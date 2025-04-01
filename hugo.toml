@@ -1,0 +1,6 @@
+baseURL = 'https://www.gokure.dev/'
+languageCode = 'en-us'
+title = 'Go Kure'
+[module]
+  [[module.imports]]
+    path = 'github.com/McShelby/hugo-theme-relearn'
