@@ -27,26 +27,26 @@ Kurel is a package system for creating reusable, customizable Kubernetes applica
 ✨ Key Features 📦 Package-based - Encapsulate applications in reusable .kurel packages 🎯 No Templating - Use patches instead of complex template syntax 🔧 Declarative Customization - Simple parameter-driven configuration 🚀 GitOps Native - Generate clean Kubernetes manifests for Flux/ArgoCD 📊 Schema Validation - Auto-generated schemas with Kubernetes API integration 🏗️ Multi-Phase Deployment - Support for ordered deployment phases 🌐 Multi-Namespace - Deploy across multiple namespaces seamlessly 🎨 User Extensions - Extend packages without modifying originals 🚀 Quick Start Installing a Package # Download a kurel package (example) git clone https://github.com/example/prometheus-operator.kurel # Validate the package kurel validate prometheus-operator.kurel/ # Customize with your parameters cat &gt; my-values.yaml &lt;&lt; EOF monitoring: enabled: true retention: 7d persistence: enabled: true size: 50Gi resources: requests: cpu: 200m memory: 512Mi EOF # Generate manifests kurel build prometheus-operator.kurel/ \ --values my-values.yaml \ --output ./manifests/ Using with GitOps # Generated structure is GitOps-ready ls manifests/ # pre-install/ - CRDs, namespaces, RBAC # main/ - Main application (depends on pre-install) # post-install/ - Monitoring, backups (depends on main) # Each phase includes kustomization.yaml with proper dependencies cat manifests/main/kustomization.yaml # apiVersion: kustomize.config.k8s.io/v1beta1 # kind: Kustomization # dependsOn: # - name: prometheus-pre-install # resources: [...] 📁 Package Structure A kurel package is a directory with this structure:">
     <meta itemprop="wordCount" content="955">
     <title></title>
-    <link href="/css/auto-complete/auto-complete.min.css?1754412104" rel="stylesheet">
-    <script src="/js/auto-complete/auto-complete.min.js?1754412104" defer></script>
-    <script src="/js/search-lunr.js?1754412104" defer></script>
-    <script src="/js/search.js?1754412104" defer></script>
+    <link href="/css/auto-complete/auto-complete.min.css?1754430541" rel="stylesheet">
+    <script src="/js/auto-complete/auto-complete.min.js?1754430541" defer></script>
+    <script src="/js/search-lunr.js?1754430541" defer></script>
+    <script src="/js/search.js?1754430541" defer></script>
     <script>
       window.relearn = window.relearn || {};
-      window.relearn.index_js_url="/searchindex.en.js?1754412104";
+      window.relearn.index_js_url="/searchindex.en.js?1754430541";
     </script>
-    <script src="/js/lunr/lunr.min.js?1754412104" defer></script>
-    <script src="/js/lunr/lunr.stemmer.support.min.js?1754412104" defer></script>
-    <script src="/js/lunr/lunr.multi.min.js?1754412104" defer></script>
-    <script src="/js/lunr/lunr.en.min.js?1754412104" defer></script>
+    <script src="/js/lunr/lunr.min.js?1754430541" defer></script>
+    <script src="/js/lunr/lunr.stemmer.support.min.js?1754430541" defer></script>
+    <script src="/js/lunr/lunr.multi.min.js?1754430541" defer></script>
+    <script src="/js/lunr/lunr.en.min.js?1754430541" defer></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.contentLangs=['en'];
     </script>
-    <link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754412104" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754412104" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar/perfect-scrollbar.min.css?1754412104" rel="stylesheet">
-    <link href="/css/theme.css?1754412104" rel="stylesheet">
-    <link href="/css/format-html.css?1754412104" rel="stylesheet" id="R-format-style">
+    <link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754430541" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754430541" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar/perfect-scrollbar.min.css?1754430541" rel="stylesheet">
+    <link href="/css/theme.css?1754430541" rel="stylesheet">
+    <link href="/css/format-html.css?1754430541" rel="stylesheet" id="R-format-style">
     <script>
       window.relearn = window.relearn || {};
       // configuration
@@ -73,7 +73,7 @@ Kurel is a package system for creating reusable, customizable Kubernetes applica
       window.T_No_results_found = `No results found for "{0}"`;
       window.T_N_results_found = `{1} results found for "{0}"`;
       // variant stuff
-      window.relearn.themevariants = [ 'auto' ];
+      window.relearn.themevariants = [ 'relearn-dark' ];
       window.relearn.customvariantname = "my-custom-variant";
       window.relearn.changeVariant = function(variant) {
         var oldVariant = document.documentElement.dataset.rThemeVariant;
@@ -99,7 +99,7 @@ Kurel is a package system for creating reusable, customizable Kubernetes applica
       }
       window.relearn.initVariant();
       window.relearn.markVariant();
-    </script><div class="notices warning" style="position: sticky; top: 0; z-index: 1000; margin: 0;">
+    </script><div class="notices warning" style="margin-bottom: 1rem;">
     <div class="label">⚠️ Work in Progress</div>
     <div class="content">Kure is currently under active development and has not been released yet. APIs and features are subject to change.</div>
 </div>
@@ -164,12 +164,12 @@ Kurel is a package system for creating reusable, customizable Kubernetes applica
               </div>
             </div>
           </div>
-          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/index.html"><span itemprop="name">Go Kure</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/packages/index.html"><span itemprop="name">Packages</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/index.html"><span itemprop="name">Go Kure</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/packages/index.html"><span itemprop="name">Packages</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/packages/launcher/index.html"><span itemprop="name">Launcher Package</span></a><meta itemprop="position" content="3">&nbsp;>&nbsp;</li>
           </ol>
           <div class="topbar-area topbar-area-end" data-area="end">
-            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/packages/index.html" title="Packages (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/packages/launcher/index.html" title="Launcher Package (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
             </div>
-            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><span class="topbar-control"><i class="fa-fw fas fa-chevron-right"></i></span>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/packages/patch/index.html" title="Patch Package (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
             </div>
             <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
               <div class="topbar-content">
@@ -474,9 +474,21 @@ Kurel is a package system for creating reusable, customizable Kubernetes applica
       <div id="R-header-topbar" class="default-animation"></div>
       <div id="R-header-wrapper" class="default-animation">
         <div id="R-header" class="default-animation">
-          <a id="R-logo" class="R-default" href="/index.html">
-            <div class="logo-title">Go Kure</div>
-          </a>
+<a href="http://localhost:1313/" style="text-decoration: none;">
+    <h1 style="margin: 0; padding: 1rem; color: var(--MENU-SECTIONS-ACTIVE-BG-color);">Go Kure</h1>
+</a>
+
+<div style="padding: 0 1rem 1rem 1rem;">
+    <div style="background-color: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 4px; padding: 0.75rem;">
+        <div style="display: flex; align-items: center; font-weight: bold; color: #ffc107; margin-bottom: 0.25rem; font-size: 0.9rem;">
+            <span style="margin-right: 0.5rem;">⚠️</span>
+            <span>Pre-Release</span>
+        </div>
+        <div style="font-size: 0.8rem; color: #ffeb3b; line-height: 1.3;">
+            Unreleased software - APIs subject to change
+        </div>
+    </div>
+</div>
         </div>
         <search><form action="/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -510,9 +522,15 @@ Kurel is a package system for creating reusable, customizable Kubernetes applica
       <div id="R-content-wrapper" class="highlightable">
         <div class="R-sidebarmenu R-shortcutmenu-main">
           <ul class="enlarge morespace collapsible-menu">
-            <li class="" data-nav-id="/examples/index.html"><a class="padding" href="/examples/index.html">Examples</a></li>
+            <li class="" data-nav-id="/overview/index.html"><a class="padding" href="/overview/index.html">Overview</a></li>
+            <li class="" data-nav-id="/getting-started/index.html"><a class="padding" href="/getting-started/index.html">Getting Started</a></li>
+            <li class="" data-nav-id="/architecture/index.html"><a class="padding" href="/architecture/index.html">Architecture</a></li>
             <li class="parent " data-nav-id="/packages/index.html"><a class="padding" href="/packages/index.html">Packages</a><ul id="R-subsections-bdf1e8ce92aa8ff6883c617f10480430" class="collapsible-menu">
+            <li class="parent alwaysopen " data-nav-id="/packages/launcher/index.html"><a class="padding" href="/packages/launcher/index.html">Launcher Package</a><ul id="R-subsections-9d3dfa62b00c459cf937434644ffeb15" class="collapsible-menu">
             <li class="active hidden " data-nav-id="/packages/launcher/readme/index.html"><a class="padding" href="/packages/launcher/readme/index.html"></a></li></ul></li>
+            <li class="" data-nav-id="/packages/patch/index.html"><a class="padding" href="/packages/patch/index.html">Patch Package</a></li></ul></li>
+            <li class="" data-nav-id="/examples/index.html"><a class="padding" href="/examples/index.html">Examples</a></li>
+            <li class="" data-nav-id="/resources/index.html"><a class="padding" href="/resources/index.html">Resources</a></li>
           </ul>
         </div>
         <div class="R-sidebarmenu R-shortcutmenu-shortcuts">
@@ -527,11 +545,19 @@ Kurel is a package system for creating reusable, customizable Kubernetes applica
           <ul class="">
           </ul>
         </div>
-<div id="R-footer"><p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p></div>
+<div id="R-footer"><div style="position: sticky; bottom: 0; padding: 1rem; margin-top: 2rem; background-color: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-top: 3px solid #ffc107;">
+    <div style="display: flex; align-items: center; font-weight: bold; color: #ffc107; margin-bottom: 0.5rem;">
+        <span style="margin-right: 0.5rem;">⚠️</span>
+        <span>Pre-Release Software</span>
+    </div>
+    <div style="font-size: 0.875rem; color: #ffeb3b; line-height: 1.4;">
+        This documentation is for unreleased software. Features and APIs may change before the official release.
+    </div>
+</div></div>
       </div>
     </aside>
-    <script src="/js/clipboard/clipboard.min.js?1754412104" defer></script>
-    <script src="/js/perfect-scrollbar/perfect-scrollbar.min.js?1754412104" defer></script>
-    <script src="/js/theme.js?1754412104" defer></script>
+    <script src="/js/clipboard/clipboard.min.js?1754430541" defer></script>
+    <script src="/js/perfect-scrollbar/perfect-scrollbar.min.js?1754430541" defer></script>
+    <script src="/js/theme.js?1754430541" defer></script>
   </body>
 </html>

@@ -31,16 +31,22 @@ title = 'Go Kure'
     target = "content/architecture/details.md"
 
   # Package documentation
-  # Launcher package - mount README as index and other docs separately
+  # Launcher package - mount docs as separate pages (index is in content dir)
   [[module.mounts]]
     source = "../kure/pkg/launcher/README.md"
-    target = "content/packages/launcher/_index.md"
+    target = "content/packages/launcher/readme.md"
   [[module.mounts]]
     source = "../kure/pkg/launcher/DESIGN.md"
     target = "content/packages/launcher/design.md"
   [[module.mounts]]
     source = "../kure/pkg/launcher/DESIGN-DETAILS.md"
     target = "content/packages/launcher/design-details.md"
+  [[module.mounts]]
+    source = "../kure/pkg/launcher/CODE-DESIGN.md"
+    target = "content/packages/launcher/code-design.md"
+  [[module.mounts]]
+    source = "../kure/pkg/launcher/CODE-IMPLEMENTATION-PLAN.md"
+    target = "content/packages/launcher/code-implementation-plan.md"
   
   # Patch package - mount all docs as regular pages
   [[module.mounts]]

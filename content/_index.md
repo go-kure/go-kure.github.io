@@ -64,7 +64,7 @@ ks := fluxcd.CreateKustomization("my-app", "default",
 
 - [Overview](/overview) - Introduction and design philosophy
 - [Architecture](/architecture) - Deep dive into Kure's design
-- [Packages](/packages/launcher) - Explore the launcher system
+- [Launcher System](/packages/launcher) - Declarative Kubernetes manifest generation
 - [Examples](/examples/patches) - See Kure in action
 
 ## Get Involved
