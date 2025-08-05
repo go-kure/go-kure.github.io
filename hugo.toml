@@ -1,6 +1,48 @@
 baseURL = 'https://www.gokure.dev/'
 languageCode = 'en-us'
 title = 'Go Kure'
+
 [module]
   [[module.imports]]
     path = 'github.com/McShelby/hugo-theme-relearn'
+  
+  # Main documentation
+  [[module.mounts]]
+    source = "../kure/README.md"
+    target = "content/overview.md"
+  
+  [[module.mounts]]
+    source = "../kure/docs/ARCHITECTURE.md"
+    target = "content/architecture/architecture.md"
+
+  # Package documentation
+  [[module.mounts]]
+    source = "../kure/pkg/launcher"
+    target = "content/packages/launcher"
+    includeFiles = "*.md"
+  
+  [[module.mounts]]
+    source = "../kure/pkg/patch"
+    target = "content/packages/patch"
+    includeFiles = "*.md"
+  
+  [[module.mounts]]
+    source = "../kure/pkg/stack/layout/README.md"
+    target = "content/packages/layout.md"
+  
+  [[module.mounts]]
+    source = "../kure/pkg/workflow/README.md"
+    target = "content/packages/workflow.md"
+
+  # Examples
+  [[module.mounts]]
+    source = "../kure/examples/patches/README.md"
+    target = "content/examples/patches.md"
+
+  # Standard Hugo content
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+  [[module.mounts]]
+    source = "static"
+    target = "static"

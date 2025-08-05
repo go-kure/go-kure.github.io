@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=35861&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.148.2">
+    <meta name="generator" content="Relearn 8.0.0+9803d5122ebb3276acea823f476e9eb44f607862">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Kure Architecture Documentation Version: 2.0.0
+Date: August 2025
+Status: Complete
+Executive Summary Kure is a Go library for programmatically building Kubernetes resources used by GitOps tools (Flux, cert-manager, MetalLB, External Secrets). The library emphasizes strongly-typed object construction over templating engines, providing a composable, type-safe approach to generating Kubernetes manifests.
+Key Architectural Achievements:
+Domain-Driven Design: Hierarchical cluster model with clear boundaries Interface Segregation: Split monolithic workflow interfaces into focused components Type Safety: Strong typing throughout with comprehensive validation GitOps Agnostic: Support for multiple GitOps tools through pluggable workflows Declarative Patching: JSONPath-based patching system with structure preservation The architecture supports complex Kubernetes cluster configurations while maintaining simplicity and extensibility through clean separation of concerns and well-defined interfaces.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="Kure Architecture Documentation Version: 2.0.0
+Date: August 2025
+Status: Complete
+Executive Summary Kure is a Go library for programmatically building Kubernetes resources used by GitOps tools (Flux, cert-manager, MetalLB, External Secrets). The library emphasizes strongly-typed object construction over templating engines, providing a composable, type-safe approach to generating Kubernetes manifests.
+Key Architectural Achievements:
+Domain-Driven Design: Hierarchical cluster model with clear boundaries Interface Segregation: Split monolithic workflow interfaces into focused components Type Safety: Strong typing throughout with comprehensive validation GitOps Agnostic: Support for multiple GitOps tools through pluggable workflows Declarative Patching: JSONPath-based patching system with structure preservation The architecture supports complex Kubernetes cluster configurations while maintaining simplicity and extensibility through clean separation of concerns and well-defined interfaces.">
+    <meta property="og:url" content="http://localhost:35861/architecture/architecture/index.html">
+    <meta property="og:site_name" content="Go Kure">
+    <meta property="og:description" content="Kure Architecture Documentation Version: 2.0.0
+Date: August 2025
+Status: Complete
+Executive Summary Kure is a Go library for programmatically building Kubernetes resources used by GitOps tools (Flux, cert-manager, MetalLB, External Secrets). The library emphasizes strongly-typed object construction over templating engines, providing a composable, type-safe approach to generating Kubernetes manifests.
+Key Architectural Achievements:
+Domain-Driven Design: Hierarchical cluster model with clear boundaries Interface Segregation: Split monolithic workflow interfaces into focused components Type Safety: Strong typing throughout with comprehensive validation GitOps Agnostic: Support for multiple GitOps tools through pluggable workflows Declarative Patching: JSONPath-based patching system with structure preservation The architecture supports complex Kubernetes cluster configurations while maintaining simplicity and extensibility through clean separation of concerns and well-defined interfaces.">
+    <meta property="og:locale" content="en_us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Architectures">
+    <meta itemprop="description" content="Kure Architecture Documentation Version: 2.0.0
+Date: August 2025
+Status: Complete
+Executive Summary Kure is a Go library for programmatically building Kubernetes resources used by GitOps tools (Flux, cert-manager, MetalLB, External Secrets). The library emphasizes strongly-typed object construction over templating engines, providing a composable, type-safe approach to generating Kubernetes manifests.
+Key Architectural Achievements:
+Domain-Driven Design: Hierarchical cluster model with clear boundaries Interface Segregation: Split monolithic workflow interfaces into focused components Type Safety: Strong typing throughout with comprehensive validation GitOps Agnostic: Support for multiple GitOps tools through pluggable workflows Declarative Patching: JSONPath-based patching system with structure preservation The architecture supports complex Kubernetes cluster configurations while maintaining simplicity and extensibility through clean separation of concerns and well-defined interfaces.">
+    <meta itemprop="wordCount" content="3830">
+    <title></title>
+    <link href="/css/auto-complete/auto-complete.min.css?1754411446" rel="stylesheet">
+    <script src="/js/auto-complete/auto-complete.min.js?1754411446" defer></script>
+    <script src="/js/search-lunr.js?1754411446" defer></script>
+    <script src="/js/search.js?1754411446" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.index_js_url="/searchindex.en.js?1754411446";
+    </script>
+    <script src="/js/lunr/lunr.min.js?1754411446" defer></script>
+    <script src="/js/lunr/lunr.stemmer.support.min.js?1754411446" defer></script>
+    <script src="/js/lunr/lunr.multi.min.js?1754411446" defer></script>
+    <script src="/js/lunr/lunr.en.min.js?1754411446" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.contentLangs=['en'];
+    </script>
+    <link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754411446" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754411446" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar/perfect-scrollbar.min.css?1754411446" rel="stylesheet">
+    <link href="/css/theme.css?1754411446" rel="stylesheet">
+    <link href="/css/format-html.css?1754411446" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      // configuration
+      window.relearn.min = ``;
+      window.relearn.path='\/architecture\/architecture\/index.html';
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:35861';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.relearn.disableInlineCopyToClipboard=false;
+      window.relearn.enableBlockCodeWrap=true;
+      // legal
+      window.relearn.getItem = (s,n) => {return s.getItem(n)};
+      window.relearn.setItem = (s,n,v) => {return s.setItem(n,v)};
+      window.relearn.removeItem = (s,n) => {return s.removeItem(n)};
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+      // variant stuff
+      window.relearn.themevariants = [ 'auto' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.relearn.setItem(window.localStorage, window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+          window.relearn.markVariant();
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.relearn.getItem(window.localStorage, window.relearn.absBaseUri + "/variant");
+        document.querySelectorAll(".R-variantswitcher select").forEach((select) => {select.value = variant;});
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.relearn.getItem(window.localStorage, window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.relearn.setItem(window.localStorage, window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/architecture/architecture/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li><a href="#executive-summary">Executive Summary</a></li>
+    <li><a href="#table-of-contents">Table of Contents</a></li>
+    <li><a href="#architecture-overview">Architecture Overview</a>
+      <ul>
+        <li><a href="#system-boundaries">System Boundaries</a></li>
+        <li><a href="#core-components">Core Components</a></li>
+        <li><a href="#key-design-principles">Key Design Principles</a></li>
+      </ul>
+    </li>
+    <li><a href="#domain-model-architecture">Domain Model Architecture</a>
+      <ul>
+        <li><a href="#hierarchical-structure">Hierarchical Structure</a></li>
+        <li><a href="#hierarchy-navigation">Hierarchy Navigation</a></li>
+      </ul>
+    </li>
+    <li><a href="#workflow-architecture">Workflow Architecture</a>
+      <ul>
+        <li><a href="#interface-segregation-pattern">Interface Segregation Pattern</a></li>
+        <li><a href="#fluxcd-implementation">FluxCD Implementation</a></li>
+        <li><a href="#component-responsibilities">Component Responsibilities</a></li>
+        <li><a href="#extensibility-pattern">Extensibility Pattern</a></li>
+      </ul>
+    </li>
+    <li><a href="#error-handling-architecture">Error Handling Architecture</a>
+      <ul>
+        <li><a href="#kureerror-system">KureError System</a></li>
+        <li><a href="#error-type-architecture">Error Type Architecture</a></li>
+        <li><a href="#centralized-validation">Centralized Validation</a></li>
+        <li><a href="#error-wrapping-strategy">Error Wrapping Strategy</a></li>
+      </ul>
+    </li>
+    <li><a href="#resource-builder-pattern">Resource Builder Pattern</a>
+      <ul>
+        <li><a href="#builder-architecture">Builder Architecture</a></li>
+        <li><a href="#implementation-structure">Implementation Structure</a></li>
+        <li><a href="#type-safety-guarantees">Type Safety Guarantees</a></li>
+        <li><a href="#cross-resource-consistency">Cross-Resource Consistency</a></li>
+      </ul>
+    </li>
+    <li><a href="#patch-system-architecture">Patch System Architecture</a>
+      <ul>
+        <li><a href="#design-philosophy">Design Philosophy</a></li>
+        <li><a href="#patch-file-format">Patch File Format</a></li>
+        <li><a href="#path-resolution-engine">Path Resolution Engine</a></li>
+        <li><a href="#list-selector-system">List Selector System</a></li>
+        <li><a href="#variable-substitution">Variable Substitution</a></li>
+        <li><a href="#type-inference">Type Inference</a></li>
+      </ul>
+    </li>
+    <li><a href="#layout-and-packaging">Layout and Packaging</a>
+      <ul>
+        <li><a href="#layout-architecture">Layout Architecture</a></li>
+        <li><a href="#grouping-strategies">Grouping Strategies</a></li>
+        <li><a href="#gitops-integration">GitOps Integration</a></li>
+        <li><a href="#directory-structure-generation">Directory Structure Generation</a></li>
+      </ul>
+    </li>
+    <li><a href="#naming-conventions">Naming Conventions</a>
+      <ul>
+        <li><a href="#function-naming-standards">Function Naming Standards</a></li>
+        <li><a href="#package-organization-standards">Package Organization Standards</a></li>
+        <li><a href="#file-naming-patterns">File Naming Patterns</a></li>
+      </ul>
+    </li>
+    <li><a href="#developer-guidelines">Developer Guidelines</a>
+      <ul>
+        <li><a href="#adding-new-resource-builders">Adding New Resource Builders</a></li>
+        <li><a href="#extending-domain-model">Extending Domain Model</a></li>
+        <li><a href="#implementing-new-gitops-workflows">Implementing New GitOps Workflows</a></li>
+        <li><a href="#testing-patterns">Testing Patterns</a></li>
+      </ul>
+    </li>
+    <li><a href="#performance-characteristics">Performance Characteristics</a>
+      <ul>
+        <li><a href="#resource-generation-performance">Resource Generation Performance</a></li>
+        <li><a href="#optimization-strategies">Optimization Strategies</a></li>
+        <li><a href="#bottlenecks-and-mitigations">Bottlenecks and Mitigations</a></li>
+      </ul>
+    </li>
+    <li><a href="#security-model">Security Model</a>
+      <ul>
+        <li><a href="#secret-management">Secret Management</a></li>
+        <li><a href="#rbac-integration">RBAC Integration</a></li>
+        <li><a href="#certificate-management">Certificate Management</a></li>
+        <li><a href="#input-validation">Input Validation</a></li>
+      </ul>
+    </li>
+    <li><a href="#testing-architecture">Testing Architecture</a>
+      <ul>
+        <li><a href="#test-organization">Test Organization</a></li>
+        <li><a href="#testing-patterns-1">Testing Patterns</a></li>
+        <li><a href="#test-utilities">Test Utilities</a></li>
+      </ul>
+    </li>
+    <li><a href="#appendices">Appendices</a>
+      <ul>
+        <li><a href="#appendix-a-glossary">Appendix A: Glossary</a></li>
+        <li><a href="#appendix-b-references">Appendix B: References</a></li>
+        <li><a href="#appendix-c-design-documents">Appendix C: Design Documents</a></li>
+        <li><a href="#appendix-d-migration-guide">Appendix D: Migration Guide</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/index.html"><span itemprop="name">Go Kure</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/architecture/index.html"><span itemprop="name">Architectures</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/architecture/index.html" title="Architectures (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/examples/index.html" title="Examples (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable architecture" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id=""></h1>
+
+<h1 id="kure-architecture-documentation">Kure Architecture Documentation</h1>
+<p><strong>Version:</strong> 2.0.0<br>
+<strong>Date:</strong> August 2025<br>
+<strong>Status:</strong> Complete</p>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>Kure is a Go library for programmatically building Kubernetes resources used by GitOps tools (Flux, cert-manager, MetalLB, External Secrets). The library emphasizes strongly-typed object construction over templating engines, providing a composable, type-safe approach to generating Kubernetes manifests.</p>
+<p><strong>Key Architectural Achievements:</strong></p>
+<ul>
+<li><strong>Domain-Driven Design</strong>: Hierarchical cluster model with clear boundaries</li>
+<li><strong>Interface Segregation</strong>: Split monolithic workflow interfaces into focused components</li>
+<li><strong>Type Safety</strong>: Strong typing throughout with comprehensive validation</li>
+<li><strong>GitOps Agnostic</strong>: Support for multiple GitOps tools through pluggable workflows</li>
+<li><strong>Declarative Patching</strong>: JSONPath-based patching system with structure preservation</li>
+</ul>
+<p>The architecture supports complex Kubernetes cluster configurations while maintaining simplicity and extensibility through clean separation of concerns and well-defined interfaces.</p>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="/architecture/architecture/index.html#architecture-overview">Architecture Overview</a></li>
+<li><a href="/architecture/architecture/index.html#domain-model-architecture">Domain Model Architecture</a></li>
+<li><a href="/architecture/architecture/index.html#workflow-architecture">Workflow Architecture</a></li>
+<li><a href="/architecture/architecture/index.html#error-handling-architecture">Error Handling Architecture</a></li>
+<li><a href="/architecture/architecture/index.html#resource-builder-pattern">Resource Builder Pattern</a></li>
+<li><a href="/architecture/architecture/index.html#patch-system-architecture">Patch System Architecture</a></li>
+<li><a href="/architecture/architecture/index.html#layout-and-packaging">Layout and Packaging</a></li>
+<li><a href="/architecture/architecture/index.html#naming-conventions">Naming Conventions</a></li>
+<li><a href="/architecture/architecture/index.html#developer-guidelines">Developer Guidelines</a></li>
+<li><a href="/architecture/architecture/index.html#performance-characteristics">Performance Characteristics</a></li>
+<li><a href="/architecture/architecture/index.html#security-model">Security Model</a></li>
+<li><a href="/architecture/architecture/index.html#testing-architecture">Testing Architecture</a></li>
+<li><a href="/architecture/architecture/index.html#appendices">Appendices</a></li>
+</ol>
+<hr>
+<h2 id="architecture-overview">Architecture Overview</h2>
+<h3 id="system-boundaries">System Boundaries</h3>
+<p>Kure operates within the Kubernetes ecosystem as a library for programmatic resource generation:</p>
+<pre class="mermaid align-center ">graph TB
+    subgraph &#34;Kure Library&#34;
+        DM[Domain Model]
+        WF[Workflow Engines]
+        RB[Resource Builders]
+        PS[Patch System]
+        LO[Layout Engine]
+    end
+    
+    subgraph &#34;GitOps Tools&#34;
+        FLUX[Flux]
+        ARGO[ArgoCD]
+    end
+    
+    subgraph &#34;Kubernetes&#34;
+        K8S[Core Resources]
+        CRD[Custom Resources]
+    end
+    
+    USER[User Code] --&gt; DM
+    DM --&gt; WF
+    WF --&gt; RB
+    RB --&gt; K8S
+    RB --&gt; CRD
+    WF --&gt; LO
+    LO --&gt; FLUX
+    LO --&gt; ARGO
+    PS --&gt; K8S</pre>
+<h3 id="core-components">Core Components</h3>
+<p>The system is organized around four primary architectural layers:</p>
+<ol>
+<li><strong>Domain Model</strong> (<code>pkg/stack/</code>): Hierarchical abstractions for cluster configuration</li>
+<li><strong>Workflow Engines</strong> (<code>pkg/workflow/</code>, <code>pkg/stack/*/</code>): GitOps-specific implementations</li>
+<li><strong>Resource Builders</strong> (<code>internal/</code>): Strongly-typed Kubernetes resource factories</li>
+<li><strong>Support Systems</strong>: Error handling, patching, layout, and I/O utilities</li>
+</ol>
+<h3 id="key-design-principles">Key Design Principles</h3>
+<p><strong>1. Composition Over Inheritance</strong></p>
+<ul>
+<li>Domain objects compose behavior through interfaces</li>
+<li>Workflow engines compose specialized generators</li>
+<li>Resources built through functional composition</li>
+</ul>
+<p><strong>2. Interface Segregation</strong></p>
+<ul>
+<li>Small, focused interfaces for specific concerns</li>
+<li>Workflow interfaces split by responsibility</li>
+<li>Clear separation between resource generation and layout</li>
+</ul>
+<p><strong>3. Immutable Constructs</strong></p>
+<ul>
+<li>Builder pattern creates immutable objects</li>
+<li>Patching creates new instances rather than modifying</li>
+<li>Functional approach to resource transformation</li>
+</ul>
+<p><strong>4. Type Safety</strong></p>
+<ul>
+<li>Strong typing for all Kubernetes resources</li>
+<li>Compile-time validation of resource construction</li>
+<li>Custom error types with contextual information</li>
+</ul>
+<hr>
+<h2 id="domain-model-architecture">Domain Model Architecture</h2>
+<h3 id="hierarchical-structure">Hierarchical Structure</h3>
+<p>The domain model follows a four-tier hierarchy designed to mirror real-world Kubernetes cluster organization:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0"><code>Cluster
+└── Node (Infrastructure/Applications)
+    └── Bundle (Logical grouping)
+        └── Application (Individual workloads)</code></pre></div>
+<h4 id="cluster-pkgstackclustergo">Cluster (<code>pkg/stack/cluster.go</code>)</h4>
+<p>The root abstraction representing a complete Kubernetes cluster configuration:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Cluster</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>   <span style="color:#66d9ef">string</span>        <span style="color:#e6db74">`yaml:&#34;name&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Node</span>   <span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>         <span style="color:#e6db74">`yaml:&#34;node,omitempty&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">GitOps</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">GitOpsConfig</span> <span style="color:#e6db74">`yaml:&#34;gitops,omitempty&#34;`</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><strong>Design Decisions:</strong></p>
+<ul>
+<li>Single root node simplifies tree traversal</li>
+<li>GitOps configuration at cluster level for global policies</li>
+<li>Name field provides unique identification across environments</li>
+</ul>
+<h4 id="node-pkgstackclustergo47-64">Node (<code>pkg/stack/cluster.go:47-64</code>)</h4>
+<p>Hierarchical containers for organizing related bundles:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Node</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>       <span style="color:#66d9ef">string</span>                    <span style="color:#e6db74">`yaml:&#34;name&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ParentPath</span> <span style="color:#66d9ef">string</span>                    <span style="color:#e6db74">`yaml:&#34;parentPath,omitempty&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Children</span>   []<span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>                   <span style="color:#e6db74">`yaml:&#34;children,omitempty&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">PackageRef</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">schema</span>.<span style="color:#a6e22e">GroupVersionKind</span>  <span style="color:#e6db74">`yaml:&#34;packageref,omitempty&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Bundle</span>     <span style="color:#f92672">*</span><span style="color:#a6e22e">Bundle</span>                   <span style="color:#e6db74">`yaml:&#34;bundle,omitempty&#34;`</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Runtime fields (not serialized)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">parent</span>   <span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>            <span style="color:#e6db74">`yaml:&#34;-&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pathMap</span>  <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span> <span style="color:#e6db74">`yaml:&#34;-&#34;`</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><strong>Anti-Circular Reference Design:</strong></p>
+<ul>
+<li><code>ParentPath</code> string instead of direct parent pointer in serialized form</li>
+<li>Runtime <code>parent</code> field populated during <code>InitializePathMap()</code></li>
+<li>Enables serialization while maintaining navigation efficiency</li>
+</ul>
+<h4 id="bundle-pkgstackbundlego">Bundle (<code>pkg/stack/bundle.go</code>)</h4>
+<p>Deployment units typically corresponding to single GitOps resources:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Bundle</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>         <span style="color:#66d9ef">string</span>         <span style="color:#e6db74">`yaml:&#34;name&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ParentPath</span>   <span style="color:#66d9ef">string</span>         <span style="color:#e6db74">`yaml:&#34;parentPath,omitempty&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">DependsOn</span>    []<span style="color:#f92672">*</span><span style="color:#a6e22e">Bundle</span>      <span style="color:#e6db74">`yaml:&#34;dependsOn,omitempty&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Applications</span> []<span style="color:#f92672">*</span><span style="color:#a6e22e">Application</span> <span style="color:#e6db74">`yaml:&#34;applications&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">SourceRef</span>    <span style="color:#f92672">*</span><span style="color:#a6e22e">SourceRef</span>     <span style="color:#e6db74">`yaml:&#34;sourceRef,omitempty&#34;`</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="application-pkgstackapplicationgo">Application (<code>pkg/stack/application.go</code>)</h4>
+<p>Individual Kubernetes workloads or resource collections:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Application</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>      <span style="color:#66d9ef">string</span>           <span style="color:#e6db74">`yaml:&#34;name&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Resources</span> []<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Object</span>  <span style="color:#e6db74">`yaml:&#34;resources&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Labels</span>    <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span> <span style="color:#e6db74">`yaml:&#34;labels,omitempty&#34;`</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="hierarchy-navigation">Hierarchy Navigation</h3>
+<p>The domain model implements efficient tree traversal through a dual approach:</p>
+<p><strong>1. Path-Based Navigation</strong></p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">n</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>) <span style="color:#a6e22e">GetPath</span>() <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">ParentPath</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">Name</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">ParentPath</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">Name</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><strong>2. Runtime Parent References</strong></p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">n</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>) <span style="color:#a6e22e">InitializePathMap</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pathMap</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">buildPathMap</span>(<span style="color:#a6e22e">pathMap</span>, <span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">setPathMapRecursive</span>(<span style="color:#a6e22e">pathMap</span>)
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>This design enables:</p>
+<ul>
+<li>Efficient serialization without circular references</li>
+<li>Fast runtime navigation through cached parent pointers</li>
+<li>Path-based lookups for configuration references</li>
+</ul>
+<hr>
+<h2 id="workflow-architecture">Workflow Architecture</h2>
+<h3 id="interface-segregation-pattern">Interface Segregation Pattern</h3>
+<p>The workflow architecture implements <strong>Interface Segregation Principle</strong> by splitting monolithic interfaces into focused components:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// pkg/workflow/interfaces.go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ResourceGenerator</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">GenerateFromCluster</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Cluster</span>) ([]<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Object</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">GenerateFromNode</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Node</span>) ([]<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Object</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">GenerateFromBundle</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Bundle</span>) ([]<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Object</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">LayoutIntegrator</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">IntegrateWithLayout</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">ManifestLayout</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Cluster</span>, <span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">LayoutRules</span>) <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CreateLayoutWithResources</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Cluster</span>, <span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">LayoutRules</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">ManifestLayout</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">BootstrapGenerator</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">GenerateBootstrap</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">BootstrapConfig</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Node</span>) ([]<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Object</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">SupportedBootstrapModes</span>() []<span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">WorkflowEngine</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ResourceGenerator</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">LayoutIntegrator</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">BootstrapGenerator</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">GetName</span>() <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">GetVersion</span>() <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="fluxcd-implementation">FluxCD Implementation</h3>
+<p>The FluxCD workflow engine demonstrates the composition pattern:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// pkg/stack/fluxcd/workflow_engine.go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">WorkflowEngine</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ResourceGen</span>  <span style="color:#f92672">*</span><span style="color:#a6e22e">ResourceGenerator</span>   <span style="color:#75715e">// Pure resource generation</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">LayoutInteg</span>  <span style="color:#f92672">*</span><span style="color:#a6e22e">LayoutIntegrator</span>   <span style="color:#75715e">// Layout integration</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">BootstrapGen</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">BootstrapGenerator</span> <span style="color:#75715e">// Bootstrap concerns</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewWorkflowEngine</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">WorkflowEngine</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">resourceGen</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewResourceGenerator</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">layoutInteg</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewLayoutIntegrator</span>(<span style="color:#a6e22e">resourceGen</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">bootstrapGen</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewBootstrapGenerator</span>()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">WorkflowEngine</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">ResourceGen</span>:  <span style="color:#a6e22e">resourceGen</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">LayoutInteg</span>:  <span style="color:#a6e22e">layoutInteg</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">BootstrapGen</span>: <span style="color:#a6e22e">bootstrapGen</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="component-responsibilities">Component Responsibilities</h3>
+<p><strong>ResourceGenerator</strong> (<code>pkg/stack/fluxcd/resource_generator.go</code>)</p>
+<ul>
+<li>Pure resource generation from domain objects</li>
+<li>Kustomization creation with proper source references</li>
+<li>Dependency management between bundles</li>
+<li>No layout or file system concerns</li>
+</ul>
+<p><strong>LayoutIntegrator</strong> (<code>pkg/stack/fluxcd/layout_integrator.go</code>)</p>
+<ul>
+<li>Integration with manifest layout system</li>
+<li>Directory structure generation</li>
+<li>File placement policies</li>
+<li>GitOps-specific layout requirements</li>
+</ul>
+<p><strong>BootstrapGenerator</strong> (<code>pkg/stack/fluxcd/bootstrap_generator.go</code>)</p>
+<ul>
+<li>Bootstrap resource generation</li>
+<li>GitOps system initialization</li>
+<li>Mode-specific configurations (gitops-toolkit vs flux-operator)</li>
+</ul>
+<h3 id="extensibility-pattern">Extensibility Pattern</h3>
+<p>Adding new GitOps workflows follows a clear pattern:</p>
+<ol>
+<li><strong>Implement Core Interfaces</strong>: ResourceGenerator, LayoutIntegrator, BootstrapGenerator</li>
+<li><strong>Compose WorkflowEngine</strong>: Combine specialized generators</li>
+<li><strong>Register with Layout</strong>: Add layout rules for the new workflow</li>
+<li><strong>Provide Public API</strong>: Create user-facing convenience functions</li>
+</ol>
+<hr>
+<h2 id="error-handling-architecture">Error Handling Architecture</h2>
+<h3 id="kureerror-system">KureError System</h3>
+<p>Kure implements a sophisticated error handling system based on typed errors with contextual information:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// pkg/errors/errors.go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">KureError</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Type</span>() <span style="color:#a6e22e">ErrorType</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Suggestion</span>() <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Context</span>() <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">interface</span>{}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ErrorType</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ErrorTypeValidation</span>    <span style="color:#a6e22e">ErrorType</span> = <span style="color:#e6db74">&#34;validation&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ErrorTypeResource</span>      <span style="color:#a6e22e">ErrorType</span> = <span style="color:#e6db74">&#34;resource&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ErrorTypePatch</span>         <span style="color:#a6e22e">ErrorType</span> = <span style="color:#e6db74">&#34;patch&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ErrorTypeParse</span>         <span style="color:#a6e22e">ErrorType</span> = <span style="color:#e6db74">&#34;parse&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ErrorTypeFile</span>          <span style="color:#a6e22e">ErrorType</span> = <span style="color:#e6db74">&#34;file&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ErrorTypeConfiguration</span> <span style="color:#a6e22e">ErrorType</span> = <span style="color:#e6db74">&#34;configuration&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ErrorTypeInternal</span>      <span style="color:#a6e22e">ErrorType</span> = <span style="color:#e6db74">&#34;internal&#34;</span>
+</span></span><span style="display:flex;"><span>)</span></span></code></pre></div>
+<h3 id="error-type-architecture">Error Type Architecture</h3>
+<p><strong>ValidationError</strong> (<code>pkg/errors/errors.go:155-185</code>)</p>
+<ul>
+<li>Field-level validation failures</li>
+<li>Provides valid value suggestions</li>
+<li>Component context for debugging</li>
+</ul>
+<p><strong>ResourceError</strong> (<code>pkg/errors/errors.go:188-250</code>)</p>
+<ul>
+<li>Resource-specific errors (not found, validation failed)</li>
+<li>Includes resource type, name, and namespace</li>
+<li>Lists available alternatives when applicable</li>
+</ul>
+<p><strong>PatchError</strong> (<code>pkg/errors/errors.go:253-294</code>)</p>
+<ul>
+<li>Patch operation failures</li>
+<li>Path and operation context</li>
+<li>Graceful degradation suggestions</li>
+</ul>
+<p><strong>ParseError</strong> (<code>pkg/errors/errors.go:297-340</code>)</p>
+<ul>
+<li>File parsing errors with location information</li>
+<li>Line and column numbers</li>
+<li>Format-specific help suggestions</li>
+</ul>
+<h3 id="centralized-validation">Centralized Validation</h3>
+<p>The validation system provides consistent error reporting across all resource builders:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// internal/validation/validators.go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Validator</span> <span style="color:#66d9ef">struct</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">v</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Validator</span>) <span style="color:#a6e22e">ValidateDeployment</span>(<span style="color:#a6e22e">deployment</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">appsv1</span>.<span style="color:#a6e22e">Deployment</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">validateNotNil</span>(<span style="color:#a6e22e">deployment</span>, <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">ErrNilDeployment</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Pre-defined error instances for common cases</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ErrNilDeployment</span> = <span style="color:#a6e22e">ResourceValidationError</span>(<span style="color:#e6db74">&#34;Deployment&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;deployment&#34;</span>, 
+</span></span><span style="display:flex;"><span>                                               <span style="color:#e6db74">&#34;deployment cannot be nil&#34;</span>, <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ErrNilPod</span>        = <span style="color:#a6e22e">ResourceValidationError</span>(<span style="color:#e6db74">&#34;Pod&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;pod&#34;</span>, 
+</span></span><span style="display:flex;"><span>                                               <span style="color:#e6db74">&#34;pod cannot be nil&#34;</span>, <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ... more predefined errors</span>
+</span></span><span style="display:flex;"><span>)</span></span></code></pre></div>
+<h3 id="error-wrapping-strategy">Error Wrapping Strategy</h3>
+<p>Kure follows Go&rsquo;s error wrapping conventions while adding structured context:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">we</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">WorkflowEngine</span>) <span style="color:#a6e22e">GenerateFromCluster</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Cluster</span>) ([]<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Object</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">c</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">ResourceValidationError</span>(<span style="color:#e6db74">&#34;Cluster&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;cluster&#34;</span>, 
+</span></span><span style="display:flex;"><span>                                                   <span style="color:#e6db74">&#34;cluster cannot be nil&#34;</span>, <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">resources</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">we</span>.<span style="color:#a6e22e">ResourceGen</span>.<span style="color:#a6e22e">GenerateFromCluster</span>(<span style="color:#a6e22e">c</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">Wrapf</span>(<span style="color:#a6e22e">err</span>, <span style="color:#e6db74">&#34;failed to generate resources for cluster %s&#34;</span>, <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Name</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">resources</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<hr>
+<h2 id="resource-builder-pattern">Resource Builder Pattern</h2>
+<h3 id="builder-architecture">Builder Architecture</h3>
+<p>Resource builders follow a consistent functional pattern across all Kubernetes resource types:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Pattern: Create* functions for constructors</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateDeployment</span>(<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">namespace</span> <span style="color:#66d9ef">string</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">appsv1</span>.<span style="color:#a6e22e">Deployment</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Pattern: Add* functions for collection modifications  </span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AddDeploymentContainer</span>(<span style="color:#a6e22e">deployment</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">appsv1</span>.<span style="color:#a6e22e">Deployment</span>, <span style="color:#a6e22e">container</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">Container</span>) <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Pattern: Set* functions for field assignments</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">SetDeploymentReplicas</span>(<span style="color:#a6e22e">deployment</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">appsv1</span>.<span style="color:#a6e22e">Deployment</span>, <span style="color:#a6e22e">replicas</span> <span style="color:#66d9ef">int32</span>) <span style="color:#66d9ef">error</span></span></span></code></pre></div>
+<h3 id="implementation-structure">Implementation Structure</h3>
+<p>Each resource builder package (<code>internal/kubernetes/</code>, <code>internal/fluxcd/</code>, etc.) follows consistent organization:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0"><code>internal/kubernetes/
+├── doc.go                    # Package documentation
+├── deployment.go            # Deployment builders
+├── deployment_test.go       # Deployment tests
+├── service.go              # Service builders  
+├── service_test.go         # Service tests
+└── ...</code></pre></div>
+<h3 id="type-safety-guarantees">Type Safety Guarantees</h3>
+<p>Builders provide compile-time type safety through:</p>
+<ol>
+<li><strong>Strong Return Types</strong>: All constructors return specific Kubernetes types</li>
+<li><strong>Validation Integration</strong>: Automatic validation in constructor functions</li>
+<li><strong>Error Propagation</strong>: Explicit error returns for validation failures</li>
+</ol>
+<p>Example implementation:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// internal/kubernetes/deployment.go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateDeployment</span>(<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">namespace</span> <span style="color:#66d9ef">string</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">appsv1</span>.<span style="color:#a6e22e">Deployment</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">appsv1</span>.<span style="color:#a6e22e">Deployment</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">ObjectMeta</span>: <span style="color:#a6e22e">metav1</span>.<span style="color:#a6e22e">ObjectMeta</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Name</span>:      <span style="color:#a6e22e">name</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Namespace</span>: <span style="color:#a6e22e">namespace</span>,
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Spec</span>: <span style="color:#a6e22e">appsv1</span>.<span style="color:#a6e22e">DeploymentSpec</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Selector</span>: <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">metav1</span>.<span style="color:#a6e22e">LabelSelector</span>{
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">MatchLabels</span>: <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>{
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;app&#34;</span>: <span style="color:#a6e22e">name</span>,
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Template</span>: <span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">PodTemplateSpec</span>{
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">ObjectMeta</span>: <span style="color:#a6e22e">metav1</span>.<span style="color:#a6e22e">ObjectMeta</span>{
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">Labels</span>: <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>{
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;app&#34;</span>: <span style="color:#a6e22e">name</span>,
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Spec</span>: <span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">PodSpec</span>{
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">Containers</span>: []<span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">Container</span>{},
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AddDeploymentContainer</span>(<span style="color:#a6e22e">deployment</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">appsv1</span>.<span style="color:#a6e22e">Deployment</span>, <span style="color:#a6e22e">container</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">Container</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">validator</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">validation</span>.<span style="color:#a6e22e">NewValidator</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">validator</span>.<span style="color:#a6e22e">ValidateDeployment</span>(<span style="color:#a6e22e">deployment</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">validator</span>.<span style="color:#a6e22e">ValidateContainer</span>(<span style="color:#a6e22e">container</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">deployment</span>.<span style="color:#a6e22e">Spec</span>.<span style="color:#a6e22e">Template</span>.<span style="color:#a6e22e">Spec</span>.<span style="color:#a6e22e">Containers</span> = append(
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">deployment</span>.<span style="color:#a6e22e">Spec</span>.<span style="color:#a6e22e">Template</span>.<span style="color:#a6e22e">Spec</span>.<span style="color:#a6e22e">Containers</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">container</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="cross-resource-consistency">Cross-Resource Consistency</h3>
+<p>All builders maintain consistency through:</p>
+<ul>
+<li><strong>Common Validation</strong>: Centralized validator used across all builders</li>
+<li><strong>Standard Error Types</strong>: Consistent error reporting patterns</li>
+<li><strong>Naming Conventions</strong>: Uniform function naming across resource types</li>
+</ul>
+<hr>
+<h2 id="patch-system-architecture">Patch System Architecture</h2>
+<h3 id="design-philosophy">Design Philosophy</h3>
+<p>The patch system implements declarative, JSONPath-based patching with structure preservation:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0"><code>Original YAML + Patch Declarations → Modified YAML (preserving comments/formatting)</code></pre></div>
+<h3 id="patch-file-format">Patch File Format</h3>
+<p>Patches use a TOML-inspired format (<code>.kpatch</code> files) that&rsquo;s optimized for Kubernetes resources:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#75715e"># examples/patches/resources.kpatch</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">deployment</span>.<span style="color:#a6e22e">app</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">replicas</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">deployment</span>.<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">containers</span>.<span style="color:#a6e22e">name</span>=<span style="color:#a6e22e">main</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">repository</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">ghcr</span>.<span style="color:#a6e22e">io</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">example</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">app</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">tag</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;${values.version}&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">resources</span>.<span style="color:#a6e22e">requests</span>.<span style="color:#a6e22e">cpu</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">250</span><span style="color:#a6e22e">m</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">service</span>.<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">ports</span>.<span style="color:#a6e22e">name</span>=<span style="color:#a6e22e">http</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">port</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">80</span></span></span></code></pre></div>
+<h3 id="path-resolution-engine">Path Resolution Engine</h3>
+<p>The patch engine implements sophisticated path resolution:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// pkg/patch/apply.go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">PatchEngine</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">preserveStructure</span> <span style="color:#66d9ef">bool</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">variables</span>        <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">interface</span>{}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">pe</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">PatchEngine</span>) <span style="color:#a6e22e">Apply</span>(<span style="color:#a6e22e">yamlContent</span> []<span style="color:#66d9ef">byte</span>, <span style="color:#a6e22e">patchContent</span> []<span style="color:#66d9ef">byte</span>) ([]<span style="color:#66d9ef">byte</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 1. Parse YAML with structure preservation</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 2. Parse patch declarations  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 3. Resolve JSONPaths with type inference</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 4. Apply modifications preserving formatting</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 5. Return modified YAML</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="list-selector-system">List Selector System</h3>
+<p>Advanced list manipulation through selector syntax:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Selector Type</th>
+          <th>Example</th>
+          <th>Operation</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>By index</td>
+          <td><code>spec.containers.0</code></td>
+          <td>Replace at index 0</td>
+      </tr>
+      <tr>
+          <td>By key-value</td>
+          <td><code>spec.containers.name=main</code></td>
+          <td>Replace item with name=main</td>
+      </tr>
+      <tr>
+          <td>Insert before</td>
+          <td><code>spec.containers.-3</code></td>
+          <td>Insert before index 3</td>
+      </tr>
+      <tr>
+          <td>Insert after</td>
+          <td><code>spec.containers.+2</code></td>
+          <td>Insert after index 2</td>
+      </tr>
+      <tr>
+          <td>Append to list</td>
+          <td><code>spec.containers.-</code></td>
+          <td>Append to end</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="variable-substitution">Variable Substitution</h3>
+<p>The patch system supports typed variable substitution:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">deployment</span>.<span style="color:#a6e22e">app</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">enabled</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">$</span>{<span style="color:#a6e22e">features</span>.<span style="color:#a6e22e">web_enabled</span>}        <span style="color:#75715e"># Boolean feature flags</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">replicas</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">$</span>{<span style="color:#a6e22e">values</span>.<span style="color:#a6e22e">replica_count</span>}       <span style="color:#75715e"># Numeric values  </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">service</span>.<span style="color:#a6e22e">app</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">hostname</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;${values.name}.${values.domain}&#34;</span>  <span style="color:#75715e"># String interpolation</span></span></span></code></pre></div>
+<h3 id="type-inference">Type Inference</h3>
+<p>Patches automatically infer Kubernetes field types:</p>
+<ul>
+<li>Resource field types from OpenAPI schema</li>
+<li>List element types from existing content</li>
+<li>Scalar types from variable context</li>
+</ul>
+<hr>
+<h2 id="layout-and-packaging">Layout and Packaging</h2>
+<h3 id="layout-architecture">Layout Architecture</h3>
+<p>The layout system manages directory structure and manifest organization:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// pkg/stack/layout/types.go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ManifestLayout</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Root</span>      <span style="color:#66d9ef">string</span>                    <span style="color:#75715e">// Repository root path</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Clusters</span>  <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">ClusterLayout</span> <span style="color:#75715e">// Per-cluster layouts</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Global</span>    <span style="color:#f92672">*</span><span style="color:#a6e22e">GlobalLayout</span>            <span style="color:#75715e">// Shared resources</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">LayoutRules</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">BundleGrouping</span>      <span style="color:#a6e22e">GroupingStrategy</span>  <span style="color:#75715e">// How to group bundles</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ApplicationGrouping</span> <span style="color:#a6e22e">GroupingStrategy</span>  <span style="color:#75715e">// How to group applications</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">KustomizationMode</span>   <span style="color:#a6e22e">KustomizationMode</span> <span style="color:#75715e">// Kustomization generation</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="grouping-strategies">Grouping Strategies</h3>
+<p><strong>GroupFlat</strong>: Each item gets its own directory</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0"><code>clusters/prod/
+├── bundles/
+│   ├── monitoring/
+│   ├── logging/  
+│   └── ingress/
+└── apps/
+    ├── frontend/
+    ├── backend/
+    └── database/</code></pre></div>
+<p><strong>GroupByParent</strong>: Items grouped under parent directories</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0"><code>clusters/prod/
+├── infrastructure/
+│   ├── monitoring/
+│   ├── logging/
+│   └── ingress/
+└── applications/
+    ├── frontend/
+    ├── backend/  
+    └── database/</code></pre></div>
+<h3 id="gitops-integration">GitOps Integration</h3>
+<p>Layout integrates with GitOps tools through specialized placement:</p>
+<p><strong>Flux Placement</strong> (<code>pkg/stack/layout/config.go</code>)</p>
+<ul>
+<li>Kustomization resources placed in flux-system namespace</li>
+<li>Source references use relative paths (<code>./clusters/prod/...</code>)</li>
+<li>Automatic kustomization.yaml generation</li>
+</ul>
+<p><strong>ArgoCD Placement</strong></p>
+<ul>
+<li>Application resources in argocd namespace</li>
+<li>Source paths without <code>./</code> prefix</li>
+<li>Manual kustomization.yaml required</li>
+</ul>
+<h3 id="directory-structure-generation">Directory Structure Generation</h3>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// pkg/stack/layout/walker.go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">WalkCluster</span>(<span style="color:#a6e22e">cluster</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Cluster</span>, <span style="color:#a6e22e">rules</span> <span style="color:#a6e22e">LayoutRules</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">ManifestLayout</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">layout</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ManifestLayout</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Root</span>:     <span style="color:#e6db74">&#34;.&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Clusters</span>: make(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">ClusterLayout</span>),
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">clusterLayout</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ClusterLayout</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Name</span>: <span style="color:#a6e22e">cluster</span>.<span style="color:#a6e22e">Name</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Path</span>: <span style="color:#a6e22e">filepath</span>.<span style="color:#a6e22e">Join</span>(<span style="color:#e6db74">&#34;clusters&#34;</span>, <span style="color:#a6e22e">cluster</span>.<span style="color:#a6e22e">Name</span>),
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Walk node hierarchy</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">walkNode</span>(<span style="color:#a6e22e">cluster</span>.<span style="color:#a6e22e">Node</span>, <span style="color:#a6e22e">clusterLayout</span>, <span style="color:#a6e22e">rules</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">Clusters</span>[<span style="color:#a6e22e">cluster</span>.<span style="color:#a6e22e">Name</span>] = <span style="color:#a6e22e">clusterLayout</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">layout</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<hr>
+<h2 id="naming-conventions">Naming Conventions</h2>
+<h3 id="function-naming-standards">Function Naming Standards</h3>
+<p>Kure follows strict naming conventions based on function purpose:</p>
+<h4 id="constructor-functions">Constructor Functions</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Go type constructors use New* prefix</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewCluster</span>(<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">tree</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Cluster</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewBundle</span>(<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">resources</span> []<span style="color:#f92672">*</span><span style="color:#a6e22e">Application</span>, <span style="color:#a6e22e">labels</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Bundle</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Kubernetes resource factories use descriptive names</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateDeployment</span>(<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">namespace</span> <span style="color:#66d9ef">string</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">appsv1</span>.<span style="color:#a6e22e">Deployment</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateService</span>(<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">namespace</span> <span style="color:#66d9ef">string</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">Service</span></span></span></code></pre></div>
+<h4 id="helper-functions">Helper Functions</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Adders for collection modifications</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AddDeploymentContainer</span>(<span style="color:#a6e22e">deployment</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">appsv1</span>.<span style="color:#a6e22e">Deployment</span>, <span style="color:#a6e22e">container</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">Container</span>) <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AddServicePort</span>(<span style="color:#a6e22e">service</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">Service</span>, <span style="color:#a6e22e">port</span> <span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">ServicePort</span>) <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Setters for field assignments  </span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">SetDeploymentReplicas</span>(<span style="color:#a6e22e">deployment</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">appsv1</span>.<span style="color:#a6e22e">Deployment</span>, <span style="color:#a6e22e">replicas</span> <span style="color:#66d9ef">int32</span>) <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">SetServiceType</span>(<span style="color:#a6e22e">service</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">Service</span>, <span style="color:#a6e22e">serviceType</span> <span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">ServiceType</span>) <span style="color:#66d9ef">error</span></span></span></code></pre></div>
+<h4 id="workflow-functions">Workflow Functions</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Engine constructors follow New* pattern</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewWorkflowEngine</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">WorkflowEngine</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewResourceGenerator</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">ResourceGenerator</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Public APIs use descriptive names</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Engine</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">WorkflowEngine</span>                                    <span style="color:#75715e">// Default engine</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">EngineWithMode</span>(<span style="color:#a6e22e">mode</span> <span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">KustomizationMode</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">WorkflowEngine</span> <span style="color:#75715e">// Configured engine</span></span></span></code></pre></div>
+<h3 id="package-organization-standards">Package Organization Standards</h3>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0"><code>pkg/                          # Public APIs and interfaces
+├── stack/                   # Domain model (public)
+│   ├── fluxcd/             # FluxCD workflow implementation  
+│   ├── argocd/             # ArgoCD workflow implementation
+│   └── layout/             # Layout generation utilities
+├── workflow/               # Workflow interfaces (public)
+├── errors/                 # Error handling utilities (public)
+└── patch/                  # Patch system (public)
+
+internal/                    # Implementation packages (private)
+├── kubernetes/             # Core Kubernetes builders
+├── fluxcd/                # Flux resource builders
+├── certmanager/           # cert-manager builders
+├── metallb/               # MetalLB builders
+├── externalsecrets/       # External Secrets builders
+└── validation/            # Centralized validation</code></pre></div>
+<h3 id="file-naming-patterns">File Naming Patterns</h3>
+<ul>
+<li><strong>Implementation files</strong>: <code>{resource_type}.go</code> (e.g., <code>deployment.go</code>, <code>service.go</code>)</li>
+<li><strong>Test files</strong>: <code>{resource_type}_test.go</code> (e.g., <code>deployment_test.go</code>)</li>
+<li><strong>Documentation</strong>: <code>doc.go</code> for package documentation</li>
+<li><strong>Design documents</strong>: <code>DESIGN.md</code>, <code>README.md</code> in relevant packages</li>
+</ul>
+<hr>
+<h2 id="developer-guidelines">Developer Guidelines</h2>
+<h3 id="adding-new-resource-builders">Adding New Resource Builders</h3>
+<p>Follow this standardized process for adding Kubernetes resource support:</p>
+<h4 id="1-create-constructor-function">1. Create Constructor Function</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// internal/kubernetes/newresource.go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateNewResource</span>(<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">namespace</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">opts</span> <span style="color:#f92672">...</span><span style="color:#a6e22e">Option</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">v1</span>.<span style="color:#a6e22e">NewResource</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">resource</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1</span>.<span style="color:#a6e22e">NewResource</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">ObjectMeta</span>: <span style="color:#a6e22e">metav1</span>.<span style="color:#a6e22e">ObjectMeta</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Name</span>:      <span style="color:#a6e22e">name</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Namespace</span>: <span style="color:#a6e22e">namespace</span>,
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Spec</span>: <span style="color:#a6e22e">v1</span>.<span style="color:#a6e22e">NewResourceSpec</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Initialize required fields</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Apply options</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">opt</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">opts</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">opt</span>(<span style="color:#a6e22e">resource</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">resource</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="2-add-helper-functions">2. Add Helper Functions</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AddNewResourceField</span>(<span style="color:#a6e22e">resource</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">v1</span>.<span style="color:#a6e22e">NewResource</span>, <span style="color:#a6e22e">field</span> <span style="color:#a6e22e">FieldType</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">validator</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">validation</span>.<span style="color:#a6e22e">NewValidator</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">validator</span>.<span style="color:#a6e22e">ValidateNewResource</span>(<span style="color:#a6e22e">resource</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">validator</span>.<span style="color:#a6e22e">ValidateField</span>(<span style="color:#a6e22e">field</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Add field to resource</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">Spec</span>.<span style="color:#a6e22e">Fields</span> = append(<span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">Spec</span>.<span style="color:#a6e22e">Fields</span>, <span style="color:#a6e22e">field</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">SetNewResourceProperty</span>(<span style="color:#a6e22e">resource</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">v1</span>.<span style="color:#a6e22e">NewResource</span>, <span style="color:#a6e22e">value</span> <span style="color:#a6e22e">PropertyType</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Validation and assignment</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="3-add-validation-support">3. Add Validation Support</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// internal/validation/validators.go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">v</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Validator</span>) <span style="color:#a6e22e">ValidateNewResource</span>(<span style="color:#a6e22e">resource</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">v1</span>.<span style="color:#a6e22e">NewResource</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">validateNotNil</span>(<span style="color:#a6e22e">resource</span>, <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">ErrNilNewResource</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// pkg/errors/errors.go - Add to predefined errors</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ErrNilNewResource</span> = <span style="color:#a6e22e">ResourceValidationError</span>(<span style="color:#e6db74">&#34;NewResource&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;newresource&#34;</span>, 
+</span></span><span style="display:flex;"><span>                                                <span style="color:#e6db74">&#34;new resource cannot be nil&#34;</span>, <span style="color:#66d9ef">nil</span>)</span></span></code></pre></div>
+<h4 id="4-comprehensive-testing">4. Comprehensive Testing</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// internal/kubernetes/newresource_test.go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestCreateNewResource</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">resource</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">CreateNewResource</span>(<span style="color:#e6db74">&#34;test&#34;</span>, <span style="color:#e6db74">&#34;default&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">resource</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#e6db74">&#34;expected non-nil resource&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Validate required fields</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">Name</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;test&#34;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;expected name &#39;test&#39;, got %s&#34;</span>, <span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">Name</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">Namespace</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;default&#34;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;expected namespace &#39;default&#39;, got %s&#34;</span>, <span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">Namespace</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestNewResourceHelpers</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">resource</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">CreateNewResource</span>(<span style="color:#e6db74">&#34;test&#34;</span>, <span style="color:#e6db74">&#34;default&#34;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Test all helper functions</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">field</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">FieldType</span>{<span style="color:#75715e">/* valid field */</span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">AddNewResourceField</span>(<span style="color:#a6e22e">resource</span>, <span style="color:#a6e22e">field</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;unexpected error: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Validate field was added</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">Spec</span>.<span style="color:#a6e22e">Fields</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;expected 1 field, got %d&#34;</span>, len(<span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">Spec</span>.<span style="color:#a6e22e">Fields</span>))
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="extending-domain-model">Extending Domain Model</h3>
+<p>When extending the core domain model:</p>
+<h4 id="1-maintain-hierarchy-consistency">1. Maintain Hierarchy Consistency</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Add new domain types following existing patterns</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">NewDomainType</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>       <span style="color:#66d9ef">string</span>                <span style="color:#e6db74">`yaml:&#34;name&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ParentPath</span> <span style="color:#66d9ef">string</span>                <span style="color:#e6db74">`yaml:&#34;parentPath,omitempty&#34;`</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Domain-specific fields</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Runtime navigation (not serialized)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">parent</span>  <span style="color:#f92672">*</span><span style="color:#a6e22e">ParentType</span>          <span style="color:#e6db74">`yaml:&#34;-&#34;`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pathMap</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">NewType</span>  <span style="color:#e6db74">`yaml:&#34;-&#34;`</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="2-implement-navigation-methods">2. Implement Navigation Methods</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">n</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">NewDomainType</span>) <span style="color:#a6e22e">SetParent</span>(<span style="color:#a6e22e">parent</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">ParentType</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">parent</span> = <span style="color:#a6e22e">parent</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">parent</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">ParentPath</span> = <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">ParentPath</span> = <span style="color:#a6e22e">parent</span>.<span style="color:#a6e22e">GetPath</span>()
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">n</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">NewDomainType</span>) <span style="color:#a6e22e">GetPath</span>() <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">ParentPath</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">Name</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">ParentPath</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">Name</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="3-update-workflow-implementations">3. Update Workflow Implementations</h4>
+<p>Ensure all workflow engines handle the new domain type appropriately.</p>
+<h3 id="implementing-new-gitops-workflows">Implementing New GitOps Workflows</h3>
+<p>To add support for new GitOps tools:</p>
+<h4 id="1-implement-core-interfaces">1. Implement Core Interfaces</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// pkg/stack/newtool/resource_generator.go</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ResourceGenerator</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Tool-specific configuration</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">rg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">ResourceGenerator</span>) <span style="color:#a6e22e">GenerateFromCluster</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Cluster</span>) ([]<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Object</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Tool-specific resource generation</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Implement other ResourceGenerator methods</span></span></span></code></pre></div>
+<h4 id="2-create-layout-integration">2. Create Layout Integration</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// pkg/stack/newtool/layout_integrator.go  </span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">LayoutIntegrator</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ResourceGen</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">ResourceGenerator</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Tool-specific layout configuration</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">li</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">LayoutIntegrator</span>) <span style="color:#a6e22e">IntegrateWithLayout</span>(<span style="color:#a6e22e">ml</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">ManifestLayout</span>, <span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Cluster</span>, <span style="color:#a6e22e">rules</span> <span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">LayoutRules</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Tool-specific layout integration</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="3-compose-workflow-engine">3. Compose Workflow Engine</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// pkg/stack/newtool/workflow_engine.go</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">WorkflowEngine</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ResourceGen</span>  <span style="color:#f92672">*</span><span style="color:#a6e22e">ResourceGenerator</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">LayoutInteg</span>  <span style="color:#f92672">*</span><span style="color:#a6e22e">LayoutIntegrator</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">BootstrapGen</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">BootstrapGenerator</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewWorkflowEngine</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">WorkflowEngine</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Compose components</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Implement workflow.WorkflowEngine interface</span></span></span></code></pre></div>
+<h4 id="4-add-public-api">4. Add Public API</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// pkg/stack/newtool/newtool.go</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Engine</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">WorkflowEngine</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">NewWorkflowEngine</span>()
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="testing-patterns">Testing Patterns</h3>
+<p>Kure maintains comprehensive test coverage through consistent patterns:</p>
+<h4 id="unit-testing">Unit Testing</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestResourceCreation</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Test constructor</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">resource</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">CreateResource</span>(<span style="color:#e6db74">&#34;test&#34;</span>, <span style="color:#e6db74">&#34;default&#34;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Validate required fields</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Test error conditions</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Verify helper functions</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestResourceValidation</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Test validation logic</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Test error cases</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Verify error messages</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="integration-testing">Integration Testing</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestWorkflowGeneration</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Create domain model</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cluster</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">NewCluster</span>(<span style="color:#e6db74">&#34;test&#34;</span>, <span style="color:#a6e22e">rootNode</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Generate with workflow</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">engine</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fluxcd</span>.<span style="color:#a6e22e">Engine</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">resources</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">engine</span>.<span style="color:#a6e22e">GenerateFromCluster</span>(<span style="color:#a6e22e">cluster</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Validate generated resources</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Test layout integration</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="error-testing">Error Testing</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestErrorHandling</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Test nil inputs</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">AddResourceField</span>(<span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">field</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">IsType</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">ErrorTypeValidation</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;expected validation error, got %T&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Test error context</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">kureErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">GetKureError</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">kureErr</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#e6db74">&#34;expected KureError&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<hr>
+<h2 id="performance-characteristics">Performance Characteristics</h2>
+<h3 id="resource-generation-performance">Resource Generation Performance</h3>
+<p>Kure is optimized for batch resource generation rather than individual operations:</p>
+<p><strong>Benchmarks</strong> (typical 100-node cluster):</p>
+<ul>
+<li>Domain model creation: ~1ms</li>
+<li>Resource generation: ~10ms</li>
+<li>Layout generation: ~5ms</li>
+<li>YAML serialization: ~15ms</li>
+</ul>
+<p><strong>Memory Usage:</strong></p>
+<ul>
+<li>Domain model: ~100KB per 100 resources</li>
+<li>Generated resources: ~1MB per 1000 resources</li>
+<li>Layout structures: ~50KB per cluster</li>
+</ul>
+<h3 id="optimization-strategies">Optimization Strategies</h3>
+<h4 id="1-lazy-initialization">1. Lazy Initialization</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">n</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>) <span style="color:#a6e22e">InitializePathMap</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Only build path map when needed</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">pathMap</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">pathMap</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">buildPathMap</span>(<span style="color:#a6e22e">pathMap</span>, <span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">setPathMapRecursive</span>(<span style="color:#a6e22e">pathMap</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="2-resource-pooling">2. Resource Pooling</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Reuse validation instances</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">validatorPool</span> = <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Pool</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">New</span>: <span style="color:#66d9ef">func</span>() <span style="color:#66d9ef">interface</span>{} {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">validation</span>.<span style="color:#a6e22e">NewValidator</span>()
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="3-batch-operations">3. Batch Operations</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">we</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">WorkflowEngine</span>) <span style="color:#a6e22e">GenerateFromCluster</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Cluster</span>) ([]<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Object</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Generate all resources in single pass</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Minimize allocation overhead</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Batch validation operations</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="bottlenecks-and-mitigations">Bottlenecks and Mitigations</h3>
+<p><strong>Known Bottlenecks:</strong></p>
+<ol>
+<li>YAML serialization (mitigated by streaming output)</li>
+<li>Path resolution in complex hierarchies (mitigated by path caching)</li>
+<li>Validation overhead (mitigated by batch validation)</li>
+</ol>
+<p><strong>Scaling Characteristics:</strong></p>
+<ul>
+<li>Linear scaling with number of resources</li>
+<li>Logarithmic scaling with hierarchy depth</li>
+<li>Constant memory overhead per resource type</li>
+</ul>
+<hr>
+<h2 id="security-model">Security Model</h2>
+<h3 id="secret-management">Secret Management</h3>
+<p>Kure follows Kubernetes security best practices for secret handling:</p>
+<h4 id="1-no-hardcoded-secrets">1. No Hardcoded Secrets</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// NEVER do this</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateSecretWithData</span>(<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">namespace</span>, <span style="color:#a6e22e">password</span> <span style="color:#66d9ef">string</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">Secret</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">Secret</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Data</span>: <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>][]<span style="color:#66d9ef">byte</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;password&#34;</span>: []byte(<span style="color:#a6e22e">password</span>), <span style="color:#75715e">// WRONG: hardcoded secret</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// CORRECT approach - reference existing secrets</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateCertificateWithSecret</span>(<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">namespace</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">secretRef</span> <span style="color:#a6e22e">cmmeta</span>.<span style="color:#a6e22e">SecretKeySelector</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">cmv1</span>.<span style="color:#a6e22e">Certificate</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">cmv1</span>.<span style="color:#a6e22e">Certificate</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Spec</span>: <span style="color:#a6e22e">cmv1</span>.<span style="color:#a6e22e">CertificateSpec</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">SecretName</span>: <span style="color:#a6e22e">secretRef</span>.<span style="color:#a6e22e">Name</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Reference, don&#39;t embed</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="2-secret-reference-pattern">2. Secret Reference Pattern</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Standard pattern for secret references</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">key</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">cmmeta</span>.<span style="color:#a6e22e">SecretKeySelector</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">LocalObjectReference</span>: <span style="color:#a6e22e">cmmeta</span>.<span style="color:#a6e22e">LocalObjectReference</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;secret-name&#34;</span>},
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Key</span>: <span style="color:#e6db74">&#34;key-name&#34;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Use in resource builders</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cert</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">certmanager</span>.<span style="color:#a6e22e">CreateCertificate</span>(<span style="color:#e6db74">&#34;tls-cert&#34;</span>, <span style="color:#e6db74">&#34;default&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">certmanager</span>.<span style="color:#a6e22e">SetCertificateIssuerSecret</span>(<span style="color:#a6e22e">cert</span>, <span style="color:#a6e22e">key</span>)</span></span></code></pre></div>
+<h3 id="rbac-integration">RBAC Integration</h3>
+<p>Resource builders provide granular RBAC control:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Create minimal privilege roles</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">role</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">kubernetes</span>.<span style="color:#a6e22e">CreateRole</span>(<span style="color:#e6db74">&#34;app-reader&#34;</span>, <span style="color:#e6db74">&#34;default&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">kubernetes</span>.<span style="color:#a6e22e">AddRoleRule</span>(<span style="color:#a6e22e">role</span>, <span style="color:#a6e22e">rbacv1</span>.<span style="color:#a6e22e">PolicyRule</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">APIGroups</span>: []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;&#34;</span>},
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Resources</span>: []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;pods&#34;</span>},
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Verbs</span>:     []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;get&#34;</span>, <span style="color:#e6db74">&#34;list&#34;</span>},
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Bind to specific accounts</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">binding</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">kubernetes</span>.<span style="color:#a6e22e">CreateRoleBinding</span>(<span style="color:#e6db74">&#34;app-reader&#34;</span>, <span style="color:#e6db74">&#34;default&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">kubernetes</span>.<span style="color:#a6e22e">SetRoleBindingRole</span>(<span style="color:#a6e22e">binding</span>, <span style="color:#e6db74">&#34;app-reader&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">kubernetes</span>.<span style="color:#a6e22e">AddRoleBindingSubject</span>(<span style="color:#a6e22e">binding</span>, <span style="color:#a6e22e">rbacv1</span>.<span style="color:#a6e22e">Subject</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Kind</span>: <span style="color:#e6db74">&#34;ServiceAccount&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;app-sa&#34;</span>,
+</span></span><span style="display:flex;"><span>})</span></span></code></pre></div>
+<h3 id="certificate-management">Certificate Management</h3>
+<p>cert-manager integration provides secure TLS:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// ACME challenge configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">issuer</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">certmanager</span>.<span style="color:#a6e22e">CreateClusterIssuer</span>(<span style="color:#e6db74">&#34;letsencrypt&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">certmanager</span>.<span style="color:#a6e22e">SetClusterIssuerACME</span>(<span style="color:#a6e22e">issuer</span>, <span style="color:#e6db74">&#34;https://acme-v02.api.letsencrypt.org/directory&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">certmanager</span>.<span style="color:#a6e22e">AddClusterIssuerACMEDNS01Provider</span>(<span style="color:#a6e22e">issuer</span>, <span style="color:#e6db74">&#34;cloudflare&#34;</span>, <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;admin@example.com&#34;</span>,
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Certificate with DNS validation</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cert</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">certmanager</span>.<span style="color:#a6e22e">CreateCertificate</span>(<span style="color:#e6db74">&#34;api-tls&#34;</span>, <span style="color:#e6db74">&#34;default&#34;</span>)  
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">certmanager</span>.<span style="color:#a6e22e">SetCertificateIssuer</span>(<span style="color:#a6e22e">cert</span>, <span style="color:#a6e22e">cmmeta</span>.<span style="color:#a6e22e">ObjectReference</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;letsencrypt&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Kind</span>: <span style="color:#e6db74">&#34;ClusterIssuer&#34;</span>,
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">certmanager</span>.<span style="color:#a6e22e">AddCertificateDNSName</span>(<span style="color:#a6e22e">cert</span>, <span style="color:#e6db74">&#34;api.example.com&#34;</span>)</span></span></code></pre></div>
+<h3 id="input-validation">Input Validation</h3>
+<p>All user inputs undergo strict validation:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateResource</span>(<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">namespace</span> <span style="color:#66d9ef">string</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Resource</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Validate Kubernetes naming conventions</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">isValidKubernetesName</span>(<span style="color:#a6e22e">name</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">NewValidationError</span>(<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#a6e22e">name</span>, <span style="color:#e6db74">&#34;Resource&#34;</span>, 
+</span></span><span style="display:flex;"><span>                                              []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;lowercase&#34;</span>, <span style="color:#e6db74">&#34;alphanumeric&#34;</span>, <span style="color:#e6db74">&#34;hyphens-only&#34;</span>})
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Validate namespace format</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">namespace</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">&amp;&amp;</span> !<span style="color:#a6e22e">isValidNamespace</span>(<span style="color:#a6e22e">namespace</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">NewValidationError</span>(<span style="color:#e6db74">&#34;namespace&#34;</span>, <span style="color:#a6e22e">namespace</span>, <span style="color:#e6db74">&#34;Resource&#34;</span>, 
+</span></span><span style="display:flex;"><span>                                              []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;valid-namespace-name&#34;</span>})
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Resource</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">Namespace</span>: <span style="color:#a6e22e">namespace</span>}, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<hr>
+<h2 id="testing-architecture">Testing Architecture</h2>
+<h3 id="test-organization">Test Organization</h3>
+<p>Kure maintains <strong>52 test files</strong> with comprehensive coverage:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0"><code>internal/
+├── kubernetes/
+│   ├── deployment_test.go
+│   ├── service_test.go
+│   └── ...
+├── fluxcd/
+│   ├── kustomize_test.go
+│   ├── source_test.go  
+│   └── ...
+└── ...
+
+pkg/
+├── stack/
+│   ├── application_test.go
+│   ├── bundle_test.go
+│   └── ...
+├── patch/
+│   ├── apply_test.go
+│   ├── set_test.go
+│   └── ...
+└── ...</code></pre></div>
+<h3 id="testing-patterns-1">Testing Patterns</h3>
+<h4 id="constructor-testing">Constructor Testing</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestCreateDeployment</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">deployment</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">CreateDeployment</span>(<span style="color:#e6db74">&#34;test-app&#34;</span>, <span style="color:#e6db74">&#34;default&#34;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Validate non-nil result</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">deployment</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#e6db74">&#34;expected non-nil deployment&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Validate required fields</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">deployment</span>.<span style="color:#a6e22e">Name</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;test-app&#34;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;expected name &#39;test-app&#39;, got %s&#34;</span>, <span style="color:#a6e22e">deployment</span>.<span style="color:#a6e22e">Name</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">deployment</span>.<span style="color:#a6e22e">Namespace</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;default&#34;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;expected namespace &#39;default&#39;, got %s&#34;</span>, <span style="color:#a6e22e">deployment</span>.<span style="color:#a6e22e">Namespace</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Validate default values</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">deployment</span>.<span style="color:#a6e22e">Spec</span>.<span style="color:#a6e22e">Replicas</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">||</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">deployment</span>.<span style="color:#a6e22e">Spec</span>.<span style="color:#a6e22e">Replicas</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#e6db74">&#34;expected default replicas to be 1&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="helper-function-testing">Helper Function Testing</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestAddDeploymentContainer</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">deployment</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">CreateDeployment</span>(<span style="color:#e6db74">&#34;test-app&#34;</span>, <span style="color:#e6db74">&#34;default&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">container</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">Container</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Name</span>:  <span style="color:#e6db74">&#34;main&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Image</span>: <span style="color:#e6db74">&#34;nginx:latest&#34;</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Test successful addition</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">AddDeploymentContainer</span>(<span style="color:#a6e22e">deployment</span>, <span style="color:#a6e22e">container</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;unexpected error: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Validate container was added</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">deployment</span>.<span style="color:#a6e22e">Spec</span>.<span style="color:#a6e22e">Template</span>.<span style="color:#a6e22e">Spec</span>.<span style="color:#a6e22e">Containers</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;expected 1 container, got %d&#34;</span>, len(<span style="color:#a6e22e">deployment</span>.<span style="color:#a6e22e">Spec</span>.<span style="color:#a6e22e">Template</span>.<span style="color:#a6e22e">Spec</span>.<span style="color:#a6e22e">Containers</span>))
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Test error conditions</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">AddDeploymentContainer</span>(<span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">container</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#e6db74">&#34;expected error for nil deployment&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">AddDeploymentContainer</span>(<span style="color:#a6e22e">deployment</span>, <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#e6db74">&#34;expected error for nil container&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="workflow-testing">Workflow Testing</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestFluxWorkflowGeneration</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Create test cluster</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">app</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Application</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;test-app&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Resources</span>: []<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Object</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">kubernetes</span>.<span style="color:#a6e22e">CreateDeployment</span>(<span style="color:#e6db74">&#34;app&#34;</span>, <span style="color:#e6db74">&#34;default&#34;</span>),
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">bundle</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Bundle</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;test-bundle&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Applications</span>: []<span style="color:#f92672">*</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Application</span>{<span style="color:#a6e22e">app</span>},
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">node</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Node</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;test-node&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Bundle</span>: <span style="color:#a6e22e">bundle</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cluster</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">NewCluster</span>(<span style="color:#e6db74">&#34;test-cluster&#34;</span>, <span style="color:#a6e22e">node</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Test resource generation</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">engine</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fluxcd</span>.<span style="color:#a6e22e">Engine</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">resources</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">engine</span>.<span style="color:#a6e22e">GenerateFromCluster</span>(<span style="color:#a6e22e">cluster</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;unexpected error: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">resources</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#e6db74">&#34;expected generated resources&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Validate resource types</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">hasKustomization</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">resource</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">resources</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">GetObjectKind</span>().<span style="color:#a6e22e">GroupVersionKind</span>().<span style="color:#a6e22e">Kind</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Kustomization&#34;</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">hasKustomization</span> = <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">hasKustomization</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#e6db74">&#34;expected Kustomization resource&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="error-testing-1">Error Testing</h4>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestValidationErrors</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Test validation error structure</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">validation</span>.<span style="color:#a6e22e">NewValidator</span>().<span style="color:#a6e22e">ValidateDeployment</span>(<span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#e6db74">&#34;expected validation error&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Test KureError interface</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">kureErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">GetKureError</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">kureErr</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#e6db74">&#34;expected KureError&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Validate error properties</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">kureErr</span>.<span style="color:#a6e22e">Type</span>() <span style="color:#f92672">!=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">ErrorTypeValidation</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;expected validation error type, got %s&#34;</span>, <span style="color:#a6e22e">kureErr</span>.<span style="color:#a6e22e">Type</span>())
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">suggestion</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">kureErr</span>.<span style="color:#a6e22e">Suggestion</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">suggestion</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#e6db74">&#34;expected non-empty suggestion&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">context</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">kureErr</span>.<span style="color:#a6e22e">Context</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">context</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#e6db74">&#34;expected error context&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="test-utilities">Test Utilities</h3>
+<p>Common test utilities for consistent testing:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Test helper functions</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">createTestCluster</span>(<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">Cluster</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Standard test cluster creation</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">validateResource</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>, <span style="color:#a6e22e">resource</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Object</span>, <span style="color:#a6e22e">expectedKind</span> <span style="color:#66d9ef">string</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Standard resource validation</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">assertNoError</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;unexpected error: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">assertError</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>, <span style="color:#a6e22e">expectedType</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">ErrorType</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#e6db74">&#34;expected error&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">IsType</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">expectedType</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;expected error type %s, got %T&#34;</span>, <span style="color:#a6e22e">expectedType</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<hr>
+<h2 id="appendices">Appendices</h2>
+<h3 id="appendix-a-glossary">Appendix A: Glossary</h3>
+<p><strong>Application</strong>: Individual Kubernetes workload or resource collection within a Bundle.</p>
+<p><strong>Bundle</strong>: Deployment unit typically corresponding to a single GitOps resource (e.g., Flux Kustomization).</p>
+<p><strong>Cluster</strong>: Root abstraction representing a complete Kubernetes cluster configuration.</p>
+<p><strong>Domain Model</strong>: The hierarchical structure (Cluster → Node → Bundle → Application) representing cluster organization.</p>
+<p><strong>GitOps Engine</strong>: Implementation of GitOps-specific resource generation and layout integration.</p>
+<p><strong>KureError</strong>: Structured error type providing contextual information and suggestions.</p>
+<p><strong>Layout</strong>: Directory structure and manifest organization for GitOps repositories.</p>
+<p><strong>Node</strong>: Hierarchical container for organizing related Bundles (e.g., infrastructure vs applications).</p>
+<p><strong>Patch</strong>: Declarative modification of Kubernetes resources using JSONPath-based operations.</p>
+<p><strong>Resource Builder</strong>: Strongly-typed factory function for creating Kubernetes resources.</p>
+<p><strong>Workflow Engine</strong>: Complete GitOps workflow implementation combining resource generation, layout integration, and bootstrap capabilities.</p>
+<h3 id="appendix-b-references">Appendix B: References</h3>
+<ul>
+<li><a href="https://kubernetes.io/docs/reference/kubernetes-api/" rel="external" target="_blank">Kubernetes API Reference</a></li>
+<li><a href="https://fluxcd.io/docs/" rel="external" target="_blank">Flux Documentation</a></li>
+<li><a href="https://argoproj.github.io/argo-cd/" rel="external" target="_blank">ArgoCD Documentation</a></li>
+<li><a href="https://cert-manager.io/docs/" rel="external" target="_blank">cert-manager Documentation</a></li>
+<li><a href="https://metallb.universe.tf/" rel="external" target="_blank">MetalLB Documentation</a></li>
+<li><a href="https://external-secrets.io/" rel="external" target="_blank">External Secrets Operator</a></li>
+</ul>
+<h3 id="appendix-c-design-documents">Appendix C: Design Documents</h3>
+<p>Additional design documentation available in the repository:</p>
+<ul>
+<li><code>pkg/patch/DESIGN.md</code>: Detailed patch system specification</li>
+<li><code>pkg/patch/PATCH_ENGINE_DESIGN.md</code>: Patch engine implementation details</li>
+<li><code>pkg/patch/PATH_RESOLUTION.md</code>: JSONPath resolution algorithms</li>
+<li><code>pkg/stack/layout/README.md</code>: Layout system overview</li>
+<li><code>pkg/workflow/README.md</code>: Workflow interface design rationale</li>
+</ul>
+<h3 id="appendix-d-migration-guide">Appendix D: Migration Guide</h3>
+<p>For migrating from previous versions:</p>
+<h4 id="v1-to-v2-migration">V1 to V2 Migration</h4>
+<p><strong>Domain Model Changes:</strong></p>
+<ul>
+<li>Node hierarchy now uses <code>ParentPath</code> strings instead of direct parent pointers</li>
+<li>Call <code>InitializePathMap()</code> on root nodes after construction</li>
+<li>Bundle hierarchy follows same pattern</li>
+</ul>
+<p><strong>Workflow Interface Changes:</strong></p>
+<ul>
+<li>Split monolithic workflow interfaces into specialized components</li>
+<li>Update implementations to use <code>ResourceGenerator</code>, <code>LayoutIntegrator</code>, <code>BootstrapGenerator</code></li>
+<li>Compose <code>WorkflowEngine</code> from specialized generators</li>
+</ul>
+<p><strong>Error Handling Changes:</strong></p>
+<ul>
+<li>Replace generic errors with typed <code>KureError</code> instances</li>
+<li>Use centralized validation from <code>internal/validation</code> package</li>
+<li>Handle error context and suggestions in error reporting</li>
+</ul>
+<p><strong>Function Naming Changes:</strong></p>
+<ul>
+<li>Constructor functions now follow <code>New*</code> vs <code>Create*</code> patterns consistently</li>
+<li>Update imports to use new package structure</li>
+<li>Helper function signatures remain compatible</li>
+</ul>
+<p>This comprehensive architecture serves as the foundation for Kure&rsquo;s continued evolution while maintaining backward compatibility and extensibility.</p>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+          <a id="R-logo" class="R-default" href="/index.html">
+            <div class="logo-title">Go Kure</div>
+          </a>
+        </div>
+        <search><form action="/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-homelinks">
+          <ul class="space collapsible-menu">
+            <li class="" data-nav-id="/index.html"><a class="padding" href="/index.html"><i class="fa-fw fas fa-home"></i> Home</a></li>
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-headercontrols">
+          <ul class="">
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div class="R-sidebarmenu R-shortcutmenu-main">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="parent " data-nav-id="/architecture/index.html"><a class="padding" href="/architecture/index.html">Architectures</a><ul id="R-subsections-9e2fbae00589891720aedcdff0084e07" class="collapsible-menu">
+            <li class="active hidden " data-nav-id="/architecture/architecture/index.html"><a class="padding" href="/architecture/architecture/index.html"></a></li></ul></li>
+            <li class="" data-nav-id="/examples/index.html"><a class="padding" href="/examples/index.html">Examples</a></li>
+            <li class="" data-nav-id="/packages/index.html"><a class="padding" href="/packages/index.html">Packages</a></li>
+          </ul>
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-shortcuts">
+          <ul class="space collapsible-menu">
+          </ul>
+        </div>
+        <div id="R-footer-margin"></div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-footercontrols">
+          <ul class="">
+          </ul>
+        </div>
+<div id="R-footer"><p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p></div>
+      </div>
+    </aside>
+    <script src="/js/js-yaml/js-yaml.min.js?1754411446" defer></script>
+    <script src="/js/d3/d3-color.min.js?1754411446" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1754411446" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1754411446" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1754411446" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1754411446" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1754411446" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1754411446" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1754411446" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1754411446" defer></script>
+    <script src="/js/mermaid/mermaid.min.js?1754411446" defer></script>
+    <script>
+      window.relearn.themeUseMermaid = JSON.parse("{}");
+    </script>
+    <script src="/js/clipboard/clipboard.min.js?1754411446" defer></script>
+    <script src="/js/perfect-scrollbar/perfect-scrollbar.min.js?1754411446" defer></script>
+    <script src="/js/theme.js?1754411446" defer></script>
+  </body>
+</html>

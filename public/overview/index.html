@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=35861&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.148.2">
+    <meta name="generator" content="Relearn 8.0.0+9803d5122ebb3276acea823f476e9eb44f607862">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Kure Kure is a Go library for programmatically building Kubernetes resources used by GitOps tools like Flux, cert-manager, MetalLB, and External Secrets. The library emphasizes strongly-typed object construction over templating engines, providing a clean, type-safe approach to Kubernetes manifest generation.
+Design Philosophy Kure prioritizes type safety, composability, and simplicity over template-based approaches. By providing strongly-typed builders and avoiding string interpolation, it reduces errors and improves maintainability in Kubernetes resource generation workflows.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="Kure Kure is a Go library for programmatically building Kubernetes resources used by GitOps tools like Flux, cert-manager, MetalLB, and External Secrets. The library emphasizes strongly-typed object construction over templating engines, providing a clean, type-safe approach to Kubernetes manifest generation.
+Design Philosophy Kure prioritizes type safety, composability, and simplicity over template-based approaches. By providing strongly-typed builders and avoiding string interpolation, it reduces errors and improves maintainability in Kubernetes resource generation workflows.">
+    <meta property="og:url" content="http://localhost:35861/overview/index.html">
+    <meta property="og:site_name" content="Go Kure">
+    <meta property="og:description" content="Kure Kure is a Go library for programmatically building Kubernetes resources used by GitOps tools like Flux, cert-manager, MetalLB, and External Secrets. The library emphasizes strongly-typed object construction over templating engines, providing a clean, type-safe approach to Kubernetes manifest generation.
+Design Philosophy Kure prioritizes type safety, composability, and simplicity over template-based approaches. By providing strongly-typed builders and avoiding string interpolation, it reduces errors and improves maintainability in Kubernetes resource generation workflows.">
+    <meta property="og:locale" content="en_us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Go Kure">
+    <meta itemprop="description" content="Kure Kure is a Go library for programmatically building Kubernetes resources used by GitOps tools like Flux, cert-manager, MetalLB, and External Secrets. The library emphasizes strongly-typed object construction over templating engines, providing a clean, type-safe approach to Kubernetes manifest generation.
+Design Philosophy Kure prioritizes type safety, composability, and simplicity over template-based approaches. By providing strongly-typed builders and avoiding string interpolation, it reduces errors and improves maintainability in Kubernetes resource generation workflows.">
+    <meta itemprop="wordCount" content="984">
+    <title></title>
+    <link href="/css/auto-complete/auto-complete.min.css?1754411446" rel="stylesheet">
+    <script src="/js/auto-complete/auto-complete.min.js?1754411446" defer></script>
+    <script src="/js/search-lunr.js?1754411446" defer></script>
+    <script src="/js/search.js?1754411446" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.index_js_url="/searchindex.en.js?1754411446";
+    </script>
+    <script src="/js/lunr/lunr.min.js?1754411446" defer></script>
+    <script src="/js/lunr/lunr.stemmer.support.min.js?1754411446" defer></script>
+    <script src="/js/lunr/lunr.multi.min.js?1754411446" defer></script>
+    <script src="/js/lunr/lunr.en.min.js?1754411446" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.contentLangs=['en'];
+    </script>
+    <link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754411446" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754411446" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar/perfect-scrollbar.min.css?1754411446" rel="stylesheet">
+    <link href="/css/theme.css?1754411446" rel="stylesheet">
+    <link href="/css/format-html.css?1754411446" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      // configuration
+      window.relearn.min = ``;
+      window.relearn.path='\/overview\/index.html';
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..';
+      window.relearn.absBaseUri='http:\/\/localhost:35861';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.relearn.disableInlineCopyToClipboard=false;
+      window.relearn.enableBlockCodeWrap=true;
+      // legal
+      window.relearn.getItem = (s,n) => {return s.getItem(n)};
+      window.relearn.setItem = (s,n,v) => {return s.setItem(n,v)};
+      window.relearn.removeItem = (s,n) => {return s.removeItem(n)};
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+      // variant stuff
+      window.relearn.themevariants = [ 'auto' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.relearn.setItem(window.localStorage, window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+          window.relearn.markVariant();
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.relearn.getItem(window.localStorage, window.relearn.absBaseUri + "/variant");
+        document.querySelectorAll(".R-variantswitcher select").forEach((select) => {select.value = variant;});
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.relearn.getItem(window.localStorage, window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.relearn.setItem(window.localStorage, window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/overview/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li><a href="#design-philosophy">Design Philosophy</a></li>
+    <li><a href="#architecture">Architecture</a>
+      <ul>
+        <li><a href="#core-design-patterns">Core Design Patterns</a></li>
+        <li><a href="#key-components">Key Components</a></li>
+      </ul>
+    </li>
+    <li><a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#quick-example">Quick Example</a></li>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#using-in-your-project">Using in Your Project</a></li>
+        <li><a href="#basic-usage">Basic Usage</a></li>
+      </ul>
+    </li>
+    <li><a href="#key-features">Key Features</a>
+      <ul>
+        <li><a href="#domain-model-usage">Domain Model Usage</a></li>
+        <li><a href="#gitops-workflow-integration">GitOps Workflow Integration</a></li>
+        <li><a href="#layout-and-manifest-generation">Layout and Manifest Generation</a></li>
+        <li><a href="#declarative-patching">Declarative Patching</a></li>
+      </ul>
+    </li>
+    <li><a href="#security-features">Security Features</a>
+      <ul>
+        <li><a href="#certificate-management">Certificate Management</a></li>
+        <li><a href="#secret-management">Secret Management</a></li>
+        <li><a href="#access-control">Access Control</a></li>
+      </ul>
+    </li>
+    <li><a href="#flux-vs-argocd-paths">Flux vs ArgoCD Paths</a></li>
+    <li><a href="#development--testing">Development &amp; Testing</a>
+      <ul>
+        <li><a href="#running-tests">Running Tests</a></li>
+        <li><a href="#code-quality">Code Quality</a></li>
+        <li><a href="#dependencies">Dependencies</a></li>
+        <li><a href="#examples--documentation">Examples &amp; Documentation</a></li>
+      </ul>
+    </li>
+    <li><a href="#use-cases">Use Cases</a></li>
+    <li><a href="#documentation">Documentation</a>
+      <ul>
+        <li><a href="#api-reference">API Reference</a></li>
+      </ul>
+    </li>
+    <li><a href="#license">License</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/index.html"><span itemprop="name">Go Kure</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/index.html" title="Go Kure (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/architecture/index.html" title="Architectures (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable page" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id=""></h1>
+
+<h1 id="kure">Kure</h1>
+<p><strong>Kure</strong> is a Go library for programmatically building Kubernetes resources used by GitOps tools like Flux, cert-manager, MetalLB, and External Secrets. The library emphasizes strongly-typed object construction over templating engines, providing a clean, type-safe approach to Kubernetes manifest generation.</p>
+<h2 id="design-philosophy">Design Philosophy</h2>
+<p>Kure prioritizes <strong>type safety</strong>, <strong>composability</strong>, and <strong>simplicity</strong> over template-based approaches. By providing strongly-typed builders and avoiding string interpolation, it reduces errors and improves maintainability in Kubernetes resource generation workflows.</p>
+<h2 id="architecture">Architecture</h2>
+<h3 id="core-design-patterns">Core Design Patterns</h3>
+<ul>
+<li><strong>Hierarchical Domain Model</strong>: Cluster → Node → Bundle → Application structure for organizing resources</li>
+<li><strong>Builder Pattern</strong>: Extensive use of constructor functions (<code>Create*</code>) and helper methods (<code>Add*</code>, <code>Set*</code>)</li>
+<li><strong>Strategy Pattern</strong>: ApplicationConfig interface enables different resource generation strategies</li>
+<li><strong>GitOps Tool Agnostic</strong>: Core abstractions can target both Flux and ArgoCD workflows</li>
+</ul>
+<h3 id="key-components">Key Components</h3>
+<h4 id="1-domain-model-pkgstack">1. Domain Model (<code>pkg/stack/</code>)</h4>
+<ul>
+<li><strong>Cluster</strong>: Root container with hierarchical node structure</li>
+<li><strong>Node</strong>: Tree structure containing child nodes and bundles</li>
+<li><strong>Bundle</strong>: Deployment unit for Flux Kustomization reconciliation</li>
+<li><strong>Application</strong>: Individual deployable application with configuration</li>
+<li><strong>Workflow Interface</strong>: Converts stack objects to GitOps tool resources</li>
+</ul>
+<h4 id="2-resource-builders-internal">2. Resource Builders (<code>internal/</code>)</h4>
+<ul>
+<li><strong>kubernetes/</strong>: Core K8s resources (Deployments, Services, ConfigMaps, RBAC)</li>
+<li><strong>fluxcd/</strong>: Flux resources (Kustomizations, GitRepositories, HelmReleases)</li>
+<li><strong>certmanager/</strong>: Certificate management (Certificates, Issuers, ACME)</li>
+<li><strong>metallb/</strong>: Load balancer resources (IPAddressPools, BGP configuration)</li>
+<li><strong>externalsecrets/</strong>: External secret management (SecretStores, ExternalSecrets)</li>
+</ul>
+<h4 id="3-layout-management-pkgstacklayout">3. Layout Management (<code>pkg/stack/layout/</code>)</h4>
+<ul>
+<li>Controls manifest organization on disk</li>
+<li>Handles Flux (<code>./path</code>) vs ArgoCD (<code>path</code>) conventions</li>
+<li>Supports various grouping and file organization strategies</li>
+<li>Generates kustomization.yaml files</li>
+</ul>
+<h4 id="4-patching-system-pkgpatch">4. Patching System (<code>pkg/patch/</code>)</h4>
+<ul>
+<li>JSONPath-based declarative patching</li>
+<li>Operations: replace, delete, insert, append</li>
+<li>TOML-inspired syntax for patch files</li>
+<li>Avoids complex overlay management</li>
+</ul>
+<h4 id="5-utilities">5. Utilities</h4>
+<ul>
+<li><strong>pkg/io/</strong>: YAML serialization and multi-document parsing</li>
+<li><strong>pkg/fluxcd/</strong>: Public API facade over internal Flux builders</li>
+<li><strong>pkg/k8s/</strong>: Kubernetes scheme and utility functions</li>
+</ul>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="quick-example">Quick Example</h3>
+<h3 id="installation">Installation</h3>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/go-kure/kure</span></span></code></pre></div>
+<h3 id="using-in-your-project">Using in Your Project</h3>
+<h3 id="basic-usage">Basic Usage</h3>
+<p>To use Kure in your project, import the public API packages:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/go-kure/kure/pkg/stack&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/go-kure/kure/pkg/stack/layout&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/go-kure/kure/pkg/k8s/fluxcd&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/go-kure/kure/pkg/io&#34;</span>
+</span></span><span style="display:flex;"><span>)</span></span></code></pre></div>
+<h2 id="key-features">Key Features</h2>
+<h3 id="domain-model-usage">Domain Model Usage</h3>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Create cluster structure</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cluster</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">NewCluster</span>(<span style="color:#e6db74">&#34;production&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">node</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">NewNode</span>(<span style="color:#e6db74">&#34;control-plane&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">bundle</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">NewBundle</span>(<span style="color:#e6db74">&#34;monitoring&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Add to hierarchy</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cluster</span>.<span style="color:#a6e22e">AddNode</span>(<span style="color:#a6e22e">node</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">AddBundle</span>(<span style="color:#a6e22e">bundle</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Configure application</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">stack</span>.<span style="color:#a6e22e">NewApplication</span>(<span style="color:#e6db74">&#34;prometheus&#34;</span>, <span style="color:#a6e22e">appConfig</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">bundle</span>.<span style="color:#a6e22e">AddApplication</span>(<span style="color:#a6e22e">app</span>)</span></span></code></pre></div>
+<h3 id="gitops-workflow-integration">GitOps Workflow Integration</h3>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Create Flux resources using the public API</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ks</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fluxcd</span>.<span style="color:#a6e22e">NewKustomization</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">fluxcd</span>.<span style="color:#a6e22e">KustomizationConfig</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>:      <span style="color:#e6db74">&#34;app&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Namespace</span>: <span style="color:#e6db74">&#34;flux-system&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Interval</span>:  <span style="color:#e6db74">&#34;1m&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">SourceRef</span>: <span style="color:#a6e22e">kustv1</span>.<span style="color:#a6e22e">CrossNamespaceSourceReference</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Kind</span>: <span style="color:#e6db74">&#34;GitRepository&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;app-repo&#34;</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">repo</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fluxcd</span>.<span style="color:#a6e22e">NewGitRepository</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">fluxcd</span>.<span style="color:#a6e22e">GitRepositoryConfig</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>:      <span style="color:#e6db74">&#34;app-repo&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Namespace</span>: <span style="color:#e6db74">&#34;flux-system&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">URL</span>:       <span style="color:#e6db74">&#34;https://github.com/example/app&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Interval</span>:  <span style="color:#e6db74">&#34;1m&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Ref</span>:       <span style="color:#e6db74">&#34;main&#34;</span>,
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Write YAML output</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">printer</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">NewYAMLPrinter</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">printer</span>.<span style="color:#a6e22e">PrintObj</span>(<span style="color:#a6e22e">ks</span>, <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">printer</span>.<span style="color:#a6e22e">PrintObj</span>(<span style="color:#a6e22e">repo</span>, <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>)</span></span></code></pre></div>
+<h3 id="layout-and-manifest-generation">Layout and Manifest Generation</h3>
+<p><code>LayoutRules</code> control how resources are organized on disk:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Configure layout rules</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">rules</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">LayoutRules</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">BundleGrouping</span>:      <span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">GroupFlat</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ApplicationGrouping</span>: <span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">GroupFlat</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Generate manifest layout</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ml</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">WalkCluster</span>(<span style="color:#a6e22e">cluster</span>, <span style="color:#a6e22e">rules</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Write manifests to disk</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cfg</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">DefaultLayoutConfig</span>()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">WriteManifest</span>(<span style="color:#e6db74">&#34;./repo&#34;</span>, <span style="color:#a6e22e">cfg</span>, <span style="color:#a6e22e">ml</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="declarative-patching">Declarative Patching</h3>
+<p>The <code>kure</code> CLI provides patching functionality:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kure patch --base examples/patches/cert-manager-simple.yaml --patch examples/patches/resources.kpatch</span></span></code></pre></div>
+<p>The command applies JSONPath-based patches to Kubernetes manifests.</p>
+<p>Example patch file (<code>.kpatch</code> format):</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[[<span style="color:#a6e22e">patches</span>]]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">path</span> = <span style="color:#e6db74">&#34;spec.replicas&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">value</span> = <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">operation</span> = <span style="color:#e6db74">&#34;replace&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[[<span style="color:#a6e22e">patches</span>]]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">path</span> = <span style="color:#e6db74">&#34;spec.template.spec.containers[0].resources.limits.memory&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">value</span> = <span style="color:#e6db74">&#34;512Mi&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">operation</span> = <span style="color:#e6db74">&#34;replace&#34;</span></span></span></code></pre></div>
+<h2 id="security-features">Security Features</h2>
+<h3 id="certificate-management">Certificate Management</h3>
+<ul>
+<li>ACME integration with Let&rsquo;s Encrypt</li>
+<li>DNS01 and HTTP01 challenge solvers</li>
+<li>Support for Cloudflare, Route53, CloudDNS providers</li>
+<li>Automated certificate provisioning</li>
+</ul>
+<h3 id="secret-management">Secret Management</h3>
+<ul>
+<li>External Secrets integration</li>
+<li>Support for AWS Secrets Manager, GCP Secret Manager, Azure Key Vault</li>
+<li>No hardcoded sensitive data - all references through Kubernetes secrets</li>
+<li>SecretStore and ClusterSecretStore builders</li>
+</ul>
+<h3 id="access-control">Access Control</h3>
+<ul>
+<li>Comprehensive RBAC builders for Roles, ClusterRoles, Bindings</li>
+<li>ServiceAccount management with token controls</li>
+<li>Network Policy construction for traffic segmentation</li>
+</ul>
+<h2 id="flux-vs-argocd-paths">Flux vs ArgoCD Paths</h2>
+<p>Flux Kustomizations reference directories in a Git repository using <code>spec.path</code>. The value must begin with <code>./</code> and is interpreted relative to the repository root. ArgoCD Applications use <code>spec.source.path</code> without the <code>./</code> prefix but with the same relative semantics.</p>
+<p>When nodes or bundles are stored in subfolders, the path has to point directly to that folder unless the directory tree only contains files for a single node or bundle. Flux will recursively auto-generate a <code>kustomization.yaml</code> when one is missing and include every manifest under the specified path. ArgoCD does not auto-generate a <code>kustomization.yaml</code> and therefore ignores nested directories unless they are referenced from a <code>kustomization.yaml</code> at the target path.</p>
+<p>For example:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>repo/
+</span></span><span style="display:flex;"><span>  clusters/
+</span></span><span style="display:flex;"><span>    prod/
+</span></span><span style="display:flex;"><span>      nodes/
+</span></span><span style="display:flex;"><span>        cp/
+</span></span><span style="display:flex;"><span>          kustomization.yaml
+</span></span><span style="display:flex;"><span>      bundles/
+</span></span><span style="display:flex;"><span>        monitoring/
+</span></span><span style="display:flex;"><span>          kustomization.yaml</span></span></code></pre></div>
+<p>Flux Kustomization for the control-plane node:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">path</span>: <span style="color:#ae81ff">./clusters/prod/nodes/cp</span></span></span></code></pre></div>
+<p>Equivalent ArgoCD Application:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">source</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">path</span>: <span style="color:#ae81ff">clusters/prod/nodes/cp</span></span></span></code></pre></div>
+<p>With this layout, each node or bundle is targeted individually. Pointing a Flux Kustomization to the parent directory (<code>./clusters/prod</code>) would combine the <code>cp</code> and <code>monitoring</code> manifests into a single deployment because it would auto-generate a <code>kustomization.yaml</code> for the entire tree. ArgoCD will only process the manifests under <code>clusters/prod</code> itself unless a <code>kustomization.yaml</code> aggregates the subdirectories, so each subfolder must be referenced separately.</p>
+<h2 id="development--testing">Development &amp; Testing</h2>
+<h3 id="running-tests">Running Tests</h3>
+<p>All packages include unit tests. Run them with:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go test ./...</span></span></code></pre></div>
+<p>The <code>go test</code> command will discover and execute tests across all packages.</p>
+<h3 id="code-quality">Code Quality</h3>
+<ul>
+<li><strong>52 test files</strong> with comprehensive unit test coverage</li>
+<li>GitHub Actions CI/CD pipeline with Go 1.24.4</li>
+<li>Qodana static analysis with vulnerability scanning</li>
+<li>gotestfmt for enhanced test output formatting</li>
+</ul>
+<h3 id="dependencies">Dependencies</h3>
+<ul>
+<li><strong>Go 1.24.5</strong> with modern Kubernetes client libraries (v0.33.2)</li>
+<li>Flux controller APIs (v1.x series)</li>
+<li>cert-manager v1.16.2, External Secrets v0.18.2, MetalLB v0.15.2</li>
+<li>Built on controller-runtime for Kubernetes integration</li>
+</ul>
+<h3 id="examples--documentation">Examples &amp; Documentation</h3>
+<ul>
+<li>Example cluster configurations in <code>examples/</code></li>
+<li>API documentation available at <a href="https://pkg.go.dev/github.com/go-kure/kure" rel="external" target="_blank">pkg.go.dev</a></li>
+<li>Design documents in <code>pkg/*/DESIGN.md</code> files</li>
+<li>CLI reference via <code>kure --help</code></li>
+</ul>
+<h2 id="use-cases">Use Cases</h2>
+<ul>
+<li><strong>GitOps Platform Development</strong>: Building tools that generate Kubernetes manifests</li>
+<li><strong>Cluster Management</strong>: Programmatic cluster configuration and resource management</li>
+<li><strong>CI/CD Integration</strong>: Generating deployment configurations from application metadata</li>
+<li><strong>Multi-Environment Deployments</strong>: Consistent resource generation across environments</li>
+<li><strong>Complex Application Stacks</strong>: Managing interdependent services and infrastructure</li>
+</ul>
+<h2 id="documentation">Documentation</h2>
+<h3 id="api-reference">API Reference</h3>
+<p>Full API documentation is available at <a href="https://pkg.go.dev/github.com/go-kure/kure" rel="external" target="_blank">pkg.go.dev</a>. The main public packages are:</p>
+<ul>
+<li><code>pkg/stack</code> - Core domain model and workflow interfaces</li>
+<li><code>pkg/stack/layout</code> - Manifest organization and file layout</li>
+<li><code>pkg/k8s/fluxcd</code> - Flux resource creation and management</li>
+<li><code>pkg/patch</code> - JSONPath-based patching system</li>
+<li><code>pkg/io</code> - YAML serialization and printing utilities</li>
+</ul>
+<h2 id="license">License</h2>
+<p>This project is licensed under the Apache License 2.0. See the <a href="LICENSE">LICENSE</a> file for details.</p>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+          <a id="R-logo" class="R-default" href="/index.html">
+            <div class="logo-title">Go Kure</div>
+          </a>
+        </div>
+        <search><form action="/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-homelinks">
+          <ul class="space collapsible-menu">
+            <li class="" data-nav-id="/index.html"><a class="padding" href="/index.html"><i class="fa-fw fas fa-home"></i> Home</a></li>
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-headercontrols">
+          <ul class="">
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div class="R-sidebarmenu R-shortcutmenu-main">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="active hidden " data-nav-id="/overview/index.html"><a class="padding" href="/overview/index.html"></a></li>
+            <li class="" data-nav-id="/architecture/index.html"><a class="padding" href="/architecture/index.html">Architectures</a></li>
+            <li class="" data-nav-id="/examples/index.html"><a class="padding" href="/examples/index.html">Examples</a></li>
+            <li class="" data-nav-id="/packages/index.html"><a class="padding" href="/packages/index.html">Packages</a></li>
+          </ul>
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-shortcuts">
+          <ul class="space collapsible-menu">
+          </ul>
+        </div>
+        <div id="R-footer-margin"></div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-footercontrols">
+          <ul class="">
+          </ul>
+        </div>
+<div id="R-footer"><p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p></div>
+      </div>
+    </aside>
+    <script src="/js/clipboard/clipboard.min.js?1754411446" defer></script>
+    <script src="/js/perfect-scrollbar/perfect-scrollbar.min.js?1754411446" defer></script>
+    <script src="/js/theme.js?1754411446" defer></script>
+  </body>
+</html>
