@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Architectures :: Go Kure</title>
-    <link>http://localhost:35861/architecture/index.html</link>
-    <description></description>
+    <title>Architecture :: Go Kure</title>
+    <link>http://localhost:1313/architecture/index.html</link>
+    <description>Architecture This section covers the architectural design and implementation details of Kure.&#xA;Design Philosophy Kure is built on several core principles:&#xA;Type Safety First: Use Go’s type system to catch errors early Composability: Build complex configurations from simple, reusable parts No Magic: Explicit is better than implicit GitOps Native: Output designed for version control and automation Core Concepts Hierarchical Domain Model: Cluster → Node → Bundle → Application Builder Pattern: Fluent APIs for resource construction Strategy Pattern: Pluggable resource generation strategies Clean Separation: Domain logic separate from serialization Learn More Read the full architecture documentation for an in-depth exploration of Kure’s design, including:</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:35861/architecture/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/architecture/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

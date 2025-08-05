@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <link>http://localhost:1313/examples/patches/index.html</link>
+    <description>Kure Patch Module Examples (TOML Format) This directory demonstrates the new TOML-style patch system with cert-manager as an example.&#xA;Files cert-manager-simple.yaml - Base cert-manager resources (simplified) resources.kpatch - Resource limits using TOML container selectors ingress.kpatch - Service configuration with port selectors security.kpatch - Security contexts with deployment targeting advanced.kpatch - Complex selectors and variable substitution Running the Demo go run ./cmd/demo -patches TOML Patch Format The patch files now use TOML-style headers for precise resource targeting:</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/examples/patches/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

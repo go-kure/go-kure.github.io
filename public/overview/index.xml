@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Overview :: Go Kure</title>
+    <link>http://localhost:1313/overview/index.html</link>
+    <description>Project Overview Welcome to Kure - a Go library for programmatically building Kubernetes resources for GitOps workflows.&#xA;Warning ⚠️ Work in Progress: Kure is currently under active development and has not been released yet. APIs and features are subject to change. Use at your own risk. What is Kure? Kure provides a type-safe, programmatic approach to generating Kubernetes manifests. Instead of wrestling with YAML templates or complex templating engines, you write Go code that produces clean, consistent Kubernetes resources.</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/overview/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

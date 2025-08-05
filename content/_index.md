@@ -5,6 +5,10 @@ type = "home"
 
 # Kure: Type-Safe Kubernetes Resource Generation
 
+{{< notice warning >}}
+⚠️ Work in Progress: Kure is currently under active development and has not been released yet. APIs and features are subject to change. Use at your own risk.
+{{< /notice >}}
+
 **Kure** is a powerful Go library for programmatically building Kubernetes resources, designed specifically for GitOps workflows. Say goodbye to complex templating engines and hello to strongly-typed, composable resource generation.
 
 ## Why Kure?
@@ -59,7 +63,7 @@ ks := fluxcd.CreateKustomization("my-app", "default",
 ## Learn More
 
 - [Overview](/overview) - Introduction and design philosophy
-- [Architecture](/architecture/architecture) - Deep dive into Kure's design
+- [Architecture](/architecture) - Deep dive into Kure's design
 - [Packages](/packages/launcher) - Explore the launcher system
 - [Examples](/examples/patches) - See Kure in action
 

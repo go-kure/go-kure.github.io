@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Examples :: Go Kure</title>
-    <link>http://localhost:35861/examples/index.html</link>
-    <description></description>
+    <link>http://localhost:1313/examples/index.html</link>
+    <description>Examples Learn how to use Kure through practical examples and use cases.&#xA;Available Examples Patch Examples Comprehensive examples demonstrating the patch system capabilities, including:&#xA;Basic patching operations Complex transformations Working with arrays and objects Preserving YAML structure and comments More Examples Coming Soon We’re actively developing more examples to help you get started with Kure:&#xA;Complete cluster configurations Multi-environment setups Integration with Flux and ArgoCD Real-world use cases Check back soon or contribute your own examples!</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:35861/examples/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/examples/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

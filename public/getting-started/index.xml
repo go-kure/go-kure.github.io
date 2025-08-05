@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Getting Started :: Go Kure</title>
+    <link>http://localhost:1313/getting-started/index.html</link>
+    <description>Getting Started with Kure This guide will help you get up and running with Kure quickly.&#xA;Installation go get github.com/go-kure/kure Quick Example Here’s a simple example creating a Kubernetes Deployment:&#xA;package main import ( &#34;github.com/go-kure/kure/pkg/kubernetes&#34; &#34;github.com/go-kure/kure/pkg/io&#34; ) func main() { // Create a deployment deployment := kubernetes.CreateDeployment(&#34;my-app&#34;, &#34;default&#34;) kubernetes.AddDeploymentContainer(deployment, &#34;app&#34;, &#34;nginx:latest&#34;) kubernetes.SetDeploymentReplicas(deployment, 3) // Output as YAML printer := io.NewPrinter() printer.PrintObj(deployment) } Next Steps Explore the Packages: Learn about the available packages Read the Architecture: Understand how Kure works Try Examples: See real-world examples Join the Community: Contribute to the GitHub repository Resources API Documentation GitHub Repository Issue Tracker</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/getting-started/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

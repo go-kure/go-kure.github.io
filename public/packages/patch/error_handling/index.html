@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=35861&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.148.2">
@@ -14,7 +14,7 @@ Warn and Continue: Missing targets, optional fields, or recoverable issues gener
     <meta name="twitter:description" content="Error Handling Philosophy and Guidelines This document establishes the unified error handling philosophy for the Kure patch module, reconciling the current mix of strict and graceful approaches.
 Core Philosophy: Graceful by Default, Strict When Critical The patch module should prioritize operational continuity while maintaining data integrity. This means:
 Warn and Continue: Missing targets, optional fields, or recoverable issues generate warnings but don’t stop processing Fail Fast: Data corruption, syntax errors, or critical system issues cause immediate failures Rich Context: All errors include actionable information for debugging and resolution Error Categories and Handling Category 1: Graceful Warnings (Continue Processing) These issues generate warnings but allow processing to continue:">
-    <meta property="og:url" content="http://localhost:35861/packages/patch/error_handling/index.html">
+    <meta property="og:url" content="http://localhost:1313/packages/patch/error_handling/index.html">
     <meta property="og:site_name" content="Go Kure">
     <meta property="og:description" content="Error Handling Philosophy and Guidelines This document establishes the unified error handling philosophy for the Kure patch module, reconciling the current mix of strict and graceful approaches.
 Core Philosophy: Graceful by Default, Strict When Critical The patch module should prioritize operational continuity while maintaining data integrity. This means:
@@ -27,26 +27,26 @@ Core Philosophy: Graceful by Default, Strict When Critical The patch module shou
 Warn and Continue: Missing targets, optional fields, or recoverable issues generate warnings but don’t stop processing Fail Fast: Data corruption, syntax errors, or critical system issues cause immediate failures Rich Context: All errors include actionable information for debugging and resolution Error Categories and Handling Category 1: Graceful Warnings (Continue Processing) These issues generate warnings but allow processing to continue:">
     <meta itemprop="wordCount" content="904">
     <title></title>
-    <link href="/css/auto-complete/auto-complete.min.css?1754411446" rel="stylesheet">
-    <script src="/js/auto-complete/auto-complete.min.js?1754411446" defer></script>
-    <script src="/js/search-lunr.js?1754411446" defer></script>
-    <script src="/js/search.js?1754411446" defer></script>
+    <link href="/css/auto-complete/auto-complete.min.css?1754412197" rel="stylesheet">
+    <script src="/js/auto-complete/auto-complete.min.js?1754412197" defer></script>
+    <script src="/js/search-lunr.js?1754412197" defer></script>
+    <script src="/js/search.js?1754412197" defer></script>
     <script>
       window.relearn = window.relearn || {};
-      window.relearn.index_js_url="/searchindex.en.js?1754411446";
+      window.relearn.index_js_url="/searchindex.en.js?1754412197";
     </script>
-    <script src="/js/lunr/lunr.min.js?1754411446" defer></script>
-    <script src="/js/lunr/lunr.stemmer.support.min.js?1754411446" defer></script>
-    <script src="/js/lunr/lunr.multi.min.js?1754411446" defer></script>
-    <script src="/js/lunr/lunr.en.min.js?1754411446" defer></script>
+    <script src="/js/lunr/lunr.min.js?1754412197" defer></script>
+    <script src="/js/lunr/lunr.stemmer.support.min.js?1754412197" defer></script>
+    <script src="/js/lunr/lunr.multi.min.js?1754412197" defer></script>
+    <script src="/js/lunr/lunr.en.min.js?1754412197" defer></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.contentLangs=['en'];
     </script>
-    <link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754411446" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754411446" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar/perfect-scrollbar.min.css?1754411446" rel="stylesheet">
-    <link href="/css/theme.css?1754411446" rel="stylesheet">
-    <link href="/css/format-html.css?1754411446" rel="stylesheet" id="R-format-style">
+    <link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754412197" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754412197" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar/perfect-scrollbar.min.css?1754412197" rel="stylesheet">
+    <link href="/css/theme.css?1754412197" rel="stylesheet">
+    <link href="/css/format-html.css?1754412197" rel="stylesheet" id="R-format-style">
     <script>
       window.relearn = window.relearn || {};
       // configuration
@@ -54,10 +54,10 @@ Warn and Continue: Missing targets, optional fields, or recoverable issues gener
       window.relearn.path='\/packages\/patch\/error_handling\/index.html';
       window.relearn.relBasePath='..\/..\/..';
       window.relearn.relBaseUri='..\/..\/..';
-      window.relearn.absBaseUri='http:\/\/localhost:35861';
+      window.relearn.absBaseUri='http:\/\/localhost:1313';
       window.relearn.disableAnchorCopy=false;
       window.relearn.disableAnchorScrolling=false;
-      window.relearn.disableInlineCopyToClipboard=false;
+      window.relearn.disableInlineCopyToClipboard=true;
       window.relearn.enableBlockCodeWrap=true;
       // legal
       window.relearn.getItem = (s,n) => {return s.getItem(n)};
@@ -99,7 +99,10 @@ Warn and Continue: Missing targets, optional fields, or recoverable issues gener
       }
       window.relearn.initVariant();
       window.relearn.markVariant();
-    </script>
+    </script><div class="notices warning" style="position: sticky; top: 0; z-index: 1000; margin: 0;">
+    <div class="label">⚠️ Work in Progress</div>
+    <div class="content">Kure is currently under active development and has not been released yet. APIs and features are subject to change.</div>
+</div>
   </head>
   <body class="mobile-support html" data-url="/packages/patch/error_handling/index.html">
     <div id="R-body" class="default-animation">
@@ -449,7 +452,6 @@ Warn and Continue: Missing targets, optional fields, or recoverable issues gener
       <div id="R-content-wrapper" class="highlightable">
         <div class="R-sidebarmenu R-shortcutmenu-main">
           <ul class="enlarge morespace collapsible-menu">
-            <li class="" data-nav-id="/architecture/index.html"><a class="padding" href="/architecture/index.html">Architectures</a></li>
             <li class="" data-nav-id="/examples/index.html"><a class="padding" href="/examples/index.html">Examples</a></li>
             <li class="parent " data-nav-id="/packages/index.html"><a class="padding" href="/packages/index.html">Packages</a><ul id="R-subsections-bdf1e8ce92aa8ff6883c617f10480430" class="collapsible-menu">
             <li class="active hidden " data-nav-id="/packages/patch/error_handling/index.html"><a class="padding" href="/packages/patch/error_handling/index.html"></a></li></ul></li>
@@ -470,8 +472,8 @@ Warn and Continue: Missing targets, optional fields, or recoverable issues gener
 <div id="R-footer"><p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p></div>
       </div>
     </aside>
-    <script src="/js/clipboard/clipboard.min.js?1754411446" defer></script>
-    <script src="/js/perfect-scrollbar/perfect-scrollbar.min.js?1754411446" defer></script>
-    <script src="/js/theme.js?1754411446" defer></script>
+    <script src="/js/clipboard/clipboard.min.js?1754412197" defer></script>
+    <script src="/js/perfect-scrollbar/perfect-scrollbar.min.js?1754412197" defer></script>
+    <script src="/js/theme.js?1754412197" defer></script>
   </body>
 </html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <link>http://localhost:1313/packages/workflow/index.html</link>
+    <description>Workflow Architecture Overview The workflow package provides a clean, composable architecture for generating GitOps resources from Kure stack definitions. This new architecture improves upon the previous monolithic workflow interface by introducing focused, single-responsibility interfaces.&#xA;Interface Architecture Core Interfaces ResourceGenerator The primary interface for converting stack components into GitOps CRDs.&#xA;type ResourceGenerator interface { GenerateFromCluster(*stack.Cluster) ([]client.Object, error) GenerateFromNode(*stack.Node) ([]client.Object, error) GenerateFromBundle(*stack.Bundle) ([]client.Object, error) } Responsibilities:&#xA;Pure resource generation without side effects Converts stack abstractions to concrete GitOps CRDs Handles resource relationships and dependencies LayoutIntegrator Handles integration of GitOps resources with manifest layouts.</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/packages/workflow/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

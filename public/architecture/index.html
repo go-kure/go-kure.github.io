@@ -1,42 +1,54 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=35861&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.148.2">
     <meta name="generator" content="Relearn 8.0.0+9803d5122ebb3276acea823f476e9eb44f607862">
-    <meta name="description" content="">
+    <meta name="description" content="Architecture This section covers the architectural design and implementation details of Kure.
+Design Philosophy Kure is built on several core principles:
+Type Safety First: Use Go’s type system to catch errors early Composability: Build complex configurations from simple, reusable parts No Magic: Explicit is better than implicit GitOps Native: Output designed for version control and automation Core Concepts Hierarchical Domain Model: Cluster → Node → Bundle → Application Builder Pattern: Fluent APIs for resource construction Strategy Pattern: Pluggable resource generation strategies Clean Separation: Domain logic separate from serialization Learn More Read the full architecture documentation for an in-depth exploration of Kure’s design, including:">
     <meta name="author" content="">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Architectures :: Go Kure">
-    <meta property="og:url" content="http://localhost:35861/architecture/index.html">
+    <meta name="twitter:title" content="Architecture :: Go Kure">
+    <meta name="twitter:description" content="Architecture This section covers the architectural design and implementation details of Kure.
+Design Philosophy Kure is built on several core principles:
+Type Safety First: Use Go’s type system to catch errors early Composability: Build complex configurations from simple, reusable parts No Magic: Explicit is better than implicit GitOps Native: Output designed for version control and automation Core Concepts Hierarchical Domain Model: Cluster → Node → Bundle → Application Builder Pattern: Fluent APIs for resource construction Strategy Pattern: Pluggable resource generation strategies Clean Separation: Domain logic separate from serialization Learn More Read the full architecture documentation for an in-depth exploration of Kure’s design, including:">
+    <meta property="og:url" content="http://localhost:1313/architecture/index.html">
     <meta property="og:site_name" content="Go Kure">
-    <meta property="og:title" content="Architectures :: Go Kure">
+    <meta property="og:title" content="Architecture :: Go Kure">
+    <meta property="og:description" content="Architecture This section covers the architectural design and implementation details of Kure.
+Design Philosophy Kure is built on several core principles:
+Type Safety First: Use Go’s type system to catch errors early Composability: Build complex configurations from simple, reusable parts No Magic: Explicit is better than implicit GitOps Native: Output designed for version control and automation Core Concepts Hierarchical Domain Model: Cluster → Node → Bundle → Application Builder Pattern: Fluent APIs for resource construction Strategy Pattern: Pluggable resource generation strategies Clean Separation: Domain logic separate from serialization Learn More Read the full architecture documentation for an in-depth exploration of Kure’s design, including:">
     <meta property="og:locale" content="en_us">
     <meta property="og:type" content="website">
-    <meta itemprop="name" content="Architectures :: Go Kure">
-    <title>Architectures :: Go Kure</title>
-    <link href="/architecture/index.xml" rel="alternate" type="application/rss+xml" title="Architectures :: Go Kure">
-    <link href="/css/auto-complete/auto-complete.min.css?1754411446" rel="stylesheet">
-    <script src="/js/auto-complete/auto-complete.min.js?1754411446" defer></script>
-    <script src="/js/search-lunr.js?1754411446" defer></script>
-    <script src="/js/search.js?1754411446" defer></script>
+    <meta itemprop="name" content="Architecture :: Go Kure">
+    <meta itemprop="description" content="Architecture This section covers the architectural design and implementation details of Kure.
+Design Philosophy Kure is built on several core principles:
+Type Safety First: Use Go’s type system to catch errors early Composability: Build complex configurations from simple, reusable parts No Magic: Explicit is better than implicit GitOps Native: Output designed for version control and automation Core Concepts Hierarchical Domain Model: Cluster → Node → Bundle → Application Builder Pattern: Fluent APIs for resource construction Strategy Pattern: Pluggable resource generation strategies Clean Separation: Domain logic separate from serialization Learn More Read the full architecture documentation for an in-depth exploration of Kure’s design, including:">
+    <meta itemprop="wordCount" content="114">
+    <title>Architecture :: Go Kure</title>
+    <link href="/architecture/index.xml" rel="alternate" type="application/rss+xml" title="Architecture :: Go Kure">
+    <link href="/css/auto-complete/auto-complete.min.css?1754413063" rel="stylesheet">
+    <script src="/js/auto-complete/auto-complete.min.js?1754413063" defer></script>
+    <script src="/js/search-lunr.js?1754413063" defer></script>
+    <script src="/js/search.js?1754413063" defer></script>
     <script>
       window.relearn = window.relearn || {};
-      window.relearn.index_js_url="/searchindex.en.js?1754411446";
+      window.relearn.index_js_url="/searchindex.en.js?1754413063";
     </script>
-    <script src="/js/lunr/lunr.min.js?1754411446" defer></script>
-    <script src="/js/lunr/lunr.stemmer.support.min.js?1754411446" defer></script>
-    <script src="/js/lunr/lunr.multi.min.js?1754411446" defer></script>
-    <script src="/js/lunr/lunr.en.min.js?1754411446" defer></script>
+    <script src="/js/lunr/lunr.min.js?1754413063" defer></script>
+    <script src="/js/lunr/lunr.stemmer.support.min.js?1754413063" defer></script>
+    <script src="/js/lunr/lunr.multi.min.js?1754413063" defer></script>
+    <script src="/js/lunr/lunr.en.min.js?1754413063" defer></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.contentLangs=['en'];
     </script>
-    <link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754411446" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754411446" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar/perfect-scrollbar.min.css?1754411446" rel="stylesheet">
-    <link href="/css/theme.css?1754411446" rel="stylesheet">
-    <link href="/css/format-html.css?1754411446" rel="stylesheet" id="R-format-style">
+    <link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754413063" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754413063" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar/perfect-scrollbar.min.css?1754413063" rel="stylesheet">
+    <link href="/css/theme.css?1754413063" rel="stylesheet">
+    <link href="/css/format-html.css?1754413063" rel="stylesheet" id="R-format-style">
     <script>
       window.relearn = window.relearn || {};
       // configuration
@@ -44,10 +56,10 @@
       window.relearn.path='\/architecture\/index.html';
       window.relearn.relBasePath='..';
       window.relearn.relBaseUri='..';
-      window.relearn.absBaseUri='http:\/\/localhost:35861';
+      window.relearn.absBaseUri='http:\/\/localhost:1313';
       window.relearn.disableAnchorCopy=false;
       window.relearn.disableAnchorScrolling=false;
-      window.relearn.disableInlineCopyToClipboard=false;
+      window.relearn.disableInlineCopyToClipboard=true;
       window.relearn.enableBlockCodeWrap=true;
       // legal
       window.relearn.getItem = (s,n) => {return s.getItem(n)};
@@ -63,7 +75,7 @@
       window.T_No_results_found = `No results found for "{0}"`;
       window.T_N_results_found = `{1} results found for "{0}"`;
       // variant stuff
-      window.relearn.themevariants = [ 'auto' ];
+      window.relearn.themevariants = [ 'relearn-dark' ];
       window.relearn.customvariantname = "my-custom-variant";
       window.relearn.changeVariant = function(variant) {
         var oldVariant = document.documentElement.dataset.rThemeVariant;
@@ -89,7 +101,10 @@
       }
       window.relearn.initVariant();
       window.relearn.markVariant();
-    </script>
+    </script><div class="notices warning" style="margin-bottom: 1rem;">
+    <div class="label">⚠️ Work in Progress</div>
+    <div class="content">Kure is currently under active development and has not been released yet. APIs and features are subject to change.</div>
+</div>
   </head>
   <body class="mobile-support html" data-url="/architecture/index.html">
     <div id="R-body" class="default-animation">
@@ -102,17 +117,24 @@
             </div>
             <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
               <div class="topbar-content">
-                <div class="topbar-content-wrapper"> 
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li><a href="#design-philosophy">Design Philosophy</a></li>
+    <li><a href="#core-concepts">Core Concepts</a></li>
+    <li><a href="#learn-more">Learn More</a></li>
+  </ul>
+</nav>
                 </div>
               </div>
             </div>
           </div>
-          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/index.html"><span itemprop="name">Go Kure</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><span itemprop="name">Architectures</span><meta itemprop="position" content="2"></li>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/index.html"><span itemprop="name">Go Kure</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><span itemprop="name">Architecture</span><meta itemprop="position" content="2"></li>
           </ol>
           <div class="topbar-area topbar-area-end" data-area="end">
-            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/index.html" title="Go Kure (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/getting-started/index.html" title="Getting Started (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
             </div>
-            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/examples/index.html" title="Examples (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/packages/index.html" title="Packages (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
             </div>
             <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
               <div class="topbar-content">
@@ -132,8 +154,33 @@
   <header class="headline">
   </header>
 
-<h1 id="architectures">Architectures</h1>
+<h1 id="architecture">Architecture</h1>
 
+<h1 id="architecture">Architecture</h1>
+<p>This section covers the architectural design and implementation details of Kure.</p>
+<h2 id="design-philosophy">Design Philosophy</h2>
+<p>Kure is built on several core principles:</p>
+<ol>
+<li><strong>Type Safety First</strong>: Use Go&rsquo;s type system to catch errors early</li>
+<li><strong>Composability</strong>: Build complex configurations from simple, reusable parts</li>
+<li><strong>No Magic</strong>: Explicit is better than implicit</li>
+<li><strong>GitOps Native</strong>: Output designed for version control and automation</li>
+</ol>
+<h2 id="core-concepts">Core Concepts</h2>
+<ul>
+<li><strong>Hierarchical Domain Model</strong>: Cluster → Node → Bundle → Application</li>
+<li><strong>Builder Pattern</strong>: Fluent APIs for resource construction</li>
+<li><strong>Strategy Pattern</strong>: Pluggable resource generation strategies</li>
+<li><strong>Clean Separation</strong>: Domain logic separate from serialization</li>
+</ul>
+<h2 id="learn-more">Learn More</h2>
+<p>Read the <a href="/architecture/details/index.html">full architecture documentation</a> for an in-depth exploration of Kure&rsquo;s design, including:</p>
+<ul>
+<li>Detailed component breakdown</li>
+<li>Design patterns and decisions</li>
+<li>Integration strategies</li>
+<li>Future roadmap</li>
+</ul>
 
   <footer class="footline">
   </footer>
@@ -145,9 +192,21 @@
       <div id="R-header-topbar" class="default-animation"></div>
       <div id="R-header-wrapper" class="default-animation">
         <div id="R-header" class="default-animation">
-          <a id="R-logo" class="R-default" href="/index.html">
-            <div class="logo-title">Go Kure</div>
-          </a>
+<a href="http://localhost:1313/" style="text-decoration: none;">
+    <h1 style="margin: 0; padding: 1rem; color: var(--MENU-SECTIONS-ACTIVE-BG-color);">Go Kure</h1>
+</a>
+
+<div style="padding: 0 1rem 1rem 1rem;">
+    <div style="background-color: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 4px; padding: 0.75rem;">
+        <div style="display: flex; align-items: center; font-weight: bold; color: #ffc107; margin-bottom: 0.25rem; font-size: 0.9rem;">
+            <span style="margin-right: 0.5rem;">⚠️</span>
+            <span>Pre-Release</span>
+        </div>
+        <div style="font-size: 0.8rem; color: #ffeb3b; line-height: 1.3;">
+            Unreleased software - APIs subject to change
+        </div>
+    </div>
+</div>
         </div>
         <search><form action="/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -181,9 +240,12 @@
       <div id="R-content-wrapper" class="highlightable">
         <div class="R-sidebarmenu R-shortcutmenu-main">
           <ul class="enlarge morespace collapsible-menu">
-            <li class="active " data-nav-id="/architecture/index.html"><a class="padding" href="/architecture/index.html">Architectures</a></li>
+            <li class="" data-nav-id="/overview/index.html"><a class="padding" href="/overview/index.html">Overview</a></li>
+            <li class="" data-nav-id="/getting-started/index.html"><a class="padding" href="/getting-started/index.html">Getting Started</a></li>
+            <li class="active " data-nav-id="/architecture/index.html"><a class="padding" href="/architecture/index.html">Architecture</a></li>
+            <li class="" data-nav-id="/packages/index.html"><a class="padding" href="/packages/index.html">Packages</a><ul id="R-subsections-bdf1e8ce92aa8ff6883c617f10480430" class="collapsible-menu"></ul></li>
             <li class="" data-nav-id="/examples/index.html"><a class="padding" href="/examples/index.html">Examples</a></li>
-            <li class="" data-nav-id="/packages/index.html"><a class="padding" href="/packages/index.html">Packages</a></li>
+            <li class="" data-nav-id="/resources/index.html"><a class="padding" href="/resources/index.html">Resources</a></li>
           </ul>
         </div>
         <div class="R-sidebarmenu R-shortcutmenu-shortcuts">
@@ -198,11 +260,19 @@
           <ul class="">
           </ul>
         </div>
-<div id="R-footer"><p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p></div>
+<div id="R-footer"><div style="position: sticky; bottom: 0; padding: 1rem; margin-top: 2rem; background-color: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-top: 3px solid #ffc107;">
+    <div style="display: flex; align-items: center; font-weight: bold; color: #ffc107; margin-bottom: 0.5rem;">
+        <span style="margin-right: 0.5rem;">⚠️</span>
+        <span>Pre-Release Software</span>
+    </div>
+    <div style="font-size: 0.875rem; color: #ffeb3b; line-height: 1.4;">
+        This documentation is for unreleased software. Features and APIs may change before the official release.
+    </div>
+</div></div>
       </div>
     </aside>
-    <script src="/js/clipboard/clipboard.min.js?1754411446" defer></script>
-    <script src="/js/perfect-scrollbar/perfect-scrollbar.min.js?1754411446" defer></script>
-    <script src="/js/theme.js?1754411446" defer></script>
+    <script src="/js/clipboard/clipboard.min.js?1754413063" defer></script>
+    <script src="/js/perfect-scrollbar/perfect-scrollbar.min.js?1754413063" defer></script>
+    <script src="/js/theme.js?1754413063" defer></script>
   </body>
 </html>

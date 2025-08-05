@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=35861&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.148.2">
@@ -14,7 +14,7 @@ Kurel is a package system for creating reusable, customizable Kubernetes applica
     <meta name="twitter:description" content="Launcher - Kubernetes Resources Launcher This package provides the core functionality for Kurel, the Kubernetes Resources Launcher CLI tool.
 Kurel is a package system for creating reusable, customizable Kubernetes applications without the complexity of templating engines. It uses a declarative patch-based approach to customize base Kubernetes manifests, making it perfect for GitOps workflows.
 ✨ Key Features 📦 Package-based - Encapsulate applications in reusable .kurel packages 🎯 No Templating - Use patches instead of complex template syntax 🔧 Declarative Customization - Simple parameter-driven configuration 🚀 GitOps Native - Generate clean Kubernetes manifests for Flux/ArgoCD 📊 Schema Validation - Auto-generated schemas with Kubernetes API integration 🏗️ Multi-Phase Deployment - Support for ordered deployment phases 🌐 Multi-Namespace - Deploy across multiple namespaces seamlessly 🎨 User Extensions - Extend packages without modifying originals 🚀 Quick Start Installing a Package # Download a kurel package (example) git clone https://github.com/example/prometheus-operator.kurel # Validate the package kurel validate prometheus-operator.kurel/ # Customize with your parameters cat &gt; my-values.yaml &lt;&lt; EOF monitoring: enabled: true retention: 7d persistence: enabled: true size: 50Gi resources: requests: cpu: 200m memory: 512Mi EOF # Generate manifests kurel build prometheus-operator.kurel/ \ --values my-values.yaml \ --output ./manifests/ Using with GitOps # Generated structure is GitOps-ready ls manifests/ # pre-install/ - CRDs, namespaces, RBAC # main/ - Main application (depends on pre-install) # post-install/ - Monitoring, backups (depends on main) # Each phase includes kustomization.yaml with proper dependencies cat manifests/main/kustomization.yaml # apiVersion: kustomize.config.k8s.io/v1beta1 # kind: Kustomization # dependsOn: # - name: prometheus-pre-install # resources: [...] 📁 Package Structure A kurel package is a directory with this structure:">
-    <meta property="og:url" content="http://localhost:35861/packages/launcher/readme/index.html">
+    <meta property="og:url" content="http://localhost:1313/packages/launcher/readme/index.html">
     <meta property="og:site_name" content="Go Kure">
     <meta property="og:description" content="Launcher - Kubernetes Resources Launcher This package provides the core functionality for Kurel, the Kubernetes Resources Launcher CLI tool.
 Kurel is a package system for creating reusable, customizable Kubernetes applications without the complexity of templating engines. It uses a declarative patch-based approach to customize base Kubernetes manifests, making it perfect for GitOps workflows.
@@ -27,26 +27,26 @@ Kurel is a package system for creating reusable, customizable Kubernetes applica
 ✨ Key Features 📦 Package-based - Encapsulate applications in reusable .kurel packages 🎯 No Templating - Use patches instead of complex template syntax 🔧 Declarative Customization - Simple parameter-driven configuration 🚀 GitOps Native - Generate clean Kubernetes manifests for Flux/ArgoCD 📊 Schema Validation - Auto-generated schemas with Kubernetes API integration 🏗️ Multi-Phase Deployment - Support for ordered deployment phases 🌐 Multi-Namespace - Deploy across multiple namespaces seamlessly 🎨 User Extensions - Extend packages without modifying originals 🚀 Quick Start Installing a Package # Download a kurel package (example) git clone https://github.com/example/prometheus-operator.kurel # Validate the package kurel validate prometheus-operator.kurel/ # Customize with your parameters cat &gt; my-values.yaml &lt;&lt; EOF monitoring: enabled: true retention: 7d persistence: enabled: true size: 50Gi resources: requests: cpu: 200m memory: 512Mi EOF # Generate manifests kurel build prometheus-operator.kurel/ \ --values my-values.yaml \ --output ./manifests/ Using with GitOps # Generated structure is GitOps-ready ls manifests/ # pre-install/ - CRDs, namespaces, RBAC # main/ - Main application (depends on pre-install) # post-install/ - Monitoring, backups (depends on main) # Each phase includes kustomization.yaml with proper dependencies cat manifests/main/kustomization.yaml # apiVersion: kustomize.config.k8s.io/v1beta1 # kind: Kustomization # dependsOn: # - name: prometheus-pre-install # resources: [...] 📁 Package Structure A kurel package is a directory with this structure:">
     <meta itemprop="wordCount" content="955">
     <title></title>
-    <link href="/css/auto-complete/auto-complete.min.css?1754411446" rel="stylesheet">
-    <script src="/js/auto-complete/auto-complete.min.js?1754411446" defer></script>
-    <script src="/js/search-lunr.js?1754411446" defer></script>
-    <script src="/js/search.js?1754411446" defer></script>
+    <link href="/css/auto-complete/auto-complete.min.css?1754412104" rel="stylesheet">
+    <script src="/js/auto-complete/auto-complete.min.js?1754412104" defer></script>
+    <script src="/js/search-lunr.js?1754412104" defer></script>
+    <script src="/js/search.js?1754412104" defer></script>
     <script>
       window.relearn = window.relearn || {};
-      window.relearn.index_js_url="/searchindex.en.js?1754411446";
+      window.relearn.index_js_url="/searchindex.en.js?1754412104";
     </script>
-    <script src="/js/lunr/lunr.min.js?1754411446" defer></script>
-    <script src="/js/lunr/lunr.stemmer.support.min.js?1754411446" defer></script>
-    <script src="/js/lunr/lunr.multi.min.js?1754411446" defer></script>
-    <script src="/js/lunr/lunr.en.min.js?1754411446" defer></script>
+    <script src="/js/lunr/lunr.min.js?1754412104" defer></script>
+    <script src="/js/lunr/lunr.stemmer.support.min.js?1754412104" defer></script>
+    <script src="/js/lunr/lunr.multi.min.js?1754412104" defer></script>
+    <script src="/js/lunr/lunr.en.min.js?1754412104" defer></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.contentLangs=['en'];
     </script>
-    <link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754411446" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754411446" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar/perfect-scrollbar.min.css?1754411446" rel="stylesheet">
-    <link href="/css/theme.css?1754411446" rel="stylesheet">
-    <link href="/css/format-html.css?1754411446" rel="stylesheet" id="R-format-style">
+    <link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754412104" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754412104" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar/perfect-scrollbar.min.css?1754412104" rel="stylesheet">
+    <link href="/css/theme.css?1754412104" rel="stylesheet">
+    <link href="/css/format-html.css?1754412104" rel="stylesheet" id="R-format-style">
     <script>
       window.relearn = window.relearn || {};
       // configuration
@@ -54,10 +54,10 @@ Kurel is a package system for creating reusable, customizable Kubernetes applica
       window.relearn.path='\/packages\/launcher\/readme\/index.html';
       window.relearn.relBasePath='..\/..\/..';
       window.relearn.relBaseUri='..\/..\/..';
-      window.relearn.absBaseUri='http:\/\/localhost:35861';
+      window.relearn.absBaseUri='http:\/\/localhost:1313';
       window.relearn.disableAnchorCopy=false;
       window.relearn.disableAnchorScrolling=false;
-      window.relearn.disableInlineCopyToClipboard=false;
+      window.relearn.disableInlineCopyToClipboard=true;
       window.relearn.enableBlockCodeWrap=true;
       // legal
       window.relearn.getItem = (s,n) => {return s.getItem(n)};
@@ -99,7 +99,10 @@ Kurel is a package system for creating reusable, customizable Kubernetes applica
       }
       window.relearn.initVariant();
       window.relearn.markVariant();
-    </script>
+    </script><div class="notices warning" style="position: sticky; top: 0; z-index: 1000; margin: 0;">
+    <div class="label">⚠️ Work in Progress</div>
+    <div class="content">Kure is currently under active development and has not been released yet. APIs and features are subject to change.</div>
+</div>
   </head>
   <body class="mobile-support html" data-url="/packages/launcher/readme/index.html">
     <div id="R-body" class="default-animation">
@@ -507,7 +510,6 @@ Kurel is a package system for creating reusable, customizable Kubernetes applica
       <div id="R-content-wrapper" class="highlightable">
         <div class="R-sidebarmenu R-shortcutmenu-main">
           <ul class="enlarge morespace collapsible-menu">
-            <li class="" data-nav-id="/architecture/index.html"><a class="padding" href="/architecture/index.html">Architectures</a></li>
             <li class="" data-nav-id="/examples/index.html"><a class="padding" href="/examples/index.html">Examples</a></li>
             <li class="parent " data-nav-id="/packages/index.html"><a class="padding" href="/packages/index.html">Packages</a><ul id="R-subsections-bdf1e8ce92aa8ff6883c617f10480430" class="collapsible-menu">
             <li class="active hidden " data-nav-id="/packages/launcher/readme/index.html"><a class="padding" href="/packages/launcher/readme/index.html"></a></li></ul></li>
@@ -528,8 +530,8 @@ Kurel is a package system for creating reusable, customizable Kubernetes applica
 <div id="R-footer"><p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p></div>
       </div>
     </aside>
-    <script src="/js/clipboard/clipboard.min.js?1754411446" defer></script>
-    <script src="/js/perfect-scrollbar/perfect-scrollbar.min.js?1754411446" defer></script>
-    <script src="/js/theme.js?1754411446" defer></script>
+    <script src="/js/clipboard/clipboard.min.js?1754412104" defer></script>
+    <script src="/js/perfect-scrollbar/perfect-scrollbar.min.js?1754412104" defer></script>
+    <script src="/js/theme.js?1754412104" defer></script>
   </body>
 </html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.148.2">
+    <meta name="generator" content="Relearn 8.0.0+9803d5122ebb3276acea823f476e9eb44f607862">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Advanced Path Resolution and Type Inference This document provides an in-depth technical guide to the sophisticated path resolution and type inference systems in the Kure patch module.
+Path Resolution Architecture PathPart Structure Each patch path is decomposed into structured components:
+type PathPart struct { Field string // The field name (e.g., &#34;containers&#34;, &#34;ports&#34;) MatchType string // &#34;&#34;, &#34;index&#34;, or &#34;key&#34; MatchValue string // The match criteria (&#34;0&#34;, &#34;name=main&#34;) } Path Parsing Process The ParsePatchPath() function converts dot-notation paths into structured segments:">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="Advanced Path Resolution and Type Inference This document provides an in-depth technical guide to the sophisticated path resolution and type inference systems in the Kure patch module.
+Path Resolution Architecture PathPart Structure Each patch path is decomposed into structured components:
+type PathPart struct { Field string // The field name (e.g., &#34;containers&#34;, &#34;ports&#34;) MatchType string // &#34;&#34;, &#34;index&#34;, or &#34;key&#34; MatchValue string // The match criteria (&#34;0&#34;, &#34;name=main&#34;) } Path Parsing Process The ParsePatchPath() function converts dot-notation paths into structured segments:">
+    <meta property="og:url" content="http://localhost:1313/packages/patch/path-resolution/index.html">
+    <meta property="og:site_name" content="Go Kure">
+    <meta property="og:description" content="Advanced Path Resolution and Type Inference This document provides an in-depth technical guide to the sophisticated path resolution and type inference systems in the Kure patch module.
+Path Resolution Architecture PathPart Structure Each patch path is decomposed into structured components:
+type PathPart struct { Field string // The field name (e.g., &#34;containers&#34;, &#34;ports&#34;) MatchType string // &#34;&#34;, &#34;index&#34;, or &#34;key&#34; MatchValue string // The match criteria (&#34;0&#34;, &#34;name=main&#34;) } Path Parsing Process The ParsePatchPath() function converts dot-notation paths into structured segments:">
+    <meta property="og:locale" content="en_us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Packages">
+    <meta itemprop="description" content="Advanced Path Resolution and Type Inference This document provides an in-depth technical guide to the sophisticated path resolution and type inference systems in the Kure patch module.
+Path Resolution Architecture PathPart Structure Each patch path is decomposed into structured components:
+type PathPart struct { Field string // The field name (e.g., &#34;containers&#34;, &#34;ports&#34;) MatchType string // &#34;&#34;, &#34;index&#34;, or &#34;key&#34; MatchValue string // The match criteria (&#34;0&#34;, &#34;name=main&#34;) } Path Parsing Process The ParsePatchPath() function converts dot-notation paths into structured segments:">
+    <meta itemprop="wordCount" content="823">
+    <title></title>
+    <link href="/css/auto-complete/auto-complete.min.css?1754413039" rel="stylesheet">
+    <script src="/js/auto-complete/auto-complete.min.js?1754413039" defer></script>
+    <script src="/js/search-lunr.js?1754413039" defer></script>
+    <script src="/js/search.js?1754413039" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.index_js_url="/searchindex.en.js?1754413039";
+    </script>
+    <script src="/js/lunr/lunr.min.js?1754413039" defer></script>
+    <script src="/js/lunr/lunr.stemmer.support.min.js?1754413039" defer></script>
+    <script src="/js/lunr/lunr.multi.min.js?1754413039" defer></script>
+    <script src="/js/lunr/lunr.en.min.js?1754413039" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.contentLangs=['en'];
+    </script>
+    <link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754413039" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/fonts/fontawesome/css/fontawesome-all.min.css?1754413039" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar/perfect-scrollbar.min.css?1754413039" rel="stylesheet">
+    <link href="/css/theme.css?1754413039" rel="stylesheet">
+    <link href="/css/format-html.css?1754413039" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      // configuration
+      window.relearn.min = ``;
+      window.relearn.path='\/packages\/patch\/path-resolution\/index.html';
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.relearn.disableInlineCopyToClipboard=true;
+      window.relearn.enableBlockCodeWrap=true;
+      // legal
+      window.relearn.getItem = (s,n) => {return s.getItem(n)};
+      window.relearn.setItem = (s,n,v) => {return s.setItem(n,v)};
+      window.relearn.removeItem = (s,n) => {return s.removeItem(n)};
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+      // variant stuff
+      window.relearn.themevariants = [ 'relearn-dark' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.relearn.setItem(window.localStorage, window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+          window.relearn.markVariant();
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.relearn.getItem(window.localStorage, window.relearn.absBaseUri + "/variant");
+        document.querySelectorAll(".R-variantswitcher select").forEach((select) => {select.value = variant;});
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.relearn.getItem(window.localStorage, window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.relearn.setItem(window.localStorage, window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+    </script><div class="notices warning" style="margin-bottom: 1rem;">
+    <div class="label">⚠️ Work in Progress</div>
+    <div class="content">Kure is currently under active development and has not been released yet. APIs and features are subject to change.</div>
+</div>
+  </head>
+  <body class="mobile-support html" data-url="/packages/patch/path-resolution/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li><a href="#path-resolution-architecture">Path Resolution Architecture</a>
+      <ul>
+        <li><a href="#pathpart-structure">PathPart Structure</a></li>
+        <li><a href="#path-parsing-process">Path Parsing Process</a></li>
+        <li><a href="#context-aware-resolution">Context-Aware Resolution</a></li>
+      </ul>
+    </li>
+    <li><a href="#toml-header-intelligence">TOML Header Intelligence</a>
+      <ul>
+        <li><a href="#semantic-path-mapping">Semantic Path Mapping</a></li>
+        <li><a href="#header-resolution-algorithm">Header Resolution Algorithm</a></li>
+        <li><a href="#resource-specific-mappings">Resource-Specific Mappings</a></li>
+      </ul>
+    </li>
+    <li><a href="#type-inference-system">Type Inference System</a>
+      <ul>
+        <li><a href="#automatic-type-detection">Automatic Type Detection</a></li>
+        <li><a href="#context-driven-inference">Context-Driven Inference</a></li>
+        <li><a href="#kubernetes-compatibility">Kubernetes Compatibility</a></li>
+      </ul>
+    </li>
+    <li><a href="#list-resolution-algorithms">List Resolution Algorithms</a>
+      <ul>
+        <li><a href="#index-resolution">Index Resolution</a></li>
+        <li><a href="#insertion-logic">Insertion Logic</a></li>
+        <li><a href="#bounds-checking">Bounds Checking</a></li>
+      </ul>
+    </li>
+    <li><a href="#error-handling-and-debugging">Error Handling and Debugging</a>
+      <ul>
+        <li><a href="#graceful-degradation">Graceful Degradation</a></li>
+        <li><a href="#debug-logging">Debug Logging</a></li>
+        <li><a href="#validation-pipeline">Validation Pipeline</a></li>
+      </ul>
+    </li>
+    <li><a href="#performance-considerations">Performance Considerations</a>
+      <ul>
+        <li><a href="#path-caching">Path Caching</a></li>
+        <li><a href="#batch-processing">Batch Processing</a></li>
+      </ul>
+    </li>
+    <li><a href="#integration-points">Integration Points</a>
+      <ul>
+        <li><a href="#variable-substitution">Variable Substitution</a></li>
+        <li><a href="#structure-preservation">Structure Preservation</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/index.html"><span itemprop="name">Go Kure</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/packages/index.html"><span itemprop="name">Packages</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/packages/patch/index.html"><span itemprop="name">Patch Package</span></a><meta itemprop="position" content="3">&nbsp;>&nbsp;</li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/packages/patch/index.html" title="Patch Package (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/examples/index.html" title="Examples (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable packages" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id=""></h1>
+
+<h1 id="advanced-path-resolution-and-type-inference">Advanced Path Resolution and Type Inference</h1>
+<p>This document provides an in-depth technical guide to the sophisticated path resolution and type inference systems in the Kure patch module.</p>
+<h2 id="path-resolution-architecture">Path Resolution Architecture</h2>
+<h3 id="pathpart-structure">PathPart Structure</h3>
+<p>Each patch path is decomposed into structured components:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">PathPart</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Field</span>      <span style="color:#66d9ef">string</span>  <span style="color:#75715e">// The field name (e.g., &#34;containers&#34;, &#34;ports&#34;)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">MatchType</span>  <span style="color:#66d9ef">string</span>  <span style="color:#75715e">// &#34;&#34;, &#34;index&#34;, or &#34;key&#34; </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">MatchValue</span> <span style="color:#66d9ef">string</span>  <span style="color:#75715e">// The match criteria (&#34;0&#34;, &#34;name=main&#34;)</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="path-parsing-process">Path Parsing Process</h3>
+<p>The <code>ParsePatchPath()</code> function converts dot-notation paths into structured segments:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0"><code>spec.containers[name=main].image
+↓
+[
+  {Field: &#34;spec&#34;},
+  {Field: &#34;containers&#34;, MatchType: &#34;key&#34;, MatchValue: &#34;name=main&#34;},
+  {Field: &#34;image&#34;}
+]</code></pre></div>
+<h3 id="context-aware-resolution">Context-Aware Resolution</h3>
+<p>The patch system uses intelligent context-aware resolution:</p>
+<ol>
+<li><strong>Resource Type Detection</strong>: Different behavior for Deployments vs Services vs ConfigMaps</li>
+<li><strong>Field Validation</strong>: Checks if target fields exist in the resource schema</li>
+<li><strong>List vs Object Disambiguation</strong>: Automatically determines if a path targets a list or object field</li>
+</ol>
+<h2 id="toml-header-intelligence">TOML Header Intelligence</h2>
+<h3 id="semantic-path-mapping">Semantic Path Mapping</h3>
+<p>TOML headers are intelligently mapped to Kubernetes paths:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">deployment</span>.<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">containers</span>.<span style="color:#a6e22e">name</span>=<span style="color:#a6e22e">main</span>]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Automatically resolves to: spec.template.spec.containers[name=main]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">service</span>.<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">ports</span>.<span style="color:#a6e22e">name</span>=<span style="color:#a6e22e">http</span>] 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Automatically resolves to: spec.ports[name=http]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">configmap</span>.<span style="color:#a6e22e">config</span>]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Automatically resolves to: data.*</span></span></span></code></pre></div>
+<h3 id="header-resolution-algorithm">Header Resolution Algorithm</h3>
+<ol>
+<li><strong>Resource Identification</strong>: Parse <code>kind.name</code> from header</li>
+<li><strong>Context Mapping</strong>: Apply resource-specific path transformations</li>
+<li><strong>Selector Extraction</strong>: Extract list selectors and match criteria</li>
+<li><strong>Path Validation</strong>: Verify the resolved path exists in the target resource</li>
+</ol>
+<h3 id="resource-specific-mappings">Resource-Specific Mappings</h3>
+<h4 id="deployment-resources">Deployment Resources</h4>
+<ul>
+<li><code>containers.*</code> → <code>spec.template.spec.containers.*</code></li>
+<li><code>volumes.*</code> → <code>spec.template.spec.volumes.*</code></li>
+<li><code>env.*</code> → <code>spec.template.spec.containers[].env.*</code></li>
+</ul>
+<h4 id="service-resources">Service Resources</h4>
+<ul>
+<li><code>ports.*</code> → <code>spec.ports.*</code></li>
+<li><code>selector.*</code> → <code>spec.selector.*</code></li>
+</ul>
+<h4 id="configmapsecret-resources">ConfigMap/Secret Resources</h4>
+<ul>
+<li>Direct field access to <code>data.*</code> fields</li>
+<li>Automatic string/binary data type detection</li>
+</ul>
+<h2 id="type-inference-system">Type Inference System</h2>
+<h3 id="automatic-type-detection">Automatic Type Detection</h3>
+<p>The <code>inferValueType()</code> function performs context-aware type inference:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Port numbers</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;8080&#34;</span> <span style="color:#960050;background-color:#1e0010">→</span> int64(<span style="color:#ae81ff">8080</span>)     <span style="color:#75715e">// when field contains &#34;port&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;80&#34;</span>   <span style="color:#960050;background-color:#1e0010">→</span> int64(<span style="color:#ae81ff">80</span>)       <span style="color:#75715e">// when field is &#34;containerPort&#34;, &#34;targetPort&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Resource quantities  </span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;500m&#34;</span> <span style="color:#960050;background-color:#1e0010">→</span> <span style="color:#e6db74">&#34;500m&#34;</span>          <span style="color:#75715e">// preserved as string for Kubernetes resource.Quantity</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;1Gi&#34;</span>  <span style="color:#960050;background-color:#1e0010">→</span> <span style="color:#e6db74">&#34;1Gi&#34;</span>           <span style="color:#75715e">// preserved as string for memory quantities</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Boolean values</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;true&#34;</span>    <span style="color:#960050;background-color:#1e0010">→</span> <span style="color:#66d9ef">true</span>         <span style="color:#75715e">// when field suggests boolean context</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;enabled&#34;</span> <span style="color:#960050;background-color:#1e0010">→</span> <span style="color:#66d9ef">true</span>         <span style="color:#75715e">// when field is &#34;enabled&#34;, &#34;debug&#34;, etc.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Replica counts</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;3&#34;</span> <span style="color:#960050;background-color:#1e0010">→</span> int64(<span style="color:#ae81ff">3</span>)           <span style="color:#75715e">// when field is &#34;replicas&#34;, &#34;instances&#34;</span></span></span></code></pre></div>
+<h3 id="context-driven-inference">Context-Driven Inference</h3>
+<p>The system considers multiple context clues:</p>
+<ol>
+<li><strong>Field Name Patterns</strong>: <code>port</code>, <code>replicas</code>, <code>timeout</code>, <code>enabled</code></li>
+<li><strong>Parent Path Context</strong>: <code>resources.limits.*</code>, <code>spec.ports.*</code></li>
+<li><strong>Value Format Recognition</strong>: Kubernetes quantity formats, duration strings</li>
+<li><strong>Resource Type Context</strong>: Different inference rules for different Kubernetes kinds</li>
+</ol>
+<h3 id="kubernetes-compatibility">Kubernetes Compatibility</h3>
+<p>All inferred types are compatible with <code>unstructured.Unstructured</code>:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">convertValueForUnstructured</span>(<span style="color:#a6e22e">value</span> <span style="color:#66d9ef">interface</span>{}) <span style="color:#66d9ef">interface</span>{} {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">value</span>.(<span style="color:#66d9ef">type</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">int</span>:    <span style="color:#66d9ef">return</span> int64(<span style="color:#a6e22e">v</span>)      <span style="color:#75715e">// Kubernetes expects int64</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">int32</span>:  <span style="color:#66d9ef">return</span> int64(<span style="color:#a6e22e">v</span>)      <span style="color:#75715e">// Convert to standard int64</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">float32</span>: <span style="color:#66d9ef">return</span> float64(<span style="color:#a6e22e">v</span>)   <span style="color:#75715e">// Convert to standard float64</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ... handle maps and slices recursively</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="list-resolution-algorithms">List Resolution Algorithms</h2>
+<h3 id="index-resolution">Index Resolution</h3>
+<p>The <code>resolveListIndex()</code> function handles multiple selector types:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Numeric index</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;2&#34;</span> <span style="color:#960050;background-color:#1e0010">→</span> <span style="color:#a6e22e">index</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Negative index (from end)</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;-1&#34;</span> <span style="color:#960050;background-color:#1e0010">→</span> len(<span style="color:#a6e22e">list</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Key-value selector  </span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;name=main&#34;</span> <span style="color:#960050;background-color:#1e0010">→</span> <span style="color:#a6e22e">find</span> <span style="color:#a6e22e">first</span> <span style="color:#a6e22e">item</span> <span style="color:#a6e22e">where</span> <span style="color:#a6e22e">item</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;main&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Multi-key selector</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;name=web,port=80&#34;</span> <span style="color:#960050;background-color:#1e0010">→</span> <span style="color:#a6e22e">find</span> <span style="color:#a6e22e">item</span> <span style="color:#a6e22e">matching</span> <span style="color:#a6e22e">both</span> <span style="color:#a6e22e">criteria</span></span></span></code></pre></div>
+<h3 id="insertion-logic">Insertion Logic</h3>
+<p>Different insertion operations use sophisticated positioning:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// insertBefore: lst = append(lst[:idx], append([]interface{}{value}, lst[idx:]...)...)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// insertAfter:  lst = append(lst[:idx+1], append([]interface{}{value}, lst[idx+1:]...)...)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// append:       lst = append(lst, value)</span></span></span></code></pre></div>
+<h3 id="bounds-checking">Bounds Checking</h3>
+<p>Comprehensive validation prevents index errors:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">0</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">i</span> = len(<span style="color:#a6e22e">list</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">i</span>  <span style="color:#75715e">// Handle negative indices</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">i</span> &gt; len(<span style="color:#a6e22e">list</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;index out of bounds: %d&#34;</span>, <span style="color:#a6e22e">i</span>)
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="error-handling-and-debugging">Error Handling and Debugging</h2>
+<h3 id="graceful-degradation">Graceful Degradation</h3>
+<p>The patch system follows a &ldquo;warn, don&rsquo;t fail&rdquo; philosophy:</p>
+<ul>
+<li>Missing target resources generate warnings but don&rsquo;t stop processing</li>
+<li>Invalid selectors are logged but don&rsquo;t crash the operation</li>
+<li>Type inference failures fall back to string values</li>
+</ul>
+<h3 id="debug-logging">Debug Logging</h3>
+<p>Enable comprehensive debugging with <code>KURE_DEBUG=1</code>:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0"><code>DEBUG: Resolving TOML header [deployment.app.containers.name=main]
+DEBUG: Mapped to path: spec.template.spec.containers[name=main]
+DEBUG: Found target container at index 0
+DEBUG: Applying patch: image.tag = &#34;v1.2.3&#34;
+DEBUG: Type inference: &#34;8080&#34; → int64(8080) (field context: containerPort)</code></pre></div>
+<h3 id="validation-pipeline">Validation Pipeline</h3>
+<p>Each patch goes through multiple validation stages:</p>
+<ol>
+<li><strong>Syntax Validation</strong>: Parse the patch line syntax</li>
+<li><strong>Path Validation</strong>: Verify the target path exists</li>
+<li><strong>Type Validation</strong>: Check if the value type is appropriate</li>
+<li><strong>Schema Validation</strong>: Ensure compatibility with Kubernetes schemas (future)</li>
+</ol>
+<h2 id="performance-considerations">Performance Considerations</h2>
+<h3 id="path-caching">Path Caching</h3>
+<p>Frequently used paths are cached to avoid repeated parsing:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">pathCache</span> = make(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>][]<span style="color:#a6e22e">PathPart</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">cachedParsePath</span>(<span style="color:#a6e22e">path</span> <span style="color:#66d9ef">string</span>) []<span style="color:#a6e22e">PathPart</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">cached</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">pathCache</span>[<span style="color:#a6e22e">path</span>]; <span style="color:#a6e22e">ok</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cached</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Parse and cache...</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="batch-processing">Batch Processing</h3>
+<p>Multiple patches are processed efficiently:</p>
+<ol>
+<li><strong>Group by Resource</strong>: Batch patches targeting the same resource</li>
+<li><strong>Optimize Selectors</strong>: Cache list index resolutions</li>
+<li><strong>Minimize Conversions</strong>: Reuse type-converted values</li>
+</ol>
+<h2 id="integration-points">Integration Points</h2>
+<h3 id="variable-substitution">Variable Substitution</h3>
+<p>Path resolution integrates with variable substitution:</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">deployment</span>.<span style="color:#960050;background-color:#1e0010">$</span>{<span style="color:#a6e22e">values</span>.<span style="color:#a6e22e">app_name</span>}.<span style="color:#a6e22e">containers</span>.<span style="color:#a6e22e">name</span>=<span style="color:#960050;background-color:#1e0010">$</span>{<span style="color:#a6e22e">values</span>.<span style="color:#a6e22e">container_name</span>}]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">tag</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;${values.version}&#34;</span></span></span></code></pre></div>
+<p>Resolution happens after variable substitution:</p>
+<ol>
+<li>Substitute variables in headers and values</li>
+<li>Parse the resolved paths</li>
+<li>Apply type inference to final values</li>
+</ol>
+<h3 id="structure-preservation">Structure Preservation</h3>
+<p>Path resolution works seamlessly with YAML structure preservation:</p>
+<ol>
+<li><strong>Parse Original Structure</strong>: Maintain comments and formatting</li>
+<li><strong>Resolve Target Paths</strong>: Find exact locations in preserved structure</li>
+<li><strong>Apply Minimal Changes</strong>: Update only the targeted values</li>
+<li><strong>Preserve Everything Else</strong>: Keep original formatting intact</li>
+</ol>
+<p>This sophisticated system enables the patch module to handle complex Kubernetes resource modifications while maintaining type safety, performance, and user-friendly error handling.</p>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<a href="http://localhost:1313/" style="text-decoration: none;">
+    <h1 style="margin: 0; padding: 1rem; color: var(--MENU-SECTIONS-ACTIVE-BG-color);">Go Kure</h1>
+</a>
+
+<div style="padding: 0 1rem 1rem 1rem;">
+    <div style="background-color: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px; padding: 0.75rem;">
+        <div style="display: flex; align-items: center; font-weight: bold; color: #856404; margin-bottom: 0.25rem; font-size: 0.9rem;">
+            <span style="margin-right: 0.5rem;">⚠️</span>
+            <span>Pre-Release</span>
+        </div>
+        <div style="font-size: 0.8rem; color: #856404; line-height: 1.3;">
+            Unreleased software - APIs subject to change
+        </div>
+    </div>
+</div>
+        </div>
+        <search><form action="/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-homelinks">
+          <ul class="space collapsible-menu">
+            <li class="" data-nav-id="/index.html"><a class="padding" href="/index.html"><i class="fa-fw fas fa-home"></i> Home</a></li>
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-headercontrols">
+          <ul class="">
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div class="R-sidebarmenu R-shortcutmenu-main">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="" data-nav-id="/overview/index.html"><a class="padding" href="/overview/index.html">Overview</a></li>
+            <li class="" data-nav-id="/getting-started/index.html"><a class="padding" href="/getting-started/index.html">Getting Started</a></li>
+            <li class="" data-nav-id="/architecture/index.html"><a class="padding" href="/architecture/index.html">Architecture</a></li>
+            <li class="parent " data-nav-id="/packages/index.html"><a class="padding" href="/packages/index.html">Packages</a><ul id="R-subsections-bdf1e8ce92aa8ff6883c617f10480430" class="collapsible-menu">
+            <li class="parent alwaysopen " data-nav-id="/packages/patch/index.html"><a class="padding" href="/packages/patch/index.html">Patch Package</a><ul id="R-subsections-7c547ca0c10cfe9e866a079fe02bd5a8" class="collapsible-menu">
+            <li class="active hidden " data-nav-id="/packages/patch/path-resolution/index.html"><a class="padding" href="/packages/patch/path-resolution/index.html"></a></li></ul></li></ul></li>
+            <li class="" data-nav-id="/examples/index.html"><a class="padding" href="/examples/index.html">Examples</a></li>
+            <li class="" data-nav-id="/resources/index.html"><a class="padding" href="/resources/index.html">Resources</a></li>
+          </ul>
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-shortcuts">
+          <ul class="space collapsible-menu">
+          </ul>
+        </div>
+        <div id="R-footer-margin"></div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-footercontrols">
+          <ul class="">
+          </ul>
+        </div>
+<div id="R-footer"><div style="position: sticky; bottom: 0; padding: 1rem; margin-top: 2rem; background-color: #fff3cd; border: 1px solid #ffeaa7; border-top: 3px solid #ffc107;">
+    <div style="display: flex; align-items: center; font-weight: bold; color: #856404; margin-bottom: 0.5rem;">
+        <span style="margin-right: 0.5rem;">⚠️</span>
+        <span>Pre-Release Software</span>
+    </div>
+    <div style="font-size: 0.875rem; color: #856404; line-height: 1.4;">
+        This documentation is for unreleased software. Features and APIs may change before the official release.
+    </div>
+</div></div>
+      </div>
+    </aside>
+    <script src="/js/clipboard/clipboard.min.js?1754413039" defer></script>
+    <script src="/js/perfect-scrollbar/perfect-scrollbar.min.js?1754413039" defer></script>
+    <script src="/js/theme.js?1754413039" defer></script>
+  </body>
+</html>
