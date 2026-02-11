@@ -18,9 +18,6 @@ The patch package implements a JSONPath-based declarative patching system. It al
 ### [Layout](/packages/layout)
 The layout package handles manifest organization and directory structure generation. It provides flexible rules for grouping and organizing generated Kubernetes resources into a clean directory structure.
 
-### [Workflow](/packages/workflow)
-The workflow package provides interfaces and abstractions for building GitOps workflows. It enables integration with tools like Flux and ArgoCD.
-
 ## Additional Resources
 
 - [Architecture Overview](/architecture) - Understand how these packages fit together

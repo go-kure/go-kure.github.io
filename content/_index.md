@@ -47,17 +47,18 @@ Kure solves these problems by providing:
 ## Quick Start
 
 ```go
-import "github.com/go-kure/kure/pkg/fluxcd"
+import "github.com/go-kure/kure/pkg/kubernetes/fluxcd"
 
 // Create a Flux Kustomization
-ks := fluxcd.CreateKustomization("my-app", "default", 
-    kustv1.KustomizationSpec{
-        Path: "./manifests",
-        SourceRef: kustv1.CrossNamespaceSourceReference{
-            Kind: "GitRepository",
-            Name: "my-repo",
-        },
-    })
+ks := fluxcd.Kustomization(&fluxcd.KustomizationConfig{
+    Name:      "my-app",
+    Namespace: "flux-system",
+    Path:      "./manifests",
+    SourceRef: kustv1.CrossNamespaceSourceReference{
+        Kind: "GitRepository",
+        Name: "my-repo",
+    },
+})
 ```
 
 ## Learn More

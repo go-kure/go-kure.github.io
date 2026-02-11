@@ -21,19 +21,17 @@ Here's a simple example creating a Kubernetes Deployment:
 package main
 
 import (
-    "github.com/go-kure/kure/pkg/kubernetes"
+    "fmt"
     "github.com/go-kure/kure/pkg/io"
 )
 
 func main() {
-    // Create a deployment
-    deployment := kubernetes.CreateDeployment("my-app", "default")
-    kubernetes.AddDeploymentContainer(deployment, "app", "nginx:latest")
-    kubernetes.SetDeploymentReplicas(deployment, 3)
-    
-    // Output as YAML
-    printer := io.NewPrinter()
-    printer.PrintObj(deployment)
+    // Parse Kubernetes manifests from a YAML file
+    objects, err := io.ParseFile("manifests/deployment.yaml")
+    if err != nil {
+        panic(err)
+    }
+    fmt.Printf("Loaded %d objects\n", len(objects))
 }
 ```
 
