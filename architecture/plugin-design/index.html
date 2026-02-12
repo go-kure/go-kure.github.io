@@ -1,0 +1,531 @@
+<!doctype html><html lang=en-us dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.155.3"><meta name=generator content="Relearn 8.0.0+9803d5122ebb3276acea823f476e9eb44f607862"><meta name=description content="Plugin Architecture Design for Kure Overview This document outlines the design for implementing a plugin architecture that allows external generators to extend Kure’s capabilities. The plugin system would enable users to create custom generators for specific needs (Terraform, Pulumi, custom CRDs, etc.) while maintaining type safety and security.
+Current Generator Architecture Kure currently uses a static registration system where generators implement the ApplicationConfig interface:
+type ApplicationConfig interface { Generate(*Application) ([]*client.Object, error) } Built-in generators like AppWorkload and FluxHelm register themselves via init() functions using the GVK (Group, Version, Kind) system:"><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Plugin Architecture :: Go Kure"><meta name=twitter:description content="Plugin Architecture Design for Kure Overview This document outlines the design for implementing a plugin architecture that allows external generators to extend Kure’s capabilities. The plugin system would enable users to create custom generators for specific needs (Terraform, Pulumi, custom CRDs, etc.) while maintaining type safety and security.
+Current Generator Architecture Kure currently uses a static registration system where generators implement the ApplicationConfig interface:
+type ApplicationConfig interface { Generate(*Application) ([]*client.Object, error) } Built-in generators like AppWorkload and FluxHelm register themselves via init() functions using the GVK (Group, Version, Kind) system:"><meta property="og:url" content="https://www.gokure.dev/architecture/plugin-design/index.html"><meta property="og:site_name" content="Go Kure"><meta property="og:title" content="Plugin Architecture :: Go Kure"><meta property="og:description" content="Plugin Architecture Design for Kure Overview This document outlines the design for implementing a plugin architecture that allows external generators to extend Kure’s capabilities. The plugin system would enable users to create custom generators for specific needs (Terraform, Pulumi, custom CRDs, etc.) while maintaining type safety and security.
+Current Generator Architecture Kure currently uses a static registration system where generators implement the ApplicationConfig interface:
+type ApplicationConfig interface { Generate(*Application) ([]*client.Object, error) } Built-in generators like AppWorkload and FluxHelm register themselves via init() functions using the GVK (Group, Version, Kind) system:"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="Architecture"><meta itemprop=name content="Plugin Architecture :: Go Kure"><meta itemprop=description content="Plugin Architecture Design for Kure Overview This document outlines the design for implementing a plugin architecture that allows external generators to extend Kure’s capabilities. The plugin system would enable users to create custom generators for specific needs (Terraform, Pulumi, custom CRDs, etc.) while maintaining type safety and security.
+Current Generator Architecture Kure currently uses a static registration system where generators implement the ApplicationConfig interface:
+type ApplicationConfig interface { Generate(*Application) ([]*client.Object, error) } Built-in generators like AppWorkload and FluxHelm register themselves via init() functions using the GVK (Group, Version, Kind) system:"><meta itemprop=wordCount content="1836"><title>Plugin Architecture :: Go Kure</title><link href=/css/auto-complete/auto-complete.min.css?1770889558 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1770889558 defer></script><script src=/js/search-lunr.min.js?1770889558 defer></script><script src=/js/search.min.js?1770889558 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.en.js?1770889558"</script><script src=/js/lunr/lunr.min.js?1770889558 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1770889558 defer></script><script src=/js/lunr/lunr.multi.min.js?1770889558 defer></script><script src=/js/lunr/lunr.en.min.js?1770889558 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/fonts/fontawesome/css/fontawesome-all.min.css?1770889558 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/fontawesome-all.min.css?1770889558 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1770889558 rel=stylesheet><link href=/css/theme.min.css?1770889558 rel=stylesheet><link href=/css/format-html.min.css?1770889558 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/architecture/plugin-design/index.html",window.relearn.relBasePath="../..",window.relearn.relBaseUri="../..",window.relearn.absBaseUri="https://www.gokure.dev",window.relearn.disableAnchorCopy=!1,window.relearn.disableAnchorScrolling=!1,window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.relearn.getItem=(e,t)=>e.getItem(t),window.relearn.setItem=(e,t,n)=>e.setItem(t,n),window.relearn.removeItem=(e,t)=>e.removeItem(t),window.T_Copy_to_clipboard=`Copy to clipboard`,window.T_Copied_to_clipboard=`Copied to clipboard!`,window.T_Copy_link_to_clipboard=`Copy link to clipboard`,window.T_Link_copied_to_clipboard=`Copied link to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantname="my-custom-variant",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.relearn.setItem(window.localStorage,window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.relearn.getItem(window.localStorage,window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.relearn.getItem(window.localStorage,window.relearn.absBaseUri+"/variant")??"";e==window.relearn.customvariantname||(!e||!window.relearn.themevariants.includes(e))&&(e=window.relearn.themevariants[0],window.relearn.setItem(window.localStorage,window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><div class="notices warning" style=margin-bottom:1rem><div class=label>⚠️ Work in Progress</div><div class=content>Kure is currently under active development and has not been released yet. APIs and features are subject to change.</div></div></head><body class="mobile-support html" data-url=/architecture/plugin-design/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar><div class=topbar-wrapper><div class=topbar-sidebar-divider></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><button class=topbar-control onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></div><div class="topbar-button topbar-button-toc" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><button class=topbar-control onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-list-alt"></i></button><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#overview>Overview</a></li><li><a href=#current-generator-architecture>Current Generator Architecture</a></li><li><a href=#plugin-architecture-requirements>Plugin Architecture Requirements</a><ul><li><a href=#core-components>Core Components</a></li><li><a href=#key-features>Key Features</a></li></ul></li><li><a href=#detailed-implementation-plan>Detailed Implementation Plan</a><ul><li><a href=#1-plugin-interface-definition>1. Plugin Interface Definition</a></li><li><a href=#2-plugin-loader-and-manager>2. Plugin Loader and Manager</a></li><li><a href=#3-plugin-registry-integration>3. Plugin Registry Integration</a></li><li><a href=#4-security-and-verification>4. Security and Verification</a></li><li><a href=#5-plugin-development-sdk>5. Plugin Development SDK</a></li><li><a href=#6-cli-integration>6. CLI Integration</a></li></ul></li><li><a href=#example-plugin-implementation>Example Plugin Implementation</a><ul><li><a href=#terraform-generator-plugin>Terraform Generator Plugin</a></li></ul></li><li><a href=#plugin-build-and-distribution>Plugin Build and Distribution</a><ul><li><a href=#building-plugins>Building Plugins</a></li><li><a href=#usage-example>Usage Example</a></li></ul></li><li><a href=#implementation-phases>Implementation Phases</a><ul><li><a href=#phase-1-core-infrastructure>Phase 1: Core Infrastructure</a></li><li><a href=#phase-2-security-and-validation>Phase 2: Security and Validation</a></li><li><a href=#phase-3-developer-experience>Phase 3: Developer Experience</a></li><li><a href=#phase-4-advanced-features>Phase 4: Advanced Features</a></li></ul></li><li><a href=#security-considerations>Security Considerations</a></li><li><a href=#benefits>Benefits</a></li><li><a href=#risks-and-mitigation>Risks and Mitigation</a></li><li><a href=#status>Status</a></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/index.html><span itemprop=name>Go Kure</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/architecture/index.html><span itemprop=name>Architecture</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Plugin Architecture</span><meta itemprop=position content="3"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><a class=topbar-control href=/architecture/details/index.html title="Architecture Details (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></div><div class="topbar-button topbar-button-next" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><a class=topbar-control href=/architecture/ux-design/index.html title="UX Design (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></div><div class="topbar-button topbar-button-more" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><button class=topbar-control onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable architecture" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><h1 id=plugin-architecture>Plugin Architecture</h1><h1 id=plugin-architecture-design-for-kure>Plugin Architecture Design for Kure</h1><h2 id=overview>Overview</h2><p>This document outlines the design for implementing a plugin architecture that allows external generators to extend Kure&rsquo;s capabilities. The plugin system would enable users to create custom generators for specific needs (Terraform, Pulumi, custom CRDs, etc.) while maintaining type safety and security.</p><h2 id=current-generator-architecture>Current Generator Architecture</h2><p>Kure currently uses a static registration system where generators implement the <code>ApplicationConfig</code> interface:</p><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>ApplicationConfig</span> <span style=color:#66d9ef>interface</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Generate</span>(<span style=color:#f92672>*</span><span style=color:#a6e22e>Application</span>) ([]<span style=color:#f92672>*</span><span style=color:#a6e22e>client</span>.<span style=color:#a6e22e>Object</span>, <span style=color:#66d9ef>error</span>)
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><p>Built-in generators like <code>AppWorkload</code> and <code>FluxHelm</code> register themselves via <code>init()</code> functions using the GVK (Group, Version, Kind) system:</p><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>init</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>gvkObj</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Group</span>:   <span style=color:#e6db74>&#34;generators.gokure.dev&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Version</span>: <span style=color:#e6db74>&#34;v1alpha1&#34;</span>, 
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Kind</span>:    <span style=color:#e6db74>&#34;AppWorkload&#34;</span>,
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>factory</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>func</span>() <span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>ApplicationConfig</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>ConfigV1Alpha1</span>{}
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>RegisterApplicationConfig</span>(<span style=color:#a6e22e>gvkObj</span>, <span style=color:#a6e22e>factory</span>)
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h2 id=plugin-architecture-requirements>Plugin Architecture Requirements</h2><h3 id=core-components>Core Components</h3><ol><li><strong>Plugin Interface</strong>: Standard contract for all plugins</li><li><strong>Plugin Loader</strong>: Dynamic loading from shared libraries</li><li><strong>Plugin Manager</strong>: Lifecycle management and registry</li><li><strong>Security Layer</strong>: Digital signature verification</li><li><strong>Registry Integration</strong>: Seamless integration with existing GVK system</li><li><strong>Development SDK</strong>: Helper library for plugin authors</li><li><strong>CLI Integration</strong>: Commands for plugin management</li></ol><h3 id=key-features>Key Features</h3><ul><li><strong>Dynamic Loading</strong>: Runtime loading from .so/.dylib files</li><li><strong>Type Safety</strong>: Strong typing through Go interfaces and GVK system</li><li><strong>Security</strong>: Digital signature verification for authenticity</li><li><strong>Extensibility</strong>: Support for generators, validators, and documentation providers</li><li><strong>Isolation</strong>: Clear interface boundaries between plugins and core</li><li><strong>Discovery</strong>: CLI tools for plugin management</li><li><strong>SDK Support</strong>: Simplified development experience</li></ul><h2 id=detailed-implementation-plan>Detailed Implementation Plan</h2><h3 id=1-plugin-interface-definition>1. Plugin Interface Definition</h3><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// pkg/stack/plugins/interface.go</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>package</span> <span style=color:#a6e22e>plugins</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> (
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;context&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;github.com/go-kure/kure/internal/gvk&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;github.com/go-kure/kure/pkg/stack&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Plugin represents a loadable generator plugin</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Plugin</span> <span style=color:#66d9ef>interface</span> {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Metadata</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Name</span>() <span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Version</span>() <span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Description</span>() <span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Author</span>() <span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Registration</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>SupportedGVKs</span>() []<span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Register</span>(<span style=color:#a6e22e>registry</span> <span style=color:#a6e22e>Registry</span>) <span style=color:#66d9ef>error</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Lifecycle</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Initialize</span>(<span style=color:#a6e22e>ctx</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Context</span>) <span style=color:#66d9ef>error</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Shutdown</span>(<span style=color:#a6e22e>ctx</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Context</span>) <span style=color:#66d9ef>error</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Health</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>HealthCheck</span>(<span style=color:#a6e22e>ctx</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Context</span>) <span style=color:#66d9ef>error</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Registry allows plugins to register their generators</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Registry</span> <span style=color:#66d9ef>interface</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>RegisterGenerator</span>(<span style=color:#a6e22e>gvk</span> <span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>, <span style=color:#a6e22e>factory</span> <span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>ApplicationConfigFactory</span>) <span style=color:#66d9ef>error</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>RegisterValidator</span>(<span style=color:#a6e22e>gvk</span> <span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>, <span style=color:#a6e22e>validator</span> <span style=color:#a6e22e>Validator</span>) <span style=color:#66d9ef>error</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>RegisterDocumentationProvider</span>(<span style=color:#a6e22e>gvk</span> <span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>, <span style=color:#a6e22e>provider</span> <span style=color:#a6e22e>DocumentationProvider</span>) <span style=color:#66d9ef>error</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Validator provides validation for plugin-specific configurations</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Validator</span> <span style=color:#66d9ef>interface</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Validate</span>(<span style=color:#a6e22e>config</span> <span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>ApplicationConfig</span>) <span style=color:#66d9ef>error</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>GetSchema</span>() ([]<span style=color:#66d9ef>byte</span>, <span style=color:#66d9ef>error</span>) <span style=color:#75715e>// JSON Schema</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// DocumentationProvider provides documentation and examples</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>DocumentationProvider</span> <span style=color:#66d9ef>interface</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>GetDocumentation</span>() <span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>GetExamples</span>() []<span style=color:#a6e22e>Example</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>GetUsageGuide</span>() <span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Example</span> <span style=color:#66d9ef>struct</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Name</span>        <span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Description</span> <span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Config</span>      <span style=color:#66d9ef>string</span> <span style=color:#75715e>// YAML example</span>
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h3 id=2-plugin-loader-and-manager>2. Plugin Loader and Manager</h3><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// pkg/stack/plugins/loader.go</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>package</span> <span style=color:#a6e22e>plugins</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> (
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;context&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;fmt&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;plugin&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;sync&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;time&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// LoaderConfig configures plugin loading behavior</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>LoaderConfig</span> <span style=color:#66d9ef>struct</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>PluginDirs</span>     []<span style=color:#66d9ef>string</span>      <span style=color:#75715e>// Directories to search for plugins</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>AllowUnsigned</span>  <span style=color:#66d9ef>bool</span>          <span style=color:#75715e>// Allow unsigned plugins (development only)</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>TrustedSigners</span> []<span style=color:#66d9ef>string</span>      <span style=color:#75715e>// Trusted plugin signer keys</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Timeout</span>        <span style=color:#a6e22e>time</span>.<span style=color:#a6e22e>Duration</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Manager manages the lifecycle of plugins</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Manager</span> <span style=color:#66d9ef>struct</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>config</span>    <span style=color:#a6e22e>LoaderConfig</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>plugins</span>   <span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>]<span style=color:#a6e22e>Plugin</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>registry</span>  <span style=color:#f92672>*</span><span style=color:#a6e22e>PluginRegistry</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mu</span>        <span style=color:#a6e22e>sync</span>.<span style=color:#a6e22e>RWMutex</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>NewManager</span>(<span style=color:#a6e22e>config</span> <span style=color:#a6e22e>LoaderConfig</span>) <span style=color:#f92672>*</span><span style=color:#a6e22e>Manager</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>Manager</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>config</span>:   <span style=color:#a6e22e>config</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>plugins</span>:  make(<span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>]<span style=color:#a6e22e>Plugin</span>),
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>registry</span>: <span style=color:#a6e22e>NewPluginRegistry</span>(),
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// LoadPlugins discovers and loads all plugins from configured directories</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>m</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>Manager</span>) <span style=color:#a6e22e>LoadPlugins</span>(<span style=color:#a6e22e>ctx</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Context</span>) <span style=color:#66d9ef>error</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>mu</span>.<span style=color:#a6e22e>Lock</span>()
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>defer</span> <span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>mu</span>.<span style=color:#a6e22e>Unlock</span>()
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> <span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>dir</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>PluginDirs</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>loadFromDirectory</span>(<span style=color:#a6e22e>ctx</span>, <span style=color:#a6e22e>dir</span>); <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;failed to load plugins from %s: %w&#34;</span>, <span style=color:#a6e22e>dir</span>, <span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>nil</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>m</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>Manager</span>) <span style=color:#a6e22e>loadPlugin</span>(<span style=color:#a6e22e>ctx</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Context</span>, <span style=color:#a6e22e>path</span> <span style=color:#66d9ef>string</span>) <span style=color:#66d9ef>error</span> {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Verify plugin signature if security is enabled</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>AllowUnsigned</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>verifyPluginSignature</span>(<span style=color:#a6e22e>path</span>); <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;plugin signature verification failed: %w&#34;</span>, <span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Load the plugin</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>p</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>plugin</span>.<span style=color:#a6e22e>Open</span>(<span style=color:#a6e22e>path</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;failed to open plugin: %w&#34;</span>, <span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Look for the plugin entry point</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>symbol</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>Lookup</span>(<span style=color:#e6db74>&#34;NewPlugin&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;plugin missing NewPlugin function: %w&#34;</span>, <span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Cast to plugin factory function</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>factory</span>, <span style=color:#a6e22e>ok</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>symbol</span>.(<span style=color:#66d9ef>func</span>() <span style=color:#a6e22e>Plugin</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>ok</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;NewPlugin has wrong signature&#34;</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Create and initialize plugin instance</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>pluginInstance</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>factory</span>()
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>pluginInstance</span>.<span style=color:#a6e22e>Initialize</span>(<span style=color:#a6e22e>ctx</span>); <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;plugin initialization failed: %w&#34;</span>, <span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Register plugin generators</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>pluginInstance</span>.<span style=color:#a6e22e>Register</span>(<span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>registry</span>); <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;plugin registration failed: %w&#34;</span>, <span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Store plugin</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>plugins</span>[<span style=color:#a6e22e>pluginInstance</span>.<span style=color:#a6e22e>Name</span>()] = <span style=color:#a6e22e>pluginInstance</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>nil</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Additional methods: GetPlugin, ListPlugins, Shutdown...</span></span></span></code></pre></div><h3 id=3-plugin-registry-integration>3. Plugin Registry Integration</h3><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// pkg/stack/plugins/registry.go</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>package</span> <span style=color:#a6e22e>plugins</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> (
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;fmt&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;sync&#34;</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;github.com/go-kure/kure/internal/gvk&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;github.com/go-kure/kure/pkg/stack&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// PluginRegistry manages plugin-registered generators</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>PluginRegistry</span> <span style=color:#66d9ef>struct</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>generators</span>    <span style=color:#66d9ef>map</span>[<span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>]<span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>ApplicationConfigFactory</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>validators</span>    <span style=color:#66d9ef>map</span>[<span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>]<span style=color:#a6e22e>Validator</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>docProviders</span>  <span style=color:#66d9ef>map</span>[<span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>]<span style=color:#a6e22e>DocumentationProvider</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>plugins</span>       <span style=color:#66d9ef>map</span>[<span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>]<span style=color:#66d9ef>string</span> <span style=color:#75715e>// Maps GVK to plugin name</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mu</span>           <span style=color:#a6e22e>sync</span>.<span style=color:#a6e22e>RWMutex</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>NewPluginRegistry</span>() <span style=color:#f92672>*</span><span style=color:#a6e22e>PluginRegistry</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>PluginRegistry</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>generators</span>:   make(<span style=color:#66d9ef>map</span>[<span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>]<span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>ApplicationConfigFactory</span>),
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>validators</span>:   make(<span style=color:#66d9ef>map</span>[<span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>]<span style=color:#a6e22e>Validator</span>),
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>docProviders</span>: make(<span style=color:#66d9ef>map</span>[<span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>]<span style=color:#a6e22e>DocumentationProvider</span>),
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>plugins</span>:      make(<span style=color:#66d9ef>map</span>[<span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>]<span style=color:#66d9ef>string</span>),
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>r</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>PluginRegistry</span>) <span style=color:#a6e22e>RegisterGenerator</span>(<span style=color:#a6e22e>gvkObj</span> <span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>, <span style=color:#a6e22e>factory</span> <span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>ApplicationConfigFactory</span>) <span style=color:#66d9ef>error</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>mu</span>.<span style=color:#a6e22e>Lock</span>()
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>defer</span> <span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>mu</span>.<span style=color:#a6e22e>Unlock</span>()
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>exists</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>generators</span>[<span style=color:#a6e22e>gvkObj</span>]; <span style=color:#a6e22e>exists</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;generator for GVK %s already registered&#34;</span>, <span style=color:#a6e22e>gvkObj</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>generators</span>[<span style=color:#a6e22e>gvkObj</span>] = <span style=color:#a6e22e>factory</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Also register with the global stack registry</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>RegisterApplicationConfig</span>(<span style=color:#a6e22e>gvkObj</span>, <span style=color:#a6e22e>factory</span>)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>nil</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Additional methods for validators, documentation providers, queries...</span></span></span></code></pre></div><h3 id=4-security-and-verification>4. Security and Verification</h3><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// pkg/stack/plugins/security.go</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>package</span> <span style=color:#a6e22e>plugins</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> (
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;crypto&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;crypto/rsa&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;crypto/sha256&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;crypto/x509&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;encoding/pem&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;fmt&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;os&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// verifyPluginSignature verifies a plugin&#39;s digital signature</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>m</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>Manager</span>) <span style=color:#a6e22e>verifyPluginSignature</span>(<span style=color:#a6e22e>pluginPath</span> <span style=color:#66d9ef>string</span>) <span style=color:#66d9ef>error</span> {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Look for signature file</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>sigPath</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>pluginPath</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;.sig&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>sigData</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>ReadFile</span>(<span style=color:#a6e22e>sigPath</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;signature file not found: %w&#34;</span>, <span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Read plugin binary</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>pluginData</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>ReadFile</span>(<span style=color:#a6e22e>pluginPath</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;failed to read plugin: %w&#34;</span>, <span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Hash the plugin</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>hash</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>sha256</span>.<span style=color:#a6e22e>Sum256</span>(<span style=color:#a6e22e>pluginData</span>)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Verify signature against trusted signers</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> <span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>signerKey</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>TrustedSigners</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>verifySignature</span>(<span style=color:#a6e22e>hash</span>[:], <span style=color:#a6e22e>sigData</span>, <span style=color:#a6e22e>signerKey</span>); <span style=color:#a6e22e>err</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>nil</span> <span style=color:#75715e>// Valid signature found</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;no valid signature found&#34;</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>m</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>Manager</span>) <span style=color:#a6e22e>verifySignature</span>(<span style=color:#a6e22e>hash</span>, <span style=color:#a6e22e>signature</span> []<span style=color:#66d9ef>byte</span>, <span style=color:#a6e22e>pubKeyPath</span> <span style=color:#66d9ef>string</span>) <span style=color:#66d9ef>error</span> {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Read and parse public key</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>keyData</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>ReadFile</span>(<span style=color:#a6e22e>pubKeyPath</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;failed to read public key: %w&#34;</span>, <span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Parse PEM format</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>block</span>, <span style=color:#a6e22e>_</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>pem</span>.<span style=color:#a6e22e>Decode</span>(<span style=color:#a6e22e>keyData</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>block</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;invalid PEM format&#34;</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Parse public key</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>pubKey</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>x509</span>.<span style=color:#a6e22e>ParsePKIXPublicKey</span>(<span style=color:#a6e22e>block</span>.<span style=color:#a6e22e>Bytes</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;failed to parse public key: %w&#34;</span>, <span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>rsaPubKey</span>, <span style=color:#a6e22e>ok</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>pubKey</span>.(<span style=color:#f92672>*</span><span style=color:#a6e22e>rsa</span>.<span style=color:#a6e22e>PublicKey</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>ok</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;only RSA keys supported&#34;</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Verify signature</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>rsa</span>.<span style=color:#a6e22e>VerifyPKCS1v15</span>(<span style=color:#a6e22e>rsaPubKey</span>, <span style=color:#a6e22e>crypto</span>.<span style=color:#a6e22e>SHA256</span>, <span style=color:#a6e22e>hash</span>, <span style=color:#a6e22e>signature</span>)
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h3 id=5-plugin-development-sdk>5. Plugin Development SDK</h3><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// pkg/stack/plugins/sdk/base.go</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>package</span> <span style=color:#a6e22e>sdk</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> (
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;context&#34;</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;github.com/go-kure/kure/internal/gvk&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;github.com/go-kure/kure/pkg/stack/plugins&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// BasePlugin provides a default implementation of common plugin functionality</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>BasePlugin</span> <span style=color:#66d9ef>struct</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>name</span>        <span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>version</span>     <span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>description</span> <span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>author</span>      <span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>supportedGVKs</span> []<span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>NewBasePlugin</span>(<span style=color:#a6e22e>name</span>, <span style=color:#a6e22e>version</span>, <span style=color:#a6e22e>description</span>, <span style=color:#a6e22e>author</span> <span style=color:#66d9ef>string</span>) <span style=color:#f92672>*</span><span style=color:#a6e22e>BasePlugin</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>BasePlugin</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>name</span>:        <span style=color:#a6e22e>name</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>version</span>:     <span style=color:#a6e22e>version</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>description</span>: <span style=color:#a6e22e>description</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>author</span>:      <span style=color:#a6e22e>author</span>,
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>BasePlugin</span>) <span style=color:#a6e22e>Name</span>() <span style=color:#66d9ef>string</span>        { <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>name</span> }
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>BasePlugin</span>) <span style=color:#a6e22e>Version</span>() <span style=color:#66d9ef>string</span>     { <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>version</span> }
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>BasePlugin</span>) <span style=color:#a6e22e>Description</span>() <span style=color:#66d9ef>string</span> { <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>description</span> }
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>BasePlugin</span>) <span style=color:#a6e22e>Author</span>() <span style=color:#66d9ef>string</span>      { <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>author</span> }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>BasePlugin</span>) <span style=color:#a6e22e>SupportedGVKs</span>() []<span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>supportedGVKs</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>BasePlugin</span>) <span style=color:#a6e22e>AddSupportedGVK</span>(<span style=color:#a6e22e>gvkObj</span> <span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>supportedGVKs</span> = append(<span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>supportedGVKs</span>, <span style=color:#a6e22e>gvkObj</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Default implementations that can be overridden</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>BasePlugin</span>) <span style=color:#a6e22e>Initialize</span>(<span style=color:#a6e22e>ctx</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Context</span>) <span style=color:#66d9ef>error</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>nil</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>BasePlugin</span>) <span style=color:#a6e22e>Shutdown</span>(<span style=color:#a6e22e>ctx</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Context</span>) <span style=color:#66d9ef>error</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>nil</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>BasePlugin</span>) <span style=color:#a6e22e>HealthCheck</span>(<span style=color:#a6e22e>ctx</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Context</span>) <span style=color:#66d9ef>error</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>nil</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Register must be implemented by concrete plugins</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>BasePlugin</span>) <span style=color:#a6e22e>Register</span>(<span style=color:#a6e22e>registry</span> <span style=color:#a6e22e>plugins</span>.<span style=color:#a6e22e>Registry</span>) <span style=color:#66d9ef>error</span> {
+</span></span><span style=display:flex><span>    panic(<span style=color:#e6db74>&#34;Register method must be implemented by concrete plugin&#34;</span>)
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h3 id=6-cli-integration>6. CLI Integration</h3><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// pkg/cmd/kure/plugins.go</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>package</span> <span style=color:#a6e22e>main</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> (
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;context&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;fmt&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;os&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;text/tabwriter&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;time&#34;</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;github.com/spf13/cobra&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;github.com/go-kure/kure/pkg/stack/plugins&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>newPluginsCmd</span>() <span style=color:#f92672>*</span><span style=color:#a6e22e>cobra</span>.<span style=color:#a6e22e>Command</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cmd</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>cobra</span>.<span style=color:#a6e22e>Command</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Use</span>:   <span style=color:#e6db74>&#34;plugins&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Short</span>: <span style=color:#e6db74>&#34;Manage generator plugins&#34;</span>,
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cmd</span>.<span style=color:#a6e22e>AddCommand</span>(<span style=color:#a6e22e>newPluginsListCmd</span>())
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cmd</span>.<span style=color:#a6e22e>AddCommand</span>(<span style=color:#a6e22e>newPluginsInstallCmd</span>())
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cmd</span>.<span style=color:#a6e22e>AddCommand</span>(<span style=color:#a6e22e>newPluginsUninstallCmd</span>())
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cmd</span>.<span style=color:#a6e22e>AddCommand</span>(<span style=color:#a6e22e>newPluginsInfoCmd</span>())
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>cmd</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>newPluginsListCmd</span>() <span style=color:#f92672>*</span><span style=color:#a6e22e>cobra</span>.<span style=color:#a6e22e>Command</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>cobra</span>.<span style=color:#a6e22e>Command</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Use</span>:   <span style=color:#e6db74>&#34;list&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Short</span>: <span style=color:#e6db74>&#34;List installed plugins&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>RunE</span>: <span style=color:#66d9ef>func</span>(<span style=color:#a6e22e>cmd</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>cobra</span>.<span style=color:#a6e22e>Command</span>, <span style=color:#a6e22e>args</span> []<span style=color:#66d9ef>string</span>) <span style=color:#66d9ef>error</span> {
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>manager</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>getPluginManager</span>()
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>ctx</span>, <span style=color:#a6e22e>cancel</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>WithTimeout</span>(<span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Background</span>(), <span style=color:#ae81ff>30</span><span style=color:#f92672>*</span><span style=color:#a6e22e>time</span>.<span style=color:#a6e22e>Second</span>)
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>defer</span> <span style=color:#a6e22e>cancel</span>()
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>manager</span>.<span style=color:#a6e22e>LoadPlugins</span>(<span style=color:#a6e22e>ctx</span>); <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Errorf</span>(<span style=color:#e6db74>&#34;failed to load plugins: %w&#34;</span>, <span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>plugins</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>manager</span>.<span style=color:#a6e22e>ListPlugins</span>()
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> len(<span style=color:#a6e22e>plugins</span>) <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> {
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#e6db74>&#34;No plugins installed.&#34;</span>)
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>nil</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>w</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>tabwriter</span>.<span style=color:#a6e22e>NewWriter</span>(<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Stdout</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>3</span>, <span style=color:#e6db74>&#39; &#39;</span>, <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Fprintln</span>(<span style=color:#a6e22e>w</span>, <span style=color:#e6db74>&#34;NAME\tVERSION\tAUTHOR\tDESCRIPTION&#34;</span>)
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> <span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>plugin</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>plugins</span> {
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Fprintf</span>(<span style=color:#a6e22e>w</span>, <span style=color:#e6db74>&#34;%s\t%s\t%s\t%s\n&#34;</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>plugin</span>.<span style=color:#a6e22e>Name</span>(),
+</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>plugin</span>.<span style=color:#a6e22e>Version</span>(),
+</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>plugin</span>.<span style=color:#a6e22e>Author</span>(),
+</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>plugin</span>.<span style=color:#a6e22e>Description</span>())
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>Flush</span>()
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>getPluginManager</span>() <span style=color:#f92672>*</span><span style=color:#a6e22e>plugins</span>.<span style=color:#a6e22e>Manager</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>config</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>plugins</span>.<span style=color:#a6e22e>LoaderConfig</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>PluginDirs</span>:     []<span style=color:#66d9ef>string</span>{<span style=color:#e6db74>&#34;/usr/local/lib/kure/plugins&#34;</span>, <span style=color:#e6db74>&#34;~/.kure/plugins&#34;</span>, <span style=color:#e6db74>&#34;./plugins&#34;</span>},
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>AllowUnsigned</span>:  <span style=color:#66d9ef>false</span>, <span style=color:#75715e>// Should be configurable</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>TrustedSigners</span>: []<span style=color:#66d9ef>string</span>{<span style=color:#e6db74>&#34;/etc/kure/trusted-signers.pem&#34;</span>},
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Timeout</span>:        <span style=color:#ae81ff>30</span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>time</span>.<span style=color:#a6e22e>Second</span>,
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>plugins</span>.<span style=color:#a6e22e>NewManager</span>(<span style=color:#a6e22e>config</span>)
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h2 id=example-plugin-implementation>Example Plugin Implementation</h2><h3 id=terraform-generator-plugin>Terraform Generator Plugin</h3><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// examples/plugins/terraform-generator/main.go</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>package</span> <span style=color:#a6e22e>main</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> (
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;context&#34;</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;sigs.k8s.io/controller-runtime/pkg/client&#34;</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;github.com/go-kure/kure/internal/gvk&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;github.com/go-kure/kure/pkg/stack&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;github.com/go-kure/kure/pkg/stack/plugins&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;github.com/go-kure/kure/pkg/stack/plugins/sdk&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// TerraformPlugin generates Kubernetes resources that deploy Terraform configurations</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>TerraformPlugin</span> <span style=color:#66d9ef>struct</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>*</span><span style=color:#a6e22e>sdk</span>.<span style=color:#a6e22e>BasePlugin</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>NewPlugin</span>() <span style=color:#a6e22e>plugins</span>.<span style=color:#a6e22e>Plugin</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>plugin</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>TerraformPlugin</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>BasePlugin</span>: <span style=color:#a6e22e>sdk</span>.<span style=color:#a6e22e>NewBasePlugin</span>(
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;terraform-generator&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;v1.0.0&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;Generates Kubernetes Jobs that run Terraform configurations&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;Example Corp &lt;plugins@example.com&gt;&#34;</span>,
+</span></span><span style=display:flex><span>        ),
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>plugin</span>.<span style=color:#a6e22e>AddSupportedGVK</span>(<span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Group</span>:   <span style=color:#e6db74>&#34;generators.example.com&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Version</span>: <span style=color:#e6db74>&#34;v1alpha1&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Kind</span>:    <span style=color:#e6db74>&#34;TerraformConfig&#34;</span>,
+</span></span><span style=display:flex><span>    })
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>plugin</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>TerraformPlugin</span>) <span style=color:#a6e22e>Register</span>(<span style=color:#a6e22e>registry</span> <span style=color:#a6e22e>plugins</span>.<span style=color:#a6e22e>Registry</span>) <span style=color:#66d9ef>error</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>gvkObj</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>gvk</span>.<span style=color:#a6e22e>GVK</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Group</span>:   <span style=color:#e6db74>&#34;generators.example.com&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Version</span>: <span style=color:#e6db74>&#34;v1alpha1&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Kind</span>:    <span style=color:#e6db74>&#34;TerraformConfig&#34;</span>,
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>factory</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>func</span>() <span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>ApplicationConfig</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>TerraformConfig</span>{}
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>registry</span>.<span style=color:#a6e22e>RegisterGenerator</span>(<span style=color:#a6e22e>gvkObj</span>, <span style=color:#a6e22e>factory</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// TerraformConfig represents a Terraform configuration to be deployed</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>TerraformConfig</span> <span style=color:#66d9ef>struct</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>APIVersion</span> <span style=color:#66d9ef>string</span> <span style=color:#e6db74>`yaml:&#34;apiVersion&#34; json:&#34;apiVersion&#34;`</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Kind</span>       <span style=color:#66d9ef>string</span> <span style=color:#e6db74>`yaml:&#34;kind&#34; json:&#34;kind&#34;`</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Terraform-specific configuration</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Module</span>          <span style=color:#66d9ef>string</span>            <span style=color:#e6db74>`yaml:&#34;module&#34; json:&#34;module&#34;`</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Variables</span>       <span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>]<span style=color:#66d9ef>string</span> <span style=color:#e6db74>`yaml:&#34;variables,omitempty&#34; json:&#34;variables,omitempty&#34;`</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>BackendConfig</span>   <span style=color:#a6e22e>BackendConfig</span>     <span style=color:#e6db74>`yaml:&#34;backend&#34; json:&#34;backend&#34;`</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>RequiredVersion</span> <span style=color:#66d9ef>string</span>            <span style=color:#e6db74>`yaml:&#34;requiredVersion,omitempty&#34; json:&#34;requiredVersion,omitempty&#34;`</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>BackendConfig</span> <span style=color:#66d9ef>struct</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Type</span>   <span style=color:#66d9ef>string</span>            <span style=color:#e6db74>`yaml:&#34;type&#34; json:&#34;type&#34;`</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Config</span> <span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>]<span style=color:#66d9ef>string</span> <span style=color:#e6db74>`yaml:&#34;config&#34; json:&#34;config&#34;`</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>c</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>TerraformConfig</span>) <span style=color:#a6e22e>Generate</span>(<span style=color:#a6e22e>app</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Application</span>) ([]<span style=color:#f92672>*</span><span style=color:#a6e22e>client</span>.<span style=color:#a6e22e>Object</span>, <span style=color:#66d9ef>error</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Implementation would create:</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// - Kubernetes Job to run terraform apply</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// - ConfigMap with terraform files</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// - Secret for backend credentials  </span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// - ServiceAccount with appropriate RBAC</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> []<span style=color:#f92672>*</span><span style=color:#a6e22e>client</span>.<span style=color:#a6e22e>Object</span>{
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Job, ConfigMap, Secret, ServiceAccount, etc.</span>
+</span></span><span style=display:flex><span>    }, <span style=color:#66d9ef>nil</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>c</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>TerraformConfig</span>) <span style=color:#a6e22e>GetAPIVersion</span>() <span style=color:#66d9ef>string</span> { <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>c</span>.<span style=color:#a6e22e>APIVersion</span> }
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>c</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>TerraformConfig</span>) <span style=color:#a6e22e>GetKind</span>() <span style=color:#66d9ef>string</span>       { <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>c</span>.<span style=color:#a6e22e>Kind</span> }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Required for Go plugins</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>main</span>() {} <span style=color:#75715e>// Empty main required for buildmode=plugin</span></span></span></code></pre></div><h2 id=plugin-build-and-distribution>Plugin Build and Distribution</h2><h3 id=building-plugins>Building Plugins</h3><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Makefile for building plugins</span>
+</span></span><span style=display:flex><span>.PHONY: plugin
+</span></span><span style=display:flex><span>plugin:
+</span></span><span style=display:flex><span>	go build -buildmode<span style=color:#f92672>=</span>plugin -o terraform-generator.so ./examples/plugins/terraform-generator/
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Plugin signing</span>
+</span></span><span style=display:flex><span>sign-plugin:
+</span></span><span style=display:flex><span>	openssl dgst -sha256 -sign private-key.pem -out terraform-generator.so.sig terraform-generator.so
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Installation script</span>
+</span></span><span style=display:flex><span>install-plugin:
+</span></span><span style=display:flex><span>	sudo cp terraform-generator.so /usr/local/lib/kure/plugins/
+</span></span><span style=display:flex><span>	sudo cp terraform-generator.so.sig /usr/local/lib/kure/plugins/</span></span></code></pre></div><h3 id=usage-example>Usage Example</h3><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e># Using a plugin-provided generator</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>generators.example.com/v1alpha1</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>kind</span>: <span style=color:#ae81ff>TerraformConfig</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>metadata</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>infrastructure</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>spec</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>module</span>: <span style=color:#e6db74>&#34;./terraform/modules/vpc&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>variables</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>region</span>: <span style=color:#e6db74>&#34;us-west-2&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>environment</span>: <span style=color:#e6db74>&#34;production&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>backend</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>type</span>: <span style=color:#e6db74>&#34;s3&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>config</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>bucket</span>: <span style=color:#e6db74>&#34;terraform-state-bucket&#34;</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>key</span>: <span style=color:#e6db74>&#34;infrastructure/terraform.tfstate&#34;</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>region</span>: <span style=color:#e6db74>&#34;us-west-2&#34;</span></span></span></code></pre></div><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># CLI plugin management</span>
+</span></span><span style=display:flex><span>kure plugins list
+</span></span><span style=display:flex><span>kure plugins install terraform-generator.so
+</span></span><span style=display:flex><span>kure plugins info terraform-generator</span></span></code></pre></div><h2 id=implementation-phases>Implementation Phases</h2><h3 id=phase-1-core-infrastructure>Phase 1: Core Infrastructure</h3><ul><li><input disabled type=checkbox> Plugin interface definition</li><li><input disabled type=checkbox> Basic plugin loader without security</li><li><input disabled type=checkbox> Plugin registry integration</li><li><input disabled type=checkbox> Simple CLI commands</li></ul><h3 id=phase-2-security-and-validation>Phase 2: Security and Validation</h3><ul><li><input disabled type=checkbox> Digital signature verification</li><li><input disabled type=checkbox> Plugin validation framework</li><li><input disabled type=checkbox> Configuration schema support</li><li><input disabled type=checkbox> Security documentation</li></ul><h3 id=phase-3-developer-experience>Phase 3: Developer Experience</h3><ul><li><input disabled type=checkbox> Plugin development SDK</li><li><input disabled type=checkbox> Example plugins</li><li><input disabled type=checkbox> Documentation and tutorials</li><li><input disabled type=checkbox> Testing utilities</li></ul><h3 id=phase-4-advanced-features>Phase 4: Advanced Features</h3><ul><li><input disabled type=checkbox> Plugin dependency management</li><li><input disabled type=checkbox> Hot-reloading support</li><li><input disabled type=checkbox> Plugin marketplace integration</li><li><input disabled type=checkbox> Monitoring and metrics</li></ul><h2 id=security-considerations>Security Considerations</h2><ol><li><strong>Code Execution</strong>: Plugins run in the same process space</li><li><strong>Digital Signatures</strong>: Required for production use</li><li><strong>Sandboxing</strong>: Consider future isolation mechanisms</li><li><strong>Resource Limits</strong>: Memory and CPU constraints</li><li><strong>Network Access</strong>: Plugin network restrictions</li><li><strong>File System</strong>: Limited file system access</li></ol><h2 id=benefits>Benefits</h2><ol><li><strong>Extensibility</strong>: Users can create domain-specific generators</li><li><strong>Community</strong>: Ecosystem of third-party plugins</li><li><strong>Maintenance</strong>: Reduces core maintenance burden</li><li><strong>Innovation</strong>: Faster iteration on new generator types</li><li><strong>Adoption</strong>: Easier integration with existing toolchains</li></ol><h2 id=risks-and-mitigation>Risks and Mitigation</h2><ol><li><strong>Security</strong>: Mitigated by signature verification and sandboxing</li><li><strong>Stability</strong>: Mitigated by plugin isolation and error handling</li><li><strong>Performance</strong>: Mitigated by lazy loading and resource limits</li><li><strong>Compatibility</strong>: Mitigated by versioned interfaces and testing</li></ol><h2 id=status>Status</h2><p>This task is currently <strong>postponed</strong> pending completion of higher-priority features like:</p><ul><li>KurelPackage generator completion</li><li>ArgoCD bootstrap implementation</li><li>OpenAPI schema generation</li></ul><p>The design is ready for implementation when development resources become available.</p><footer class=footline></footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><div id=R-header class=default-animation><a href=https://www.gokure.dev/ style=text-decoration:none><h1 style=margin:0;padding:1rem;color:var(--MENU-SECTIONS-ACTIVE-BG-color)>Go Kure</h1></a><div style="padding:0 1rem 1rem"><div style="background-color:rgba(255,193,7,.1);border:1px solid rgba(255,193,7,.3);border-radius:4px;padding:.75rem"><div style=display:flex;align-items:center;font-weight:700;color:#ffc107;margin-bottom:.25rem;font-size:.9rem><span style=margin-right:.5rem>⚠️</span>
+<span>Pre-Release</span></div><div style=font-size:.8rem;color:#ffeb3b;line-height:1.3>Unreleased software - APIs subject to change</div></div></div></div><search><form action=/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Search</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
+<button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class=padding></div><div class="R-sidebarmenu R-shortcutmenu-homelinks"><ul class="space collapsible-menu"><li data-nav-id=/index.html><a class=padding href=/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class=padding></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols"><ul></ul></div><div class="R-menu-divider default-animation"><hr class=padding></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/overview/index.html><a class=padding href=/overview/index.html>Overview</a><ul id=R-subsections-0545e563276d3ac6e3218cfecf67a14b class=collapsible-menu></ul></li><li data-nav-id=/getting-started/index.html><a class=padding href=/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li class=parent data-nav-id=/architecture/index.html><a class=padding href=/architecture/index.html>Architecture</a><ul id=R-subsections-9e2fbae00589891720aedcdff0084e07 class=collapsible-menu><li data-nav-id=/architecture/details/index.html><a class=padding href=/architecture/details/index.html>Architecture Details</a></li><li class=active data-nav-id=/architecture/plugin-design/index.html><a class=padding href=/architecture/plugin-design/index.html>Plugin Architecture</a></li><li data-nav-id=/architecture/ux-design/index.html><a class=padding href=/architecture/ux-design/index.html>UX Design</a></li></ul></li><li data-nav-id=/packages/index.html><a class=padding href=/packages/index.html>Packages</a><ul id=R-subsections-bdf1e8ce92aa8ff6883c617f10480430 class=collapsible-menu></ul></li><li data-nav-id=/examples/index.html><a class=padding href=/examples/index.html>Examples</a><ul id=R-subsections-2e4187ca04853a7e1382c8d86f7be6fd class=collapsible-menu></ul></li><li data-nav-id=/reference/index.html><a class=padding href=/reference/index.html>Reference</a><ul id=R-subsections-66002f201bef818664bb81aa67490c58 class=collapsible-menu></ul></li><li data-nav-id=/development/index.html><a class=padding href=/development/index.html>Development</a><ul id=R-subsections-54b0ce3c97b111c8cd4d107325fd580c class=collapsible-menu></ul></li><li data-nav-id=/changelog/index.html><a class=padding href=/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin></div><div class="R-menu-divider default-animation"><hr class=padding></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols"><ul></ul></div><div id=R-footer><div style="position:sticky;bottom:0;padding:1rem;margin-top:2rem;background-color:rgba(255,193,7,.1);border:1px solid rgba(255,193,7,.3);border-top:3px solid #ffc107"><div style=display:flex;align-items:center;font-weight:700;color:#ffc107;margin-bottom:.5rem><span style=margin-right:.5rem>⚠️</span>
+<span>Pre-Release Software</span></div><div style=font-size:.875rem;color:#ffeb3b;line-height:1.4>This documentation is for unreleased software. Features and APIs may change before the official release.</div></div></div></div></aside><script src=/js/clipboard/clipboard.min.js?1770889558 defer></script><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1770889558 defer></script><script src=/js/theme.min.js?1770889558 defer></script></body></html>
