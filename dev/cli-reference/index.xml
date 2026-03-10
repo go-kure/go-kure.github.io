@@ -14,14 +14,14 @@ Generate to specific output file kure generate app –output-file manifests.yaml
 Synopsis Generate bootstrap configurations for GitOps tools like Flux or ArgoCD.
 This command processes bootstrap configuration files and generates the necessary manifests to bootstrap a GitOps workflow in a Kubernetes cluster.
 Examples:
-Generate Flux bootstrap configuration kure generate bootstrap examples/bootstrap/flux-operator.yaml
-Generate ArgoCD bootstrap configuration kure generate bootstrap examples/bootstrap/argocd.yaml
+Generate Flux bootstrap configuration kure generate bootstrap examples/demo/bootstrap/flux-operator.yaml
+Generate ArgoCD bootstrap configuration kure generate bootstrap examples/demo/bootstrap/argocd.yaml
 Generate with custom output directory kure generate bootstrap –output-dir ./bootstrap cluster.yaml
 Generate with specific GitOps type kure generate bootstrap –gitops-type=flux –flux-mode=operator bootstrap.yaml</description></item><item><title>kure generate cluster</title><link>https://www.gokure.dev/dev/cli-reference/kure_generate_cluster/index.html</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.gokure.dev/dev/cli-reference/kure_generate_cluster/index.html</guid><description>kure generate cluster Generate cluster manifests from configuration
 Synopsis Generate complete cluster manifests with GitOps configuration.
 This command processes cluster configuration files and generates a complete directory structure with Kubernetes manifests organized for GitOps workflows.
 Examples:
-Generate cluster from config file kure generate cluster examples/clusters/basic/cluster.yaml
+Generate cluster from config file kure generate cluster examples/demo/clusters/basic/cluster.yaml
 Generate with custom output directory kure generate cluster –output-dir ./output cluster.yaml
 Generate with different layout options kure generate cluster –bundle-grouping=nested –flux-placement=separate cluster.yaml
 kure generate cluster [flags] CONFIG_FILE Options -a, --application-grouping string application grouping strategy (flat|nested) (default "flat") -b, --bundle-grouping string bundle grouping strategy (flat|nested) (default "flat") --flux-placement string flux placement strategy (integrated|separate) (default "integrated") -h, --help help for cluster -i, --input-dir string input directory for loading app configs (defaults to config file directory) --manifest-dir string manifests directory name in output (default "clusters") -d, --output-dir string output directory for generated manifests (default "out") Options inherited from parent commands -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -o, --output string output format (yaml|json|table|wide|name) (default "yaml") -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kure generate - Generate Kubernetes manifests</description></item><item><title>kure generate</title><link>https://www.gokure.dev/dev/cli-reference/kure_generate/index.html</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.gokure.dev/dev/cli-reference/kure_generate/index.html</guid><description>kure generate Generate Kubernetes manifests
