@@ -5,7 +5,7 @@ var relearn_searchindex = [
     "description": "Kure Architecture Documentation Version: 2.0.0\nDate: August 2025\nStatus: Complete\nExecutive Summary Kure is a Go library for programmatically building Kubernetes resources used by GitOps tools (Flux, cert-manager, MetalLB, External Secrets). The library emphasizes strongly-typed object construction over templating engines, providing a composable, type-safe approach to generating Kubernetes manifests.\nKey Architectural Achievements:\nDomain-Driven Design: Hierarchical cluster model with clear boundaries Interface Segregation: Split monolithic workflow interfaces into focused components Type Safety: Strong typing throughout with comprehensive validation GitOps Agnostic: Support for multiple GitOps tools through pluggable workflows Declarative Patching: JSONPath-based patching system with structure preservation The architecture supports complex Kubernetes cluster configurations while maintaining simplicity and extensibility through clean separation of concerns and well-defined interfaces.",
     "tags": [],
     "title": "Architecture",
-    "uri": "/dev/concepts/architecture/index.html"
+    "uri": "/kure/dev/concepts/architecture/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e Contributing",
@@ -13,7 +13,7 @@ var relearn_searchindex = [
     "description": "Development Guide This guide covers development workflows and tooling for the Kure project.\nQuick Start # Get help with all available commands make help # Run all standard development tasks make all # Quick development cycle make check Contributing Workflow The main branch is protected — all changes must go through pull requests.\nBranch Workflow Create a feature branch from main:\ngit checkout -b feat/my-feature main Use branch prefixes: feat/, fix/, docs/, chore/",
     "tags": [],
     "title": "Development Guide",
-    "uri": "/dev/contributing/guide/index.html"
+    "uri": "/kure/dev/contributing/guide/index.html"
   },
   {
     "breadcrumb": "Go Kure",
@@ -21,7 +21,7 @@ var relearn_searchindex = [
     "description": "Getting Started with Kure Kure is primarily a Go library. You can also install its CLI tools for package management and code generation.\nUsing as a Library Add Kure to your Go project:\ngo get github.com/go-kure/kure Then import the packages you need:\nimport ( \"github.com/go-kure/kure/pkg/stack\" \"github.com/go-kure/kure/pkg/kubernetes/fluxcd\" \"github.com/go-kure/kure/pkg/io\" ) Installing CLI Tools # kure — main CLI for resource generation go install github.com/go-kure/kure/cmd/kure@latest # kurel — package system for reusable application bundles go install github.com/go-kure/kure/cmd/kurel@latest Verify the installation:",
     "tags": [],
     "title": "Getting Started",
-    "uri": "/dev/getting-started/index.html"
+    "uri": "/kure/dev/getting-started/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -29,7 +29,7 @@ var relearn_searchindex = [
     "description": "kure completion Generate completion script\nSynopsis Generate the autocompletion script for the specified shell. See each sub-command’s help for details on how to use the generated script.\nkure completion [bash|zsh|fish|powershell] Options -h, --help help for completion Options inherited from parent commands -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -o, --output string output format (yaml|json|table|wide|name) (default \"yaml\") -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kure - A Go library for programmatically building Kubernetes resources",
     "tags": [],
     "title": "kure completion",
-    "uri": "/dev/cli-reference/kure_completion/index.html"
+    "uri": "/kure/dev/cli-reference/kure_completion/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e Examples",
@@ -37,7 +37,7 @@ var relearn_searchindex = [
     "description": "Kure Patch Module Examples (TOML Format) This directory demonstrates the new TOML-style patch system with cert-manager as an example.\nFiles cert-manager-simple.yaml - Base cert-manager resources (simplified) resources.kpatch - Resource limits using TOML container selectors ingress.kpatch - Service configuration with port selectors security.kpatch - Security contexts with deployment targeting advanced.kpatch - Complex selectors and variable substitution Running the Demo go run ./cmd/demo -patches TOML Patch Format The patch files now use TOML-style headers for precise resource targeting:",
     "tags": [],
     "title": "Patches",
-    "uri": "/dev/examples/patches/index.html"
+    "uri": "/kure/dev/examples/patches/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e Getting Started",
@@ -45,7 +45,7 @@ var relearn_searchindex = [
     "description": "Quickstart Guide This guide walks you through installing Kure, generating your first cluster configuration, and deploying with Flux.\nInstallation Install the Kure CLI tools using Go:\ngo install github.com/go-kure/kure/cmd/kure@latest go install github.com/go-kure/kure/cmd/kurel@latest Verify the installation:\nkure version kurel version Hello World: Generate a Simple Cluster Config Create a minimal Go program that generates Kubernetes manifests:\npackage main import ( \"os\" \"github.com/go-kure/kure/pkg/kubernetes/fluxcd\" \"github.com/go-kure/kure/pkg/io\" kustv1 \"github.com/fluxcd/kustomize-controller/api/v1\" ) func main() { // Create a Flux Kustomization ks := fluxcd.NewKustomization(\u0026fluxcd.KustomizationConfig{ Name: \"hello-world\", Namespace: \"flux-system\", Interval: \"5m\", Path: \"./clusters/production\", SourceRef: kustv1.CrossNamespaceSourceReference{ Kind: \"GitRepository\", Name: \"flux-system\", }, }) // Print YAML to stdout printer := io.NewYAMLPrinter() printer.PrintObj(ks, os.Stdout) } Run the program to see the generated YAML:",
     "tags": [],
     "title": "Quickstart",
-    "uri": "/dev/getting-started/quickstart/index.html"
+    "uri": "/kure/dev/getting-started/quickstart/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e Changelog",
@@ -53,7 +53,7 @@ var relearn_searchindex = [
     "description": "Changelog All notable changes to this project will be documented in this file.\n[0.1.0-rc.11] - 2026-04-20 Added Add public pkg/kubernetes/cnpg wrapper Dependencies Bump github.com/moby/spdystream from 0.5.0 to 0.5.1 Bump github.com/cloudnative-pg/machinery Bump github.com/cloudnative-pg/plugin-barman-cloud Documentation Add internal design note for launcher extraction Correct patch.go treatment in launcher extraction design Document OCI folder layout and split strategy design Rename infra to platform in OCI layout design doc Register oci-layout.md in docs site scripts [0.1.0-rc.10] - 2026-04-15 Added Add builders for Role, RoleBinding, ClusterRole, ClusterRoleBinding Release V0.1.0-rc.10 [0.1.0-rc.9] - 2026-04-15 Added Add Patches and PostBuild fields to Bundle Add Force and Suspend fields to Bundle Dependencies Bump github.com/cert-manager/cert-manager Release V0.1.0-rc.9 [0.1.0-rc.8] - 2026-04-14 Added Add RenderChart for client-side OCI chart rendering Dependencies Bump github.com/google/cel-go from 0.27.0 to 0.28.0 Documentation Document undocumented features across package READMEs and guides Add prometheus-builders API reference page and fix broken links Fixed Sort manifest keys for stable output Release V0.1.0-rc.8 [0.1.0-rc.7] - 2026-04-12 Fixed Honor FileNaming in WriteToDisk, WriteManifest, and package walker Release V0.1.0-rc.7 [0.1.0-rc.6] - 2026-04-12 Added Propagate FileNaming to ManifestLayout and WriteToTar Fixed Force FilePerResource for FluxIntegrated kustomization refs Release V0.1.0-rc.6 [0.1.0-rc.5] - 2026-04-11 Added Emit full Flux Operator install bundle in flux-operator mode Release V0.1.0-rc.5 [0.1.0-rc.4] - 2026-04-10 Added Add Bundle.Children + shared cluster validator Wire ValidateCluster into all entry points Umbrella Kustomization spec generation Umbrella layout walker + integrated placement + v1alpha1 parity Add umbrella cluster demo and fix writer CR duplication Dependencies Bump github.com/fluxcd/flux2/v2 from 2.8.2 to 2.8.3 Bump github.com/cert-manager/cert-manager Bump github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring Bump github.com/cloudnative-pg/cloudnative-pg Bump github.com/fluxcd/flux2/v2 from 2.8.2 to 2.8.3 Fixed Bump Go to 1.26.2 for stdlib security fixes Switch to claude-max-proxy Nest child nodes under root node layout when ClusterName is set Testing Move gotk network tests to integration, use flux-operator in workflow test Release V0.1.0-rc.4 [0.1.0-rc.3] - 2026-03-22 Added Upgrade cert-manager v1.19.4 → v1.20.0 Add PSAViolationError with field paths Dependencies Bundle dependency updates Documentation Update lint job timeout from 10 to 15 minutes Fixed Map dependency-updates.md to docs site Increase lint job timeout to 15 minutes Resolve broken links on versioned doc subsites Disable setup-go built-in cache to prevent double-caching Resolve broken dependency-updates link on contributing guide page Release V0.1.0-rc.3 [0.1.0-rc.2] - 2026-03-20 Added Dynamic version notice on homepage CI Run all GitHub Actions on self-hosted runner Changed Reorganize examples/ with demo/ grouping and READMEs Documentation Update CI docs and changelog for isDeepEmpty fix Fixed Patch pipeline bugs and update demo examples to AppWorkload format Correct containerport typo to containerPort in example YAMLs Pin yq version and cache Hugo modules in CI Add fallback for COMMIT_SHA in gen-versions-toml.sh Install missing tools on self-hosted runner in CI workflows Run apt-get update before installing make in CI workflows Install gcc and enable CGO for race tests on self-hosted runner Remove gotestfmt from unit test step to fix self-hosted runner Install build-essential to provide C headers for CGO Strip zero-value primitives in isDeepEmpty Add nil and []any handling to isDeepEmpty Install goimports before formatting check Increase lint timeout and scope cache to modules only Gate release on pre-release tests and fix CGO_ENABLED Release V0.1.0-rc.1 V0.1.0-rc.2 [0.1.0-rc.0] - 2026-03-09 Changed Simplify Bundle.Generate() label propagation Standardize CRD builders to void returns Standardize ConfigMap and Secret builders to void returns Standardize validation strategy with void returns Dependencies Bump github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring Bump sigs.k8s.io/gateway-api from 1.4.0 to 1.5.0 Fixed Simplify SetSecretImmutable and remove unnecessary Immutable pre-allocation Testing Add golden file tests for InitContainer builders Release V0.1.0-rc.0 [0.1.0-beta.7] - 2026-03-08 Added Add public facade package Add public facade package Add public facade package Support flat root output with NodeGrouping=GroupFlat (#240) Add configurable layout presets (#263) Add NetworkPolicy and HTTPRoute builders (#242) Add PSA security context helpers (#243) Add Prometheus operator builders (#354) Add ResourceRequirements builder (#244) Add {kind}-{name}.yaml file naming pattern (#266) Set FileNamingKindName in centralized preset LayoutRules Add SourceKind field to BootstrapConfig (#254) Implement regex pattern validation in schema Add configurable kustomization mode per FluxPlacement (#265) Add Flux 2.8 remediation and wait strategy builders (#255) Promote flux-operator to primary bootstrap mode (#256) Add remediation config to ReleaseConfig (#236) Documentation Add package README Add metallb to AGENTS.md reverse mapping table Fix version mismatches and outdated references across documentation Add godoc comments to namespace builder functions Document Provider/Alert v1beta3 blocked state (#250) Document k8s.io replace directives in go.mod (#291) Fixed Add missing types.go, doc.go, tests and SetClusterIssuerCA Skip empty ACME solvers, make ACME and CA mutually exclusive Append GOPATH/bin to PATH instead of prepending in Makefile Use predefined nil error constants in metallb builders Use pkg/errors instead of fmt.Errorf in patch package Check FluxPlacement in WriteToDisk and WriteToTar (#264) Centralize error sentinels and add documentation Avoid slice mutation and validate ephemeral containers in PSA Use centralized sentinel errors and add missing Prometheus helpers Remove trailing blank line in bootstrap generator test Testing Add comprehensive tests for public facade Add tests and docs for externalsecrets facade Release V0.1.0-beta.7 [0.1.0-beta.6] - 2026-03-06 Added Add strategic merge patch support with namespace-aware target resolution Add HelmRelease targetNamespace and releaseName fields Expose valuesFrom in FluxHelm ReleaseConfig Add PostRenderer Kustomize builder helpers Add CRD lifecycle policy fields to ReleaseConfig Add chartRef support to FluxHelm generator (#267) Allow SourceRefName override in FluxHelm generator Support prune protection annotation on generated resources Add DriftDetection builder helpers for HelmRelease Add HealthChecks field to Bundle Add mise release task with dry-run trigger wrapper Promote internal/gvk to pkg/gvk Promote 7 internal K8s builders to public API Add CNPG Database CR builder Add CNPG ObjectStore CR builder Add CNPG ScheduledBackup plugin method and advanced knobs Enable gosec linter with fixes for all violations Add CNPG managed roles builder Build Add gen-versions-toml.sh for Hugo config overlay Use versioned config overlay in docs-build Rework deploy-docs for multi-version deployment Trigger versioned docs deployment on stable release Add manage-docs admin workflow Migrate golangci-lint from v1 to v2 Upgrade to Go 1.26.0 Remove accidentally committed temp file Upgrade k8s.io dependencies to v0.35.1 (Kubernetes 1.35) Update versions.yaml for k8s 1.35 upgrade Remove broken k8s-compat CI job Upgrade cert-manager to v1.19.4 and metallb to v0.15.3 Upgrade external-secrets to v1.3.2 (module path migration) Changed Replace any with typed parameters in Workflow interface Dependencies Upgrade FluxCD ecosystem to 2.8 Bump sigs.k8s.io/controller-runtime Documentation Update branch protection docs to reflect ruleset migration Add version-aware banner and header display Add pkg.go.dev reference links to package READMEs Document versioned docs system in github-workflows.md Add 2026-02-26 deep code review Add action plan, issue specs, and implementation design Clarify AGENTS.md fmt.Errorf guidance Add example_test.go for CRD builder packages Document deepCopyBundle shallow copy behavior Document Cluster getter/setter duality Add getting-started example for Cluster-to-Disk pipeline Fixed Add release notes extraction to release workflow Use tab-indented code block for YAML example in doc comment Guard unstructured fallback from list decode panics Release read lock before invoking converter callback Fix CI lint baseline and resolve pre-existing lint issues Resolve 30+ broken links on gokure.dev Use json.Marshal for HelmRelease values encoding Exclude docs/development/ from unmapped docs check Replace gh CLI with curl in pr-review workflow Address AI review findings on pr-review workflow Enforce ChartRef validation and mutual exclusivity Check remote tags before releasing Use pkg/errors and pkg/logger in getting-started example Use ToClientObject helper instead of manual pointer-to-interface Isolate TestEnsureConfigDir from host environment Harden release-trigger.sh remote detection and hint output Remove curl|sh auto-install from lint-fast target Strip v prefix from pseudo-version in versions.yaml Add deprecation markers and update DESIGN.md references Add timeline notification comments for PR review updates Replace gh CLI with curl for timeline notice comments Add Content-Type header to timeline notice API calls Replace sticky comments with regular PR comments Sync controller-runtime version to 0.23.3 in versions.yaml Align pr-review workflow with GitLab mr-review template Correct yq pipe precedence in max_dependabot filter Migrate cosign signing to v3 bundle format Bump Go to 1.26.1 (security patch) Remove output flag and use sigstore.json extension for cosign v3 Add release-notes.md to .gitignore Performance Add lint-fast Makefile target Testing Improve test coverage from 78% to 88% Pr-review Fix broken pipe and stale assessment comment Release V0.1.0-beta.1 V0.1.0-beta.2 V0.1.0-beta.3 V0.1.0-beta.4 V0.1.0-beta.5 V0.1.0-beta.6 [0.1.0-beta.0] - 2026-02-17 Added Expose HPA helpers in pkg/kubernetes Expose PDB helpers in pkg/kubernetes Add deterministic YAML serialization option Expose Deployment, Service, Ingress helpers in pkg/kubernetes Expose CronJob helpers in pkg/kubernetes Add optional Validator interface for ApplicationConfig Add unstructured fallback for unknown GVKs Implement Generate() for stack pipeline integration Add comprehensive server-set field stripping (#196) Add kure init scaffolding command (#136) Rewrite fluent builders with immutable copy semantics (#139) Migrate release automation from semver.sh to CI-driven release.sh Changed Consolidate generator registries into pkg/stack (#179) Dependencies Bump sigs.k8s.io/kustomize/api in the k8s-ecosystem group Documentation Add implementation workflow checklist Document ApplicationConfig breaking change (#178) Release V0.1.0-alpha.4 V0.1.0-beta.0 [0.1.0-alpha.3] - 2026-02-12 Documentation Add changelog entry for v0.1.0-alpha.3 Fixed Install syft in release workflow for SBOM generation Release V0.1.0-alpha.3 [0.1.0-alpha.2] - 2026-02-12 Added Deterministic kustomization.yaml ordering Add missing Bundle fields (Prune, Wait, Timeout, etc.) Clean YAML output in EncodeObjectsToYAML by default Implement createSource() for OCIRepository/GitRepository Add WriteToTar(io.Writer) for in-memory layout generation Propagate Bundle.Labels to all generated resources Rename CI job names to match branch protection check names Add Hugo documentation site with CI/CD and mise tasks Add auto-rebase workflow and rebase-check job Build Improve release workflow security and reproducibility CI Add GitLab mirror push after all checks pass Add divergence detection and tag sync to GitLab mirror Dependencies Bump github.com/google/cel-go from 0.26.1 to 0.27.0 Documentation Archive completed PLAN.md to docs/history/ Streamline README as landing page with badges Use shields.io badge for Go Report Card Restructure site around user needs with code-synced READMEs Fixed Use git-cliff for changelog generation in release script Bump Go 1.24.12 → 1.24.13, add govulncheck summary to CI Use path-based matching in findLayoutNode() Anchor GO_VERSION patterns to avoid matching HUGO_VERSION Add rollup build gate job to satisfy branch protection check Release V0.1.0-alpha.2 [0.1.0-alpha.1] - 2026-01-30 Fixed Run tests directly in release workflow instead of checking CI status [0.1.0-alpha.0] - 2026-01-30 Added Add storageclass helpers Add kustomize helpers Add flux source helpers Add helpers Add fluxcd builders package Add layout grouping and app file mode Support file- and dir-per-application layouts Implement OCI artifact separation in layout system Implement GitOps bootstrap and refactor demo system to data-driven architecture Implement comprehensive Kubernetes printer wrappers in io module Modernize error handling with custom error types and standardization Implement professional Cobra CLI with comprehensive command structure Implement comprehensive structured error handling system Add shorthand flags for common CLI options across all commands Complete kurel package system design documentation Implement package loader with hybrid error handling Implement variable resolver with cycle detection Implement patch processor with dependency resolution Implement schema generation and validation for launcher Complete Phase 4 - schema generation and validation Complete Phase 5 - output builder and local extensions Implement Phase 6 - CLI command integration Implement Phase 7 - comprehensive integration tests Implement GVK-based ApplicationConfig generator system Implement GVK-based versioning for stack module structs Implement GVK-based versioning for stack module structs Add comprehensive Makefile and CI/CD pipeline Complete KurelPackage generator implementation Enable Kubernetes schema inclusion in kurel CLI Implement fluent builder pattern Phase 1 Implement comprehensive interval validation for GitOps configurations Add Go version management tools Add fast precommit target for git hooks Add PodDisruptionBudget builder Add HorizontalPodAutoscaler builder Add combined-output mode to kure patch Add –diff option to kure patch Build Update Go to 1.24.12 to fix govulncheck vulnerabilities Automate changelog generation with git-cliff CI Add GitHub Action to refresh Go proxy on main branch commits Enforce Go version consistency in PR checks Remove Qodana workflow due to licensing issues Fix security scan action to use official gosec action Remove gosec security scan (CodeQL provides coverage) Changed Loop over YAML prints Split appsets module Export ApplyPatch Register k8s schemes on demand Move pkg/layout to pkg/stack/layout for better organization Move pkg/fluxcd to pkg/k8s/fluxcd for better organization Yaml dir naming and proper marshalling Modernize errors package to follow Go best practices Modernize patch module with clean syntax and comprehensive tooling Rename cmd/patch to cmd/kure for better CLI naming Promote patch command from subcommand to top-level command Rename .patch files to .kpatch to avoid conflicts with diff patches Eliminate circular references in Node and Bundle structures Centralize validation logic across Kubernetes builders Standardize error handling to use KureError consistently Standardize function naming conventions across codebase Multi-CLI architecture and package naming standardization Implement clean workflow interface architecture Implement launcher base types with shared libraries Implement shared internal/gvk infrastructure Apply go fmt formatting to codebase Simplify Claude settings with symlink and expanded permissions Reorganize task files with numbered prefixes Migrate to GoReleaser v2 workflow Consolidate Makefile targets and enhance dev workflow Standardize validation patterns across packages Consolidate 4 GitHub workflows into 2 (ci.yml + release.yml) Consolidate 4 GitHub workflows into 2 (ci.yml + release.yml) Improve pkg/kubernetes testability and coverage Dependencies Align k8s.io/cli-runtime to v0.33.2 to match replace directive Bump tj-actions/changed-files Bump github.com/external-secrets/external-secrets Bump sigs.k8s.io/kustomize/api from 0.20.0 to 0.21.0 Bump sigs.k8s.io/yaml from 1.5.0 to 1.6.0 Implement centralized dependency version management Document blocked dependency updates for Go 1.25 Bump github.com/spf13/cobra in the go-safe group Bump github.com/cert-manager/cert-manager Update versions.yaml for cert-manager 1.16.5 Documentation Add project README Mention base resources and expose constructor Expand kio package documentation Expand kio documentation Expand fluxcd package overview Correct Flux auto-generated kustomization details Update README to reflect current repository state Add comprehensive architectural documentation Add comprehensive architectural documentation for generators Add comprehensive UX design document and recommendations Update project status and document remaining features Add comprehensive plugin architecture design Update CLAUDE.md with current project priorities and status Update CLAUDE.md with current project status and accurate metrics Update user documentation with current project state Add detailed explanation of CEL Validation Enhancement task Add comprehensive repository review and task management system Update task statuses after upstream rebase Add comprehensive puzl-cloud/kubesdk review with kure comparison Add task #1 for CEL validation enhancement Add workflow guidelines to tasks.md Remove references to non-existent demo-internals make target Add HPA and PDB builder tasks for Crane OAM support Add Crane integration documentation Add tasks README and update task 03 status Add quickstart guide Expand README with end-to-end examples Mark high-priority tasks 1-5, 23, 24 as completed Mark task #8 as completed Add comprehensive GoDoc documentation Mark task #10 as completed Mark task #6 as completed Mark tasks #7, #9, #11, #12 as completed Fixed Separate helper group comments Add missing unstructured import to patch CLI Correct type usage in generators package tests Resolve all layout module test failures Ensure all manifest directories have kustomization.yaml for GitOps compliance Resolve test failures in launcher module Resolve CLI test output capture issues Resolve all failing tests and improve TOML patch support Correct appworkload test to match ServiceConfig structure Update demo and kure commands to use new GVK-based ApplicationWrapper Resolve intermittent test failures in cmd/demo package Resolve stdout capture synchronization in demo tests Configure golangci-lint compatibility and resolve linting issues Correct YAML structure in CI workflow Add goimports to make fmt for CI/local parity Add GOPATH/bin to PATH in lint and fmt targets Upgrade Go to 1.24.11 to resolve security vulnerabilities Make max_depth_exceeded test deterministic Fix CVE in mapstructure and add workflow permissions Resolve repo issues across docs, CI, validation, and caching Propagate –strict flag to validator in kurel validate Update K8s compatibility matrix to test supported versions Remove K8s 0.33 from CI compatibility matrix Align mise.toml Go version with CI workflows Lower coverage threshold to 70% to match current main coverage Improve dependabot wildcard pattern matching in validation Block FluxCD major version updates in dependabot Testing Check errors Add runCluster coverage Add comprehensive test coverage for all packages Add comprehensive test coverage for FluxHelm internal package Skip demo integration tests in short mode Skip demo tests when examples directory is missing Fix data race in TestMainFunction Skip max_depth_exceeded test due to resolver bugs Add integration tests for stack generation workflows Add fuzz tests for patch parser Add Kubernetes version matrix to CI Add tests to improve coverage and fix Go version Add Phase 1 coverage for simple getters/setters Add Phase 2 parsing tests, reach 70.5% coverage Add Phase 3 validation tests, reach 100% validation coverage Add Phase 4 stack domain model tests Add Phase 5 layout integrator tests Add wrapper function tests, reach 94.8% gvk coverage Add setter function tests for internal packages Add comprehensive IO table and printer tests Add comprehensive appworkload internal tests Release V0.1.0-alpha.0",
     "tags": [],
     "title": "Releases",
-    "uri": "/dev/changelog/releases/index.html"
+    "uri": "/kure/dev/changelog/releases/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e API Reference",
@@ -61,7 +61,7 @@ var relearn_searchindex = [
     "description": "Stack - Core Domain Model The stack package defines the hierarchical domain model at the heart of Kure. It provides the Cluster, Node, Bundle, and Application abstractions used to describe a complete Kubernetes deployment topology.\nOverview Kure models Kubernetes infrastructure as a four-level hierarchy:\nCluster └── Node (tree structure) └── Bundle (deployment unit) └── Application (workload) Each level maps to a concept in GitOps deployment:",
     "tags": [],
     "title": "Stack",
-    "uri": "/dev/api-reference/stack/index.html"
+    "uri": "/kure/dev/api-reference/stack/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e Guides",
@@ -69,7 +69,7 @@ var relearn_searchindex = [
     "description": "Using Kure as a Library Kure is primarily a Go library. This guide covers the basics of importing it, creating resources, and generating YAML output.\nInstallation go get github.com/go-kure/kure Creating Resources Kure provides typed builder functions for Kubernetes and FluxCD resources.\nFluxCD Resources import \"github.com/go-kure/kure/pkg/kubernetes/fluxcd\" // Create a GitRepository source repo := fluxcd.GitRepository(\u0026fluxcd.GitRepositoryConfig{ Name: \"my-repo\", Namespace: \"flux-system\", URL: \"https://github.com/org/repo\", Branch: \"main\", Interval: \"5m\", }) // Create a Kustomization that references the source ks := fluxcd.Kustomization(\u0026fluxcd.KustomizationConfig{ Name: \"my-app\", Namespace: \"flux-system\", Path: \"./clusters/production\", Interval: \"10m\", Prune: true, SourceRef: kustv1.CrossNamespaceSourceReference{ Kind: \"GitRepository\", Name: \"my-repo\", }, }) See the FluxCD Builders reference for all available resource types.",
     "tags": [],
     "title": "Using Kure as a Library",
-    "uri": "/dev/guides/library-usage/index.html"
+    "uri": "/kure/dev/guides/library-usage/index.html"
   },
   {
     "breadcrumb": "Go Kure",
@@ -77,7 +77,7 @@ var relearn_searchindex = [
     "description": "Concepts Understand the ideas behind Kure’s design.\nArchitecture - System architecture and component overview Domain Model - The Cluster, Node, Bundle, Application hierarchy Design Philosophy - Type-safe builders, no templating, GitOps-native",
     "tags": [],
     "title": "Concepts",
-    "uri": "/dev/concepts/index.html"
+    "uri": "/kure/dev/concepts/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e Concepts",
@@ -85,7 +85,7 @@ var relearn_searchindex = [
     "description": "Domain Model Kure models Kubernetes infrastructure as a four-level hierarchy. Each level maps to a concept in GitOps deployment workflows.\nThe Hierarchy Cluster └── Node (tree structure) └── Bundle (deployment unit) └── Application (workload) Cluster The root of the hierarchy, representing a target Kubernetes cluster. A cluster has a name, a tree of nodes, and GitOps configuration specifying which workflow engine to use (Flux or ArgoCD).\nNode An organizational grouping within a cluster. Nodes form a tree structure — for example, a cluster might have top-level nodes for infrastructure and applications, each with child nodes for specific concerns.",
     "tags": [],
     "title": "Domain Model",
-    "uri": "/dev/concepts/domain-model/index.html"
+    "uri": "/kure/dev/concepts/domain-model/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e API Reference",
@@ -93,7 +93,7 @@ var relearn_searchindex = [
     "description": "Flux Engine - FluxCD Workflow Implementation The fluxcd package implements the stack.Workflow interface for FluxCD, providing complete Flux resource generation from domain model definitions.\nOverview The Flux engine transforms Kure’s hierarchical domain model (Cluster, Node, Bundle, Application) into FluxCD resources (Kustomizations, source references) organized in a GitOps-ready directory structure.\nThe engine is composed of three specialized components:\nComponent Responsibility ResourceGenerator Generates Flux resources from domain objects LayoutIntegrator Integrates resources into directory structures BootstrapGenerator Creates Flux bootstrap manifests Quick Start import \"github.com/go-kure/kure/pkg/stack/fluxcd\" // Create engine with defaults engine := fluxcd.Engine() // Generate all Flux resources for a cluster objects, err := engine.GenerateFromCluster(cluster) // Or with custom configuration engine = fluxcd.EngineWithConfig( layout.KustomizationExplicit, layout.FluxSeparate, ) Engine Construction // Default engine engine := fluxcd.Engine() // Engine with specific kustomization mode engine := fluxcd.EngineWithMode(layout.KustomizationExplicit) // Engine with full configuration engine := fluxcd.EngineWithConfig(mode, placement) // Engine with custom components engine := fluxcd.NewWorkflowEngine() Resource Generation Generate Flux resources at different hierarchy levels:",
     "tags": [],
     "title": "Flux Engine",
-    "uri": "/dev/api-reference/flux-engine/index.html"
+    "uri": "/kure/dev/api-reference/flux-engine/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e Guides",
@@ -101,7 +101,7 @@ var relearn_searchindex = [
     "description": "Generating Flux Manifests This guide walks through the complete workflow for generating a GitOps repository structure with Flux resources using Kure.\nOverview The workflow has four stages:\nDefine the cluster topology using the domain model Select the Flux workflow engine Generate Flux resources and directory layout Write manifests to disk Step 1: Define the Cluster Use the fluent builder to define your cluster’s structure:\nimport \"github.com/go-kure/kure/pkg/stack\" cluster := stack.NewClusterBuilder(\"production\"). WithNode(\"infrastructure\"). WithBundle(\"cert-manager\"). WithApplication(\"cert-manager\", certManagerConfig). End(). End(). WithNode(\"applications\"). WithBundle(\"web-tier\"). WithApplication(\"frontend\", frontendConfig). WithApplication(\"api-gateway\", apiConfig). End(). End(). Build() Each bundle becomes a Flux Kustomization, and each application generates its Kubernetes manifests.",
     "tags": [],
     "title": "Generating Flux Manifests",
-    "uri": "/dev/guides/flux-workflow/index.html"
+    "uri": "/kure/dev/guides/flux-workflow/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e Examples",
@@ -109,7 +109,7 @@ var relearn_searchindex = [
     "description": "Generator Examples This directory contains examples of the GVK-based generator system for Kure.\nOverview Kure uses a Group, Version, Kind (GVK) pattern similar to Kubernetes for identifying generator types. Each generator:\nHas a unique GVK identifier Implements the ApplicationConfig interface Can generate specific types of Kubernetes resources Available Generators AppWorkload (generators.gokure.dev/v1alpha1) Creates standard Kubernetes workloads (Deployments, StatefulSets, DaemonSets) with associated resources.\nExample: appworkload.yaml This example creates:\nA Deployment with 3 replicas A LoadBalancer Service An Ingress resource Proper resource limits and volume mounts FluxHelm (generators.gokure.dev/v1alpha1) Creates Flux HelmRelease resources with their source configurations.",
     "tags": [],
     "title": "Generators",
-    "uri": "/dev/examples/generators/index.html"
+    "uri": "/kure/dev/examples/generators/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e Contributing",
@@ -117,7 +117,7 @@ var relearn_searchindex = [
     "description": "GitHub Workflows Documentation This document provides an overview of all GitHub Actions workflows used in the kure project.\nLast Updated: 2026-02-27\nWorkflow Summary Workflow File Triggers Purpose CI ci.yml push, PR, schedule, manual Comprehensive testing, linting, building, security Deploy Docs deploy-docs.yml push to main (docs paths), workflow_dispatch Multi-version docs deployment Manage Docs manage-docs.yml workflow_dispatch Remove, rebuild, or re-point doc versions Auto-Rebase auto-rebase.yml push to main Rebase all open PRs when main is updated Release release.yml version tags GoReleaser-based release with versioned docs deploy Create Release release-create.yml workflow_dispatch Pre-release test gate + tag creation PR Review pr-review.yml pull_request Two-pass AI code review via ccproxy CI Workflow File: .github/workflows/ci.yml Name: CI",
     "tags": [],
     "title": "GitHub Workflows",
-    "uri": "/dev/contributing/github-workflows/index.html"
+    "uri": "/kure/dev/contributing/github-workflows/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -125,7 +125,7 @@ var relearn_searchindex = [
     "description": "kure generate app Generate application workload manifests\nSynopsis Generate application workload manifests from configuration files.\nThis command processes application workload configuration files and generates Kubernetes manifests for deployments, services, and other application resources.\nExamples:\nGenerate from single config file kure generate app app-config.yaml\nGenerate from multiple config files kure generate app app1.yaml app2.yaml app3.yaml\nGenerate from directory kure generate app –input-dir ./apps\nGenerate to specific output file kure generate app –output-file manifests.yaml app-config.yaml",
     "tags": [],
     "title": "kure generate app",
-    "uri": "/dev/cli-reference/kure_generate_app/index.html"
+    "uri": "/kure/dev/cli-reference/kure_generate_app/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e Concepts",
@@ -133,7 +133,7 @@ var relearn_searchindex = [
     "description": "Design Philosophy Kure is built on a few core principles that guide its design and API choices.\nType-Safe Builders Over Templating Traditional Kubernetes tooling relies on string-based templating (Helm, Kustomize overlays, Jsonnet). This creates a class of errors that only surface at deploy time — typos in YAML paths, type mismatches, missing fields.\nKure uses Go’s type system instead:\n// Compile-time checked — typos and type errors are caught by the compiler ks := fluxcd.Kustomization(\u0026fluxcd.KustomizationConfig{ Name: \"my-app\", Namespace: \"flux-system\", Path: \"./clusters/production/apps\", Interval: \"10m\", Prune: true, }) If you misspell a field name, the Go compiler tells you immediately.",
     "tags": [],
     "title": "Design Philosophy",
-    "uri": "/dev/concepts/design-philosophy/index.html"
+    "uri": "/kure/dev/concepts/design-philosophy/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e API Reference",
@@ -141,7 +141,7 @@ var relearn_searchindex = [
     "description": "Generators - Application Generator System The generators package provides a type-safe system for creating Kubernetes application workloads from configuration. Generators implement the stack.ApplicationConfig interface, allowing them to be used as applications within the domain model.\nOverview Generators use the GroupVersionKind (GVK) type system to identify and instantiate application configurations. Each generator is registered in the stack package’s global registry and can be referenced by its GVK identifier.",
     "tags": [],
     "title": "Generators",
-    "uri": "/dev/api-reference/generators/index.html"
+    "uri": "/kure/dev/api-reference/generators/index.html"
   },
   {
     "breadcrumb": "Go Kure",
@@ -149,7 +149,7 @@ var relearn_searchindex = [
     "description": "Guides Step-by-step guides for common Kure workflows.\nUsing Kure as a Library - Import paths, creating resources, generating YAML Generating Flux Manifests - End-to-end cluster definition to disk Working with Generators - The GVK system and application generators Patching Resources - JSONPath patching and TOML patch format Building Kurel Packages - Creating reusable application packages",
     "tags": [],
     "title": "Guides",
-    "uri": "/dev/guides/index.html"
+    "uri": "/kure/dev/guides/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -157,7 +157,7 @@ var relearn_searchindex = [
     "description": "kure generate bootstrap Generate bootstrap configurations for GitOps tools\nSynopsis Generate bootstrap configurations for GitOps tools like Flux or ArgoCD.\nThis command processes bootstrap configuration files and generates the necessary manifests to bootstrap a GitOps workflow in a Kubernetes cluster.\nExamples:\nGenerate Flux bootstrap configuration kure generate bootstrap examples/demo/bootstrap/flux-operator.yaml\nGenerate ArgoCD bootstrap configuration kure generate bootstrap examples/demo/bootstrap/argocd.yaml\nGenerate with custom output directory kure generate bootstrap –output-dir ./bootstrap cluster.yaml\nGenerate with specific GitOps type kure generate bootstrap –gitops-type=flux –flux-mode=operator bootstrap.yaml",
     "tags": [],
     "title": "kure generate bootstrap",
-    "uri": "/dev/cli-reference/kure_generate_bootstrap/index.html"
+    "uri": "/kure/dev/cli-reference/kure_generate_bootstrap/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e Examples",
@@ -165,7 +165,7 @@ var relearn_searchindex = [
     "description": "Frigate Kurel Package This is a Kurel package for deploying Frigate , a complete and local NVR designed for Home Assistant with AI object detection.\nOverview Frigate is a complete and local NVR designed for Home Assistant with AI object detection. It uses OpenCV and Tensorflow to perform realtime object detection locally for IP cameras.\nPrerequisites Kubernetes cluster Coral USB TPU device (for hardware acceleration) Node labeled with coral-usb=true where the Coral USB is attached MQTT broker (for Home Assistant integration) Storage provisioner for persistent volumes cert-manager (for TLS certificates) Installation Basic Installation kurel build examples/kurel/frigate | kubectl apply -f - Installation with Custom Values Create a values file my-values.yaml: app: namespace: my-frigate image: tag: 0.13.0 service: loadBalancerIP: 10.0.0.100 ingress: hostname: frigate.mydomain.com storage: size: 200Gi Build and deploy: kurel build examples/kurel/frigate --values my-values.yaml | kubectl apply -f - Using Patches Apply environment-specific patches:",
     "tags": [],
     "title": "Kurel Frigate",
-    "uri": "/dev/examples/kurel-frigate/index.html"
+    "uri": "/kure/dev/examples/kurel-frigate/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e Guides",
@@ -173,7 +173,7 @@ var relearn_searchindex = [
     "description": "Working with Generators Generators provide a type-safe way to create application workloads from configuration. They implement the ApplicationConfig interface and are identified by GroupVersionKind (GVK) strings.\nGetting Started The fastest way to start a new project is with kure init:\nkure init my-cluster This creates a ready-to-use directory structure with cluster.yaml and an example application under apps/. You can then generate manifests with:\nkure generate cluster cluster.yaml See kure init --help for options like --gitops argocd.",
     "tags": [],
     "title": "Working with Generators",
-    "uri": "/dev/guides/generators/index.html"
+    "uri": "/kure/dev/guides/generators/index.html"
   },
   {
     "breadcrumb": "Go Kure",
@@ -181,7 +181,7 @@ var relearn_searchindex = [
     "description": "Examples Practical examples of using Kure to generate Kubernetes configurations.\nMounted Examples These examples include full documentation:\nPatches - Declarative patching with TOML and YAML formats Generators - Resource generation using the GVK system Kurel Frigate - Building a complete kurel package Validation - Resource validation patterns Additional Examples These examples are available in the examples/ directory on GitHub:\nApp Workloads (examples/demo/app-workloads/) - Application workload generation Bootstrap (examples/demo/bootstrap/) - Flux bootstrap configuration Clusters (examples/demo/clusters/) - Multi-cluster definitions Multi-OCI (examples/demo/multi-oci/) - Multi-source OCI deployments",
     "tags": [],
     "title": "Examples",
-    "uri": "/dev/examples/index.html"
+    "uri": "/kure/dev/examples/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -189,7 +189,7 @@ var relearn_searchindex = [
     "description": "kure generate cluster Generate cluster manifests from configuration\nSynopsis Generate complete cluster manifests with GitOps configuration.\nThis command processes cluster configuration files and generates a complete directory structure with Kubernetes manifests organized for GitOps workflows.\nExamples:\nGenerate cluster from config file kure generate cluster examples/demo/clusters/basic/cluster.yaml\nGenerate with custom output directory kure generate cluster –output-dir ./output cluster.yaml\nGenerate with different layout options kure generate cluster –bundle-grouping=nested –flux-placement=separate cluster.yaml\nkure generate cluster [flags] CONFIG_FILE Options -a, --application-grouping string application grouping strategy (flat|nested) (default \"flat\") -b, --bundle-grouping string bundle grouping strategy (flat|nested) (default \"flat\") --flux-placement string flux placement strategy (integrated|separate) (default \"integrated\") -h, --help help for cluster -i, --input-dir string input directory for loading app configs (defaults to config file directory) --manifest-dir string manifests directory name in output (default \"clusters\") -d, --output-dir string output directory for generated manifests (default \"out\") Options inherited from parent commands -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -o, --output string output format (yaml|json|table|wide|name) (default \"yaml\") -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kure generate - Generate Kubernetes manifests",
     "tags": [],
     "title": "kure generate cluster",
-    "uri": "/dev/cli-reference/kure_generate_cluster/index.html"
+    "uri": "/kure/dev/cli-reference/kure_generate_cluster/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e API Reference",
@@ -197,7 +197,7 @@ var relearn_searchindex = [
     "description": "Layout Module The layout module is a sophisticated system for organizing and writing Kubernetes manifests to disk in directory structures that work with GitOps tools like Flux and ArgoCD.\nCore Purpose The layout module transforms Kure’s in-memory stack representation (Clusters → Nodes → Bundles → Applications) into organized directory structures with proper kustomization.yaml files that GitOps tools can consume.",
     "tags": [],
     "title": "Layout Engine",
-    "uri": "/dev/api-reference/layout/index.html"
+    "uri": "/kure/dev/api-reference/layout/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e Guides",
@@ -205,7 +205,7 @@ var relearn_searchindex = [
     "description": "Patching Resources Kure’s patch system lets you declaratively modify Kubernetes resources using JSONPath expressions. Patches are applied after resource generation, making them useful for environment-specific customization.\nWhen to Patch vs Configure Configure at generation time when you control the resource builder (set replicas, image, etc. in code) Patch after generation when you need to modify resources from external sources, or when the same base resources need different modifications per environment Patch File Formats TOML Format (.kpatch) The TOML format uses section headers to target resources:",
     "tags": [],
     "title": "Patching Resources",
-    "uri": "/dev/guides/patching/index.html"
+    "uri": "/kure/dev/guides/patching/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e Examples",
@@ -213,7 +213,7 @@ var relearn_searchindex = [
     "description": "Validation Examples This directory contains examples demonstrating Kure’s built-in validation features.\nBundle Interval Validation File: bundle-intervals.yaml\nDemonstrates proper configuration of time interval fields in Bundle resources:\nValid Examples: Recommended patterns and edge cases Invalid Examples: Common mistakes and validation errors (commented out) Error Messages: Examples of validation error output Key Validation Rules Format: Go time.Duration syntax (1s, 5m, 1h, 1h30m) Range: 1 second minimum, 24 hours maximum Fields: interval, timeout, retryInterval Best Practices Reconciliation: Use 5m to 30m for most applications Timeouts: Set 2-3x longer than expected deployment time Retry Intervals: Use 1m to 5m for faster failure recovery Production: Avoid very short intervals (\u003c1m) to reduce API load Testing Validation To test validation with these examples:",
     "tags": [],
     "title": "Validation",
-    "uri": "/dev/examples/validation/index.html"
+    "uri": "/kure/dev/examples/validation/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e Guides",
@@ -221,7 +221,7 @@ var relearn_searchindex = [
     "description": "Building Kurel Packages Kurel is the package system for creating reusable Kubernetes applications. A kurel package bundles base manifests, patches, and parameters into a self-contained unit that can be customized per deployment.\nPackage Structure my-app.kurel/ ├── parameters.yaml # Variables and package metadata ├── resources/ # Base Kubernetes manifests │ ├── deployment.yaml │ ├── service.yaml │ └── namespace.yaml ├── patches/ # Modular customization patches │ ├── 00-base.kpatch # Global settings │ ├── features/ │ │ ├── 10-monitoring.kpatch │ │ └── 10-monitoring.yaml # Patch conditions │ └── profiles/ │ ├── 10-dev.kpatch │ └── 20-prod.kpatch └── README.md Creating a Package 1. Define Parameters # parameters.yaml kurel: name: my-application version: 1.0.0 description: \"A sample application package\" app: replicas: 3 image: repository: myapp tag: v1.0.0 monitoring: enabled: false 2. Add Base Resources Place standard Kubernetes manifests in resources/. These are the starting point before patches are applied.",
     "tags": [],
     "title": "Building Kurel Packages",
-    "uri": "/dev/guides/kurel-packages/index.html"
+    "uri": "/kure/dev/guides/kurel-packages/index.html"
   },
   {
     "breadcrumb": "Go Kure",
@@ -229,7 +229,7 @@ var relearn_searchindex = [
     "description": "CLI Reference Kure provides two command-line tools.\nkure The main CLI for Kubernetes resource generation.\nkure [command] [flags] Commands Command Description generate Generate Kubernetes resources from configuration patch Apply patches to existing manifests validate Validate resource configurations config Manage kure configuration version Print version information completion Generate shell completion scripts kurel The package system CLI for building and managing reusable application packages.\nkurel [command] [flags] Commands Command Description build Build Kubernetes manifests from a kurel package validate Validate kurel package structure and configuration info Show package information schema Schema generation and validation commands config Manage kurel configuration version Print version information completion Generate shell completion scripts kurel build kurel build \u003cpackage\u003e [flags] Flag Description -o, --output Output path (default: stdout) --values Values file for parameter overrides -p, --patch Enable specific patches --format Output format: yaml, json (default: yaml) --kind Filter by resource kind --name Filter by resource name --add-label Add labels to all resources kurel validate kurel validate \u003cpackage\u003e [flags] Flag Description --values Values file for validation --schema Custom schema file --json Output validation results as JSON kurel info kurel info \u003cpackage\u003e [flags] Flag Description -o, --output Output format: text, yaml, json (default: text) --all Show all details including resource content Global Flags Both tools support:",
     "tags": [],
     "title": "CLI Reference",
-    "uri": "/dev/cli-reference/index.html"
+    "uri": "/kure/dev/cli-reference/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -237,7 +237,7 @@ var relearn_searchindex = [
     "description": "kure generate Generate Kubernetes manifests\nSynopsis Generate Kubernetes manifests from configuration files using Kure builders.\nThe generate command supports multiple subcommands for different types of resources:\ncluster: Generate complete cluster manifests with GitOps configuration app: Generate application workload manifests bootstrap: Generate bootstrap configurations for GitOps tools Options -h, --help help for generate Options inherited from parent commands -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -o, --output string output format (yaml|json|table|wide|name) (default \"yaml\") -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kure - A Go library for programmatically building Kubernetes resources kure generate app - Generate application workload manifests kure generate bootstrap - Generate bootstrap configurations for GitOps tools kure generate cluster - Generate cluster manifests from configuration",
     "tags": [],
     "title": "kure generate",
-    "uri": "/dev/cli-reference/kure_generate/index.html"
+    "uri": "/kure/dev/cli-reference/kure_generate/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e API Reference",
@@ -245,7 +245,7 @@ var relearn_searchindex = [
     "description": "Launcher - Kubernetes Resources Launcher This package provides the core functionality for Kurel, the Kubernetes Resources Launcher CLI tool.\nKurel is a package system for creating reusable, customizable Kubernetes applications without the complexity of templating engines. It uses a declarative patch-based approach to customize base Kubernetes manifests, making it perfect for GitOps workflows.\n✨ Key Features 📦 Package-based - Encapsulate applications in reusable .kurel packages 🎯 No Templating - Use patches instead of complex template syntax 🔧 Declarative Customization - Simple parameter-driven configuration 🚀 GitOps Native - Generate clean Kubernetes manifests for Flux/ArgoCD 📊 Schema Validation - Auto-generated schemas with Kubernetes API integration 🏗️ Multi-Phase Deployment - Support for ordered deployment phases 🌐 Multi-Namespace - Deploy across multiple namespaces seamlessly 🎨 User Extensions - Extend packages without modifying originals 🚀 Quick Start Installing a Package # Download a kurel package (example) git clone https://github.com/example/prometheus-operator.kurel # Validate the package kurel validate prometheus-operator.kurel/ # Customize with your parameters cat \u003e my-values.yaml \u003c\u003c EOF monitoring: enabled: true retention: 7d persistence: enabled: true size: 50Gi resources: requests: cpu: 200m memory: 512Mi EOF # Generate manifests kurel build prometheus-operator.kurel/ \\ --values my-values.yaml \\ --output ./manifests/ Using with GitOps # Generated structure is GitOps-ready ls manifests/ # pre-install/ - CRDs, namespaces, RBAC # main/ - Main application (depends on pre-install) # post-install/ - Monitoring, backups (depends on main) # Each phase includes kustomization.yaml with proper dependencies cat manifests/main/kustomization.yaml # apiVersion: kustomize.config.k8s.io/v1beta1 # kind: Kustomization # dependsOn: # - name: prometheus-pre-install # resources: [...] 📁 Package Structure A kurel package is a directory with this structure:",
     "tags": [],
     "title": "Launcher",
-    "uri": "/dev/api-reference/launcher/index.html"
+    "uri": "/kure/dev/api-reference/launcher/index.html"
   },
   {
     "breadcrumb": "Go Kure",
@@ -253,7 +253,7 @@ var relearn_searchindex = [
     "description": "API Reference Kure’s public API is organized into focused packages. Each package README below is auto-synced from the source code.\nFor full Go API documentation, see pkg.go.dev/github.com/go-kure/kure .\nCore Domain Package Description Reference Stack Cluster, Node, Bundle, Application domain model pkg.go.dev Flux Engine FluxCD workflow implementation pkg.go.dev Generators Application generator system (GVK) pkg.go.dev Layout Engine Manifest directory organization pkg.go.dev Package System Package Description Reference Launcher Kurel package loading, building, validation pkg.go.dev Resource Operations Package Description Reference Patch JSONPath-based declarative patching pkg.go.dev IO YAML/JSON serialization and resource printing pkg.go.dev Kubernetes Builders Core K8s resource constructors (GVK, HPA, PDB) pkg.go.dev FluxCD Builders Low-level Flux resource constructors pkg.go.dev Prometheus Builders Prometheus Operator CRD constructors (ServiceMonitor, PodMonitor, PrometheusRule) pkg.go.dev Utilities Package Description Reference Errors Structured error types pkg.go.dev CLI Utilities Factory, IOStreams, Printer pkg.go.dev Logger Structured logging pkg.go.dev Compatibility Compatibility Matrix - Supported Kubernetes and dependency versions ArgoCD ArgoCD support exists at pkg/stack/argocd/ but is not yet production-ready. It is not featured in guides or examples. The Flux workflow is the primary supported GitOps integration.",
     "tags": [],
     "title": "API Reference",
-    "uri": "/dev/api-reference/index.html"
+    "uri": "/kure/dev/api-reference/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -261,7 +261,7 @@ var relearn_searchindex = [
     "description": "kure init Scaffold a new kure project\nSynopsis Scaffold a new kure project with cluster configuration and example application templates.\nCreates a directory structure ready for use with “kure generate cluster”: cluster.yaml - Cluster configuration apps/ - Application definitions infra/ - Infrastructure definitions\nExamples:\nScaffold in current directory using directory name as project name kure init\nScaffold with explicit project name kure init my-cluster\nScaffold for ArgoCD kure init my-cluster –gitops argocd",
     "tags": [],
     "title": "kure init",
-    "uri": "/dev/cli-reference/kure_init/index.html"
+    "uri": "/kure/dev/cli-reference/kure_init/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e API Reference",
@@ -269,7 +269,7 @@ var relearn_searchindex = [
     "description": "Patch - Declarative Resource Patching The patch package provides a JSONPath-based system for declaratively modifying Kubernetes resources. It supports both TOML and YAML patch file formats with structure-preserving modifications and variable substitution.\nOverview Patches allow you to modify Kubernetes manifests without rewriting them. The system uses JSONPath expressions to target specific fields and applies changes while preserving the original YAML structure (comments, ordering, formatting).",
     "tags": [],
     "title": "Patch",
-    "uri": "/dev/api-reference/patch/index.html"
+    "uri": "/kure/dev/api-reference/patch/index.html"
   },
   {
     "breadcrumb": "Go Kure",
@@ -277,7 +277,7 @@ var relearn_searchindex = [
     "description": "Changelog Track changes across Kure releases.\nReleases - Version history and release notes",
     "tags": [],
     "title": "Changelog",
-    "uri": "/dev/changelog/index.html"
+    "uri": "/kure/dev/changelog/index.html"
   },
   {
     "breadcrumb": "Go Kure",
@@ -285,7 +285,7 @@ var relearn_searchindex = [
     "description": "Contributing Resources for contributing to Kure.\nDevelopment Guide - Setup, testing, code quality, and CI/CD workflows GitHub Workflows - CI/CD pipeline documentation Quick Start # Clone the repository git clone https://github.com/go-kure/kure.git cd kure # Install tools make tools # Run checks make check # Run full pre-commit validation make precommit Branch Workflow main is protected. Create a feature branch:\ngit checkout -b feat/my-feature main # make changes git push -u origin feat/my-feature gh pr create Required CI checks: lint, test, build.",
     "tags": [],
     "title": "Contributing",
-    "uri": "/dev/contributing/index.html"
+    "uri": "/kure/dev/contributing/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e API Reference",
@@ -293,7 +293,7 @@ var relearn_searchindex = [
     "description": "IO - YAML Serialization and Resource Printing The io package provides utilities for parsing, serializing, and printing Kubernetes resources. It supports multiple output formats including YAML, JSON, and kubectl-compatible table views.\nOverview This package handles the I/O boundary of Kure: reading Kubernetes manifests from files, serializing resources to YAML/JSON, and printing resources in human-readable formats. It integrates with Kure’s registered scheme for type-aware parsing.",
     "tags": [],
     "title": "IO",
-    "uri": "/dev/api-reference/io/index.html"
+    "uri": "/kure/dev/api-reference/io/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -301,7 +301,7 @@ var relearn_searchindex = [
     "description": "kure patch Apply patches to Kubernetes manifests\nSynopsis Apply patches to existing Kubernetes manifests using Kure’s patch system.\nThis command applies declarative patches to base YAML files containing Kubernetes resources, supporting JSONPath-based modifications.\nExamples:\nApply single patch to base file kure patch base.yaml patch.yaml\nApply multiple patches kure patch base.yaml patch1.yaml patch2.yaml patch3.yaml\nApply all patches from directory kure patch –patch-dir ./patches base.yaml\nValidate patches without applying kure patch –validate-only base.yaml patch.yaml",
     "tags": [],
     "title": "kure patch",
-    "uri": "/dev/cli-reference/kure_patch/index.html"
+    "uri": "/kure/dev/cli-reference/kure_patch/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e API Reference",
@@ -309,7 +309,7 @@ var relearn_searchindex = [
     "description": "Errors - Structured Error Handling The errors package provides structured error types with contextual information for Kubernetes resource operations. All Kure packages use this instead of fmt.Errorf.\nOverview Errors in Kure carry context: the type of error, what resource was affected, suggestions for fixing the problem, and the original cause. This makes debugging easier and enables programmatic error handling.",
     "tags": [],
     "title": "Errors",
-    "uri": "/dev/api-reference/errors/index.html"
+    "uri": "/kure/dev/api-reference/errors/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -317,7 +317,7 @@ var relearn_searchindex = [
     "description": "kure version Print version information\nSynopsis Print the version number of kure\nkure version [flags] Options -h, --help help for version Options inherited from parent commands -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -o, --output string output format (yaml|json|table|wide|name) (default \"yaml\") -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kure - A Go library for programmatically building Kubernetes resources",
     "tags": [],
     "title": "kure version",
-    "uri": "/dev/cli-reference/kure_version/index.html"
+    "uri": "/kure/dev/cli-reference/kure_version/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e API Reference",
@@ -325,7 +325,7 @@ var relearn_searchindex = [
     "description": "CLI - Command-Line Interface Utilities The cli package provides foundational components for Kure’s CLI tools (kure and kurel). It implements the Factory pattern for dependency injection, I/O stream abstraction, and output formatting.\nOverview This package is used internally by the pkg/cmd/ packages to build CLI commands. It provides a clean separation between command logic and I/O handling.\nKey Components Factory Dependency injection container for CLI commands. Provides access to global options, I/O streams, and configuration.",
     "tags": [],
     "title": "CLI Utilities",
-    "uri": "/dev/api-reference/cli/index.html"
+    "uri": "/kure/dev/api-reference/cli/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -333,7 +333,7 @@ var relearn_searchindex = [
     "description": "kure A Go library for programmatically building Kubernetes resources\nSynopsis Kure is a Go library for programmatically building Kubernetes resources used by GitOps tools.\nThe library emphasizes strongly-typed object construction over templating engines, supporting both Flux and ArgoCD workflows for GitOps-native resource management.\nOptions -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -h, --help help for kure -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -o, --output string output format (yaml|json|table|wide|name) (default \"yaml\") -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kure completion - Generate completion script kure generate - Generate Kubernetes manifests kure init - Scaffold a new kure project kure patch - Apply patches to Kubernetes manifests kure version - Print version information",
     "tags": [],
     "title": "kure",
-    "uri": "/dev/cli-reference/kure/index.html"
+    "uri": "/kure/dev/cli-reference/kure/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e API Reference",
@@ -341,7 +341,7 @@ var relearn_searchindex = [
     "description": "Kubernetes Builders - Core Resource Helpers The kubernetes package provides GVK utilities, scheme registration, and strongly-typed builder functions for core Kubernetes resources.\nOverview This package exposes helpers that other Kure packages (and external consumers such as Crane) use to construct and inspect Kubernetes objects without dealing with low-level struct details.\nImport import \"github.com/go-kure/kure/pkg/kubernetes\" GVK Utilities // Resolve the GVK of any registered runtime.Object gvk, err := kubernetes.GetGroupVersionKind(myDeployment) // Check if a GVK is in an allow list ok := kubernetes.IsGVKAllowed(gvk, allowedGVKs) Scheme Registration // Lazily registers all supported API groups (core K8s, FluxCD, cert-manager, etc.) err := kubernetes.RegisterSchemes() HPA Builders // Create a HorizontalPodAutoscaler hpa := kubernetes.CreateHorizontalPodAutoscaler(\"my-app\", \"default\") // Set the scale target err := kubernetes.SetHPAScaleTargetRef(hpa, \"apps/v1\", \"Deployment\", \"my-app\") // Set replica bounds err = kubernetes.SetHPAMinMaxReplicas(hpa, 2, 10) // Add CPU and memory metrics err = kubernetes.AddHPACPUMetric(hpa, 80) err = kubernetes.AddHPAMemoryMetric(hpa, 70) // Set scaling behavior window := int32(300) err = kubernetes.SetHPABehavior(hpa, \u0026autoscalingv2.HorizontalPodAutoscalerBehavior{ ScaleDown: \u0026autoscalingv2.HPAScalingRules{ StabilizationWindowSeconds: \u0026window, }, }) // Update metadata err = kubernetes.SetHPALabels(hpa, map[string]string{\"env\": \"prod\"}) err = kubernetes.SetHPAAnnotations(hpa, map[string]string{\"owner\": \"platform\"}) PDB Builders // Create a PodDisruptionBudget pdb := kubernetes.CreatePodDisruptionBudget(\"my-app\", \"default\") // Set disruption budget (MinAvailable and MaxUnavailable are mutually exclusive) err := kubernetes.SetPDBMinAvailable(pdb, intstr.FromInt32(2)) // or: err = kubernetes.SetPDBMaxUnavailable(pdb, intstr.FromString(\"25%\")) // Set the label selector err = kubernetes.SetPDBSelector(pdb, \u0026metav1.LabelSelector{ MatchLabels: map[string]string{\"app\": \"my-app\"}, }) // Update metadata err = kubernetes.SetPDBLabels(pdb, map[string]string{\"env\": \"prod\"}) err = kubernetes.SetPDBAnnotations(pdb, map[string]string{\"owner\": \"platform\"}) Deployment Builders // Create a Deployment dep := kubernetes.CreateDeployment(\"my-app\", \"default\") // Add a container container := \u0026corev1.Container{Name: \"app\", Image: \"nginx:1.25\"} err := kubernetes.AddDeploymentContainer(dep, container) // Set replicas and strategy err = kubernetes.SetDeploymentReplicas(dep, 3) err = kubernetes.SetDeploymentStrategy(dep, appsv1.DeploymentStrategy{ Type: appsv1.RollingUpdateDeploymentStrategyType, }) // Configure pod template err = kubernetes.SetDeploymentServiceAccountName(dep, \"my-sa\") err = kubernetes.SetDeploymentNodeSelector(dep, map[string]string{\"role\": \"web\"}) err = kubernetes.AddDeploymentToleration(dep, \u0026corev1.Toleration{Key: \"dedicated\", Value: \"web\"}) CronJob Builders // Create a CronJob cj := kubernetes.CreateCronJob(\"my-job\", \"default\", \"*/5 * * * *\") // Add a container container := \u0026corev1.Container{Name: \"worker\", Image: \"busybox:1.36\"} err := kubernetes.AddCronJobContainer(cj, container) // Configure schedule and policies err = kubernetes.SetCronJobConcurrencyPolicy(cj, batchv1.ForbidConcurrent) err = kubernetes.SetCronJobSuccessfulJobsHistoryLimit(cj, 3) err = kubernetes.SetCronJobFailedJobsHistoryLimit(cj, 1) // Configure pod template err = kubernetes.SetCronJobServiceAccountName(cj, \"my-sa\") err = kubernetes.SetCronJobNodeSelector(cj, map[string]string{\"role\": \"batch\"}) err = kubernetes.AddCronJobToleration(cj, \u0026corev1.Toleration{Key: \"dedicated\", Value: \"batch\"}) Service Builders // Create a Service svc := kubernetes.CreateService(\"my-app\", \"default\") // Configure the service err := kubernetes.SetServiceSelector(svc, map[string]string{\"app\": \"my-app\"}) err = kubernetes.AddServicePort(svc, corev1.ServicePort{ Name: \"http\", Port: 80, TargetPort: intstr.FromInt32(8080), }) err = kubernetes.SetServiceType(svc, corev1.ServiceTypeLoadBalancer) // Update metadata err = kubernetes.AddServiceLabel(svc, \"env\", \"prod\") err = kubernetes.AddServiceAnnotation(svc, \"external-dns.alpha.kubernetes.io/hostname\", \"app.example.com\") Ingress Builders // Create an Ingress ing := kubernetes.CreateIngress(\"my-app\", \"default\", \"nginx\") // Build a rule with paths rule := kubernetes.CreateIngressRule(\"app.example.com\") pt := netv1.PathTypePrefix path := kubernetes.CreateIngressPath(\"/\", \u0026pt, \"my-app\", \"http\") kubernetes.AddIngressRulePath(rule, path) err := kubernetes.AddIngressRule(ing, rule) // Add TLS err = kubernetes.AddIngressTLS(ing, netv1.IngressTLS{ Hosts: []string{\"app.example.com\"}, SecretName: \"my-app-tls\", }) NetworkPolicy Builders // Create a NetworkPolicy np := kubernetes.CreateNetworkPolicy(\"my-app\", \"default\") // Set pod selector and policy types err := kubernetes.SetNetworkPolicyPodSelector(np, metav1.LabelSelector{ MatchLabels: map[string]string{\"app\": \"my-app\"}, }) err = kubernetes.AddNetworkPolicyPolicyType(np, netv1.PolicyTypeIngress) err = kubernetes.AddNetworkPolicyPolicyType(np, netv1.PolicyTypeEgress) // Build an ingress rule with peers and ports ingressRule := netv1.NetworkPolicyIngressRule{} kubernetes.AddNetworkPolicyIngressPeer(\u0026ingressRule, netv1.NetworkPolicyPeer{ PodSelector: \u0026metav1.LabelSelector{MatchLabels: map[string]string{\"app\": \"frontend\"}}, }) kubernetes.AddNetworkPolicyIngressPort(\u0026ingressRule, netv1.NetworkPolicyPort{}) err = kubernetes.AddNetworkPolicyIngressRule(np, ingressRule) HTTPRoute Builders // Create an HTTPRoute route := kubernetes.CreateHTTPRoute(\"my-app\", \"default\") // Add parent gateway reference and hostname err := kubernetes.AddHTTPRouteParentRef(route, gwapiv1.ParentReference{Name: \"my-gateway\"}) err = kubernetes.AddHTTPRouteHostname(route, \"app.example.com\") // Build a rule with match, filter, and backend ref rule := gwapiv1.HTTPRouteRule{} pathType := gwapiv1.PathMatchPathPrefix kubernetes.AddHTTPRouteRuleMatch(\u0026rule, gwapiv1.HTTPRouteMatch{ Path: \u0026gwapiv1.HTTPPathMatch{Type: \u0026pathType, Value: ptrStr(\"/api\")}, }) kubernetes.AddHTTPRouteRuleFilter(\u0026rule, gwapiv1.HTTPRouteFilter{ Type: gwapiv1.HTTPRouteFilterRequestHeaderModifier, RequestHeaderModifier: \u0026gwapiv1.HTTPHeaderFilter{ Set: []gwapiv1.HTTPHeader{{Name: \"X-Custom\", Value: \"val\"}}, }, }) kubernetes.AddHTTPRouteRuleBackendRef(\u0026rule, gwapiv1.HTTPBackendRef{ BackendRef: gwapiv1.BackendRef{ BackendObjectReference: gwapiv1.BackendObjectReference{Name: \"my-svc\"}, }, }) err = kubernetes.AddHTTPRouteRule(route, rule) PSA Security Context Helpers Helpers for Pod Security Admission (PSA) compliance at Restricted, Baseline, and Privileged levels.",
     "tags": [],
     "title": "Kubernetes Builders",
-    "uri": "/dev/api-reference/kubernetes-builders/index.html"
+    "uri": "/kure/dev/api-reference/kubernetes-builders/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e API Reference",
@@ -349,7 +349,7 @@ var relearn_searchindex = [
     "description": "FluxCD Builders - Flux Resource Constructors The fluxcd package provides strongly-typed constructor functions for creating FluxCD Kubernetes resources. These are the low-level building blocks used by Kure’s higher-level stack and workflow packages.\nOverview Each function takes a configuration struct and returns a fully initialized Flux custom resource. The builders handle API version and kind metadata, letting you focus on the resource specification.",
     "tags": [],
     "title": "FluxCD Builders",
-    "uri": "/dev/api-reference/fluxcd-builders/index.html"
+    "uri": "/kure/dev/api-reference/fluxcd-builders/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -357,7 +357,7 @@ var relearn_searchindex = [
     "description": "kurel build Build Kubernetes manifests from kurel package\nSynopsis Build generates Kubernetes manifests from a kurel package.\nThe build command processes the package structure, applies patches based on configuration, and outputs phase-organized manifests ready for GitOps deployment.\nkurel build \u003cpackage\u003e [flags] Options --add-label stringToString Add labels to all resources (default []) --format string Output format (yaml, json) (default \"yaml\") -h, --help help for build --kind string Filter by resource kind --name string Filter by resource name -o, --output string Output path (default: stdout) -p, --patch strings Enable specific patches --values string Values file for parameter overrides Options inherited from parent commands -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kurel - Kurel - Kubernetes Resources Launcher",
     "tags": [],
     "title": "kurel build",
-    "uri": "/dev/cli-reference/kurel_build/index.html"
+    "uri": "/kure/dev/cli-reference/kurel_build/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -365,7 +365,7 @@ var relearn_searchindex = [
     "description": "kurel completion Generate completion script\nSynopsis Generate the autocompletion script for the specified shell. See each sub-command’s help for details on how to use the generated script.\nkurel completion [bash|zsh|fish|powershell] Options -h, --help help for completion Options inherited from parent commands -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -o, --output string output format (yaml|json|table|wide|name) (default \"yaml\") -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kurel - Kurel - Kubernetes Resources Launcher",
     "tags": [],
     "title": "kurel completion",
-    "uri": "/dev/cli-reference/kurel_completion/index.html"
+    "uri": "/kure/dev/cli-reference/kurel_completion/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e API Reference",
@@ -373,7 +373,7 @@ var relearn_searchindex = [
     "description": "Logger - Logging Utilities The logger package provides structured logging for Kure. All logging in the project should use this package instead of fmt.Print or the standard log package.\nOverview The logger provides a simple interface for structured key-value logging with support for different log levels. It wraps an underlying structured logger and provides convenience functions.\nUsage import \"github.com/go-kure/kure/pkg/logger\" // Default logger log := logger.Default() // Log with context log.Info(\"loading package\", \"path\", \"/path/to/package\") log.Error(\"failed to parse\", \"error\", err, \"file\", \"config.yaml\") // No-op logger (for quiet mode) log := logger.Noop() Log Levels Level Usage Info Normal operational messages Error Error conditions Debug Detailed debugging information Warn Warning conditions Conventions Use key-value pairs for structured data: log.Info(\"msg\", \"key1\", val1, \"key2\", val2) Use logger.Noop() when verbose output is disabled Pass the logger through function parameters or options structs Use logger.Default() only at initialization points (CLI entry, tests) Related Packages All Kure packages use this logger. See the errors package for error handling patterns.",
     "tags": [],
     "title": "Logger",
-    "uri": "/dev/api-reference/logger/index.html"
+    "uri": "/kure/dev/api-reference/logger/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e API Reference",
@@ -381,7 +381,7 @@ var relearn_searchindex = [
     "description": "Kure Compatibility Matrix This document describes the versions of infrastructure tools that Kure supports.\nVersion Philosophy Kure maintains two version concepts for each dependency:\nBuild Version (current in versions.yaml): The exact library version Kure imports in go.mod Deployment Compatibility (supported_range): The range of deployed tool versions that Kure can generate YAML for Go Version Current: Go 1.26.1\nInfrastructure Dependencies Tool Build Version Deployment Compatibility Notes cert-manager 1.20.0 1.14 - 1.20 Stable v1 APIs. v1.20 deprecated ObjectReference in favor of IssuerReference (type alias). fluxcd 2.8.2 2.4 - 2.8 v1beta2 APIs removed in 2.8, DependsOn uses DependencyReference. image-automation-controller promoted to v1. All github.com/fluxcd/* packages upgraded together. flux-operator 0.40.0 0.23 - 0.40 Upgraded with FluxCD 2.8 ecosystem. metallb 0.15.3 0.14 - 0.15 Stable v1beta1 APIs, patch release prometheus-operator 0.89.0 0.75 - 0.89 Prometheus operator monitoring API types (ServiceMonitor, PodMonitor, PrometheusRule). Only the /pkg/apis/monitoring submodule is imported — not the full operator. Stable v1 APIs (monitoring.coreos.com/v1). external-secrets 0.0.0-20260213133823-31b0c7c37342 1.3 Module path changed from root to /apis submodule in v1.0 (#5494). No semver tags for apis submodule — use pseudo-versions pinned to release commits. v1.3.2+ commit: 31b0c7c3734255a92dfe5cf9e1e204de127eb24c (includes controller-runtime v0.23.1 compat) cnpg 1.28.1 1.24 - 1.28 CloudNativePG operator for PostgreSQL on Kubernetes. Cluster CR (with managed roles), Database CR (postgresql.cnpg.io/v1), ObjectStore CR (barmancloud.cnpg.io/v1), and ScheduledBackups. ObjectStore lives in a separate module (plugin-barman-cloud). cnpg-barman-cloud 0.11.0 0.9 - 0.11 Barman Cloud plugin for CNPG — provides ObjectStore CR (barmancloud.cnpg.io/v1). Versioned independently from the CNPG operator. controller-runtime 0.23.3 0.22 - 0.23 Upgraded with FluxCD 2.8 and external-secrets 1.3 migrations gateway-api 1.5.1 1.0 - 1.5 Gateway API v1 types (HTTPRoute). Used by pkg/kubernetes HTTPRoute builders. Kure generates gateway.networking.k8s.io/v1 resources (GA since v1.0). kubernetes 0.35.1 1.33 - 1.35 Go 1.26 baseline; generated YAML uses stable APIs compatible across this range Understanding the Matrix Build Version (go.mod) The version Kure imports and builds against. This is validated by CI to match versions.yaml.",
     "tags": [],
     "title": "Compatibility Matrix",
-    "uri": "/dev/api-reference/compatibility/index.html"
+    "uri": "/kure/dev/api-reference/compatibility/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -389,7 +389,7 @@ var relearn_searchindex = [
     "description": "kurel config init Initialize configuration file\nkurel config init [flags] Options -h, --help help for init Options inherited from parent commands -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -o, --output string output format (yaml|json|table|wide|name) (default \"yaml\") -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kurel config - Manage kurel configuration",
     "tags": [],
     "title": "kurel config init",
-    "uri": "/dev/cli-reference/kurel_config_init/index.html"
+    "uri": "/kure/dev/cli-reference/kurel_config_init/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -397,7 +397,7 @@ var relearn_searchindex = [
     "description": "kurel config view View current configuration\nkurel config view [flags] Options -h, --help help for view Options inherited from parent commands -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -o, --output string output format (yaml|json|table|wide|name) (default \"yaml\") -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kurel config - Manage kurel configuration",
     "tags": [],
     "title": "kurel config view",
-    "uri": "/dev/cli-reference/kurel_config_view/index.html"
+    "uri": "/kure/dev/cli-reference/kurel_config_view/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -405,7 +405,7 @@ var relearn_searchindex = [
     "description": "kurel config Manage kurel configuration\nSynopsis View and modify kurel configuration settings\nOptions -h, --help help for config Options inherited from parent commands -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -o, --output string output format (yaml|json|table|wide|name) (default \"yaml\") -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kurel - Kurel - Kubernetes Resources Launcher kurel config init - Initialize configuration file kurel config view - View current configuration",
     "tags": [],
     "title": "kurel config",
-    "uri": "/dev/cli-reference/kurel_config/index.html"
+    "uri": "/kure/dev/cli-reference/kurel_config/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -413,7 +413,7 @@ var relearn_searchindex = [
     "description": "kurel info Show package information\nSynopsis Info displays detailed information about a kurel package including metadata, available patches, configurable parameters, and deployment phases.\nkurel info \u003cpackage\u003e [flags] Options --all Show all details including resource content -h, --help help for info -o, --output string Output format (text, yaml, json) (default \"text\") Options inherited from parent commands -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kurel - Kurel - Kubernetes Resources Launcher",
     "tags": [],
     "title": "kurel info",
-    "uri": "/dev/cli-reference/kurel_info/index.html"
+    "uri": "/kure/dev/cli-reference/kurel_info/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -421,7 +421,7 @@ var relearn_searchindex = [
     "description": "kurel schema generate Generate JSON schema for package parameters\nkurel schema generate \u003cpackage\u003e [flags] Options -h, --help help for generate --k8s Include Kubernetes resource schemas -o, --output string Output path (default: stdout) --pretty Pretty print JSON output (default true) Options inherited from parent commands -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kurel schema - Schema generation and validation commands",
     "tags": [],
     "title": "kurel schema generate",
-    "uri": "/dev/cli-reference/kurel_schema_generate/index.html"
+    "uri": "/kure/dev/cli-reference/kurel_schema_generate/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -429,7 +429,7 @@ var relearn_searchindex = [
     "description": "kurel schema Schema generation and validation commands\nSynopsis Manage JSON schemas for kurel package validation\nOptions -h, --help help for schema Options inherited from parent commands -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -o, --output string output format (yaml|json|table|wide|name) (default \"yaml\") -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kurel - Kurel - Kubernetes Resources Launcher kurel schema generate - Generate JSON schema for package parameters",
     "tags": [],
     "title": "kurel schema",
-    "uri": "/dev/cli-reference/kurel_schema/index.html"
+    "uri": "/kure/dev/cli-reference/kurel_schema/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -437,7 +437,7 @@ var relearn_searchindex = [
     "description": "kurel validate Validate kurel package structure and configuration\nSynopsis Validate checks the kurel package for structural correctness, parameter validation, and patch consistency.\nkurel validate \u003cpackage\u003e [flags] Options -h, --help help for validate --json Output validation results as JSON --schema string Custom schema file --values string Values file for validation Options inherited from parent commands -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -o, --output string output format (yaml|json|table|wide|name) (default \"yaml\") -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kurel - Kurel - Kubernetes Resources Launcher",
     "tags": [],
     "title": "kurel validate",
-    "uri": "/dev/cli-reference/kurel_validate/index.html"
+    "uri": "/kure/dev/cli-reference/kurel_validate/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -445,7 +445,7 @@ var relearn_searchindex = [
     "description": "kurel version Print version information\nSynopsis Print the version number of kurel\nkurel version [flags] Options -h, --help help for version Options inherited from parent commands -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -o, --output string output format (yaml|json|table|wide|name) (default \"yaml\") -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kurel - Kurel - Kubernetes Resources Launcher",
     "tags": [],
     "title": "kurel version",
-    "uri": "/dev/cli-reference/kurel_version/index.html"
+    "uri": "/kure/dev/cli-reference/kurel_version/index.html"
   },
   {
     "breadcrumb": "Go Kure \u003e CLI Reference",
@@ -453,7 +453,7 @@ var relearn_searchindex = [
     "description": "kurel Kurel - Kubernetes Resources Launcher\nSynopsis Kurel is a CLI tool for launching and managing Kubernetes resources. It extends the Kure library with deployment and resource management capabilities.\nKurel uses a package-based approach to create reusable, customizable Kubernetes applications without the complexity of templating engines.\nOptions -c, --config string config file (default is $HOME/.kure.yaml) --debug debug output --dry-run print generated resources without writing to files -h, --help help for kurel -n, --namespace string target namespace for operations --no-headers don't print headers (for table output) -o, --output string output format (yaml|json|table|wide|name) (default \"yaml\") -f, --output-file string write output to file instead of stdout --show-labels show resource labels in table output --strict treat warnings as errors -v, --verbose verbose output --wide use wide output format SEE ALSO kurel build - Build Kubernetes manifests from kurel package kurel completion - Generate completion script kurel config - Manage kurel configuration kurel info - Show package information kurel schema - Schema generation and validation commands kurel validate - Validate kurel package structure and configuration kurel version - Print version information",
     "tags": [],
     "title": "kurel",
-    "uri": "/dev/cli-reference/kurel/index.html"
+    "uri": "/kure/dev/cli-reference/kurel/index.html"
   },
   {
     "breadcrumb": "Go Kure",
@@ -461,15 +461,15 @@ var relearn_searchindex = [
     "description": "",
     "tags": [],
     "title": "Categories",
-    "uri": "/dev/categories/index.html"
+    "uri": "/kure/dev/categories/index.html"
   },
   {
     "breadcrumb": "",
-    "content": "Kure: Type-Safe Kubernetes Resource Generation Warning Work in Progress: Kure is currently under active development (v0.1.0-rc.11 @ 5c12ec0). APIs and features are subject to change.\nKure is a Go library for programmatically building Kubernetes resources, designed for GitOps workflows with FluxCD. Instead of complex templating engines, Kure provides strongly-typed, composable resource generation in native Go.\nWhy Kure? Building Kubernetes manifests for GitOps can be challenging:\nYAML templating is error-prone and hard to maintain Helm charts add complexity with their templating language Raw manifests lead to duplication and inconsistency Kure solves these problems by providing:\nType-safe builders that catch errors at compile time Composable patterns for reusable resource generation Native Go code instead of template syntax GitOps-ready output for Flux Quick Example import ( \"os\" \"github.com/go-kure/kure/pkg/kubernetes/fluxcd\" \"github.com/go-kure/kure/pkg/io\" kustv1 \"github.com/fluxcd/kustomize-controller/api/v1\" ) // Create a Flux Kustomization ks := fluxcd.Kustomization(\u0026fluxcd.KustomizationConfig{ Name: \"my-app\", Namespace: \"default\", Path: \"./manifests\", Interval: \"5m\", SourceRef: kustv1.CrossNamespaceSourceReference{ Kind: \"GitRepository\", Name: \"my-repo\", }, }) // Output as YAML io.Marshal(os.Stdout, ks) Features Comprehensive Resource Support: Core Kubernetes, FluxCD, cert-manager, External Secrets, MetalLB Hierarchical Organization: Cluster, Node, Bundle, Application structure for clean GitOps layouts Declarative Patching: JSONPath-based patching system for resource customization Kurel Package System: Reusable application packages with patch-based customization ArgoCD support is planned but not yet production-ready.\nLearn More Getting Started - Installation and quickstart guide Concepts - Architecture and design philosophy Guides - How-to guides for common workflows Examples - See Kure in action API Reference - Package documentation Get Involved Kure is open source and welcomes contributions!\nGitHub Repository Issue Tracker Discussions",
-    "description": "Kure: Type-Safe Kubernetes Resource Generation Warning Work in Progress: Kure is currently under active development (v0.1.0-rc.11 @ 5c12ec0). APIs and features are subject to change.\nKure is a Go library for programmatically building Kubernetes resources, designed for GitOps workflows with FluxCD. Instead of complex templating engines, Kure provides strongly-typed, composable resource generation in native Go.\nWhy Kure? Building Kubernetes manifests for GitOps can be challenging:",
+    "content": "Kure: Type-Safe Kubernetes Resource Generation Warning Work in Progress: Kure is currently under active development (v0.1.0-rc.11 @ 431df93). APIs and features are subject to change.\nKure is a Go library for programmatically building Kubernetes resources, designed for GitOps workflows with FluxCD. Instead of complex templating engines, Kure provides strongly-typed, composable resource generation in native Go.\nWhy Kure? Building Kubernetes manifests for GitOps can be challenging:\nYAML templating is error-prone and hard to maintain Helm charts add complexity with their templating language Raw manifests lead to duplication and inconsistency Kure solves these problems by providing:\nType-safe builders that catch errors at compile time Composable patterns for reusable resource generation Native Go code instead of template syntax GitOps-ready output for Flux Quick Example import ( \"os\" \"github.com/go-kure/kure/pkg/kubernetes/fluxcd\" \"github.com/go-kure/kure/pkg/io\" kustv1 \"github.com/fluxcd/kustomize-controller/api/v1\" ) // Create a Flux Kustomization ks := fluxcd.Kustomization(\u0026fluxcd.KustomizationConfig{ Name: \"my-app\", Namespace: \"default\", Path: \"./manifests\", Interval: \"5m\", SourceRef: kustv1.CrossNamespaceSourceReference{ Kind: \"GitRepository\", Name: \"my-repo\", }, }) // Output as YAML io.Marshal(os.Stdout, ks) Features Comprehensive Resource Support: Core Kubernetes, FluxCD, cert-manager, External Secrets, MetalLB Hierarchical Organization: Cluster, Node, Bundle, Application structure for clean GitOps layouts Declarative Patching: JSONPath-based patching system for resource customization Kurel Package System: Reusable application packages with patch-based customization ArgoCD support is planned but not yet production-ready.\nLearn More Getting Started - Installation and quickstart guide Concepts - Architecture and design philosophy Guides - How-to guides for common workflows Examples - See Kure in action API Reference - Package documentation Get Involved Kure is open source and welcomes contributions!\nGitHub Repository Issue Tracker Discussions",
+    "description": "Kure: Type-Safe Kubernetes Resource Generation Warning Work in Progress: Kure is currently under active development (v0.1.0-rc.11 @ 431df93). APIs and features are subject to change.\nKure is a Go library for programmatically building Kubernetes resources, designed for GitOps workflows with FluxCD. Instead of complex templating engines, Kure provides strongly-typed, composable resource generation in native Go.\nWhy Kure? Building Kubernetes manifests for GitOps can be challenging:",
     "tags": [],
     "title": "Go Kure",
-    "uri": "/dev/index.html"
+    "uri": "/kure/dev/index.html"
   },
   {
     "breadcrumb": "Go Kure",
@@ -477,6 +477,6 @@ var relearn_searchindex = [
     "description": "",
     "tags": [],
     "title": "Tags",
-    "uri": "/dev/tags/index.html"
+    "uri": "/kure/dev/tags/index.html"
   }
 ]
