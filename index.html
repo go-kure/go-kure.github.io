@@ -2,10 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Go Kure</title>
-  <meta http-equiv="refresh" content="0; url=/kure/dev/">
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      max-width: 46rem; margin: 0 auto; padding: 3rem 1.25rem; line-height: 1.55;
+    }
+    header { margin-bottom: 2rem; }
+    h1 { margin: 0 0 .25rem; font-size: 2rem; }
+    .tagline { color: #666; margin: 0; }
+    .note { color: #888; font-size: .9rem; margin-top: .5rem; }
+    .projects { display: grid; gap: 1rem; margin: 2rem 0; }
+    a.card {
+      display: block; padding: 1.1rem 1.25rem; border: 1px solid #8884; border-radius: 10px;
+      text-decoration: none; color: inherit;
+    }
+    a.card:hover { border-color: #888; }
+    a.card h2 { margin: 0 0 .25rem; font-size: 1.2rem; }
+    a.card p { margin: 0; color: #777; }
+    footer { color: #888; font-size: .9rem; margin-top: 2rem; }
+    footer a { color: inherit; }
+  </style>
 </head>
 <body>
-  <p>Go to <a href="/kure/dev/">Kure docs</a></p>
+  <header>
+    <h1>Go Kure</h1>
+    <p class="tagline">Type-safe Kubernetes tooling.</p>
+    <p class="note">Development preview — no stable release yet; documentation links point to the development docs.</p>
+  </header>
+
+  <main class="projects">
+    <a class="card" href="/kure/">
+      <h2>Kure &rarr;</h2>
+      <p>Type-safe Kubernetes resource generation — a Go library for building manifests without templating.</p>
+    </a>
+    <a class="card" href="/launcher/">
+      <h2>Launcher (kurel) &rarr;</h2>
+      <p>OAM-native package manager for Kubernetes — render GitOps-ready manifests from Application packages.</p>
+    </a>
+  </main>
+
+  <footer>
+    Source on <a href="https://github.com/go-kure">github.com/go-kure</a>.
+  </footer>
 </body>
 </html>
