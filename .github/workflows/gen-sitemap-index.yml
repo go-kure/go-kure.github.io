@@ -1,0 +1,44 @@
+name: Generate root sitemap index
+
+# Each project's deploy workflow (in the kure / launcher repos) pushes rendered
+# output into kure/<slot>/ or launcher/<slot>/ here. This job rebuilds the
+# domain-root sitemap index + robots.txt from whatever slots currently exist.
+#
+# Loop guard: the trigger only fires on changes under kure/** or launcher/**.
+# This job's own commit touches only the root sitemap.xml and robots.txt, which
+# are outside those paths, so it never retriggers itself.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'kure/**'
+      - 'launcher/**'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gen-sitemap-index
+  cancel-in-progress: false
+
+jobs:
+  gen-sitemap-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Regenerate root sitemap index + robots.txt
+        run: bash scripts/gen-sitemap-index.sh
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml robots.txt
+          if git diff --cached --quiet; then
+            echo "Root sitemap index already up to date."
+          else
+            git commit -m "chore: regenerate root sitemap-index"
+            git push
+          fi
