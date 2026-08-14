@@ -1,0 +1,32 @@
+# Dependabot configuration
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+#
+# This repository ships rendered site content plus one shell script — there is no
+# package manifest of any kind. The only ecosystem is the GitHub Actions used by
+# .github/workflows/, which must stay pinned to full commit SHAs (the org enforces
+# actions.sha_pinning_required) and therefore need Dependabot to bump them.
+#
+# No `labels:` block on purpose: this repository still carries only GitHub's nine
+# default labels, and Dependabot cannot apply a label that does not exist. Add the
+# standard dependencies/github_actions/type/ci labels here once the repository is
+# brought under central label management.
+#
+# The go-kure/.github composite-action pin is NOT covered: that repository
+# publishes no tags, so Dependabot has nothing to resolve. It is bumped by hand.
+
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    rebase-strategy: "auto"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    commit-message:
+      prefix: "chore(ci)"
+    groups:
+      actions:
+        patterns:
+          - "*"

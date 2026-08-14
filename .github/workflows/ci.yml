@@ -1,0 +1,39 @@
+name: CI
+
+# This repository is GitHub Pages content: the kure and launcher deploy-docs
+# workflows push rendered output straight to main, many times a day. Running CI
+# on those pushes would be pure noise, so the push trigger is narrowed to the
+# only paths a human ever edits here.
+on:
+  pull_request:
+  push:
+    branches: [main]
+    paths:
+      - '.github/**'
+      - 'scripts/**'
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      # The org enforces actions.sha_pinning_required; this is the same checker
+      # kure and launcher run, consumed as a composite action rather than
+      # vendored. go-kure/.github publishes no tags, so the pin is a main commit
+      # with `# main` as the comment and is bumped by hand.
+      - name: Check action pins
+        uses: go-kure/.github/.github/actions/check-action-pins@1793023365e5af6923e9bb6b424fcea1dca1279e # main
+
+      # Fail loudly rather than silently skipping if the runner image ever drops
+      # shellcheck.
+      - name: shellcheck
+        run: |
+          shellcheck --version
+          shellcheck scripts/gen-sitemap-index.sh
