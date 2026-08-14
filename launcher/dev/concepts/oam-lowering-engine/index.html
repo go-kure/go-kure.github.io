@@ -1,0 +1,301 @@
+<!doctype html><html id=R-html lang=en-us dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.155.3"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Design rationale: OAM lowering engine (ADR-035) Validates the design set out in this project’s OAM-levels research notes (decisions D1–D7). The mechanics below were first proven on a throwaway spike branch (spike/oam-lowering-engine, never merged, no PR); this document originally reported what running code found against each decision there. The production implementation this document now describes ships on feat/oam-lowering-engine (draft PR #274): pkg/oam/lowering.go, pkg/oam/lowering_raw.go, the PlatformReserved/ enforcePlatformReserved enforcement, and expose as a registered TraitLoweringRule are all real code on this branch today, not spike-only prototypes. Where a spike-time question was left open, the section below states how it was actually resolved, with a citation to the resolving code."><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Lowering Engine :: Go Kure — Launcher"><meta name=twitter:description content="Design rationale: OAM lowering engine (ADR-035) Validates the design set out in this project’s OAM-levels research notes (decisions D1–D7). The mechanics below were first proven on a throwaway spike branch (spike/oam-lowering-engine, never merged, no PR); this document originally reported what running code found against each decision there. The production implementation this document now describes ships on feat/oam-lowering-engine (draft PR #274): pkg/oam/lowering.go, pkg/oam/lowering_raw.go, the PlatformReserved/ enforcePlatformReserved enforcement, and expose as a registered TraitLoweringRule are all real code on this branch today, not spike-only prototypes. Where a spike-time question was left open, the section below states how it was actually resolved, with a citation to the resolving code."><meta property="og:url" content="https://www.gokure.dev/launcher/dev/concepts/oam-lowering-engine/index.html"><meta property="og:site_name" content="Go Kure — Launcher"><meta property="og:title" content="Lowering Engine :: Go Kure — Launcher"><meta property="og:description" content="Design rationale: OAM lowering engine (ADR-035) Validates the design set out in this project’s OAM-levels research notes (decisions D1–D7). The mechanics below were first proven on a throwaway spike branch (spike/oam-lowering-engine, never merged, no PR); this document originally reported what running code found against each decision there. The production implementation this document now describes ships on feat/oam-lowering-engine (draft PR #274): pkg/oam/lowering.go, pkg/oam/lowering_raw.go, the PlatformReserved/ enforcePlatformReserved enforcement, and expose as a registered TraitLoweringRule are all real code on this branch today, not spike-only prototypes. Where a spike-time question was left open, the section below states how it was actually resolved, with a citation to the resolving code."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="Concepts"><meta itemprop=name content="Lowering Engine :: Go Kure — Launcher"><meta itemprop=description content="Design rationale: OAM lowering engine (ADR-035) Validates the design set out in this project’s OAM-levels research notes (decisions D1–D7). The mechanics below were first proven on a throwaway spike branch (spike/oam-lowering-engine, never merged, no PR); this document originally reported what running code found against each decision there. The production implementation this document now describes ships on feat/oam-lowering-engine (draft PR #274): pkg/oam/lowering.go, pkg/oam/lowering_raw.go, the PlatformReserved/ enforcePlatformReserved enforcement, and expose as a registered TraitLoweringRule are all real code on this branch today, not spike-only prototypes. Where a spike-time question was left open, the section below states how it was actually resolved, with a citation to the resolving code."><meta itemprop=wordCount content="3311"><title>Lowering Engine :: Go Kure — Launcher</title><link href=/launcher/dev/css/auto-complete/auto-complete.min.css?1786717742 rel=stylesheet><script src=/launcher/dev/js/auto-complete/auto-complete.min.js?1786717742 defer></script><script src=/launcher/dev/js/search-lunr.min.js?1786717742 defer></script><script src=/launcher/dev/js/search.min.js?1786717742 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/launcher/dev/searchindex.en.js?1786717742"</script><script src=/launcher/dev/js/lunr/lunr.min.js?1786717742 defer></script><script src=/launcher/dev/js/lunr/lunr.stemmer.support.min.js?1786717742 defer></script><script src=/launcher/dev/js/lunr/lunr.multi.min.js?1786717742 defer></script><script src=/launcher/dev/js/lunr/lunr.en.min.js?1786717742 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1786717742 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1786717742 rel=stylesheet></noscript><link href=/launcher/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1786717742 rel=stylesheet><link href=/launcher/dev/css/theme.min.css?1786717742 rel=stylesheet><link href=/launcher/dev/css/format-html.min.css?1786717742 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/concepts/oam-lowering-engine/index.html",window.relearn.relBasePath="../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://www.gokure.dev/launcher/dev",window.relearn.version_js_url="/launcher/dev/versionindex.en.js?1786717742",window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-origin=/launcher/dev/concepts/oam-lowering-engine/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#summary>Summary</a></li><li><a href=#d1--one-engine-for-all-four-positions>D1 — one engine for all four positions</a></li><li><a href=#d2--1n-everywhere>D2 — 1→N everywhere</a></li><li><a href=#d3--platform-reserved-precedence>D3 — platform-reserved precedence</a></li><li><a href=#d4--re-validate-emitted-elements-plus-whole-document-validation>D4 — re-validate emitted elements, plus whole-document validation</a></li><li><a href=#d5--information-closure-four-inputs>D5 — information closure, four inputs</a></li><li><a href=#d7--recursion-bound-and-provenance-first-errors>D7 — recursion bound and provenance-first errors</a></li><li><a href=#frictions>Frictions</a></li><li><a href=#byte-identity-cost>Byte-identity cost</a></li><li><a href=#entry-point-contract-in-transform-and-raw-document>Entry-point contract: in-transform and raw-document</a><ul><li><a href=#the-finding>The finding</a></li><li><a href=#entry-point-1--in-transform-shipped>Entry point 1 — in-transform (shipped)</a></li><li><a href=#entry-point-2--raw-document-shipped>Entry point 2 — raw-document (shipped)</a></li><li><a href=#how-the-open-questions-were-resolved>How the open questions were resolved</a></li></ul></li><li><a href=#what-this-does-not-resolve>What this does not resolve</a></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/index.html><span itemprop=name>Go Kure — Launcher</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/concepts/index.html><span itemprop=name>Concepts</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Lowering Engine</span><meta itemprop=position content="3"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/concepts/oam-policy-interface/index.html title="Policy Interface (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/concepts/oam-package-composition/index.html title="Package Composition (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable concepts" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><h1 id=lowering-engine>Lowering Engine</h1><h1 id=design-rationale-oam-lowering-engine-adr-035>Design rationale: OAM lowering engine (ADR-035)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h1><p>Validates the design set out in this project&rsquo;s OAM-levels research notes (decisions
+D1–D7). The mechanics below were first proven on a throwaway spike branch
+(<code>spike/oam-lowering-engine</code>, never merged, no PR); this document originally reported
+what running code found against each decision there. The production implementation
+this document now describes ships on <code>feat/oam-lowering-engine</code> (draft PR #274):
+<code>pkg/oam/lowering.go</code>, <code>pkg/oam/lowering_raw.go</code>, the <code>PlatformReserved</code>/
+<code>enforcePlatformReserved</code> enforcement, and <code>expose</code> as a registered <code>TraitLoweringRule</code>
+are all real code on this branch today, not spike-only prototypes. Where a spike-time
+question was left open, the section below states how it was actually resolved, with a
+citation to the resolving code.</p><h2 id=summary>Summary<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>All seven decisions survived contact with running code, with two concrete corrections:
+D3&rsquo;s proof surfaced that &ldquo;platform-reserved&rdquo; was previously <strong>documentation, not
+enforcement</strong> for a shared schema fragment (<code>networkPolicy</code>); the fix that shipped
+enforces it <strong>uniformly</strong> across all three sharing traits, via an explicit
+<code>schemaNetworkPolicy(reserved bool)</code> parameter rather than an implicit shared default —
+see the D3 section below. D5&rsquo;s four-input closure forced an
+engine-level design choice — capability rendering is merged in by the engine, not the
+rule — that was not spelled out in the original decisions doc. Everything else matched
+the design as written. <code>pkg/oam</code>&rsquo;s scope genuinely widened beyond its doc-comment&rsquo;s
+stated &ldquo;model + parser + validator&rdquo; — the lowering engine is now part of the
+package&rsquo;s production surface, not a spike-only detour that reverts before merge.
+<code>pkg/oam/doc.go</code>&rsquo;s package comment was updated in this PR to say so.</p><h2 id=d1--one-engine-for-all-four-positions>D1 — one engine for all four positions<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Holds. <code>DocumentLoweringRule</code> / <code>ComponentLoweringRule</code> / <code>TraitLoweringRule</code> /
+<code>PolicyLoweringRule</code> (<code>lowering.go:180-235</code>) share one <code>LoweringResult</code> type, one
+fixpoint loop (<code>lowerDocumentBody</code>), and one <code>LoweringContext</code>. <code>loweringPositionRules</code>
+(<code>lowering.go:92-97</code>) is the only position-specific logic — a lookup table, not a
+branch per position in the engine body. The four positions did not need separate
+mechanisms; they needed a shared result type wide enough to express &ldquo;this rule may
+touch traits, components, and policies, but not documents&rdquo; declaratively.</p><h2 id=d2--1n-everywhere>D2 — 1→N everywhere<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Holds, at a real but bounded cost. <code>NameAllocator</code> (<code>lowering.go:140-172</code>) is the whole
+naming mechanism: deterministic <code>&lt;base>-&lt;suffix></code> generation plus collision detection
+keyed by authored <code>Origin</code>, so two rules independently choosing the same generated name
+fail loudly and name both origins rather than silently overwriting. <code>Origin</code> provenance
+(<code>lowering.go:35-48</code>) rides as unexported <code>origin *Origin</code> / <code>sealed bool</code> fields on
+<code>Trait</code>/<code>Component</code>/<code>ApplicationPolicy</code>/<code>Application</code> — yaml.v3 ignores unexported
+fields, so this cost nothing in the wire format, and value-copy semantics at existing
+call sites (<code>transform.go</code> cluster-building) preserve it without a pointer-keyed side
+table.</p><p>Document-level 1→N (one authored document lowering into several) ships only at the
+<strong>raw</strong> entry point today: <code>testRawRule</code> (<code>pkg/oam/lowering_raw_test.go:41-139</code>) emits
+<code>n</code> sibling <code>Application</code> documents from one raw document when its <code>emit</code> field is set,
+proving <code>LoweringResult.Documents</code> with more than one entry round-trips through the
+shared fixpoint (<code>runLowering</code>, <code>lowering.go:439</code>) correctly — each sibling gets its own
+generated name via the shared <code>NameAllocator</code>, and the <code>slot</code>-keyed splice
+(<code>lowering_raw.go:101-121</code>) puts every emitted document back at its raw input&rsquo;s
+position. This is proven with a test-only rule, not a shipped built-in — no concrete
+production rule in this repo emits more than one document yet. The in-transform
+document position (<code>DocumentLoweringRule</code>) is exercised for 1→1 renaming
+(<code>testDocRule</code>, <code>lowering_test.go:144-157</code>) but not for 1→N on this branch; see
+&ldquo;Document-level splitting fragments cluster-wide passes&rdquo; under Frictions below for what
+still blocks a real multi-cluster-output rule, and <code>TransformAll</code> under &ldquo;What this does
+not resolve&rdquo; for the still-unshipped API that would consume such a split.</p><h2 id=d3--platform-reserved-precedence>D3 — platform-reserved precedence<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Holds, but the proof attempt found a real gap: the pre-existing doc comments on
+<code>IngressHandler</code>/<code>HTTPRouteHandler</code> already asserted <code>networkPolicy</code> was
+&ldquo;platform-reserved&rdquo; (<code>ingress.go:79-81</code>, <code>httproute.go:64</code>), but nothing enforced it —
+~18 tests in <code>networkpolicy_auto_test.go</code> author <code>networkPolicy</code> directly on those
+traits, bypassing any <code>ClusterProfile</code>, to exercise netpol synthesis without a
+capability round-trip. Marking the shared <code>schemaNetworkPolicy()</code> fragment
+(<code>pkg/oam/builtin/traits/schema.go</code>) reserved broke all of them — a pre-existing,
+intentional test pattern this needed to preserve, not route around. An initial fix
+scoped <code>PlatformReserved</code> per-schema-copy (<code>ExposeRule.PropertySchema()</code> cloning the
+fragment and overriding the flag on its own copy only), which unblocked forward
+progress but left <code>IngressHandler</code>/<code>HTTPRouteHandler</code>&rsquo;s copies unreserved — three schema
+declarations of the same property that could silently drift out of sync, with nothing
+forcing a future change to touch all three.</p><p><strong>Decision: enforce <code>PlatformReserved</code> uniformly, via an explicit parameter, not an
+implicit shared default.</strong> <code>schemaNetworkPolicy()</code> became <code>schemaNetworkPolicy(reserved bool)</code> (<code>schema.go</code>) — every call site (<code>ExposeRule</code>, <code>IngressHandler</code>,
+<code>HTTPRouteHandler</code>) now states its choice at the call, and today all three pass <code>true</code>.
+This closes the divergence risk without adding a generic reservation-scoping mechanism
+that only one property currently needs — the explicit argument is the whole mechanism.
+The ~18 affected tests in <code>networkpolicy_auto_test.go</code> (plus 3 in
+<code>domain_resolution_test.go</code>) were migrated: tests that drive the full
+<code>TransformWithPolicy</code> pipeline now supply <code>networkPolicy</code> via
+<code>ctx.Capabilities["ingress"|"httproute"].Rendering</code>, mirroring how a real
+<code>ClusterProfile</code> would render it, instead of authoring it inline on the trait (which
+<code>enforcePlatformReserved</code> now rejects). Tests that call
+<code>IngressHandler.Apply</code>/<code>HTTPRouteHandler.Apply</code> directly are unaffected — they bypass
+<code>applyTraits</code>/<code>enforcePlatformReserved</code> entirely — and were left authoring it inline
+(see <code>TestHandlers_ReservedNetworkPolicy_StillAppliesDirectly</code>,
+<code>pkg/oam/builtin/traits/platform_reserved_apply_test.go</code>). This is itself a finding:
+<strong>the design&rsquo;s &ldquo;mark it declaratively&rdquo; assumption is right, and a shared schema
+fragment does not need a bespoke per-caller-scoping mechanism to stay uniform — an
+explicit boolean parameter is enough</strong>, so long as every caller is required to pass one
+rather than relying on a default.</p><p>The same class of gap recurred once more before this branch was ready for review:
+<code>IngressHandler</code>&rsquo;s own <code>allowedHostnameWildcard</code> property carried the identical
+&ldquo;platform-reserved&rdquo; doc-comment claim (<code>ingress.go:79-81</code>) without the
+<code>PlatformReserved: true</code> flag on its own schema entry, even after <code>ExposeRule</code>&rsquo;s copy of
+the same key was correctly reserved — an author could bypass hostname-wildcard
+enforcement entirely by authoring the <code>ingress</code> trait directly instead of going through
+<code>expose</code>. Fixed the same way: <code>PropertySchema.PlatformReserved: true</code> added to
+<code>IngressHandler</code>&rsquo;s <code>allowedHostnameWildcard</code> entry (<code>ingress.go:131</code>), with a regression
+test proving the bypass is closed
+(<code>TestIngressHandler_AllowedHostnameWildcard_InlineAuthoringRejected</code>,
+<code>pkg/oam/builtin/traits/ingress_platform_reserved_test.go</code>).</p><p><code>enforcePlatformReserved</code> (<code>property_validate.go:174</code>) runs at every point that merges
+capability rendering in: the trait-lowering branch (<code>lowering.go:661-670</code>, before
+<code>resolveCapability</code>), <code>applyTraits</code> (<code>transform.go:760-769</code>, before
+<code>resolveCapability</code>, inside the <code>!trait.sealed</code> guard), and symmetrically before a
+component handler&rsquo;s <code>ToApplicationConfig</code> (<code>transform.go:517</code>, <code>createApplications</code>) —
+though no component schema declares a reserved field today, so that call site is
+currently a no-op in practice. The proof: <code>webservice-expose-ingress/app.yaml</code> loses its
+inline <code>controllerType: ingress</code> line; <code>expected.yaml</code> is <strong>byte-identical</strong> because the
+capability-supplied value was already sufficient — the authored line was redundant even
+before D3, and D3 makes that redundancy an error instead of a silent no-op. A third
+fixture, <code>pkg/cmd/kurel/testdata/app.yaml</code>, carried the same now-redundant inline
+<code>controllerType: ingress</code> line and was missed in that earlier pass; it was found and
+fixed the same way — <code>pkg/cmd/kurel/testdata/cluster.yaml</code> already supplies
+<code>controllerType</code> via capability rendering, so deleting the inline line is the whole fix.
+<code>flatschema.go</code>&rsquo;s flat allow-sets (<code>kurelParamKeys</code>, <code>capabilityPropKeys</code>) are untouched,
+by design: a capability rendering schema describes what the platform <em>may set</em>, so
+&ldquo;platform-reserved&rdquo; is meaningless at that call site, exactly like
+<code>Enum</code>/<code>Properties</code>/<code>Items</code> already are.</p><p><code>RegisterTrait</code> (<code>transform.go:152-167</code>) has always panicked at registration time if a
+dispatchable <code>TraitHandler</code> implements <code>CapabilityAware</code> without also implementing
+<code>ValidateAndApplyDefaults</code>, because <code>EvaluateProfile</code>&rsquo;s dispatch needs
+<code>ValidateAndApplyDefaults</code> to validate/default a capability-rendered binding before use.
+<code>RegisterTraitLowering</code> (<code>lowering.go:324-351</code>) lacked the equivalent assertion:
+<code>EvaluateProfile</code>&rsquo;s trait-lowering-rule fallback (<code>transform.go</code>) has the identical
+need — a <code>TraitLoweringRule</code> implementing <code>CapabilityAware</code> without
+<code>ValidateAndApplyDefaults</code> would have its capability rendering accepted unvalidated and
+undefaulted, with no signal at registration time. <code>ExposeRule</code> implements both
+interfaces today, so this was not a live bug, but nothing structurally prevented a
+future rule from reintroducing the exact class of gap Friction #2 below records as
+fixed specifically for <code>expose</code>. Closed by adding the same guard to
+<code>RegisterTraitLowering</code> that <code>RegisterTrait</code> already has, with a registration-time panic
+and regression tests proving both the accept and reject paths
+(<code>TestRegisterTraitLowering_PanicsIfCapabilityAwareWithoutVAD</code>,
+<code>TestRegisterTraitLowering_CapabilityAwareWithVAD_OK</code>, <code>pkg/oam/lowering_test.go</code>).</p><h2 id=d4--re-validate-emitted-elements-plus-whole-document-validation>D4 — re-validate emitted elements, plus whole-document validation<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Holds, and required writing the validator the design assumed existed —
+<code>PropertySchema</code> was published (<code>HandlerSchemas</code>) but nothing in launcher enforced it
+before this work. <code>validateProperties</code>/<code>validateObjectProperties</code>
+(<code>property_validate.go</code>) cover type/required/enum/nested <code>Properties</code>/<code>Items</code>/
+<code>AdditionalProperties</code>. Two enforcement points, matching the design: emission-time
+(<code>validateEmittedComponent</code>/<code>validateEmittedTrait</code>/<code>validateEmittedPolicy</code>, called the
+moment a rule emits an element, citing the <strong>authored</strong> origin first per D7) and a
+post-fixpoint whole-document pass with an <strong>empty</strong> <code>LowerableTypes</code>
+(call site <code>lowering.go:483</code>, <code>validateSettled</code> itself at <code>lowering.go:502-508</code>, which
+calls <code>validateWithExtraTypes(doc, customTraitTypes, LowerableTypes{})</code>) — any
+kind/component/trait type still present once the fixpoint has settled is, by
+construction, not claimed by any registered rule (<code>LowerableTypes</code>&rsquo;s own doc comment,
+<code>lowering.go:366-370</code>), so it is a non-terminating rule&rsquo;s leftover rather than a
+legitimate terminal type.</p><h2 id=d5--information-closure-four-inputs>D5 — information closure, four inputs<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Holds for <code>expose</code>, and the port surfaced a design decision the original document did
+not spell out: <strong>who performs the capability-rendering merge, the engine or the rule?</strong>
+The answer that shipped is the engine — <code>lowerDocumentBody</code>&rsquo;s trait branch merges
+capability rendering into the trait via <code>resolveCapability</code> <em>before</em> calling
+<code>LowerTrait</code> (<code>lowering.go:671-677</code>, mirroring <code>applyTraits</code>&rsquo;s existing pre-merge for a
+dispatchable <code>TraitHandler</code>) — so <code>ExposeRule.LowerTrait</code> reads <code>trait.Properties</code>
+exactly as the former <code>ExposeHandler.Apply</code> always did; the port from handler to rule is
+close to mechanical (<code>app.Name</code> → <code>lctx.Component.Name</code>, the two terminal handler calls
+become emitted <code>Trait{Type:"ingress"|"httproute"}</code>). This closes a corollary the design
+implied but did not state: <strong>an emitted element cannot re-enter capability resolution</strong>,
+because that would introduce a fifth input (a <em>different</em> key&rsquo;s capability rendering,
+chosen by the emitted type rather than the authored one). The fix is the <code>sealed</code> field
+(<code>types.go</code>): every trait a <code>TraitLoweringRule</code> emits is marked <code>sealed = true</code>
+(<code>lowering.go:687</code>), and <code>applyTraits</code> skips its entire capability-processing block for
+a sealed trait (<code>transform.go:721-727</code>, <code>if !trait.sealed</code>).
+<code>TestExposeRule_SealedGuard_ExtraIngressCapabilityIgnored</code>
+(<code>pkg/cmd/kurel/expose_sealed_test.go</code>) proves the guard does something: it fails when
+the guard is removed (verified by hand) and passes with it in place, confirming a
+profile defining <em>both</em> <code>expose</code> and <code>ingress</code> capabilities produces byte-identical
+output to one defining <code>expose</code> alone.</p><h2 id=d7--recursion-bound-and-provenance-first-errors>D7 — recursion bound and provenance-first errors<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Both proposed defaults survived unchanged and ship as written. <code>MaxLoweringDepth = 9</code>
+(<code>lowering.go:40</code>) was never approached by any rule exercised so far — the deepest
+chain any test drives is three rounds. The bound exists for the pathological case (a
+rule that keeps re-emitting a type another rule also claims) and <code>LoweringError</code> prints
+the <strong>authored</strong> <code>Origin</code> first, the <code>Cause</code> second, then the full <code>Chain</code> of
+<code>LoweringStep</code>s (<code>LoweringError</code> struct at <code>lowering.go:248-263</code>) — one of the negative
+tests specifically asserts a depth-limit failure prints all <code>MaxLoweringDepth</code> chain
+steps, not just the last one (<code>TestLower_DepthLimit_PrintsFullChain</code>,
+<code>pkg/oam/lowering_negative_test.go</code>). No change to either default was needed.</p><h2 id=frictions>Frictions<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Three were recorded as findings in the plan rather than designed around; two of the
+three resolved themselves once <code>expose</code> was actually implemented as a rule, and are
+recorded here as <em>resolved</em> rather than <em>open</em>.</p><ol><li><strong>Document-level splitting fragments cluster-wide passes (still open).</strong> Netpol
+synthesis (<code>synthesizeNetworkPolicies</code> et al., post-fixpoint in
+<code>TransformWithPolicy</code>) and source dedup both operate per-cluster. A document-position
+rule producing more than one output document has no shipped API to turn those
+multiple documents into multiple <code>*stack.Cluster</code>s in the first place — see
+<code>TransformAll</code> under &ldquo;What this does not resolve&rdquo; below — so this friction has not
+yet been exercised against real multi-cluster output, only against the raw entry
+point&rsquo;s <code>testRawRule</code> fixture (D2 above), whose siblings are deliberately
+<strong>disjoint</strong> and never reach a cluster-wide pass. This stays open: no fix was
+attempted, since no consumer of split output exists yet to design against.</li><li><strong>Moving <code>expose</code> out of <code>traitHandlers</code> silently drops its capability validation
+(resolved).</strong> <code>EvaluateProfile</code> (<code>transform.go</code>) only ever looked up
+<code>t.traitHandlers[typeName]</code>; once <code>ExposeRule</code> replaced <code>ExposeHandler</code> there, the
+<code>gatewayName</code>-required and <code>gatewayNamespace</code>-default checks would have stopped
+running with no failing test to catch it. Fixed by extending <code>EvaluateProfile</code> to
+fall back to <code>t.traitLoweringRules[typeName]</code> and its optional
+<code>ValidateAndApplyDefaults</code> (<code>transform.go</code>). <code>TestExposeRule_EvaluateProfile_GatewayValidation</code>
+(<code>pkg/oam/builtin/traits/expose_rule_evaluate_profile_test.go</code>) is the regression
+guard. The D3 section above records the one place this fallback&rsquo;s own guard was
+still incomplete: <code>RegisterTraitLowering</code> did not enforce
+<code>CapabilityAware</code>⇒<code>ValidateAndApplyDefaults</code> the way <code>RegisterTrait</code> does — now fixed
+structurally, not just for <code>expose</code> specifically.</li><li><strong>An emitted trait re-entering capability resolution is a fifth D5 input
+(resolved).</strong> Covered under D5 above — the <code>sealed</code> field and the <code>!trait.sealed</code>
+guard in <code>applyTraits</code>.</li></ol><h2 id=byte-identity-cost>Byte-identity cost<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>The C1 no-op guarantee — zero lowering rules registered, <code>Transform</code>/
+<code>TransformWithPolicy</code> behave exactly as before — was verified twice:
+<code>TestLower_EmptyRegistry_ReturnsSamePointer</code> (<code>pkg/oam/lowering_test.go:12</code>) asserts
+pointer identity on the returned document when no rule is registered, and
+<code>UPDATE_GOLDEN=1 go test ./pkg/cmd/kurel -run TestFixtures</code> followed by
+<code>git diff --exit-code pkg/cmd/kurel/testdata</code> produces <strong>zero diff</strong> across every
+existing golden. The cost of the engine&rsquo;s presence, with zero rules registered, is
+one extra pointer-identity check per <code>Transform</code> call — not a measurable runtime cost,
+and not a single behavioral difference. The expose-as-a-rule migration re-ran the
+same proof at the feature level: both expose goldens (<code>webservice-expose-ingress</code>,
+the gateway fixture) pass <strong>without</strong> <code>UPDATE_GOLDEN</code>, and all five
+<code>expose_*_test.go</code> files keep their original assertions, re-pointed through a shared
+<code>applyExpose</code> helper (<code>pkg/oam/builtin/traits/traits_test.go</code>) that feeds
+<code>ExposeRule.LowerTrait</code>&rsquo;s emitted trait to the real
+<code>IngressHandler</code>/<code>HTTPRouteHandler.Apply</code> — reproducing byte-for-byte what the engine&rsquo;s
+fixpoint plus <code>applyTraits</code> does end to end.</p><h2 id=entry-point-contract-in-transform-and-raw-document>Entry-point contract: in-transform and raw-document<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>The engine mechanics above (D1–D7) were first proven for documents that already
+unmarshal into the base <code>Application</code>/<code>ApplicationSpec</code> shape, entered from inside the
+existing transform pipeline. Follow-on integration work against a real downstream
+parser surfaced a case that first pass did not cover, and it changes what &ldquo;the engine&rdquo;
+has to be reachable from. This section specifies both entry points the shipped API
+exposes.</p><h3 id=the-finding>The finding<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>A consumer embedding this engine does not necessarily hand it an already-decoded
+<code>Application</code>. A consumer&rsquo;s own parser may gate on <code>kind</code>/<code>apiVersion</code> <em>before</em> any
+transform runs, rejecting a higher-level kind outright — a document the engine was
+meant to lower never reaches a transform call at all, because it never survives the
+consumer&rsquo;s own parse step. Separately, a consumer may parse the same raw document bytes
+independently at several call sites in its own codebase (validation, export, one or
+more command entry points, pre-generation passes, …), not through one funnel — so an
+insertion point reachable from only one of those sites still leaves the others exposed
+to the same rejection. A production lowering engine therefore has to be reachable
+directly from raw, undecoded document bytes, ahead of a consumer&rsquo;s own parsing, not
+only from a point downstream of it.</p><p>This matters only for a <strong>whole-noun higher-level kind</strong>: a document authored under a
+<code>kind</code> and <code>apiVersion</code> of its own, carrying fields that do not fit the base
+<code>ApplicationSpec</code> shape at all, so it cannot be unmarshalled into an <code>Application</code> in
+the first place — not for a document that already fits the base shape and merely needs
+a trait/component/policy lowered out of it. The latter case is exactly what D1–D7 above
+validated and needs no new machinery.</p><h3 id=entry-point-1--in-transform-shipped>Entry point 1 — in-transform (shipped)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>For a document whose authored YAML already unmarshals into the base
+<code>Application</code>/<code>ApplicationSpec</code> shape, the engine runs downstream of <code>Parse</code>, reached
+through <code>Transform</code> (<code>pkg/oam/transform.go:369</code>) / <code>TransformWithPolicy</code>
+(<code>pkg/oam/transform.go:377</code>). <code>DocumentLoweringRule</code>/<code>ComponentLoweringRule</code>/
+<code>TraitLoweringRule</code>/<code>PolicyLoweringRule</code> operate on a decoded <code>Application</code>, with
+<code>LoweringContext</code>, <code>Origin</code> provenance, <code>NameAllocator</code>, and the <code>MaxLoweringDepth</code>
+fixpoint bound all proven against it (D1–D7 above) and shipping on this branch. The
+document-splitting-to-multiple-clusters case (<code>TransformAll</code>) is the one piece of the
+original mechanics that is <strong>not</strong> implemented here — see &ldquo;What this does not resolve&rdquo;
+below; its absence does not affect this entry point&rsquo;s correctness for the
+single-document case it does handle.</p><h3 id=entry-point-2--raw-document-shipped>Entry point 2 — raw-document (shipped)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>For a whole-noun higher-level kind that cannot survive the base parse, the engine is
+also reachable <em>before</em> parsing: <code>(*Transformer).LowerRaws</code> operates on undecoded
+document bytes, run once per raw document ahead of a consumer&rsquo;s own parse fan-out,
+producing raw bytes that a standard <code>Application</code> parse can then accept. Shipped shape
+(<code>pkg/oam/lowering_raw.go:42</code>, differing from the pre-implementation proposal by being a
+<code>*Transformer</code> method rather than a package function, and by taking a
+<code>TransformContext</code> — see below for why):</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>t</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>Transformer</span>) <span style=color:#a6e22e>LowerRaws</span>(<span style=color:#a6e22e>raws</span> []<span style=color:#a6e22e>json</span>.<span style=color:#a6e22e>RawMessage</span>, <span style=color:#a6e22e>ctx</span> <span style=color:#a6e22e>TransformContext</span>) ([]<span style=color:#a6e22e>json</span>.<span style=color:#a6e22e>RawMessage</span>, <span style=color:#66d9ef>error</span>)</span></span></code></pre></div><p>backed by <code>RawDocumentLoweringRule</code> (<code>lowering.go:201-217</code>), analogous in spirit to
+<code>DocumentLoweringRule</code> but operating on <code>kind</code>-sniffed raw bytes rather than a decoded
+<code>Application</code> — it cannot assume the input unmarshals into any type this package
+already knows, since the whole point is that it may not. A consumer calls <code>LowerRaws</code>
+once, ahead of every one of its own parse call sites, rather than calling it per site;
+a document it rewrites then flows through the ordinary parse path and, if applicable,
+into entry point 1 above unchanged.</p><h3 id=how-the-open-questions-were-resolved>How the open questions were resolved<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Three questions were left open when this contract was first specified, ahead of
+implementation. All three are answered by the shipped code:</p><ul><li><strong>Can <code>RawDocumentLoweringRule</code> share <code>LoweringContext</code>/<code>Origin</code>
+provenance/<code>NameAllocator</code>/<code>MaxLoweringDepth</code> with the decoded-document rule types, or
+does it need its own bounded fixpoint over raw bytes?</strong> It shares them fully.
+<code>runLowering</code> (<code>lowering.go:439</code>) is, by its own doc comment, &ldquo;the ONE fixpoint
+implementation in this package&rdquo; — both entry points call it exactly once per
+invocation, so one <code>NameAllocator</code>, one expansion chain, and one <code>MaxLoweringDepth</code>
+budget are shared across every document in the call, siblings from different raw
+inputs included. Round 0 for a raw-entered document (<code>lowerRawOnce</code>,
+<code>lowering_raw.go:134-150</code>) decodes the bytes and calls the rule&rsquo;s <code>LowerDocument</code>
+exactly as <code>lowerDocumentOnce</code>&rsquo;s document-rule branch would; from round 1 on, every
+descendant is an ordinary <code>*Application</code> and follows the identical path an
+in-transform document does. <code>ctx TransformContext</code> is threaded through <code>LowerRaws</code>
+precisely because of this sharing: rounds after round 0 can reach an ordinary
+<code>TraitLoweringRule</code>/<code>ComponentLoweringRule</code>/<code>PolicyLoweringRule</code>, and a
+<code>CapabilityAware</code> one among them needs <code>ctx.Capabilities</code> populated from an
+already-evaluated <code>ClusterProfile</code> or it fails with <code>ErrMissingCapability</code> — a caller
+that has not evaluated a profile yet passes what it has, and gets the same failure
+the in-transform path would produce for the same input (<code>lowering_raw.go:36-41</code>).</li><li><strong>Should a document a raw-document rule emits be eligible to re-enter <code>LowerRaws</code>
+itself (a raw-to-raw fixpoint), or must it always land in base shape in one step?</strong>
+It must land in base shape in one step; there is no raw-to-raw re-entry. Only the
+original seed entries built directly from <code>raws</code> carry a non-nil <code>raw</code> field
+(<code>loweringDoc.raw</code>, <code>lowering.go:420</code>); every document <code>LowerDocument</code> emits at round
+0 becomes an ordinary <code>*Application</code> in <code>next</code> (<code>runLowering</code>&rsquo;s loop,
+<code>lowering.go:449-479</code>), which subsequent rounds process via <code>lowerDocumentOnce</code>, never
+<code>lowerRawOnce</code>, so <code>t.rawDocLoweringRules</code> is never consulted again for it. This
+mirrors the <code>sealed</code> guard&rsquo;s constraint on entry point 1 (D5 above): an emitted
+element does not re-enter the resolution mechanism it came from.</li><li><strong>What is the exact registration and dispatch shape for <code>RawDocumentLoweringRule</code>?</strong>
+A lookup keyed on sniffed <code>kind</code>, mirroring the pattern <code>loweringPositionRules</code> uses
+for positions. Registration is <code>t.rawDocLoweringRules map[string]RawDocumentLoweringRule</code>
+(<code>transform.go:108</code>, populated by <code>RegisterRawDocumentLowering</code>, <code>lowering.go:295-307</code>,
+with the same duplicate/cross-registrar collision guards <code>RegisterDocumentLowering</code>
+has in the other direction). Dispatch decodes just enough of each raw input — kind and
+<code>metadata.name</code>, via the lenient <code>documentEnvelope</code> probe (<code>lowering_raw.go:18-23</code>) —
+to look up <code>t.rawDocLoweringRules[env.Kind]</code> (<code>lowering_raw.go:57</code>); an input whose
+kind matches no registered rule passes through byte-identical, never decoded or
+re-serialized.</li></ul><h2 id=what-this-does-not-resolve>What this does not resolve<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong><code>TransformAll</code> (document-level 1→N producing multiple <code>*stack.Cluster</code>s) is not
+implemented on this branch.</strong> It remains the one piece of the original mechanics that
+stayed unshipped: <code>Transform</code>/<code>TransformWithPolicy</code>&rsquo;s single-<code>*stack.Cluster</code> return
+cannot express a document splitting into two, and no equivalent multi-cluster API
+exists in <code>pkg/oam/transform.go</code> today. Whether the lowering engine&rsquo;s
+document-splitting support ever needs a production <code>TransformAll</code> (or some other
+shape) is still undecided and unimplemented; D2&rsquo;s 1→N proof above rests on the raw
+entry point&rsquo;s <code>testRawRule</code> fixture alone (test-only), not on a shipped mechanism for
+consuming split output.</li><li>Document-level 1→N is, correspondingly, only proven for <strong>disjoint</strong> output documents
+(Friction #1 above, still open) — no rule shipped or tested here produces documents
+whose outputs need to share a cluster-wide pass (netpol synthesis, source dedup).</li><li>No <code>WebApplication</code>-style higher-level-kind builtin ships in this repo. The
+entry-point contract above specifies, and the shipped code implements, the mechanism
+(<code>LowerRaws</code>/<code>RawDocumentLoweringRule</code>); it does not include a concrete production
+rule built on top of it, and it does not design how any particular downstream
+consumer wires its own parse fan-out through entry point 2 — that remains a
+consumer-side integration decision, out of scope for this library.</li><li>The static type allowlists (<code>LowerableTypes</code>, <code>validComponentTypes</code>, etc.) were
+proven necessary but whether they should become a real type-registry document is
+still undecided — unchanged from the original design doc, and extends to whatever
+raw-<code>kind</code> registry a future higher-level-kind rule ends up needing.</li></ul><footer class=footline></footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/launcher/dev/index.html><span class="logo-title default-animation">Go Kure — Launcher</span>
+</a><search><form action=/launcher/dev/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Search</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
+<button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/launcher/dev/index.html><a class=padding href=/launcher/dev/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul><li class=R-versionswitcher><div class="padding menu-control"><i class="fa-fw fas fa-code-branch"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-version>Version</label>
+<select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/launcher/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main default-animation"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/launcher/dev/getting-started/index.html><a class="padding default-animation" href=/launcher/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li class=parent data-nav-id=/launcher/dev/concepts/index.html><a class="padding default-animation" href=/launcher/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu><li data-nav-id=/launcher/dev/concepts/design/index.html><a class=padding href=/launcher/dev/concepts/design/index.html>Design</a></li><li data-nav-id=/launcher/dev/concepts/oam-gvk/index.html><a class=padding href=/launcher/dev/concepts/oam-gvk/index.html>API Group & GVK</a></li><li data-nav-id=/launcher/dev/concepts/oam-package/index.html><a class=padding href=/launcher/dev/concepts/oam-package/index.html>Kurel Packages</a></li><li data-nav-id=/launcher/dev/concepts/oam-cluster-profile/index.html><a class=padding href=/launcher/dev/concepts/oam-cluster-profile/index.html>Cluster Profiles</a></li><li data-nav-id=/launcher/dev/concepts/oam-param-syntax/index.html><a class=padding href=/launcher/dev/concepts/oam-param-syntax/index.html>Parameter Syntax</a></li><li data-nav-id=/launcher/dev/concepts/oam-capability-schema/index.html><a class=padding href=/launcher/dev/concepts/oam-capability-schema/index.html>Capability Schema</a></li><li data-nav-id=/launcher/dev/concepts/oam-policy-interface/index.html><a class=padding href=/launcher/dev/concepts/oam-policy-interface/index.html>Policy Interface</a></li><li class=active data-nav-id=/launcher/dev/concepts/oam-lowering-engine/index.html><a class=padding href=/launcher/dev/concepts/oam-lowering-engine/index.html>Lowering Engine</a></li><li data-nav-id=/launcher/dev/concepts/oam-package-composition/index.html><a class=padding href=/launcher/dev/concepts/oam-package-composition/index.html>Package Composition</a></li><li data-nav-id=/launcher/dev/concepts/oam-external-secret-shorthand/index.html><a class=padding href=/launcher/dev/concepts/oam-external-secret-shorthand/index.html>External Secret Shorthand</a></li></ul></li><li data-nav-id=/launcher/dev/contributing/index.html><a class="padding default-animation" href=/launcher/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/api-reference/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/changelog/index.html><a class="padding default-animation" href=/launcher/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/launcher/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1786717742 defer></script><script src=/launcher/dev/js/theme.min.js?1786717742 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
