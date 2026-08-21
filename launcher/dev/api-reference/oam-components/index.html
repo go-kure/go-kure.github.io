@@ -1,5 +1,5 @@
-<!doctype html><html id=R-html lang=en-us dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.155.3"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="OAM Built-in Component Handlers Package components implements oam.ComponentHandler for the built-in component types. Each handler parses a typed config from a component’s properties and produces the corresponding Kubernetes resources via kure’s builders. Handlers are registered with the transformer in pkg/cmd/kurel (newBuiltinTransformer), each mapping a component type string to a handler implementing CanHandle + ToApplicationConfig. Every built-in component handler also implements oam.PropertySchemaProvider (PropertySchema()), declaring a constrained schema for its user-facing properties so the downstream runtime can validate them before invocation. Deeply nested or K8s-adjacent shapes are kept shallow/open (additionalProperties) rather than modeled field-by-field; escape-hatch fields (e.g. passthrough.object, manifests/crd inline content) stay open by design. Every property (including nested object fields and array item schemas at every depth) carries a Description, surfaced in the downstream runtime’s generated Handler API Reference."><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Component Handlers :: Go Kure — Launcher"><meta name=twitter:description content="OAM Built-in Component Handlers Package components implements oam.ComponentHandler for the built-in component types. Each handler parses a typed config from a component’s properties and produces the corresponding Kubernetes resources via kure’s builders. Handlers are registered with the transformer in pkg/cmd/kurel (newBuiltinTransformer), each mapping a component type string to a handler implementing CanHandle + ToApplicationConfig. Every built-in component handler also implements oam.PropertySchemaProvider (PropertySchema()), declaring a constrained schema for its user-facing properties so the downstream runtime can validate them before invocation. Deeply nested or K8s-adjacent shapes are kept shallow/open (additionalProperties) rather than modeled field-by-field; escape-hatch fields (e.g. passthrough.object, manifests/crd inline content) stay open by design. Every property (including nested object fields and array item schemas at every depth) carries a Description, surfaced in the downstream runtime’s generated Handler API Reference."><meta property="og:url" content="https://www.gokure.dev/launcher/dev/api-reference/oam-components/index.html"><meta property="og:site_name" content="Go Kure — Launcher"><meta property="og:title" content="Component Handlers :: Go Kure — Launcher"><meta property="og:description" content="OAM Built-in Component Handlers Package components implements oam.ComponentHandler for the built-in component types. Each handler parses a typed config from a component’s properties and produces the corresponding Kubernetes resources via kure’s builders. Handlers are registered with the transformer in pkg/cmd/kurel (newBuiltinTransformer), each mapping a component type string to a handler implementing CanHandle + ToApplicationConfig. Every built-in component handler also implements oam.PropertySchemaProvider (PropertySchema()), declaring a constrained schema for its user-facing properties so the downstream runtime can validate them before invocation. Deeply nested or K8s-adjacent shapes are kept shallow/open (additionalProperties) rather than modeled field-by-field; escape-hatch fields (e.g. passthrough.object, manifests/crd inline content) stay open by design. Every property (including nested object fields and array item schemas at every depth) carries a Description, surfaced in the downstream runtime’s generated Handler API Reference."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="API Reference"><meta itemprop=name content="Component Handlers :: Go Kure — Launcher"><meta itemprop=description content="OAM Built-in Component Handlers Package components implements oam.ComponentHandler for the built-in component types. Each handler parses a typed config from a component’s properties and produces the corresponding Kubernetes resources via kure’s builders. Handlers are registered with the transformer in pkg/cmd/kurel (newBuiltinTransformer), each mapping a component type string to a handler implementing CanHandle + ToApplicationConfig. Every built-in component handler also implements oam.PropertySchemaProvider (PropertySchema()), declaring a constrained schema for its user-facing properties so the downstream runtime can validate them before invocation. Deeply nested or K8s-adjacent shapes are kept shallow/open (additionalProperties) rather than modeled field-by-field; escape-hatch fields (e.g. passthrough.object, manifests/crd inline content) stay open by design. Every property (including nested object fields and array item schemas at every depth) carries a Description, surfaced in the downstream runtime’s generated Handler API Reference."><meta itemprop=wordCount content="622"><title>Component Handlers :: Go Kure — Launcher</title><link href=/launcher/dev/css/auto-complete/auto-complete.min.css?1787140897 rel=stylesheet><script src=/launcher/dev/js/auto-complete/auto-complete.min.js?1787140897 defer></script><script src=/launcher/dev/js/search-lunr.min.js?1787140897 defer></script><script src=/launcher/dev/js/search.min.js?1787140897 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/launcher/dev/searchindex.en.js?1787140897"</script><script src=/launcher/dev/js/lunr/lunr.min.js?1787140897 defer></script><script src=/launcher/dev/js/lunr/lunr.stemmer.support.min.js?1787140897 defer></script><script src=/launcher/dev/js/lunr/lunr.multi.min.js?1787140897 defer></script><script src=/launcher/dev/js/lunr/lunr.en.min.js?1787140897 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1787140897 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1787140897 rel=stylesheet></noscript><link href=/launcher/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1787140897 rel=stylesheet><link href=/launcher/dev/css/theme.min.css?1787140897 rel=stylesheet><link href=/launcher/dev/css/format-html.min.css?1787140897 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/api-reference/oam-components/index.html",window.relearn.relBasePath="../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://www.gokure.dev/launcher/dev",window.relearn.version_js_url="/launcher/dev/versionindex.en.js?1787140897",window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-origin=/launcher/dev/api-reference/oam-components/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#component-types>Component types</a></li><li><a href=#common-config>Common config</a></li><li><a href=#per-type-highlights>Per-type highlights</a></li><li><a href=#extending>Extending</a></li><li><a href=#conventions>Conventions</a></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/index.html><span itemprop=name>Go Kure — Launcher</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/index.html><span itemprop=name>API Reference</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Component Handlers</span><meta itemprop=position content="3"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam/index.html title="OAM Model (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-traits/index.html title="Trait Handlers (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable api-reference" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><h1 id=component-handlers>Component Handlers</h1><h1 id=oam-built-in-component-handlers>OAM Built-in Component Handlers<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h1><p><a href=https://pkg.go.dev/github.com/go-kure/launcher/pkg/oam/builtin/components rel=external><a href=#R-image-4f682c05d9c875cd44f0c79b6eb6eb83 class=lightbox-link><img alt="Go Reference" class="lazy lightbox figure-image" loading=lazy src=https://pkg.go.dev/badge/github.com/go-kure/launcher/pkg/oam/builtin/components.svg style=height:auto;width:auto></a>
-<a href=javascript:history.back(); class=lightbox-back id=R-image-4f682c05d9c875cd44f0c79b6eb6eb83><img alt="Go Reference" class="lazy lightbox lightbox-image" loading=lazy src=https://pkg.go.dev/badge/github.com/go-kure/launcher/pkg/oam/builtin/components.svg></a></a></p><p>Package <code>components</code> implements <code>oam.ComponentHandler</code> for the built-in component
+<!doctype html><html id=R-html lang=en-us dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.155.3"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="OAM Built-in Component Handlers Package components implements oam.ComponentHandler for the built-in component types. Each handler parses a typed config from a component’s properties and produces the corresponding Kubernetes resources via kure’s builders. Handlers are registered with the transformer in pkg/cmd/kurel (newBuiltinTransformer), each mapping a component type string to a handler implementing CanHandle + ToApplicationConfig. Every built-in component handler also implements oam.PropertySchemaProvider (PropertySchema()), declaring a constrained schema for its user-facing properties so the downstream runtime can validate them before invocation. Deeply nested or K8s-adjacent shapes are kept shallow/open (additionalProperties) rather than modeled field-by-field; escape-hatch fields (e.g. passthrough.object, manifests/crd inline content) stay open by design. Every property (including nested object fields and array item schemas at every depth) carries a Description, surfaced in the downstream runtime’s generated Handler API Reference."><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Component Handlers :: Go Kure — Launcher"><meta name=twitter:description content="OAM Built-in Component Handlers Package components implements oam.ComponentHandler for the built-in component types. Each handler parses a typed config from a component’s properties and produces the corresponding Kubernetes resources via kure’s builders. Handlers are registered with the transformer in pkg/cmd/kurel (newBuiltinTransformer), each mapping a component type string to a handler implementing CanHandle + ToApplicationConfig. Every built-in component handler also implements oam.PropertySchemaProvider (PropertySchema()), declaring a constrained schema for its user-facing properties so the downstream runtime can validate them before invocation. Deeply nested or K8s-adjacent shapes are kept shallow/open (additionalProperties) rather than modeled field-by-field; escape-hatch fields (e.g. passthrough.object, manifests/crd inline content) stay open by design. Every property (including nested object fields and array item schemas at every depth) carries a Description, surfaced in the downstream runtime’s generated Handler API Reference."><meta property="og:url" content="https://www.gokure.dev/launcher/dev/api-reference/oam-components/index.html"><meta property="og:site_name" content="Go Kure — Launcher"><meta property="og:title" content="Component Handlers :: Go Kure — Launcher"><meta property="og:description" content="OAM Built-in Component Handlers Package components implements oam.ComponentHandler for the built-in component types. Each handler parses a typed config from a component’s properties and produces the corresponding Kubernetes resources via kure’s builders. Handlers are registered with the transformer in pkg/cmd/kurel (newBuiltinTransformer), each mapping a component type string to a handler implementing CanHandle + ToApplicationConfig. Every built-in component handler also implements oam.PropertySchemaProvider (PropertySchema()), declaring a constrained schema for its user-facing properties so the downstream runtime can validate them before invocation. Deeply nested or K8s-adjacent shapes are kept shallow/open (additionalProperties) rather than modeled field-by-field; escape-hatch fields (e.g. passthrough.object, manifests/crd inline content) stay open by design. Every property (including nested object fields and array item schemas at every depth) carries a Description, surfaced in the downstream runtime’s generated Handler API Reference."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="API Reference"><meta itemprop=name content="Component Handlers :: Go Kure — Launcher"><meta itemprop=description content="OAM Built-in Component Handlers Package components implements oam.ComponentHandler for the built-in component types. Each handler parses a typed config from a component’s properties and produces the corresponding Kubernetes resources via kure’s builders. Handlers are registered with the transformer in pkg/cmd/kurel (newBuiltinTransformer), each mapping a component type string to a handler implementing CanHandle + ToApplicationConfig. Every built-in component handler also implements oam.PropertySchemaProvider (PropertySchema()), declaring a constrained schema for its user-facing properties so the downstream runtime can validate them before invocation. Deeply nested or K8s-adjacent shapes are kept shallow/open (additionalProperties) rather than modeled field-by-field; escape-hatch fields (e.g. passthrough.object, manifests/crd inline content) stay open by design. Every property (including nested object fields and array item schemas at every depth) carries a Description, surfaced in the downstream runtime’s generated Handler API Reference."><meta itemprop=wordCount content="5578"><title>Component Handlers :: Go Kure — Launcher</title><link href=/launcher/dev/css/auto-complete/auto-complete.min.css?1787315377 rel=stylesheet><script src=/launcher/dev/js/auto-complete/auto-complete.min.js?1787315377 defer></script><script src=/launcher/dev/js/search-lunr.min.js?1787315377 defer></script><script src=/launcher/dev/js/search.min.js?1787315377 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/launcher/dev/searchindex.en.js?1787315377"</script><script src=/launcher/dev/js/lunr/lunr.min.js?1787315377 defer></script><script src=/launcher/dev/js/lunr/lunr.stemmer.support.min.js?1787315377 defer></script><script src=/launcher/dev/js/lunr/lunr.multi.min.js?1787315377 defer></script><script src=/launcher/dev/js/lunr/lunr.en.min.js?1787315377 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1787315377 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1787315377 rel=stylesheet></noscript><link href=/launcher/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1787315377 rel=stylesheet><link href=/launcher/dev/css/theme.min.css?1787315377 rel=stylesheet><link href=/launcher/dev/css/format-html.min.css?1787315377 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/api-reference/oam-components/index.html",window.relearn.relBasePath="../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://www.gokure.dev/launcher/dev",window.relearn.version_js_url="/launcher/dev/versionindex.en.js?1787315377",window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-origin=/launcher/dev/api-reference/oam-components/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#component-types>Component types</a></li><li><a href=#common-config>Common config</a></li><li><a href=#per-type-highlights>Per-type highlights</a></li><li><a href=#extending>Extending</a></li><li><a href=#conventions>Conventions</a></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/index.html><span itemprop=name>Go Kure — Launcher</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/index.html><span itemprop=name>API Reference</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Component Handlers</span><meta itemprop=position content="3"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam/index.html title="OAM Model (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-traits/index.html title="Trait Handlers (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable api-reference" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><h1 id=component-handlers>Component Handlers</h1><h1 id=oam-built-in-component-handlers>OAM Built-in Component Handlers<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h1><p><a href=https://pkg.go.dev/github.com/go-kure/launcher/pkg/oam/builtin/components rel=external><a href=#R-image-e78e0514c84e1b39360b537833dde341 class=lightbox-link><img alt="Go Reference" class="lazy lightbox figure-image" loading=lazy src=https://pkg.go.dev/badge/github.com/go-kure/launcher/pkg/oam/builtin/components.svg style=height:auto;width:auto></a>
+<a href=javascript:history.back(); class=lightbox-back id=R-image-e78e0514c84e1b39360b537833dde341><img alt="Go Reference" class="lazy lightbox lightbox-image" loading=lazy src=https://pkg.go.dev/badge/github.com/go-kure/launcher/pkg/oam/builtin/components.svg></a></a></p><p>Package <code>components</code> implements <code>oam.ComponentHandler</code> for the built-in component
 types. Each handler parses a typed config from a component&rsquo;s <code>properties</code> and
 produces the corresponding Kubernetes resources via kure&rsquo;s builders. Handlers are
 registered with the transformer in <code>pkg/cmd/kurel</code> (<code>newBuiltinTransformer</code>), each
@@ -11,17 +11,510 @@ K8s-adjacent shapes are kept shallow/open (<code>additionalProperties</code>) ra
 field-by-field; escape-hatch fields (e.g. <code>passthrough.object</code>, <code>manifests</code>/<code>crd</code> inline
 content) stay open by design. Every property (including nested object fields and array item
 schemas at every depth) carries a <code>Description</code>, surfaced in the downstream runtime&rsquo;s generated Handler API
-Reference.</p><h2 id=component-types>Component types<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><table><thead><tr><th><code>type</code></th><th>Produces</th><th>Summary</th></tr></thead><tbody><tr><td><code>webservice</code></td><td>Deployment, Service, ServiceAccount (+PVC)</td><td>HTTP service with replicas, probes, env, volumes.</td></tr><tr><td><code>worker</code></td><td>Deployment, ServiceAccount (+PVC)</td><td>Background workload (no Service/port).</td></tr><tr><td><code>statefulset</code></td><td>StatefulSet, headless Service, SA</td><td>Stateful workload with <code>volumeClaimTemplates</code>.</td></tr><tr><td><code>daemonset</code></td><td>DaemonSet, SA (+Service if <code>port</code>)</td><td>Per-node daemon; honors <code>tolerations</code>.</td></tr><tr><td><code>cronjob</code></td><td>CronJob, SA</td><td>Scheduled job; cron <code>schedule</code> + history limits.</td></tr><tr><td><code>helmchart</code></td><td>HelmRelease + Helm/OCIRepository, or rendered manifests</td><td>Helm via Flux (<code>native</code>) or client-side <code>template</code>.</td></tr><tr><td><code>oci</code></td><td>OCIRepository, Kustomization</td><td>Sync manifests from an OCI artifact (Flux).</td></tr><tr><td><code>postgresql</code></td><td>CNPG Cluster, Pooler, ObjectStore, Database</td><td>CloudNativePG database (backup/monitoring/pooling).</td></tr><tr><td><code>passthrough</code></td><td>any (verbatim)</td><td>Emit an arbitrary object as-declared (<code>clusterScoped</code> opt).</td></tr><tr><td><code>crd</code></td><td>CustomResourceDefinition(s)</td><td>CRDs from <code>inline</code>/<code>url</code>; rejects non-CRD docs.</td></tr><tr><td><code>manifests</code></td><td>any</td><td>Raw manifests from <code>inline</code>/<code>url</code> with namespace stamping + <code>scopeOverrides</code>.</td></tr></tbody></table><h2 id=common-config>Common config<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Most workload types (<code>webservice</code>, <code>worker</code>, <code>statefulset</code>, <code>daemonset</code>, <code>cronjob</code>)
-share these fields: <code>image</code> (validated — no untagged/<code>latest</code>), <code>env</code> (with
-<code>valueFrom</code> secret/configMap refs), <code>resources</code> (requests/limits, defaults
-100m/128Mi), <code>command</code>/<code>args</code>, <code>probes</code> (httpGet/tcpSocket/exec/grpc),
-<code>volumes</code>, <code>initContainers</code>, <code>sidecars</code>, and <code>affinity</code>.</p><h2 id=per-type-highlights>Per-type highlights<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong>webservice / worker</strong> — <code>image</code>, <code>replicas</code> (default 1), <code>port</code> (webservice).
+Reference.</p><h2 id=component-types>Component types<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><table><thead><tr><th><code>type</code></th><th>Produces</th><th>Summary</th></tr></thead><tbody><tr><td><code>webservice</code></td><td>Deployment, Service, ServiceAccount (+PVC)</td><td>HTTP service with replicas, probes, env, volumes.</td></tr><tr><td><code>worker</code></td><td>Deployment, ServiceAccount (+PVC)</td><td>Background workload (no Service/port).</td></tr><tr><td><code>statefulset</code></td><td>StatefulSet, headless Service, SA</td><td>Stateful workload with <code>volumeClaimTemplates</code>.</td></tr><tr><td><code>daemonset</code></td><td>DaemonSet, SA (+Service if <code>port</code>)</td><td>Per-node daemon; honors <code>tolerations</code>.</td></tr><tr><td><code>cronjob</code></td><td>CronJob, SA (+PVC)</td><td>Scheduled job; cron <code>schedule</code> + history limits.</td></tr><tr><td><code>helmchart</code></td><td>HelmRelease + Helm/OCIRepository, or rendered manifests</td><td>Helm via Flux (<code>native</code>) or client-side <code>template</code>.</td></tr><tr><td><code>oci</code></td><td>OCIRepository, Kustomization</td><td>Sync manifests from an OCI artifact (Flux).</td></tr><tr><td><code>postgresql</code></td><td>CNPG Cluster, Pooler, ObjectStore, Database</td><td>CloudNativePG database (backup/monitoring/pooling).</td></tr><tr><td><code>passthrough</code></td><td>any (verbatim)</td><td>Emit an arbitrary object as-declared (<code>clusterScoped</code> opt).</td></tr><tr><td><code>crd</code></td><td>CustomResourceDefinition(s)</td><td>CRDs from <code>inline</code>/<code>url</code>; rejects non-CRD docs.</td></tr><tr><td><code>manifests</code></td><td>any</td><td>Raw manifests from <code>inline</code>/<code>url</code> with namespace stamping + <code>scopeOverrides</code>.</td></tr></tbody></table><h2 id=common-config>Common config<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Most workload types (<code>webservice</code>, <code>worker</code>, <code>statefulset</code>, <code>daemonset</code>, <code>cronjob</code>)
+share these fields, projected directly onto real <code>corev1</code> types (same
+structural pattern as <code>ProbeConfig</code> holding <code>*corev1.Probe</code>) rather than a
+hand-rolled parallel schema: <code>image</code> (validated — no untagged/<code>latest</code>), <code>env</code>
+(<code>value</code> or <code>valueFrom</code> — mutually exclusive, matching <code>corev1.EnvVar</code>&rsquo;s own
+doc comment (&ldquo;cannot be used if value is not empty&rdquo;); <code>valueFrom</code> is one of
+<code>secretKeyRef</code>, <code>configMapKeyRef</code> (both accept <code>optional</code>, rejecting a
+present non-boolean value rather than silently treating it as unset; a key
+other than <code>name</code>/<code>key</code>/<code>optional</code> in either is rejected outright too, rather
+than being silently ignored), <code>fieldRef</code>
+(<code>apiVersion</code> must be <code>v1</code> if authored — the only field-label conversion
+Kubernetes has ever shipped for the downward API; omitting it also defaults to
+<code>v1</code>; a present-but-non-string <code>apiVersion</code> (e.g. a bare YAML number) is
+rejected rather than silently treated as absent, same as every other typed
+scalar field in this document; <code>fieldPath</code> is validated against the exact set real admission accepts
+for an env var fieldRef — <code>metadata.name</code>/<code>metadata.namespace</code>/<code>metadata.uid</code>,
+<code>spec.nodeName</code>/<code>spec.serviceAccountName</code>, <code>status.hostIP</code>/<code>status.hostIPs</code>/
+<code>status.podIP</code>/<code>status.podIPs</code> — plus the <code>metadata.labels['KEY']</code>/
+<code>metadata.annotations['KEY']</code> subscript forms, each with <code>KEY</code> checked as a
+qualified name; a field like <code>status.phase</code> builds but is rejected by
+admission, so it is rejected here too; a key other than <code>fieldPath</code>/
+<code>apiVersion</code> is rejected outright too, rather than being silently ignored),
+<code>resourceFieldRef</code> (<code>resource</code> must be
+one of <code>limits.cpu</code>, <code>limits.memory</code>, <code>limits.ephemeral-storage</code>,
+<code>requests.cpu</code>, <code>requests.memory</code>, <code>requests.ephemeral-storage</code>, or a
+<code>requests.hugepages-&lt;size></code>/<code>limits.hugepages-&lt;size></code> selector — the downward
+API cannot project an arbitrary extended resource such as
+<code>limits.nvidia.com/gpu</code>, unlike a plain <code>resources</code> map below; an authored
+<code>divisor</code> must be one of the canonical unit strings admission accepts for that
+resource&rsquo;s family — <code>1m</code>/<code>1</code> for cpu, one of <code>1</code>/<code>1k</code>/<code>1M</code>/<code>1G</code>/<code>1T</code>/<code>1P</code>/<code>1E</code>/
+<code>1Ki</code>/<code>1Mi</code>/<code>1Gi</code>/<code>1Ti</code>/<code>1Pi</code>/<code>1Ei</code> for memory/ephemeral-storage/hugepages — a
+zero-valued divisor such as <code>"0"</code> is treated as absent rather than rejected,
+matching admission&rsquo;s own zero-value defaulting; a present-but-non-string
+divisor (e.g. a bare YAML number) is rejected rather than silently treated as
+absent, same as every other typed scalar field in this document;
+<code>containerName</code>, if authored,
+must be a syntactically valid container name (<code>ValidateDNS1123Label</code>) —
+<strong>note:</strong> whether it actually names a container present in the generated pod
+is deliberately not checked, since that needs the full sibling
+container/initContainer/sidecar name set, which isn&rsquo;t available at this
+single-env-var parsing depth; real admission doesn&rsquo;t check it either (only
+the downward API <em>volume</em> form of <code>resourceFieldRef</code> requires
+<code>containerName</code> at all), so an unresolvable target only surfaces later, as a
+kubelet-time <code>CreateContainerConfigError</code>; a key other than
+<code>resource</code>/<code>containerName</code>/<code>divisor</code> is rejected outright rather than
+silently ignored, since a typo such as <code>divisorr</code> would otherwise leave the
+divisor unset — Kubernetes treats a zero divisor as its default of 1,
+changing the emitted unit),
+<code>fileKeyRef</code> (<code>volumeName</code>/<code>path</code>/<code>key</code> required, <code>optional</code> accepted (same
+non-boolean rejection as above); corev1&rsquo;s <code>EnvFiles</code> feature; <code>volumeName</code>
+must be a valid DNS-1123 label and <code>key</code> a valid (relaxed) env var name,
+matching real admission&rsquo;s own <code>validateFileKeySelector</code>; <code>path</code> must be
+relative and must not contain a <code>..</code> backstep component, per this repo&rsquo;s own
+path-safety convention; <strong>deferred:</strong> <code>volumeName</code> is not cross-checked
+against the component&rsquo;s declared <code>volumes</code> — env parsing runs before volume
+parsing in every call site — so a <code>fileKeyRef</code> naming a nonexistent volume,
+or an existing but non-<code>emptyDir</code> one, builds successfully here but is
+rejected at real admission: <code>validateFileKeyRefVolumes</code> requires the
+referenced volume be specifically <code>emptyDir</code>, not any other source type this
+schema supports; see the doc comment on <code>parseFileKeyRef</code> in <code>common.go</code>; a
+key other than <code>volumeName</code>/<code>path</code>/<code>key</code>/<code>optional</code> is rejected outright too,
+rather than being silently ignored) —
+mutually exclusive among themselves too), <code>envFrom</code> (an authored non-array
+value, e.g. a single ConfigMap/Secret object instead of a list of them, is
+rejected rather than silently treated as absent; bulk-import a ConfigMap&rsquo;s
+or Secret&rsquo;s keys, with <code>prefix</code> — any printable ASCII character except <code>=</code>,
+matching <code>corev1.EnvFromSource.Prefix</code>&rsquo;s own field doc comment; only the final
+prefix+key concatenation need be a valid env var name, not the prefix alone;
+a present-but-non-string <code>prefix</code> (e.g. a bare YAML number) is rejected
+rather than silently omitted while still emitting the rest of the source —
+an unprefixed import can collide with existing names and leaves the names
+the application expects unset;
+<code>configMapRef.name</code>/<code>secretRef.name</code> must each be a valid DNS-1123 subdomain,
+matching how every Kubernetes object name is validated; both <code>configMapRef</code>
+and <code>secretRef</code> also accept <code>optional</code>, with the same non-boolean rejection
+as <code>env</code>&rsquo;s <code>secretKeyRef</code>/<code>configMapKeyRef</code> above; a key other than
+<code>name</code>/<code>optional</code> inside either nested ref (e.g. a misspelled <code>optoinal</code>) is
+rejected outright too, rather than silently leaving the ref at its required
+default; a present-but-malformed
+<code>configMapRef</code>/<code>secretRef</code> (e.g. a scalar instead of an object) is rejected
+outright rather than silently treated as absent — the latter would let the
+other, well-formed ref alone satisfy the &ldquo;exactly one&rdquo; check below and
+quietly discard the malformed one instead of reporting it); a key other
+than <code>prefix</code>/<code>configMapRef</code>/<code>secretRef</code> (e.g. a misspelled <code>prefx</code>) is
+rejected outright too, rather than being silently ignored while the rest of
+the entry still builds — on <code>prefix</code> specifically, that previously emitted
+an unprefixed import instead of the intended one),
+<code>resources</code> — a <code>corev1.ResourceRequirements</code> projection: <code>requests</code>/<code>limits</code>
+accept <code>cpu</code>/<code>memory</code> (defaults 100m/128Mi) plus any other well-formed
+resource name (e.g. <code>ephemeral-storage</code>, <code>nvidia.com/gpu</code>) in the same map,
+each value authored as either a quantity string (<code>"500m"</code>, <code>"2Gi"</code>) or a bare
+YAML/JSON number (<code>1</code>, <code>0.5</code>) — both are valid <code>resource.Quantity</code> input
+(<code>Quantity.UnmarshalJSON</code> parses a bare numeric literal the same way it parses
+a quoted one), and both forms are also accepted by the published property
+schema itself: <code>cpu</code>/<code>memory</code> are declared with no <code>Type</code>, since the schema
+vocabulary has no string-or-number union and a <code>string</code>-only declaration would
+reject the numeric form the parser accepts — parsed as <code>resource.Quantity</code> and
+round-tripped unmodified. A resource name is validated the same way real
+admission validates <code>corev1.Container.Resources</code> (mirrors
+<code>ValidateContainerResourceName</code>): an unqualified name (no <code>/</code>) must be
+<code>cpu</code>/<code>memory</code>/<code>ephemeral-storage</code> or a <code>hugepages-&lt;size></code> name — an arbitrary
+unqualified token such as <code>foo</code> builds but is reserved for Kubernetes&rsquo; own
+native resources and is rejected here too; a qualified name (has <code>/</code>) is
+accepted as an extended resource (e.g. <code>nvidia.com/gpu</code>) unless it either
+contains <code>kubernetes.io/</code> (which claims to be a native resource, not an
+extended one, mirroring <code>IsNativeResource</code>) or is <code>requests.</code>-prefixed (which
+collides with the <code>ResourceQuota</code> <code>requests.&lt;name></code> alias form) — the two
+conditions are checked independently, so e.g. <code>kubernetes.io/foo</code> is rejected
+even though it is not <code>requests.</code>-prefixed.
+Every quantity must be non-negative; <code>cpu</code>/<code>memory</code>/<code>storage</code>/
+<code>ephemeral-storage</code> may be fractional, but any other (extended) resource name
+must be a whole number, matching Kubernetes&rsquo; own extended-resource
+constraint. A <code>hugepages-&lt;size></code> quantity must additionally be an integer
+multiple of that page size (e.g. <code>hugepages-2Mi: 3Mi</code> is a whole number of
+bytes but not a whole number of 2Mi pages, and is rejected; <code>hugepages-2Mi: 4Mi</code> is accepted), matching <code>IsHugePageResourceValueDivisible</code>. A hugepages
+or extended resource cannot be overcommitted (mirrors
+<code>validateResourceRequirements</code>&rsquo;s <code>IsOvercommitAllowed</code> check): if <code>requests</code>
+sets one, <code>limits</code> must set the identical value for that same name — a
+request with no matching limit is rejected outright (nothing defaults a
+missing limit from a request, unlike cpu/memory), and a request/limit pair
+that merely differs is rejected too. A <code>limits</code>-only entry with no matching
+<code>requests</code> entry is deliberately not rejected here: the real apiserver&rsquo;s
+defaulter copies <code>limits</code> into <code>requests</code> before validation runs, so that
+shape is admission-valid. <code>cpu</code>/<code>memory</code>/<code>ephemeral-storage</code> stay
+overcommittable — a lower request than limit is fine, and either may be set
+without the other — but when both are present the request still must not
+<em>exceed</em> the limit, matching <code>validateResourceRequirements</code>&rsquo;s
+request-vs-limit comparison for every resource name, not just the
+non-overcommitable set. No policy
+default/max hook exists for names other than cpu/memory
+today; <code>claims</code> (Dynamic Resource Allocation) is deliberately not covered —
+genuinely feature-gated in the pinned <code>k8s.io/api</code> version and meaningless
+without pod-level <code>PodSpec.ResourceClaims</code> wiring this schema doesn&rsquo;t have
+yet, see <code>parseResources</code>&rsquo;s doc comment), <code>command</code>/<code>args</code> (each element must
+be a string — <strong>note:</strong> unlike every other array field in this schema,
+<code>command</code>/<code>args</code> still silently drop a non-string element rather than
+rejecting it; <code>lifecycle.{postStart,preStop}.exec.command</code> below was fixed to
+reject, but the top-level <code>command</code>/<code>args</code> fix was deliberately left out of
+that change to keep it self-contained to <code>common.go</code>&rsquo;s <code>parseLifecycleHandler</code>
+— touching <code>parseCommand</code>/<code>parseArgs</code> would ripple into all 7 call sites across
+every kind component), <code>probes</code>
+(rejected outright if authored with a non-object value, e.g. <code>probes: true</code>,
+and likewise for each of its own <code>readiness</code>/<code>liveness</code>/<code>startup</code> keys, e.g.
+<code>probes: {liveness: true}</code> — same two-level presence-then-type-check shape as
+<code>lifecycle</code> below, instead of silently discarding the authored health check;
+a key other than <code>readiness</code>/<code>liveness</code>/<code>startup</code> (e.g. a misspelled
+<code>probes: {live: {...}}</code>) is rejected outright too, rather than matching none
+of the three recognized keys and silently producing no probe at all; a key
+other than the ten recognized fields inside a single probe object — the four
+handlers below plus the six timing fields further down — (e.g. a misspelled
+<code>failureTreshold</code>) is rejected outright too, instead of silently falling
+back to Kubernetes&rsquo; own default for the field the typo was meant to
+override;
+httpGet/tcpSocket/exec/grpc — exactly one handler may be authored; a
+present-but-non-object value for any of the four (e.g. <code>httpGet: "invalid"</code>)
+is rejected outright, even when paired with a well-formed sibling handler,
+rather than silently discarded while the sibling wins; an authored probe
+object with none of the four handlers present (e.g. <code>probes: {liveness: {periodSeconds: 10}}</code>) is rejected too, matching real admission
+(<code>validateHandler</code>&rsquo;s <code>numHandlers == 0</code> check) instead of silently discarding
+the whole authored probe; <code>exec.command</code> must be
+a non-empty array of strings — a present-but-wrong-type <code>command</code> (e.g. a
+bare string instead of an array) or an array containing a non-string element
+is rejected the same way, instead of silently producing no probe at all,
+mirroring <code>lifecycle.{postStart,preStop}.exec.command</code> below; a key other
+than <code>command</code> inside a probe <code>exec</code> object (e.g. a misspelled <code>commnad</code>) is
+rejected outright too, instead of silently ignored while the intended
+command never overrides the default; a string <code>port</code> is a named container port, not
+an arbitrary label, and is validated against <code>validation.IsValidPortName</code>
+just as real admission&rsquo;s <code>ValidatePortNumOrName</code> does: lowercase
+<code>[-a-z0-9]</code> only, at least one letter, no leading/trailing/adjacent hyphen,
+max 15 characters — a purely numeric string like <code>"8080"</code> is rejected, since
+it has no letter; beyond syntax, a named port is rejected outright on a
+component kind whose main container never declares any port for the kubelet
+to resolve the name against — <code>worker</code> and <code>cronjob</code> unconditionally (neither
+exposes a <code>port</code> property at all), <code>daemonset</code>/<code>statefulset</code> only when their
+own optional <code>port</code> was not set on that component instance (their main
+container is named <code>"http"</code>/<code>"tcp"</code> respectively, but only when <code>port > 0</code>),
+and <code>webservice</code> never (its <code>port</code> always defaults to 80, so the main
+container is always named <code>"http"</code>) — a numeric port is unaffected either way,
+since it dials the kubelet directly rather than resolving a declared name.
+Where a named port is allowed at all, it is further checked against the
+exact name the kind&rsquo;s builder actually declares — <code>"http"</code> for
+<code>webservice</code>/<code>daemonset</code>, <code>"tcp"</code> for <code>statefulset</code> — not merely accepted as
+any syntactically valid name: a syntactically valid but different name (e.g.
+<code>httpGet.port: metrics</code> on a <code>webservice</code>, whose only declared container
+port is <code>"http"</code>) builds successfully but is exactly as unresolvable by the
+kubelet at runtime as a named port on a portless component, so it is
+rejected the same way; <code>grpc.service</code>, if authored, must be a string — a
+present-but-non-string value (e.g. <code>service: 123</code>) is rejected rather than
+silently treated as absent (which would check the overall server instead of
+the intended named service) — and must be no more than 63
+characters (mirrors <code>validateGRPCService</code>&rsquo;s length cap — the gRPC
+health-checking service name is not DNS-1123 formatted, but admission still
+bounds its length), and <code>grpc.port</code> is always numeric regardless of any
+kind&rsquo;s named-port rules — a named <code>grpc.port</code> is rejected outright with its
+own message, never resolved against a declared container port; a key other
+than <code>port</code>/<code>service</code> inside a probe <code>grpc</code> object (e.g. a misspelled
+<code>servcie</code>) is rejected outright too, instead of silently ignored;
+<code>tcpSocket.host</code>, if authored, is preserved on the probe — a
+present-but-non-string value (e.g. <code>host: 123</code>) is rejected the same as
+every other typed scalar field in this document, instead of silently
+discarded while the probe still dials the Pod IP; when omitted,
+<code>corev1.TCPSocketAction.Host</code>&rsquo;s own doc comment says it then defaults to the
+Pod IP, so no explicit default needs to be authored here — the same
+optional-override shape as <code>httpGet.host</code> below; a key other than
+<code>port</code>/<code>host</code> inside a probe <code>tcpSocket</code> object (e.g. a misspelled <code>hots</code>)
+is rejected outright too, instead of silently ignored;
+<code>httpGet.httpHeaders</code> itself and its entries are validated
+rather than silently dropped/coerced — an authored non-array <code>httpHeaders</code>
+value (e.g. a single header object instead of a list) is rejected the same
+as a non-object entry within it, a missing/empty/invalid <code>name</code>
+(<code>validation.IsHTTPHeaderName</code>, matching <code>validateHTTPGetAction</code>), or a
+present-but-non-string <code>value</code> are all rejected instead of quietly
+disappearing or turning into <code>""</code>; a key other than <code>name</code>/<code>value</code> in a
+header entry (e.g. a misspelled <code>vaule</code>) is rejected outright too, rather
+than being silently ignored; an omitted <code>value</code> key still defaults to
+<code>""</code> — shared by <code>lifecycle.{postStart,preStop}.httpGet</code> below via the same
+parsing helper; a key other than <code>port</code>/<code>path</code>/<code>host</code>/<code>scheme</code>/<code>httpHeaders</code>
+anywhere in an httpGet object (e.g. a misspelled <code>pth</code> for <code>path</code>) is
+rejected outright too, instead of silently ignored while Kubernetes defaults
+whatever field the typo was meant to override — the identical five-key
+allow-list is checked independently in <code>lifecycle.{postStart,preStop}.httpGet</code>
+below, which has its own copy of this handler; <code>path</code>/<code>host</code>/<code>scheme</code> are
+all optional — an absent or empty
+<code>path</code> matches real Kubernetes&rsquo; own defaulting (<code>SetDefaults_HTTPGetAction</code>
+fills it with <code>"/"</code> before validation ever runs, wired for both probe and
+lifecycle httpGet handlers), so this schema does not require what upstream
+itself fills in; <code>host</code> has no format validation in real admission either
+(only rejected in combination with an HTTP2 protocol, which this schema does
+not expose), so an unusual-looking host string is accepted verbatim, same as
+real admission; <code>scheme</code>, if authored, must be <code>HTTP</code> or <code>HTTPS</code>
+(case-insensitive); all three, plus every probe numeric field below, reject a
+present-but-wrong-type value instead of silently treating it as absent;
+<code>initialDelaySeconds</code>/<code>periodSeconds</code>/<code>timeoutSeconds</code>/<code>successThreshold</code>/
+<code>failureThreshold</code>/<code>terminationGracePeriodSeconds</code> are typed integers, each
+bounds-checked to match real Kubernetes admission (<code>validateProbeTimeouts</code>
+plus the liveness/startup <code>successThreshold</code> rule) rather than accepting any
+integer at face value: <code>initialDelaySeconds</code> must not be negative;
+<code>periodSeconds</code>/<code>timeoutSeconds</code>/<code>successThreshold</code>/<code>failureThreshold</code> must
+each be at least 1 (a <code>periodSeconds: 0</code>, for example, would otherwise author
+a probe Kubernetes itself would reject); <code>successThreshold</code> must additionally
+be exactly 1 on a liveness or startup probe — only a readiness probe may set
+it above 1, since liveness/startup have only two outcomes (still healthy,
+or restart) and &ldquo;N consecutive successes to reset that state&rdquo; has no defined
+meaning for either —
+<code>terminationGracePeriodSeconds</code> is additionally rejected outright on a
+readiness probe (a failed readiness check only pulls the pod from Service
+endpoints, it never terminates the container, so the field has nothing to
+apply to there) and must be at least 1 when set on a liveness or startup
+probe), <code>lifecycle</code> (rejected outright if authored with a non-object value,
+e.g. a scalar or array, instead of silently treating it as absent and
+running the container with no startup/shutdown hooks; a key other than
+<code>postStart</code>/<code>preStop</code> (e.g. a misspelled <code>lifecycle: {postStop: {...}}</code>) is
+rejected outright too, rather than matching neither recognized key and
+silently producing no hook at all;
+<code>postStart</code>/<code>preStop</code>:
+<code>exec</code> (every <code>command</code> element must be a string; a non-string element is
+rejected, not silently dropped; a key other than <code>command</code> in the object,
+e.g. a misspelled <code>commnad</code>, is rejected outright too, instead of silently
+ignored)/<code>httpGet</code> (same named-port, <code>httpHeaders</code>,
+unknown-key, and optional-<code>path</code>/<code>host</code>/<code>scheme</code> rules as <code>probes</code>
+above)/<code>sleep</code> (<code>seconds</code> is required and must be a non-negative integer; a
+key other than <code>seconds</code> in the object, e.g. a misspelled <code>sconds</code>, is
+rejected outright too, instead of silently ignored) — at
+most one of these three may be authored, and a present-but-non-object value
+for any of them is rejected outright rather than silently discarded while a
+well-formed sibling wins, same as <code>probes</code> above;
+<code>tcpSocket</code> is rejected unconditionally, even when paired with another valid
+handler such as <code>exec</code>, and regardless of its own value&rsquo;s shape (an
+authored-but-malformed <code>tcpSocket</code>, e.g. a string, is rejected the same as a
+well-formed one) — corev1 documents it as broken for lifecycle hooks,
+and simply ignoring the extra key would silently drop the authored
+<code>tcpSocket</code> while emitting only the other handler; a key on a <code>postStart</code>/
+<code>preStop</code> value outside <code>httpGet</code>/<code>exec</code>/<code>sleep</code>/<code>tcpSocket</code> itself (e.g. a
+misspelled <code>timeoutSeconds</code> alongside a valid <code>exec</code>) is rejected outright
+too, rather than being silently ignored while the valid sibling handler
+still builds; <code>postStart</code>/<code>preStop</code> are
+each rejected outright if present with a non-object value, e.g. <code>preStop: "flush"</code>, instead of silently discarding the whole hook),
+<code>securityContext</code> (rejected outright if authored with a non-object value,
+e.g. a scalar or array, instead of silently treating it as absent and
+emitting a container with a nil security context; a key other than the
+eleven recognized security-context fields (e.g. a misspelled
+<code>readOnlyRootFileSystem</code>) is rejected outright too, instead of matching none
+of them and silently discarding the whole hardening request;
+per-container: <code>runAsUser</code>/<code>runAsGroup</code>/<code>runAsNonRoot</code>
+(<code>runAsUser: 0</code> combined with <code>runAsNonRoot: true</code> builds and is admitted by
+the API server, but the kubelet&rsquo;s <code>verifyRunAsNonRoot</code> check deterministically
+fails it at container-start time — a <code>CreateContainerConfigError</code>, every
+time — so this contradictory combination is rejected here instead of
+shipping a workload guaranteed never to start; <code>runAsUser</code>/<code>runAsGroup</code> are
+each rejected if authored with a non-integer value, e.g. a quoted <code>"1000"</code>,
+rather than silently omitting the UID/GID — since the container would then
+fall back to the image&rsquo;s own default, which may be root, while looking like
+the authored value was honored; both must also be non-negative),
+<code>readOnlyRootFilesystem</code>, <code>allowPrivilegeEscalation</code>, <code>privileged</code> (these
+three, plus <code>runAsNonRoot</code> above, are each rejected outright if authored with
+a non-boolean value, e.g. a quoted <code>"false"</code>, instead of being silently
+skipped: since Kubernetes&rsquo; default for each is permissive, silently dropping
+a mistyped value would leave the container permissive while looking like the
+authored hardening request was honored; additionally, <code>privileged: true</code>
+combined with <code>allowPrivilegeEscalation: false</code> is rejected outright —
+<code>corev1.SecurityContext.AllowPrivilegeEscalation</code>&rsquo;s own field doc states it
+is always true once a container runs privileged, so the pair would claim a
+hardening guarantee the runtime cannot honor, the same contradiction shape as
+<code>runAsUser: 0</code> with <code>runAsNonRoot: true</code> above),
+<code>capabilities</code> (rejected if authored with a non-object value; a key other
+than <code>add</code>/<code>drop</code> in the object, e.g. a misspelled <code>dorp</code>, is rejected
+outright too, instead of silently ignored; <code>add</code>/<code>drop</code>
+are each rejected if authored with a non-array value, e.g. <code>drop: ALL</code>
+instead of a list, or with a non-string array element — an empty-string
+element is silently skipped rather than rejected, since real admission places
+no format constraint on a Capability string at all. Adding the literal
+capability <code>CAP_SYS_ADMIN</code> alongside <code>allowPrivilegeEscalation: false</code> is
+rejected outright — Kubernetes admission always treats a container holding
+that capability as privilege-escalated regardless of the field&rsquo;s own value,
+so the combination promises hardening the runtime cannot honor; the
+unprefixed conventional form <code>SYS_ADMIN</code> is not rejected, matching real
+admission&rsquo;s own exact-string scope (it checks only <code>CAP_SYS_ADMIN</code>,
+literally). No environment-policy
+enforcement hook exists for these two fields — <code>oam.Policy</code> separately
+declares <code>AllowedCapabilities</code>/<code>ForbiddenCapabilities</code>/<code>RequiredCapabilities</code>,
+but those gate OAM trait-type usage (e.g. &ldquo;ingress&rdquo;), not container Linux
+capability strings (e.g. &ldquo;NET_ADMIN&rdquo;); see <code>enforce.go</code>&rsquo;s <code>enforcePrivileged</code>
+doc comment for the naming-collision detail. Enforcing these would need a new
+<code>Policy</code> method, which is out of scope here), <code>seccompProfile</code> (rejected outright if authored with
+a non-object value, e.g. <code>seccompProfile: RuntimeDefault</code>, instead of silently skipping the field
+and dropping the requested sandboxing entirely; a key other than
+<code>type</code>/<code>localhostProfile</code> in the object, e.g. a misspelled <code>locahost</code>, is
+rejected outright too, instead of silently ignored; <code>type</code> is required whenever the
+<code>seccompProfile</code> object is authored at all, matching real admission&rsquo;s own
+<code>field.Required</code> — omitting it (e.g. authoring only <code>localhostProfile</code> with
+no <code>type</code> key) is rejected rather than silently discarding the whole
+profile; <code>localhostProfile</code> is rejected outright when authored alongside
+<code>type: RuntimeDefault</code>/<code>Unconfined</code> (only meaningful for <code>type: Localhost</code>),
+including a present-but-non-string value in that position (e.g.
+<code>localhostProfile: 123</code>) — the same present-but-wrong-type rejection as
+every other typed scalar field in this document, not silently treated as
+absent while the contradictory type is accepted as authored; when <code>type</code> is
+<code>Localhost</code>, <code>localhostProfile</code> must be
+relative and must not contain a <code>..</code> backstep component, matching
+<code>corev1.SeccompProfile.LocalhostProfile</code>&rsquo;s own doc comment — &ldquo;must be a
+descending path, relative to the kubelet&rsquo;s configured seccomp profile
+location&rdquo; — and this repo&rsquo;s own path-safety convention), <code>seLinuxOptions</code>
+(also rejected outright if authored with a non-object value, same reasoning as
+<code>seccompProfile</code> above; a key other than <code>user</code>/<code>role</code>/<code>type</code>/<code>level</code> in the
+object, e.g. a misspelled <code>tpye</code>, is rejected outright too, instead of
+silently ignored;
+<code>user</code>/<code>role</code>/<code>type</code>/<code>level</code> are each rejected if authored with a
+non-string value, e.g. <code>type: 123</code>, instead of silently discarding just that
+sub-field — if it were the only one set, the whole SELinux context would
+otherwise vanish rather than reporting the malformed input),
+<code>appArmorProfile</code> (same &ldquo;<code>type</code> required when authored&rdquo; rule as
+<code>seccompProfile</code> above, the same non-object rejection as <code>seccompProfile</code>
+and <code>seLinuxOptions</code>, the same unknown-key rejection (only
+<code>type</code>/<code>localhostProfile</code> are recognized) as <code>seccompProfile</code> above, and the
+same <code>localhostProfile</code>
+mutual-exclusivity-with-RuntimeDefault/Unconfined and present-but-non-string
+rejection as <code>seccompProfile</code> above), <code>procMount</code> (<code>Default</code>|<code>Unmasked</code>; a present-but-non-string
+value, e.g. <code>procMount: false</code>, is rejected rather than silently omitted —
+same as every other typed scalar field in this document; an explicit empty
+string is still treated as absent, not an error, matching <code>parseStringField</code>&rsquo;s
+own convention for every other string field here); <code>windowsOptions</code> is
+deliberately not covered — this project&rsquo;s own container images are
+Linux-only (distroless base images run under podman), so a Windows-specific
+security context has no target to apply to here, and <code>procMount</code> is
+Linux-specific by definition, so excluding <code>windowsOptions</code> does not extend to
+it), <code>workingDir</code> (a bare pass-through — <code>corev1.Container.WorkingDir</code>&rsquo;s own
+doc comment states only that the container runtime&rsquo;s default applies when
+unset, and real admission enforces no path shape for it, so this schema does
+not invent a stricter constraint upstream itself does not have; a
+present-but-non-string value, e.g. <code>workingDir: 123</code>, is rejected rather than
+silently treated as absent, in all five kind handlers — this is a type check,
+distinct from the content-validation question the previous paragraph answers),
+<code>volumes</code> (the <code>volumes</code> property itself, if authored, must be an array — a
+present-but-non-array value, e.g. <code>volumes: {name: data}</code>, is rejected
+outright rather than silently treated as absent and building without the
+requested volume/mount, the same presence-then-type-check shape as <code>probes</code>
+above; each entry in that array must itself be an object — a non-object
+entry, e.g. <code>volumes: [data]</code>, is rejected outright rather than silently
+skipped while any well-formed sibling entries still build; every volume&rsquo;s
+<code>name</code>, regardless of source type — <code>hostPath</code>,
+<code>emptyDir</code>, <code>pvc</code>, <code>configMap</code>, <code>secret</code>, etc. — must be a valid DNS-1123
+label, matching how real admission validates every <code>corev1.Volume.Name</code>; an
+invalid name, e.g. containing <code>/</code>, builds successfully but is rejected at Pod
+admission; two volumes sharing the same valid name are likewise rejected —
+Pod volume names must be unique (<code>validateVolumes</code>&rsquo; own duplicate check),
+so the second entry is caught at parse time rather than only at admission;
+two volumes with distinct names sharing the same <code>mountPath</code> are also
+rejected — a container&rsquo;s own volume mounts must have unique mount paths
+(<code>ValidateVolumeMounts</code>&rsquo; own duplicate check), so only the first of two
+colliding mounts would ever actually be reachable at admission; <code>readOnly</code>,
+if authored, must be a boolean — a present-but-non-boolean value (e.g.
+<code>readOnly: "true"</code>) is rejected rather than silently defaulting to a
+writable mount (same fix applied to <code>initContainers</code>/<code>sidecars</code>&rsquo; own
+<code>volumeMounts</code> entries below, which had the identical gap);
+<code>name</code> and <code>mountPath</code> are both required on every entry — a present-but-
+non-string value (e.g. a numeric <code>mountPath</code>) collapses to the same empty
+value as an absent one, so both are rejected the same way: an entry missing
+either, or authoring one with the wrong type, previously built with no
+volume and no mount for that entry instead of reporting what was missing;
+<code>emptyDir.sizeLimit</code>, if authored, is parsed as a
+<code>resource.Quantity</code> and rejected if negative (e.g. <code>"-1Gi"</code>) — syntactically
+valid but a storage quantity real Kubernetes resource validation refuses,
+same as <code>resources</code>&rsquo; own quantity fields above; a present-but-non-string
+value (e.g. <code>sizeLimit: 1048576</code>) is rejected the same way, instead of
+failing the bare type assertion silently and building an emptyDir with no
+size limit at all; <code>pvc.size</code> is required (the
+same missing-vs-wrong-type rejection as <code>name</code>/<code>mountPath</code> above) and, once
+present, is validated the same way as <code>emptyDir.sizeLimit</code>; <code>pvc.storageClass</code>,
+if authored, must be a string — a present-but-non-string value (e.g. a bare
+number) is rejected rather than silently building with the cluster default
+class — and, once confirmed a string, a non-empty value must also be a valid
+DNS-1123 subdomain, matching <code>ValidatePersistentVolumeClaimSpec</code>&rsquo;s own
+<code>ValidateClassName</code> check; a malformed class name (e.g. containing <code>_</code> or
+<code>!</code>) previously built successfully and was rejected only at admission. An
+explicitly authored <code>storageClass: ""</code> is preserved as an
+opt-out request (Kubernetes distinguishes a nil <code>StorageClassName</code> — use the
+cluster default — from a pointer to <code>""</code> — request no class) rather than
+being collapsed to &ldquo;absent&rdquo; and silently provisioned through the default
+class; this distinction is not available for <code>volumeClaimTemplates.storageClass</code>
+below, since the underlying <code>go-kure/kure</code> <code>CreateVolumeClaimTemplate</code> helper
+that path builds on only ever sets a non-empty storage class name on the
+generated claim — a cross-repo limitation, out of scope here.
+<code>pvc.accessModes</code>, if authored, must be a non-empty array of non-empty
+strings, each one of the three real <code>corev1.PersistentVolumeAccessMode</code>
+values — a present-but-non-array value (e.g. a bare string) or a non-string
+element is rejected outright too, instead of silently falling through to the
+<code>ReadWriteOnce</code> default while discarding the author&rsquo;s actual list; an
+authored empty array (<code>accessModes: []</code>) is rejected outright as well —
+<code>ValidatePersistentVolumeClaimSpec</code> itself requires at least one access
+mode, so silently defaulting an explicit empty list to <code>ReadWriteOnce</code> would
+build a claim the author never asked for rather than reporting the
+malformed input; an absent <code>accessModes</code> key still defaults to
+<code>ReadWriteOnce</code>, unchanged — only an authored-and-empty array is treated as
+malformed; <code>ReadWriteOncePod</code>
+combined with any other access mode is rejected outright — real Kubernetes
+requires it be the claim&rsquo;s only mode; the same parser
+backs <code>volumeClaimTemplates.accessModes</code> below; the generated
+<code>PersistentVolumeClaim</code> object&rsquo;s own Kubernetes name is the component&rsquo;s
+<code>&lt;app.Name>-&lt;pod-local volume name></code>, not the bare pod-local name — two
+components in the same namespace that both author a <code>pvc</code> volume named
+<code>data</code> would otherwise emit two colliding <code>PersistentVolumeClaim/data</code>
+objects; the pod-local <code>Volume.Name</code> and its <code>VolumeMount</code> reference stay
+unqualified, only the PVC object&rsquo;s name and the matching
+<code>Volume.PersistentVolumeClaim.ClaimName</code> are qualified (<code>qualifyPVCNames</code> in
+<code>common.go</code>, called once per kind&rsquo;s <code>Generate()</code>) — qualification is keyed
+off the stable pod-local <code>Volume.Name</code> rather than the PVC&rsquo;s own (mutable)
+object name, so a second <code>Generate()</code> call on the same component instance
+reproduces the same qualified name instead of re-qualifying an
+already-qualified one (e.g. <code>app-data</code> becoming <code>app-app-data</code>); the join
+itself escapes interior hyphens in each half (<code>escapeForPVCQualification</code>)
+before concatenating, since plain <code>&lt;appName>-&lt;localName></code> string
+concatenation is not collision-free when either half itself contains a
+hyphen — component <code>a-b</code> with volume <code>data</code>, and component <code>a</code> with volume
+<code>b-data</code>, would otherwise both qualify to <code>a-b-data</code>; <code>hostPath.path</code>
+is likewise required and must be absolute — a raw host filesystem path has
+no defined root to resolve a relative value against, and real admission
+(<code>validateHostPathVolumeSource</code>) rejects a relative one the same way;
+<code>configMap.configMapName</code> and <code>secret.secretName</code> are each required the same
+way as <code>pvc.size</code>; a fully-authored entry whose <code>type</code> matches none of the
+five recognized sources — including <code>type</code> omitted entirely — is rejected
+outright rather than silently producing no volume or mount for an entry the
+author clearly intended to add; each recognized type&rsquo;s own field set is
+closed the same way <code>securityContext</code> and its nested objects are elsewhere
+in this file — an unrecognized key on a <code>hostPath</code>, <code>emptyDir</code>, <code>pvc</code>,
+<code>configMap</code>, or <code>secret</code> entry (e.g. a typo&rsquo;d <code>sizeLmit</code> instead of
+<code>sizeLimit</code>) is rejected rather than silently ignored, which previously let
+the author&rsquo;s intended value take no effect with no error explaining why),
+<code>initContainers</code>, <code>sidecars</code> (each entry&rsquo;s own <code>volumeMounts[].readOnly</code>
+must be a boolean and <code>volumeMounts[].subPath</code> must be a string when
+present — same presence-then-type-check shape as <code>volumes.readOnly</code> above;
+<code>volumeMounts[].mountPath</code> must also be unique within that entry&rsquo;s own
+mount list, the identical rule as <code>volumes</code>&rsquo; duplicate-mountPath check
+above, since each <code>initContainers</code>/<code>sidecars</code> entry is its own container),
+and <code>affinity</code>.</p><p><code>securityContext.privileged: true</code> is rejected unless the environment policy&rsquo;s
+<code>AllowPrivileged()</code> allows it — the one <code>securityContext</code> field enforced today
+(<code>enforce.go</code>&rsquo;s <code>enforcePrivileged</code>); the others have no policy hook yet.</p><p>A <code>volumes</code> entry sourced from <code>hostPath</code> is rejected unless the environment
+policy&rsquo;s <code>AllowHostPathVolumes()</code> allows it (<code>enforce.go</code>&rsquo;s
+<code>enforceHostPathVolumes</code>, the same reused-mechanism shape as
+<code>enforcePrivileged</code> above); like <code>enforcePrivileged</code>, it is called from all
+five kind components&rsquo; <code>ApplyPolicy</code>, not just one — a hostPath volume mounts
+an arbitrary path from the node&rsquo;s own filesystem into the Pod, so an
+unenforced policy denial here is a container-escape-adjacent gap, not merely
+a style one.</p><p>Setting any <code>securityContext</code> field makes the container&rsquo;s <code>SecurityContext</code>
+non-nil, which opts it out of the <code>security-context</code> trait&rsquo;s nil-only
+backfill for every <em>other</em> <code>SecurityContext</code> field too. If a component uses
+both, the trait&rsquo;s <code>Generate()</code> pass runs later and unconditionally overwrites
+<code>container.SecurityContext</code> — the trait always wins when both are applied to
+the same component. Use the trait for a safe, complete PSA-consistent
+default; use this property for raw, partial, full-fidelity authoring.</p><p><code>env</code>, <code>envFrom</code>, <code>resources</code>, <code>lifecycle</code>, <code>securityContext</code>, <code>workingDir</code>, and
+<code>probes</code> are each schema fragments parameterized by a <code>reserved bool</code> (mirroring
+<code>pkg/oam/builtin/traits/schema.go</code>&rsquo;s <code>schemaNetworkPolicy(reserved bool)</code>):
+every built-in call site passes <code>false</code> today. Deciding which of these fields
+should be platform-reserved (rejecting any authored value via
+<code>PropertySchema.PlatformReserved</code>/<code>enforcePlatformReserved</code>) is a consumer-side
+policy choice, not something this shared schema hardcodes.</p><h2 id=per-type-highlights>Per-type highlights<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong>webservice / worker</strong> — <code>image</code>, <code>replicas</code> (default 1), <code>port</code> (webservice).
 The <code>webservice</code> handler implements the optional <code>oam.EndpointProvider</code>: it declares its own
 pods (<code>app: &lt;component-name></code>) on the declared <code>port</code> (its single <code>port</code> property drives both
 the container port and the Service port), letting a downstream platform synthesize generic
 app→app connections targeting a webservice. <code>worker</code> declares no in-cluster port and emits no
-Service, so it deliberately advertises no endpoint (not an <code>EndpointProvider</code>).</li><li><strong>statefulset</strong> — <code>volumeClaimTemplates</code> (<code>name</code>, <code>size</code>, <code>storageClass</code>,
-<code>accessModes</code>, <code>mountPath</code>), <code>serviceName</code> (headless).</li><li><strong>daemonset</strong> — <code>tolerations</code> (<code>key</code>/<code>operator</code>/<code>value</code>/<code>effect</code>); <code>port</code>
+Service, so it deliberately advertises no endpoint (not an <code>EndpointProvider</code>).</li><li><strong>statefulset</strong> — <code>volumeClaimTemplates</code> (<code>name</code>, <code>size</code> — a <code>resource.Quantity</code>
+rejected if negative, same as <code>volumes</code>&rsquo; <code>pvc.size</code> above — <code>storageClass</code>
+(a present-but-non-string value is rejected outright, same as <code>volumes</code>'
+<code>pvc.storageClass</code>), <code>accessModes</code>, <code>mountPath</code>), <code>serviceName</code> (headless).</li><li><strong>daemonset</strong> — <code>tolerations</code> (<code>key</code>/<code>operator</code>/<code>value</code>/<code>effect</code>); <code>port</code>
 optionally adds a Service.</li><li><strong>cronjob</strong> — <code>schedule</code> (5-field cron), <code>restartPolicy</code> (default <code>OnFailure</code>),
 <code>successfulJobsHistoryLimit</code>/<code>failedJobsHistoryLimit</code>.</li><li><strong>helmchart</strong> — <code>chart</code>, <code>version</code>, <code>delivery</code> (<code>native</code>|<code>template</code>), <code>source</code>
 (inline <code>url</code> or <code>{name,kind}</code> ref), <code>values</code>/<code>valuesFrom</code>, <code>driftDetection</code>,
@@ -29,6 +522,13 @@ optionally adds a Service.</li><li><strong>cronjob</strong> — <code>schedule</
 <code>prune</code>, <code>interval</code>, <code>targetNamespace</code>.</li><li><strong>postgresql</strong> — <code>provider: cnpg</code>, <code>version</code> (default <code>16</code>), <code>storageSize</code>
 (precedence: authored > policy default <code>storageSize</code> > <code>1Gi</code>), <code>replicas</code>,
 <code>backup.*</code>, <code>monitoring.enabled</code>, <code>pooler.enabled</code>, <code>managedRoles</code>, <code>databases</code>.
+<code>resources</code> forwards <code>cpu</code>/<code>memory</code> only — the underlying CNPG builder
+(<code>kurecnpg.ResourceOptions</code>, an external <code>go-kure/kure</code> type) has no fields
+for other resource names, so any other name authored under <code>requests</code>/
+<code>limits</code> (e.g. <code>ephemeral-storage</code>, <code>nvidia.com/gpu</code>) is rejected with an
+explicit error rather than silently dropped; the other 5 workload kinds
+forward every resource name directly onto the real <code>corev1.Container</code> and
+have no such restriction.
 Its handler implements the optional <code>oam.EndpointProvider</code>: it declares the CNPG cluster&rsquo;s
 data-plane endpoint (<code>cnpg.io/cluster: &lt;component-name></code> on port <code>5432</code>) so a downstream
 platform can synthesize the target-side ingress allow (<code>{comp}-allow-endpoint-ingress</code>)
@@ -40,7 +540,10 @@ Its config exposes <code>ComponentName() string</code> (the <code>oam.ComponentN
 consumers can attribute the emitted resource to its owning OAM component.</li><li><strong>crd / manifests</strong> — <code>inline</code> xor <code>url</code>; <code>manifests</code> adds <code>scopeOverrides</code>
 (<code>apiVersion</code>/<code>kind</code>/<code>scope</code>) for unknown kinds.</li></ul><h2 id=extending>Extending<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Custom component types implement <code>oam.ComponentHandler</code> (<code>CanHandle</code> +
 <code>ToApplicationConfig</code>) and are registered alongside the built-ins. Exported helpers:
-<code>ValidateImageRef</code> (image policy) and <code>BuildPVC</code> (PVC from a <code>PVCConfig</code>).</p><p>See <a href=https://pkg.go.dev/github.com/go-kure/launcher/pkg/oam/builtin/components rel=external>pkg.go.dev</a>
+<code>ValidateImageRef</code> (image policy) and <code>BuildPVC</code> (PVC from a <code>PVCConfig</code>). A custom
+<code>Generate()</code> that builds standalone PVCs from a <code>PVCConfig</code> list should qualify their
+names the same way every built-in kind does — see <code>qualifyPVCNames</code> (unexported,
+<code>common.go</code>) — to avoid two components colliding on the same pod-local volume name.</p><p>See <a href=https://pkg.go.dev/github.com/go-kure/launcher/pkg/oam/builtin/components rel=external>pkg.go.dev</a>
 for the full type/field reference, the <a href=https://pkg.go.dev/github.com/go-kure/launcher/pkg/oam rel=external>OAM model</a>
 for the handler interfaces, and <code>examples/</code> for runnable applications.</p><h2 id=conventions>Conventions<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Handlers use <code>k8s.io/api</code> constants for well-known Kubernetes enum values (access
 modes, restart policies, etc.) rather than string literals — never re-define values
@@ -50,4 +553,4 @@ that already exist upstream.</p><footer class=footline></footer></article></div>
 <input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
 <button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/launcher/dev/index.html><a class=padding href=/launcher/dev/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul><li class=R-versionswitcher><div class="padding menu-control"><i class="fa-fw fas fa-code-branch"></i>
 <span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-version>Version</label>
-<select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/launcher/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main default-animation"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/launcher/dev/getting-started/index.html><a class="padding default-animation" href=/launcher/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/concepts/index.html><a class="padding default-animation" href=/launcher/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/contributing/index.html><a class="padding default-animation" href=/launcher/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li class=parent data-nav-id=/launcher/dev/api-reference/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/kurel-cli/index.html><a class=padding href=/launcher/dev/api-reference/kurel-cli/index.html>kurel CLI</a></li><li data-nav-id=/launcher/dev/api-reference/oam/index.html><a class=padding href=/launcher/dev/api-reference/oam/index.html>OAM Model</a></li><li class=active data-nav-id=/launcher/dev/api-reference/oam-components/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/index.html>Component Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-traits/index.html><a class=padding href=/launcher/dev/api-reference/oam-traits/index.html>Trait Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/errors/index.html><a class=padding href=/launcher/dev/api-reference/errors/index.html>Errors</a></li><li data-nav-id=/launcher/dev/api-reference/patch/index.html><a class=padding href=/launcher/dev/api-reference/patch/index.html>Patch Engine</a></li></ul></li><li data-nav-id=/launcher/dev/changelog/index.html><a class="padding default-animation" href=/launcher/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/launcher/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1787140897 defer></script><script src=/launcher/dev/js/theme.min.js?1787140897 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
+<select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/launcher/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main default-animation"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/launcher/dev/getting-started/index.html><a class="padding default-animation" href=/launcher/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/concepts/index.html><a class="padding default-animation" href=/launcher/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/contributing/index.html><a class="padding default-animation" href=/launcher/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li class=parent data-nav-id=/launcher/dev/api-reference/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/kurel-cli/index.html><a class=padding href=/launcher/dev/api-reference/kurel-cli/index.html>kurel CLI</a></li><li data-nav-id=/launcher/dev/api-reference/oam/index.html><a class=padding href=/launcher/dev/api-reference/oam/index.html>OAM Model</a></li><li class=active data-nav-id=/launcher/dev/api-reference/oam-components/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/index.html>Component Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-traits/index.html><a class=padding href=/launcher/dev/api-reference/oam-traits/index.html>Trait Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/errors/index.html><a class=padding href=/launcher/dev/api-reference/errors/index.html>Errors</a></li><li data-nav-id=/launcher/dev/api-reference/patch/index.html><a class=padding href=/launcher/dev/api-reference/patch/index.html>Patch Engine</a></li></ul></li><li data-nav-id=/launcher/dev/changelog/index.html><a class="padding default-animation" href=/launcher/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/launcher/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1787315377 defer></script><script src=/launcher/dev/js/theme.min.js?1787315377 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
