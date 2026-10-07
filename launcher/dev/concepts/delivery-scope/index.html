@@ -2,7 +2,7 @@
 This document records the target scope of the launcher library and kurel after a cross-library scope review of kure, launcher and a downstream cluster engine that consumes both. For each area it states launcher’s current behaviour, naming the symbol and the file that hold it, and the target behaviour of the ticket that changes it. A reference to code that a shipped ticket removed keeps the file:line it had before that change."><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Delivery Scope :: Go Kure — Launcher"><meta name=twitter:description content="Launcher delivery scope: ordering, naming, Helm values and template security Date: 2026-10-04 | Status: Design, tickets filed; §8 says which have shipped
 This document records the target scope of the launcher library and kurel after a cross-library scope review of kure, launcher and a downstream cluster engine that consumes both. For each area it states launcher’s current behaviour, naming the symbol and the file that hold it, and the target behaviour of the ticket that changes it. A reference to code that a shipped ticket removed keeps the file:line it had before that change."><meta property="og:url" content="https://www.gokure.dev/launcher/dev/concepts/delivery-scope/index.html"><meta property="og:site_name" content="Go Kure — Launcher"><meta property="og:title" content="Delivery Scope :: Go Kure — Launcher"><meta property="og:description" content="Launcher delivery scope: ordering, naming, Helm values and template security Date: 2026-10-04 | Status: Design, tickets filed; §8 says which have shipped
 This document records the target scope of the launcher library and kurel after a cross-library scope review of kure, launcher and a downstream cluster engine that consumes both. For each area it states launcher’s current behaviour, naming the symbol and the file that hold it, and the target behaviour of the ticket that changes it. A reference to code that a shipped ticket removed keeps the file:line it had before that change."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="Concepts"><meta itemprop=name content="Delivery Scope :: Go Kure — Launcher"><meta itemprop=description content="Launcher delivery scope: ordering, naming, Helm values and template security Date: 2026-10-04 | Status: Design, tickets filed; §8 says which have shipped
-This document records the target scope of the launcher library and kurel after a cross-library scope review of kure, launcher and a downstream cluster engine that consumes both. For each area it states launcher’s current behaviour, naming the symbol and the file that hold it, and the target behaviour of the ticket that changes it. A reference to code that a shipped ticket removed keeps the file:line it had before that change."><meta itemprop=wordCount content="16667"><title>Delivery Scope :: Go Kure — Launcher</title><link href=/launcher/dev/css/auto-complete/auto-complete.min.css?1791273724 rel=stylesheet><script src=/launcher/dev/js/auto-complete/auto-complete.min.js?1791273724 defer></script><script src=/launcher/dev/js/search-lunr.min.js?1791273724 defer></script><script src=/launcher/dev/js/search.min.js?1791273724 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/launcher/dev/searchindex.en.js?1791273724"</script><script src=/launcher/dev/js/lunr/lunr.min.js?1791273724 defer></script><script src=/launcher/dev/js/lunr/lunr.stemmer.support.min.js?1791273724 defer></script><script src=/launcher/dev/js/lunr/lunr.multi.min.js?1791273724 defer></script><script src=/launcher/dev/js/lunr/lunr.en.min.js?1791273724 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1791273724 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1791273724 rel=stylesheet></noscript><link href=/launcher/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1791273724 rel=stylesheet><link href=/launcher/dev/css/theme.min.css?1791273724 rel=stylesheet><link href=/launcher/dev/css/format-html.min.css?1791273724 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/concepts/delivery-scope/index.html",window.relearn.relBasePath="../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://www.gokure.dev/launcher/dev",window.relearn.version_js_url="/launcher/dev/versionindex.en.js?1791273724",window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-origin=/launcher/dev/concepts/delivery-scope/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#1-scope-launcher-is-delivery-agnostic>1. Scope: launcher is delivery-agnostic</a><ul><li><a href=#11-layer-roles>1.1 Layer roles</a></li><li><a href=#12-rules-this-document-applies>1.2 Rules this document applies</a></li><li><a href=#13-what-leaves-launcher-go-kurelauncher781-and-go-kurelauncher782-shipped>1.3 What leaves launcher (go-kure/launcher#781 and go-kure/launcher#782 shipped)</a></li></ul></li><li><a href=#2-ordering-model-go-kurelauncher783-go-kurelauncher784>2. Ordering model (go-kure/launcher#783, go-kure/launcher#784)</a><ul><li><a href=#21-before-go-kurelauncher783>2.1 Before go-kure/launcher#783</a></li><li><a href=#22-shipped-go-kurelauncher783-explicit-ordering-one-bundle-shape>2.2 Shipped (go-kure/launcher#783): explicit ordering, one bundle shape</a></li><li><a href=#23-oci-lowers-to-kind-components-go-kurelauncher784-done>2.3 <code>oci</code> lowers to kind components (go-kure/launcher#784, done)</a></li></ul></li><li><a href=#3-naming-and-overrides-go-kurelauncher785-go-kurelauncher787-go-kurelauncher788-go-kurelauncher792-go-kurelauncher793>3. Naming and overrides (go-kure/launcher#785, go-kure/launcher#787, go-kure/launcher#788, go-kure/launcher#792, go-kure/launcher#793)</a><ul><li><a href=#31-current-behaviour>3.1 Current behaviour</a></li><li><a href=#32-partly-shipped-go-kurelauncher787-open-name-overrides>3.2 Partly shipped (go-kure/launcher#787, open): name overrides</a></li><li><a href=#33-shipped-go-kurelauncher792-go-kurelauncher793-uniqueness-and-shortening>3.3 Shipped (go-kure/launcher#792, go-kure/launcher#793): uniqueness and shortening</a></li><li><a href=#34-shipped-go-kurelauncher788-component-label-and-provenance>3.4 Shipped (go-kure/launcher#788): component label and provenance</a></li></ul></li><li><a href=#4-helm-and-values-go-kurelauncher785-go-kurelauncher786>4. Helm and values (go-kure/launcher#785, go-kure/launcher#786)</a><ul><li><a href=#41-current-behaviour>4.1 Current behaviour</a></li><li><a href=#42-shipped-go-kurelauncher785-release-name>4.2 Shipped (go-kure/launcher#785): release name</a></li><li><a href=#43-shipped-go-kurelauncher786-secret-values>4.3 Shipped (go-kure/launcher#786): Secret values</a></li></ul></li><li><a href=#5-security-on-template-delivery-go-kurelauncher791>5. Security on template delivery (go-kure/launcher#791)</a><ul><li><a href=#51-current-behaviour>5.1 Current behaviour</a></li><li><a href=#52-implemented-go-kurelauncher791>5.2 Implemented (go-kure/launcher#791)</a></li><li><a href=#53-shipped-go-kurelauncher849-refusal-classes>5.3 Shipped (go-kure/launcher#849): refusal classes</a></li></ul></li><li><a href=#6-contract-metadata-and-kind-coverage-go-kurelauncher789-go-kurelauncher790>6. Contract metadata and kind coverage (go-kure/launcher#789, go-kure/launcher#790)</a><ul><li><a href=#61-shipped-go-kurelauncher789-contract-metadata>6.1 Shipped (go-kure/launcher#789): contract metadata</a></li><li><a href=#62-partly-shipped-go-kurelauncher790-open-full-spec-and-the-full-set-of-kinds>6.2 Partly shipped (go-kure/launcher#790, open): full spec and the full set of kinds</a></li></ul></li><li><a href=#7-asymmetries-go-kurelauncher794>7. Asymmetries (go-kure/launcher#794)</a></li><li><a href=#8-ticket-index>8. Ticket index</a></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/index.html><span itemprop=name>Go Kure — Launcher</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/concepts/index.html><span itemprop=name>Concepts</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Delivery Scope</span><meta itemprop=position content="3"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/concepts/design/index.html title="Design (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/concepts/oam-gvk/index.html title="API Group & GVK (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable concepts" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><h1 id=delivery-scope>Delivery Scope</h1><h1 id=launcher-delivery-scope-ordering-naming-helm-values-and-template-security>Launcher delivery scope: ordering, naming, Helm values and template security<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h1><p><em>Date: 2026-10-04 | Status: Design, tickets filed; §8 says which have shipped</em></p><p>This document records the target scope of the launcher library and <code>kurel</code> after a
+This document records the target scope of the launcher library and kurel after a cross-library scope review of kure, launcher and a downstream cluster engine that consumes both. For each area it states launcher’s current behaviour, naming the symbol and the file that hold it, and the target behaviour of the ticket that changes it. A reference to code that a shipped ticket removed keeps the file:line it had before that change."><meta itemprop=wordCount content="16648"><title>Delivery Scope :: Go Kure — Launcher</title><link href=/launcher/dev/css/auto-complete/auto-complete.min.css?1791363412 rel=stylesheet><script src=/launcher/dev/js/auto-complete/auto-complete.min.js?1791363412 defer></script><script src=/launcher/dev/js/search-lunr.min.js?1791363412 defer></script><script src=/launcher/dev/js/search.min.js?1791363412 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/launcher/dev/searchindex.en.js?1791363412"</script><script src=/launcher/dev/js/lunr/lunr.min.js?1791363412 defer></script><script src=/launcher/dev/js/lunr/lunr.stemmer.support.min.js?1791363412 defer></script><script src=/launcher/dev/js/lunr/lunr.multi.min.js?1791363412 defer></script><script src=/launcher/dev/js/lunr/lunr.en.min.js?1791363412 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1791363412 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1791363412 rel=stylesheet></noscript><link href=/launcher/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1791363412 rel=stylesheet><link href=/launcher/dev/css/theme.min.css?1791363412 rel=stylesheet><link href=/launcher/dev/css/format-html.min.css?1791363412 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/concepts/delivery-scope/index.html",window.relearn.relBasePath="../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://www.gokure.dev/launcher/dev",window.relearn.version_js_url="/launcher/dev/versionindex.en.js?1791363412",window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-origin=/launcher/dev/concepts/delivery-scope/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#1-scope-launcher-is-delivery-agnostic>1. Scope: launcher is delivery-agnostic</a><ul><li><a href=#11-layer-roles>1.1 Layer roles</a></li><li><a href=#12-rules-this-document-applies>1.2 Rules this document applies</a></li><li><a href=#13-what-leaves-launcher-go-kurelauncher781-and-go-kurelauncher782-shipped>1.3 What leaves launcher (go-kure/launcher#781 and go-kure/launcher#782 shipped)</a></li></ul></li><li><a href=#2-ordering-model-go-kurelauncher783-go-kurelauncher784>2. Ordering model (go-kure/launcher#783, go-kure/launcher#784)</a><ul><li><a href=#21-before-go-kurelauncher783>2.1 Before go-kure/launcher#783</a></li><li><a href=#22-shipped-go-kurelauncher783-explicit-ordering-one-bundle-shape>2.2 Shipped (go-kure/launcher#783): explicit ordering, one bundle shape</a></li><li><a href=#23-oci-lowers-to-kind-components-go-kurelauncher784-done>2.3 <code>oci</code> lowers to kind components (go-kure/launcher#784, done)</a></li></ul></li><li><a href=#3-naming-and-overrides-go-kurelauncher785-go-kurelauncher787-go-kurelauncher788-go-kurelauncher792-go-kurelauncher793>3. Naming and overrides (go-kure/launcher#785, go-kure/launcher#787, go-kure/launcher#788, go-kure/launcher#792, go-kure/launcher#793)</a><ul><li><a href=#31-current-behaviour>3.1 Current behaviour</a></li><li><a href=#32-partly-shipped-go-kurelauncher787-open-name-overrides>3.2 Partly shipped (go-kure/launcher#787, open): name overrides</a></li><li><a href=#33-shipped-go-kurelauncher792-go-kurelauncher793-uniqueness-and-shortening>3.3 Shipped (go-kure/launcher#792, go-kure/launcher#793): uniqueness and shortening</a></li><li><a href=#34-shipped-go-kurelauncher788-component-label-and-provenance>3.4 Shipped (go-kure/launcher#788): component label and provenance</a></li></ul></li><li><a href=#4-helm-and-values-go-kurelauncher785-go-kurelauncher786>4. Helm and values (go-kure/launcher#785, go-kure/launcher#786)</a><ul><li><a href=#41-current-behaviour>4.1 Current behaviour</a></li><li><a href=#42-shipped-go-kurelauncher785-release-name>4.2 Shipped (go-kure/launcher#785): release name</a></li><li><a href=#43-shipped-go-kurelauncher786-secret-values>4.3 Shipped (go-kure/launcher#786): Secret values</a></li></ul></li><li><a href=#5-security-on-template-delivery-go-kurelauncher791>5. Security on template delivery (go-kure/launcher#791)</a><ul><li><a href=#51-current-behaviour>5.1 Current behaviour</a></li><li><a href=#52-implemented-go-kurelauncher791>5.2 Implemented (go-kure/launcher#791)</a></li><li><a href=#53-shipped-go-kurelauncher849-refusal-classes>5.3 Shipped (go-kure/launcher#849): refusal classes</a></li></ul></li><li><a href=#6-contract-metadata-and-kind-coverage-go-kurelauncher789-go-kurelauncher790>6. Contract metadata and kind coverage (go-kure/launcher#789, go-kure/launcher#790)</a><ul><li><a href=#61-shipped-go-kurelauncher789-contract-metadata>6.1 Shipped (go-kure/launcher#789): contract metadata</a></li><li><a href=#62-partly-shipped-go-kurelauncher790-open-full-spec-and-the-full-set-of-kinds>6.2 Partly shipped (go-kure/launcher#790, open): full spec and the full set of kinds</a></li></ul></li><li><a href=#7-asymmetries-go-kurelauncher794>7. Asymmetries (go-kure/launcher#794)</a></li><li><a href=#8-ticket-index>8. Ticket index</a></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/index.html><span itemprop=name>Go Kure — Launcher</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/concepts/index.html><span itemprop=name>Concepts</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Delivery Scope</span><meta itemprop=position content="3"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/concepts/design/index.html title="Design (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/concepts/oam-gvk/index.html title="API Group & GVK (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable concepts" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><h1 id=delivery-scope>Delivery Scope</h1><h1 id=launcher-delivery-scope-ordering-naming-helm-values-and-template-security>Launcher delivery scope: ordering, naming, Helm values and template security<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h1><p><em>Date: 2026-10-04 | Status: Design, tickets filed; §8 says which have shipped</em></p><p>This document records the target scope of the launcher library and <code>kurel</code> after a
 cross-library scope review of kure, launcher and a downstream cluster engine that consumes
 both. For each area it states launcher&rsquo;s current behaviour, naming the symbol and the file
 that hold it, and the target behaviour of the ticket that changes it. A reference to code
@@ -431,7 +431,8 @@ registry class.</li><li><strong>Breaking</strong> for an unkeyed <code>oam.Viola
 empty maps. A missing co-registration was found only when a lowered component was
 dispatched, and the message named the type, not the authored component or the rule.</li><li><strong>Now</strong> (<code>pkg/oam/README.md</code> &ldquo;Contract metadata&rdquo;):<ul><li>Every built-in handler and lowering rule implements <code>ContractDescriber</code>
 (<code>pkg/oam/handler.go</code>; one <code>contract.go</code> in each of the components, traits and
-policies packages). <code>Family</code> is the type name, <code>Version</code> is <code>builtin.ContractVersion</code>
+policies packages, or the kind&rsquo;s own file for a kind component added since).
+<code>Family</code> is the type name, <code>Version</code> is <code>builtin.ContractVersion</code>
 (<code>v1alpha1</code>, <code>pkg/oam/builtin/contract.go</code>).</li><li><code>HandlerContractSet</code> (<code>pkg/oam/transform.go</code>) has a third map, <code>Policies</code>. Breaking
 for a consumer that wrote an unkeyed literal of it.</li><li>A built-in rule&rsquo;s identity carries the version: <code>component/webservice@v1alpha1</code> on
 <code>Origin.Rule</code>, on <code>LoweringStep.Rule</code> and in a <code>LoweringError</code> chain, where it read
@@ -490,7 +491,270 @@ trait type and, for a kind held or judged not authorable, the reason. Two tests 
 to the code
 (<code>TestKindInventory_CoversEveryConstructor</code>, <code>TestKindInventory_MatchesCallSites</code>,
 <code>kind_inventory_internal_test.go</code>): a base-library bump that adds a kind fails until the
-table has its row.</p></li><li><p><strong>Shipped: four core kinds,</strong> <code>namespace</code>, <code>limitrange</code>, <code>resourcequota</code> and
+table has its row.</p></li><li><p><strong>Shipped: five kinds of the Gateway API&rsquo;s <code>gateway.networking.k8s.io/v1</code>
+infrastructure objects,</strong> <code>gatewayclass</code>, <code>gateway</code>, <code>listenerset</code>, <code>referencegrant</code>
+and <code>backendtlspolicy</code> (<code>gatewayclass.go</code>, <code>gateway.go</code>, <code>listenerset.go</code>,
+<code>referencegrant.go</code>, <code>backendtlspolicy.go</code>, with what they share in
+<code>gateway_common.go</code>), each the strict projection of its spec type, declaring its object
+and taking <code>objectName</code>. A GatewayClass is cluster-scoped, the other four namespaced.
+All five are built on <code>policyFreeKind</code>, unchanged: no environment policy applies, no
+default is filled and no <code>Policy</code> method is added.</p><ul><li><strong>No capability is required and nothing gates them,</strong> a GatewayClass and a
+ReferenceGrant (which lets another namespace refer into the build namespace)
+included: on a cluster without the Gateway API&rsquo;s CRDs the component builds and the
+object is refused at apply. The <code>gateway</code> kind is not the Gateway a capability names
+for the <code>httproute</code> trait.</li><li>Required fields follow the rule of the Prometheus operator&rsquo;s kinds: a field the API
+requires that the Go type writes whether or not it was authored must be authored. A
+test holds each list to the CRDs the linked module ships (4 paths for a gatewayclass,
+22 for a gateway, 4 for a listenerset, 7 for a referencegrant, 9 for a
+backendtlspolicy), read in the experimental channel&rsquo;s CRDs, which hold every field
+the Go types do, and held to agree with the standard channel&rsquo;s.</li><li><strong>A field the API requires and the type omits when it is not authored is refused by
+the kind itself,</strong> as <code>servicecidr</code> refuses a missing <code>cidrs</code>, absent or authored
+empty: a <code>listenerset</code> with no <code>listeners</code>, a <code>backendtlspolicy</code> with no
+<code>targetRefs</code>, and <strong>a ListenerSet listener without its <code>name</code>, <code>port</code> or
+<code>protocol</code>,</strong> which a Gateway&rsquo;s listener must author too. The same test derives
+that set from the CRDs, at every depth, and holds each member to the kind&rsquo;s refusal
+or to a stated reason the decoded value cannot show the omission; there are five,
+all refused.</li><li><code>defaultScope</code> on a Gateway is an experimental-channel field, the only one of the
+five specs; a test holds that.</li><li><strong>No host these objects name is held to the allowed registries</strong> (a listener&rsquo;s
+hostname, a requested address, the hostname and subject alternative names a
+BackendTLSPolicy validates): none is an artifact source. <strong>No field holds a literal
+secret and none is checked:</strong> a certificate is a reference, and the free maps a
+controller defines (<code>tls.options</code>, <code>options</code>) are written as authored.</li><li>The pods a controller starts for a Gateway are not sized by the object, so the
+policy&rsquo;s maxima have nothing to hold. Labels and annotations are the <code>labels</code> and
+<code>annotations</code> properties, as on every kind component.</li></ul></li><li><p><strong>Shipped: three kinds of cert-manager&rsquo;s <code>cert-manager.io/v1</code> API,</strong> <code>issuer</code>,
+<code>clusterissuer</code> and <code>certificate</code> (<code>issuer.go</code>, <code>clusterissuer.go</code>, <code>certificate.go</code>,
+with what they share in <code>certmanager_common.go</code>), each the strict projection of its
+spec type, declaring its object and taking <code>objectName</code>. An Issuer and a Certificate
+are namespaced, a ClusterIssuer cluster-scoped. <code>certificate</code> is also a trait type;
+the two are separate lists, and the trait is unchanged.</p><ul><li><strong>No capability is required and nothing gates them,</strong> a ClusterIssuer included: on
+a cluster without cert-manager&rsquo;s CRDs the component builds and the object is refused
+at apply.</li><li><strong>The environment policy reaches two fields, so these are not built on
+<code>policyFreeKind</code> alone.</strong> <code>policyHeldKind</code> (<code>kind_policy_held.go</code>) is that helper,
+unchanged, with an <code>ApplyPolicy</code> that asks one function of the kind. An issuer&rsquo;s ACME
+HTTP01 solver pod template sizes a pod cert-manager starts: its cpu and memory are
+held to the policy&rsquo;s maxima, and nothing else of it is (it names no image and no
+security context of a container). A Certificate&rsquo;s keystore password written into the
+object is refused under a policy that forbids explicit secrets. No default is filled
+and no <code>Policy</code> method is added.</li><li>Required fields follow the rule of the Prometheus operator&rsquo;s kinds: a field the API
+requires that the Go type writes whether or not it was authored must be authored. A
+test holds each list to the CRDs the linked module ships (64 paths for an issuer, 8
+for a certificate). An issuer has none at the top level; a required field under a
+parent the author left out is not asked for. Three of an issuer&rsquo;s paths are fields
+of a Kubernetes or Gateway API type an ACME HTTP01 solver embeds (the terms of a
+required node affinity, the name of a parent reference): the CRDs refuse each as the
+type writes it unauthored, which a second test shows with the CRDs&rsquo; validator.</li><li><strong>cert-manager&rsquo;s validating webhook refuses more than the CRDs do, and launcher
+repeats none of it:</strong> an issuer of no type or of two, a keystore with a password
+beside a reference that names a Secret or with neither, a certificate that names no
+subject. Such a component builds and is refused at apply. The one rule the CRDs
+write as an expression (a <code>venafi</code> issuer names exactly one platform) is not
+repeated either.</li><li><strong>No host these objects name is held to the allowed registries</strong> (an ACME directory,
+a Vault server, a certificate platform, a DNS server, a CRL or OCSP endpoint): none
+is an artifact source. <strong>No field of an issuer is checked for a literal secret:</strong> a
+credential is a reference to a Secret, and the free JSON of a webhook solver&rsquo;s
+<code>config</code> is written as authored.</li><li>A duration is carried in Go&rsquo;s spelling (<code>2160h</code> as <code>2160h0m0s</code>). Labels and
+annotations are the <code>labels</code> and <code>annotations</code> properties, as on every kind
+component.</li></ul></li><li><p><strong>Shipped: the four kinds of Cilium&rsquo;s BGP control plane, <code>cilium.io/v2</code>,</strong>
+<code>cilium-bgpadvertisement</code>, <code>cilium-bgpclusterconfig</code>, <code>cilium-bgpnodeconfigoverride</code>
+and <code>cilium-bgppeerconfig</code> (<code>cilium_bgpadvertisement.go</code>, <code>cilium_bgpclusterconfig.go</code>,
+<code>cilium_bgpnodeconfigoverride.go</code>, <code>cilium_bgppeerconfig.go</code>, with what they share in
+<code>cilium_bgp_common.go</code>), each the strict projection of its spec type, built on
+<code>policyFreeKind</code>, cluster-scoped, declaring its object and taking <code>objectName</code>. The
+type names carry a prefix: MetalLB has a BGPAdvertisement too.</p><ul><li><strong>No capability is required and nothing gates them:</strong> on a cluster without Cilium&rsquo;s
+CRDs the component builds and the object is refused at apply.</li><li>The required lists follow the rule of the Prometheus operator&rsquo;s kinds, read from the
+CRDs of the linked module: a
+test holds each list to the CRD&rsquo;s <code>required</code> entries the Go type would write
+unauthored.</li><li>The CRDs carry six expression rules. The five on an advertisement entry (<code>service</code>
+with type <code>Service</code> and only with it, <code>interface</code> with type <code>Interface</code> and only
+with it, no <code>selector</code> with type <code>PodCIDR</code>) are checked: each compares authored
+fields. The one on a peer configuration&rsquo;s <code>timers</code> (<code>keepAliveTimeSeconds</code> not
+larger than <code>holdTimeSeconds</code>) is checked too; with one authored, the other is
+the default the API server fills before it evaluates the rule, and the kind
+compares with that default (30 and 90, the linked CRD&rsquo;s, held to it by a test)
+and names it in the refusal. A test fails on a rule of the linked CRDs that is neither
+listed as checked nor as left, and holds each checked rule to the API server&rsquo;s own
+expression validator, run over the linked CRD after its defaults: the validator
+refuses what breaks the rule and accepts what is next to it, and the kind agrees on
+both.</li><li><strong>No host these objects name is held to the allowed registries</strong> (a peer&rsquo;s
+address, a session&rsquo;s local address, a router ID): none is an artifact source. <strong>No
+field is checked for a literal secret:</strong> <code>authSecretRef</code> is the name of a Secret,
+and no field holds a password.</li><li>A peer configuration selects its advertisements by label: those are written under
+the advertisement&rsquo;s <code>labels</code>, as on every kind component. An override takes effect
+on the CiliumBGPNodeConfig of the same name, which <code>objectName</code> sets.</li></ul></li><li><p><strong>Shipped: five more kinds of Cilium&rsquo;s API, <code>cilium.io/v2</code>,</strong> <code>cilium-cidrgroup</code>,
+<code>cilium-loadbalancerippool</code>, <code>cilium-egressgatewaypolicy</code>, <code>cilium-localredirectpolicy</code>
+and <code>cilium-nodeconfig</code> (<code>cilium_cidrgroup.go</code>, <code>cilium_loadbalancerippool.go</code>,
+<code>cilium_egressgatewaypolicy.go</code>, <code>cilium_localredirectpolicy.go</code>,
+<code>cilium_nodeconfig.go</code>), each the strict projection of its spec type, built on
+<code>policyFreeKind</code>, declaring its object and taking <code>objectName</code>. The first three are
+cluster-scoped; the redirect policy and the node configuration are namespaced.</p><ul><li><strong>No capability is required and nothing gates them,</strong> as for the BGP kinds.</li><li>The required lists are read from the CRDs of the linked module and held to them by
+a test, with the helper the BGP kinds use for a selector&rsquo;s match expressions.</li><li>A redirect frontend takes exactly one of <code>addressMatcher</code> and <code>serviceMatcher</code>: the
+CRD&rsquo;s schema says so, it is one comparison of authored fields, and the kind refuses
+neither and both.</li><li>The CRDs carry five expression rules and none is checked. That an <code>egressIP</code> is an
+IP address (twice) is one field&rsquo;s value rule. The three on a redirect policy refuse
+a change of the stored object, which a build does not have. A test fails on a rule
+of the linked CRDs that is not listed as left.</li><li>Three defaults of the CRDs sit on fields the Go type omits when empty (<code>disabled</code>,
+<code>skipRedirectFromBackend</code>, <code>egressGateways</code>). Each default is that empty value, so
+an authored <code>false</code> or <code>[]</code> is left out and filled back the same; a test holds the
+defaults to that.</li><li><strong>No address or CIDR these objects hold is held to the allowed registries:</strong> none
+is an artifact source, and no field names a host. <strong>No field is checked for a
+literal secret:</strong> none refers to a Secret, and a node configuration&rsquo;s <code>defaults</code> is
+a free map of strings, written as authored and not checked.</li><li>A CIDR group is referred to by its name, which <code>objectName</code> sets, or selected by
+the labels written under its <code>labels</code>, as on every kind component.</li></ul></li><li><p><strong>Shipped: the <code>cilium-clusterwidenetworkpolicy</code> kind</strong>
+(<code>cilium_clusterwidenetworkpolicy.go</code>), the cluster-scoped counterpart of the
+<code>cilium-networkpolicy</code> kind: <code>spec</code>, <code>specs</code> or both, each a Cilium rule, with that
+kind&rsquo;s decode and its refusal of an unknown key inside a selector. It declares its
+object and takes <code>objectName</code>. <strong>No capability is required and nothing gates it.</strong></p><ul><li>It refuses what the CRD&rsquo;s schema refuses of the two fields and is one comparison of
+authored fields: an object with no rule, a rule that authors both or neither of
+<code>endpointSelector</code> and <code>nodeSelector</code>, and a rule with no entry in any of its four
+lists. The choices deeper in a rule (how a CIDR entry names its addresses, a DNS
+entry&rsquo;s name or pattern, a port&rsquo;s layer 7 protocol) and every value rule are left to
+the API server. A test lists every choice and expression rule of the linked CRD as
+checked or left, and another holds the refusal of an object with no rule to the API
+server&rsquo;s own expression validator.</li><li>The required list of a rule is read from the CRD and held to it by a test: 59
+fields the Cilium type writes whether or not they were authored. Two optional
+fields are required as well, a listener&rsquo;s <code>priority</code> and the <code>kind</code> of its Envoy
+configuration, because the type writes an unauthored one as <code>0</code> and as the empty
+string, and the API refuses both.</li><li><strong>Hosts are not checked:</strong> the names a rule holds (<code>toFQDNs</code>, DNS rules, an HTTP
+<code>host</code>, server names) and its CIDRs are not artifact sources and are not held to
+the allowed registries. <strong>No literal secret is checked:</strong> an HTTP header match&rsquo;s
+<code>value</code> is written as authored, and a Secret a rule refers to is not looked for.</li></ul></li><li><p><strong>Shipped: the <code>cilium-networkpolicy</code> kind</strong> (<code>cilium_networkpolicy.go</code>), ungated
+under the terms of the routing kinds.</p><ul><li>A CiliumNetworkPolicy has no spec type: the kind projects its <code>spec</code> (one rule) and
+<code>specs</code> (a list of rules), each the whole Cilium rule.</li><li>It refuses a policy Cilium rejects: no rule at all, a rule with no
+<code>endpointSelector</code>, a rule with a <code>nodeSelector</code>, a rule with no entry in <code>ingress</code>,
+<code>ingressDeny</code>, <code>egress</code> or <code>egressDeny</code>. Cilium&rsquo;s CRD schema refuses some of these
+at admission; the rest the API server would store and the agent reject when it
+reads the object, unenforced. No selector is filled in.</li><li>It refuses a required field that was not authored, by its path: the fields the
+CiliumNetworkPolicy CRD requires inside a rule that the Cilium type writes whether
+or not they were authored (a match expression&rsquo;s <code>key</code> and <code>operator</code>, an
+<code>authentication</code>&rsquo;s <code>mode</code>, a TLS context&rsquo;s <code>secret</code>), and a listener&rsquo;s <code>priority</code>
+and the <code>kind</code> of its <code>envoyConfig</code>, which the type writes with a value the API
+refuses. Such a document was emitted before, with the empty value in place of the
+field. A test holds the list to the CRD of the linked module.</li><li>The <code>cilium-networkpolicy</code> trait refuses the same, under the three fields of a rule
+it publishes (<code>endpointSelector</code>, <code>ingress</code>, <code>egress</code>): it decodes into the same
+type, and a trait that left such a field out was emitted with the empty value too.
+Its list is the kind&rsquo;s, cut to those fields, and a test holds it to the same CRD.
+Both read the list from the internal <code>pkg/oam/internal/requiredfields</code>.</li><li>An unknown key inside an endpoint selector is refused by its path, as in the trait:
+the selector unmarshals itself and would drop a misspelt key, leaving the selector
+that matches everything. The positions are found from the Cilium types.</li></ul></li><li><p><strong>Shipped: the four kinds of the External Secrets Operator, <code>external-secrets.io/v1</code>,</strong>
+<code>secretstore</code>, <code>clustersecretstore</code>, <code>externalsecret</code> and <code>clusterexternalsecret</code>
+(<code>secretstore.go</code>, <code>clustersecretstore.go</code>, <code>externalsecret.go</code>,
+<code>clusterexternalsecret.go</code>, with what they share in <code>externalsecrets_common.go</code>), each
+the strict projection of its spec type, declaring its object and taking <code>objectName</code>.
+The two cluster kinds are cluster-scoped. All four are built on <code>policyHeldKind</code>.</p><ul><li><strong>No capability is required and nothing gates them:</strong> on a cluster without the
+operator&rsquo;s CRDs the component builds and the object is refused at apply. The
+cluster&rsquo;s <code>external-secret</code> capability is the trait&rsquo;s; the kinds do not read it,
+and an <code>externalsecret</code> names its own store.</li><li>The required lists follow the rule of the Prometheus operator&rsquo;s kinds, read from the
+Go source of the linked
+module, which ships no CRD. <strong>A store&rsquo;s list is generated</strong> (251 paths over every
+provider at this pin, in <code>zz_generated_externalsecrets_required.go</code>), and a test
+fails where the file and the derivation differ. Four more fields of a store are
+ones the API would default and the type always writes, so the default never
+applies and the value must be written: <strong>a Vault store writes its <code>version</code>.</strong></li><li>An authored <code>false</code> or <code>0</code> the type would omit and the API would replace with
+another default is refused, on three fields of single providers.</li><li>Of the API&rsquo;s count and expression rules two are checked: a store configures exactly
+one provider, and a <code>data</code> entry&rsquo;s <code>sourceRef</code> names no generator (the object
+always carries its <code>storeRef</code>; <code>dataFrom</code> takes a generator). The others, and what
+the operator&rsquo;s validating webhook adds (an external secret with neither <code>data</code> nor
+<code>dataFrom</code>, among others), are left to the API server. A test fails on a rule of
+the linked source that is neither listed as checked nor as left.</li><li><strong>A credential written into a store is refused under an environment policy that
+forbids explicit secrets:</strong> the <code>value</code> of seven credential fields that also take a
+reference to a Secret, and the data of the <code>fake</code> provider. An identifier in the
+same shape of field is not. <strong>Not checked, under any policy:</strong> a webhook&rsquo;s headers
+and body, a Vault provider&rsquo;s headers, the user part of a URL and the template of
+the Secret an external secret writes, where a reference and a literal look alike.
+<strong>No host these objects name is held to the allowed registries</strong> (a provider&rsquo;s
+server, URL or endpoint): none is an artifact source.</li><li><strong>An object an external secret has the operator write instead of a Secret
+(<code>target.manifest</code>) gets no more than the same policy gives that kind on
+<code>passthrough</code>.</strong> Its content is rendered in the cluster and cannot be read at
+build, so a kind the rendered-object check reads (a workload, a claim, a
+PersistentVolume, a HorizontalPodAutoscaler, in any version) is refused, under
+every policy and under the default one; a core Secret is refused where
+<code>passthrough</code> refuses it; any other kind passes as it would there, and whether
+the operator writes it at all is the cluster&rsquo;s (the operator&rsquo;s generic-target
+setting and its RBAC). That is stricter than <code>passthrough</code> where the policy
+would pass the object it read (a claim under a policy with no storage maximum,
+an autoscaler under one with no replica maximum): here there is nothing to
+read. An <code>apiVersion</code> there that is no API version (a version, or a group and
+a version, each a name the API can have) is refused under every policy, since
+nothing can write such an object and, where the value does not split into the
+two, its kind cannot be read.</li><li>A trait&rsquo;s ExternalSecret and an <code>externalsecret</code> component&rsquo;s are one kind: given
+one name in one namespace they are refused as a collision.</li></ul></li><li><p><strong>Shipped: <code>role</code>, <code>rolebinding</code>, <code>clusterrole</code>, <code>clusterrolebinding</code></strong> (<code>role.go</code>,
+<code>rolebinding.go</code>, <code>clusterrole.go</code>, <code>clusterrolebinding.go</code>, with what they share in
+<code>rbac_common.go</code>), the projections of the four objects of the
+<code>rbac.authorization.k8s.io/v1</code> API on the shared helper <code>policyFreeKind</code>. The first
+two are in the build namespace, the last two cluster-scoped.</p><ul><li><strong>They are ungated: no capability and no environment-policy check restricts what a
+role grants,</strong> nor to whom a binding grants it.</li><li>None has a spec: the properties are the object&rsquo;s own fields (<code>rules</code>; <code>rules</code> and
+<code>aggregationRule</code>; <code>subjects</code> and <code>roleRef</code>), strictly decoded, and its <code>kind</code>,
+<code>apiVersion</code> and <code>metadata</code> are refused.</li><li>The required lists (a rule&rsquo;s <code>verbs</code>; a binding&rsquo;s <code>roleRef</code> with its <code>kind</code> and
+<code>name</code>, and a subject&rsquo;s <code>kind</code> and <code>name</code>; the <code>key</code> and <code>operator</code> of a match
+expression of an aggregation selector) are derived from the markers of the linked
+<code>k8s.io/api</code> module by the test that derives the <code>endpointslice</code> kind&rsquo;s, which also
+fails on a required field the type omits when unauthored: the four have none.</li><li>Beyond the markers, the kinds check presence rules read by hand from the API
+server&rsquo;s validation at Kubernetes v1.37.1, which no linked module holds and no
+test derives: a rule names <code>apiGroups</code> and <code>resources</code>, or in a ClusterRole
+<code>nonResourceURLs</code> instead, which are refused in a Role and beside resources; a
+ClusterRoleBinding&rsquo;s ServiceAccount subject names its <code>namespace</code>; an
+<code>aggregationRule</code> holds a selector. The form of a value that validation checks
+is left to the API server; whether a verb, a resource or an API group exists is
+checked by neither.</li><li><code>roleRef.apiGroup</code> may be left out: the object carries it empty and the API server
+fills the RBAC group. <code>roleRef.name</code> and the names of subjects are the author&rsquo;s
+literals and follow no component&rsquo;s <code>objectName</code>.</li><li>An aggregated ClusterRole is emitted with <code>rules: null</code> when <code>rules</code> is not
+authored and with <code>[]</code> when authored so; the control plane fills the rules.</li><li>They stand beside the <code>rbac</code> trait, which grants to a workload&rsquo;s own
+ServiceAccount. A trait&rsquo;s object and a component&rsquo;s of one kind and name are
+refused as a name collision.</li></ul></li><li><p><strong>Shipped: six cluster-scoped kinds no environment policy applies to,</strong>
+<code>storageclass</code>, <code>volumeattributesclass</code>, <code>priorityclass</code>, <code>runtimeclass</code>,
+<code>ingressclass</code> and <code>csidriver</code> (one file each, named after the type, in
+<code>pkg/oam/builtin/components</code>).</p><ul><li>One shared helper builds them (<code>policyFreeKind</code>, <code>kind_policy_free.go</code>): the strict
+decode, a config with nothing to enforce, and a <code>Generate</code> that returns the
+base-library constructor&rsquo;s object with a copy of what was decoded. A kind built on it
+is a type, an optional required-field check, an optional list of required fields the
+type writes unauthored, and a constructor.</li><li>Each declares its object as cluster-scoped and takes <code>objectName</code> (§3.2): the config
+carries the resolved name, <code>Generate</code> names the object with it, and the name is
+claimed in no namespace.</li><li><code>ingressclass</code> and <code>csidriver</code> project their spec type. The four classes have no
+spec type: the properties are the object&rsquo;s fields beside its identity, and <code>kind</code>,
+<code>apiVersion</code> and <code>metadata</code> are refused by name.</li><li>A top-level field the API server refuses an object without must be authored
+(<code>provisioner</code>, <code>handler</code>, <code>driverName</code>, an IngressClass&rsquo;s <code>controller</code>, and at least
+one of a VolumeAttributesClass&rsquo;s <code>parameters</code>). A PriorityClass <code>value</code> is not one:
+unauthored, it is emitted as <code>0</code>. Other value rules are left to the API server.</li><li>A default StorageClass or IngressClass writes its default-class annotation under
+<code>annotations</code>, as every kind component does.</li><li>A CSIDriver&rsquo;s name is not held to the 63 characters the API documents for it: the
+API server does not hold the object to that limit, and refuses a PersistentVolume
+that names a longer driver. The kind refuses what the API server refuses of the
+object and no more.</li></ul></li><li><p><strong>Shipped: <code>endpointslice</code></strong> (<code>endpointslice.go</code>), the projection of a
+<code>discovery.k8s.io/v1</code> EndpointSlice on the shared helper <code>policyFreeKind</code>, in the
+build namespace. It was held until the kinds took <code>labels</code> (above).</p><ul><li>An EndpointSlice has no spec: the properties are the object&rsquo;s own fields
+(<code>addressType</code>, <code>endpoints</code>, <code>ports</code>), strictly decoded, and its <code>kind</code>,
+<code>apiVersion</code> and <code>metadata</code> are refused.</li><li>A slice belongs to a Service only through the <code>kubernetes.io/service-name</code> label,
+authored under <code>labels</code>. It is the author&rsquo;s literal and does not follow a
+Service&rsquo;s <code>objectName</code>.</li><li>The required list (<code>addressType</code>, an endpoint&rsquo;s <code>addresses</code>, the <code>name</code> of a zone
+or node hint) is the fields the API&rsquo;s source marks required and the type writes
+whether or not they were authored. A test derives it from the markers of the
+linked <code>k8s.io/api</code> module, and fails on a required field the type omits when
+unauthored: the kind has none. The check is of presence; the form of every value
+is left to the API server.</li><li>The type writes <code>endpoints</code>, <code>ports</code> and an endpoint&rsquo;s <code>conditions</code> when they
+are not authored, and the API does not require them: the object carries them
+empty (<code>null</code>, <code>null</code>, <code>{}</code>).</li><li><strong>Hosts are not checked:</strong> the addresses of an endpoint, FQDNs included, are not
+artifact sources and are not held to the allowed registries.</li></ul></li><li><p><strong>Shipped: <code>servicecidr</code>, <code>poddisruptionbudget</code> and <code>horizontalpodautoscaler</code></strong>
+(<code>servicecidr.go</code>, <code>poddisruptionbudget.go</code>, <code>horizontalpodautoscaler.go</code>), each the
+strict projection of its spec type, declaring its object and taking <code>objectName</code>.</p><ul><li><code>servicecidr</code> (cluster-scoped) and <code>poddisruptionbudget</code> (namespaced) are built on
+<code>policyFreeKind</code>: no environment policy applies. A ServiceCIDR needs at least one of
+<code>cidrs</code>; a PodDisruptionBudget has no required field. That <code>minAvailable</code> and
+<code>maxUnavailable</code> exclude each other is left to the API server.</li><li><code>horizontalpodautoscaler</code> (namespaced) requires <code>scaleTargetRef</code> and <code>maxReplicas</code>
+(an authored <code>0</code> counts as unauthored; a negative one is left to the API server),
+and <code>maxReplicas</code> is held to <code>MaxReplicas</code>, as a rendered HorizontalPodAutoscaler
+is. No policy default is filled.</li><li>The selector of a budget and the target of an autoscaler are the author&rsquo;s: launcher
+points neither at a component and checks neither against the document. <strong>The
+<code>scaler</code> trait&rsquo;s guard on a workload whose claim is not ReadWriteMany does not see a
+<code>horizontalpodautoscaler</code> component that targets that workload,</strong> as it does not see
+an autoscaler a chart renders or a <code>passthrough</code> component holds.</li><li>The <code>scaler</code> trait&rsquo;s objects and these kinds are claimed as the same kinds, so one
+name given to both in one namespace is a name collision.</li></ul></li><li><p><strong>Shipped: the routing kinds</strong> <code>ingress</code> and <code>httproute</code> (<code>ingress.go</code>,
+<code>httproute.go</code>), on the recipe of the four core kinds.</p><ul><li><code>ingress</code> projects <code>IngressSpec</code>, <code>httproute</code> projects <code>HTTPRouteSpec</code>. No field is
+required by the decode and none is filled; the API&rsquo;s value rules are left to the API
+server.</li><li>Each is an authored object, not the trait of the same type name. The NetworkPolicy
+synthesis reads a routing trait&rsquo;s traffic sources and target component, which a
+kind does not report, so no allow rule is synthesized for it. The trait&rsquo;s other
+rendering inputs do not reach a kind either: the platform&rsquo;s hostname constraint on
+an Ingress, the capability&rsquo;s Gateway as an HTTPRoute&rsquo;s parent.</li><li>No environment policy applies. The policy&rsquo;s capability lists gate trait types, so a
+policy that forbids the trait does not refuse the component; the rendered
+paths emit the same object under the same terms. A capability gate on component
+types is an open point of go-kure/launcher#790.</li></ul></li><li><p><strong>Shipped: four core kinds,</strong> <code>namespace</code>, <code>limitrange</code>, <code>resourcequota</code> and
 <code>persistentvolume</code> (<code>namespace.go</code>, <code>limitrange.go</code>, <code>resourcequota.go</code>,
 <code>persistentvolume.go</code> in <code>pkg/oam/builtin/components</code>).</p><ul><li>Each has one schema key per json field of the object&rsquo;s spec type, and the property
 map is decoded strictly into that type (<code>decodeKindSpec</code>, <code>kind_decode.go</code>), as the
@@ -506,9 +770,16 @@ source needs <code>AllowHostPathVolumes</code>, and <code>capacity.storage</code
 <code>flexVolume</code> source is not checked (a decided limit, go-kure/launcher#794, item 12,
 §7).
 Breaking for a chart, a <code>passthrough</code> component or a <code>manifests</code> source that holds
-such a PersistentVolume. The other three kinds have nothing to enforce.</li></ul></li><li><p><strong>Shipped: the pod kinds</strong> <code>pod</code>, <code>replicaset</code>, <code>replicationcontroller</code> and
+such a PersistentVolume. The other three kinds have nothing to enforce.</li></ul></li><li><p><strong>Shipped: the <code>networkpolicy</code> kind</strong> (<code>networkpolicy.go</code>), on the recipe of the four
+core kinds and ungated under the terms of the routing kinds.</p><ul><li>It projects <code>NetworkPolicySpec</code>. No field is required by the decode and none is
+filled.</li><li>It is an authored object, not the trait of the same type name, and reads as the
+API reads it. The trait always selects its component&rsquo;s pods; on the kind an
+unwritten <code>podSelector</code> selects every pod of the namespace. The trait lists a
+direction when its key is present; on the kind <code>policyTypes</code> is the author&rsquo;s, so
+<code>egress: []</code> alone isolates no egress.</li><li>A null rule, peer or port is refused by its path: decoded, it would be the empty
+one, which allows everything.</li></ul></li><li><p><strong>Shipped: the pod kinds</strong> <code>pod</code>, <code>replicaset</code>, <code>replicationcontroller</code> and
 <code>podtemplate</code> (<code>pod.go</code>, <code>replicaset.go</code>, <code>replicationcontroller.go</code>, <code>podtemplate.go</code>,
-<code>pod_template.go</code>), on the same recipe.</p><ul><li><code>pod</code> projects <code>PodSpec</code>, <code>replicaset</code> projects <code>ReplicaSetSpec</code>,
+<code>pod_template.go</code>), on the recipe of the four core kinds.</p><ul><li><code>pod</code> projects <code>PodSpec</code>, <code>replicaset</code> projects <code>ReplicaSetSpec</code>,
 <code>replicationcontroller</code> projects <code>ReplicationControllerSpec</code>. The pod spec, the one
 under a <code>template</code> included, refuses <code>ephemeralContainers</code>, <code>priority</code> and
 <code>overhead</code>, an untagged or <code>:latest</code> image and a probe timing written as <code>0</code>; a
@@ -571,82 +842,7 @@ are targets of <code>security-context</code>, a <code>configmap</code> mount and
 injection.</li><li>A ReplicaSet&rsquo;s <code>selector</code> is required; a ReplicationController&rsquo;s is a plain label
 map and optional.</li><li><code>podtemplate</code> projects a PodTemplate&rsquo;s one field, <code>template</code>. A PodTemplate is
 stored, not run: no <code>app</code> label, no ServiceAccount reported, and not a trait target
-(§7, item 14).</li></ul></li><li><p><strong>Shipped: six cluster-scoped kinds no environment policy applies to,</strong>
-<code>storageclass</code>, <code>volumeattributesclass</code>, <code>priorityclass</code>, <code>runtimeclass</code>,
-<code>ingressclass</code> and <code>csidriver</code> (one file each, named after the type, in
-<code>pkg/oam/builtin/components</code>).</p><ul><li>One shared helper builds them (<code>policyFreeKind</code>, <code>kind_policy_free.go</code>): the strict
-decode, a config with nothing to enforce, and a <code>Generate</code> that returns the
-base-library constructor&rsquo;s object with a copy of what was decoded. A kind built on it
-is a type, an optional required-field check, an optional list of required fields the
-type writes unauthored, and a constructor.</li><li>Each declares its object as cluster-scoped and takes <code>objectName</code> (§3.2): the config
-carries the resolved name, <code>Generate</code> names the object with it, and the name is
-claimed in no namespace.</li><li><code>ingressclass</code> and <code>csidriver</code> project their spec type. The four classes have no
-spec type: the properties are the object&rsquo;s fields beside its identity, and <code>kind</code>,
-<code>apiVersion</code> and <code>metadata</code> are refused by name.</li><li>A top-level field the API server refuses an object without must be authored
-(<code>provisioner</code>, <code>handler</code>, <code>driverName</code>, an IngressClass&rsquo;s <code>controller</code>, and at least
-one of a VolumeAttributesClass&rsquo;s <code>parameters</code>). A PriorityClass <code>value</code> is not one:
-unauthored, it is emitted as <code>0</code>. Other value rules are left to the API server.</li><li>A default StorageClass or IngressClass writes its default-class annotation under
-<code>annotations</code>, as every kind component does.</li><li>A CSIDriver&rsquo;s name is not held to the 63 characters the API documents for it: the
-API server does not hold the object to that limit, and refuses a PersistentVolume
-that names a longer driver. The kind refuses what the API server refuses of the
-object and no more.</li></ul></li><li><p><strong>Shipped: the routing kinds</strong> <code>ingress</code> and <code>httproute</code> (<code>ingress.go</code>,
-<code>httproute.go</code>), on the recipe of the core kinds above.</p><ul><li><code>ingress</code> projects <code>IngressSpec</code>, <code>httproute</code> projects <code>HTTPRouteSpec</code>. No field is
-required by the decode and none is filled; the API&rsquo;s value rules are left to the API
-server.</li><li>Each is an authored object, not the trait of the same type name. The NetworkPolicy
-synthesis reads a routing trait&rsquo;s traffic sources and target component, which a
-kind does not report, so no allow rule is synthesized for it. The trait&rsquo;s other
-rendering inputs do not reach a kind either: the platform&rsquo;s hostname constraint on
-an Ingress, the capability&rsquo;s Gateway as an HTTPRoute&rsquo;s parent.</li><li>No environment policy applies. The policy&rsquo;s capability lists gate trait types, so a
-policy that forbids the trait does not refuse the component; the rendered
-paths emit the same object under the same terms. A capability gate on component
-types is an open point of go-kure/launcher#790.</li></ul></li><li><p><strong>Shipped: the <code>networkpolicy</code> kind</strong> (<code>networkpolicy.go</code>), on the same recipe and
-ungated under the same terms.</p><ul><li>It projects <code>NetworkPolicySpec</code>. No field is required by the decode and none is
-filled.</li><li>It is an authored object, not the trait of the same type name, and reads as the
-API reads it. The trait always selects its component&rsquo;s pods; on the kind an
-unwritten <code>podSelector</code> selects every pod of the namespace. The trait lists a
-direction when its key is present; on the kind <code>policyTypes</code> is the author&rsquo;s, so
-<code>egress: []</code> alone isolates no egress.</li><li>A null rule, peer or port is refused by its path: decoded, it would be the empty
-one, which allows everything.</li></ul></li><li><p><strong>Shipped: the <code>cilium-networkpolicy</code> kind</strong> (<code>cilium_networkpolicy.go</code>), ungated
-under the same terms.</p><ul><li>A CiliumNetworkPolicy has no spec type: the kind projects its <code>spec</code> (one rule) and
-<code>specs</code> (a list of rules), each the whole Cilium rule.</li><li>It refuses a policy Cilium rejects: no rule at all, a rule with no
-<code>endpointSelector</code>, a rule with a <code>nodeSelector</code>, a rule with no entry in <code>ingress</code>,
-<code>ingressDeny</code>, <code>egress</code> or <code>egressDeny</code>. Cilium&rsquo;s CRD schema refuses some of these
-at admission; the rest the API server would store and the agent reject when it
-reads the object, unenforced. No selector is filled in.</li><li>It refuses a required field that was not authored, by its path: the fields the
-CiliumNetworkPolicy CRD requires inside a rule that the Cilium type writes whether
-or not they were authored (a match expression&rsquo;s <code>key</code> and <code>operator</code>, an
-<code>authentication</code>&rsquo;s <code>mode</code>, a TLS context&rsquo;s <code>secret</code>), and a listener&rsquo;s <code>priority</code>
-and the <code>kind</code> of its <code>envoyConfig</code>, which the type writes with a value the API
-refuses. Such a document was emitted before, with the empty value in place of the
-field. A test holds the list to the CRD of the linked module.</li><li>The <code>cilium-networkpolicy</code> trait refuses the same, under the three fields of a rule
-it publishes (<code>endpointSelector</code>, <code>ingress</code>, <code>egress</code>): it decodes into the same
-type, and a trait that left such a field out was emitted with the empty value too.
-Its list is the kind&rsquo;s, cut to those fields, and a test holds it to the same CRD.
-Both read the list from the internal <code>pkg/oam/internal/requiredfields</code>.</li><li>An unknown key inside an endpoint selector is refused by its path, as in the trait:
-the selector unmarshals itself and would drop a misspelt key, leaving the selector
-that matches everything. The positions are found from the Cilium types.</li></ul></li><li><p><strong>Shipped: the <code>secret</code> kind</strong> (<code>secret.go</code>), the <code>secret</code> trait&rsquo;s twin (§4.3).</p><ul><li>It projects a v1 Secret through the parser and the generator the trait runs
-(<code>ParseSecretProperties</code>, <code>GenerateSecret</code>): <code>stringData</code>, <code>data</code>, <code>type</code>,
-<code>immutable</code>. Every entry is emitted under <code>data</code>, base64 and not encrypted, and no
-refusal repeats a value.</li><li>It is held to the environment policy, unlike the other kinds of this group: a policy
-that forbids explicit secrets (<code>oam.ExplicitSecretPolicy</code>) refuses it, as it refuses
-the trait.</li><li>The trait names its Secret under no role, so a <code>secret</code> component and a <code>secret</code>
-trait that name one Secret are refused among the generated objects with both named,
-as a <code>configmap</code> component and trait are. The Secret a <code>helm</code> component generates for
-<code>secretValues</code> is claimed under role <code>values-secret</code>, so a <code>secret</code> component under
-that name is refused as a name collision.</li></ul></li><li><p><strong>Shipped: <code>servicecidr</code>, <code>poddisruptionbudget</code> and <code>horizontalpodautoscaler</code></strong>
-(<code>servicecidr.go</code>, <code>poddisruptionbudget.go</code>, <code>horizontalpodautoscaler.go</code>), each the
-strict projection of its spec type, declaring its object and taking <code>objectName</code>.</p><ul><li><code>servicecidr</code> (cluster-scoped) and <code>poddisruptionbudget</code> (namespaced) are built on
-<code>policyFreeKind</code>: no environment policy applies. A ServiceCIDR needs at least one of
-<code>cidrs</code>; a PodDisruptionBudget has no required field. That <code>minAvailable</code> and
-<code>maxUnavailable</code> exclude each other is left to the API server.</li><li><code>horizontalpodautoscaler</code> (namespaced) requires <code>scaleTargetRef</code> and <code>maxReplicas</code>
-(an authored <code>0</code> counts as unauthored; a negative one is left to the API server),
-and <code>maxReplicas</code> is held to <code>MaxReplicas</code>, as a rendered HorizontalPodAutoscaler
-is. No policy default is filled.</li><li>The selector of a budget and the target of an autoscaler are the author&rsquo;s: launcher
-points neither at a component and checks neither against the document. <strong>The
-<code>scaler</code> trait&rsquo;s guard on a workload whose claim is not ReadWriteMany does not see a
-<code>horizontalpodautoscaler</code> component that targets that workload,</strong> as it does not see
-an autoscaler a chart renders or a <code>passthrough</code> component holds.</li><li>The <code>scaler</code> trait&rsquo;s objects and these kinds are claimed as the same kinds, so one
-name given to both in one namespace is a name collision.</li></ul></li><li><p><strong>Shipped: four kinds of the Prometheus operator&rsquo;s <code>monitoring.coreos.com/v1</code> API,</strong>
+(§7, item 14).</li></ul></li><li><p><strong>Shipped: four kinds of the Prometheus operator&rsquo;s <code>monitoring.coreos.com/v1</code> API,</strong>
 <code>servicemonitor</code>, <code>podmonitor</code>, <code>prometheus-probe</code> and <code>prometheusrule</code>
 (<code>servicemonitor.go</code>, <code>podmonitor.go</code>, <code>prometheus_probe.go</code>, <code>prometheusrule.go</code>,
 with what they share in <code>monitoring_common.go</code>), each the strict projection of its
@@ -669,209 +865,7 @@ name is held to the allowed registries</strong> (a prober, a proxy, an OAuth2 to
 endpoint, a static probe target): none is an artifact source. <strong>No field is checked
 for a literal secret:</strong> a credential is a reference to a Secret key, and free text
 that could hold one (<code>params</code>, <code>endpointParams</code>, a proxy URL) is written as authored.</li><li>The labels a Prometheus selects monitors and rules by are written under <code>labels</code>,
-as on every kind component.</li></ul></li><li><p><strong>Shipped: three kinds of cert-manager&rsquo;s <code>cert-manager.io/v1</code> API,</strong> <code>issuer</code>,
-<code>clusterissuer</code> and <code>certificate</code> (<code>issuer.go</code>, <code>clusterissuer.go</code>, <code>certificate.go</code>,
-with what they share in <code>certmanager_common.go</code>), each the strict projection of its
-spec type, declaring its object and taking <code>objectName</code>. An Issuer and a Certificate
-are namespaced, a ClusterIssuer cluster-scoped. <code>certificate</code> is also a trait type;
-the two are separate lists, and the trait is unchanged.</p><ul><li><strong>No capability is required and nothing gates them,</strong> a ClusterIssuer included: on
-a cluster without cert-manager&rsquo;s CRDs the component builds and the object is refused
-at apply.</li><li><strong>The environment policy reaches two fields, so these are not built on
-<code>policyFreeKind</code> alone.</strong> <code>policyHeldKind</code> (<code>kind_policy_held.go</code>) is that helper,
-unchanged, with an <code>ApplyPolicy</code> that asks one function of the kind. An issuer&rsquo;s ACME
-HTTP01 solver pod template sizes a pod cert-manager starts: its cpu and memory are
-held to the policy&rsquo;s maxima, and nothing else of it is (it names no image and no
-security context of a container). A Certificate&rsquo;s keystore password written into the
-object is refused under a policy that forbids explicit secrets. No default is filled
-and no <code>Policy</code> method is added.</li><li>Required fields follow the rule of the Prometheus operator&rsquo;s kinds: a field the API
-requires that the Go type writes whether or not it was authored must be authored. A
-test holds each list to the CRDs the linked module ships (64 paths for an issuer, 8
-for a certificate). An issuer has none at the top level; a required field under a
-parent the author left out is not asked for. Three of an issuer&rsquo;s paths are fields
-of a Kubernetes or Gateway API type an ACME HTTP01 solver embeds (the terms of a
-required node affinity, the name of a parent reference): the CRDs refuse each as the
-type writes it unauthored, which a second test shows with the CRDs&rsquo; validator.</li><li><strong>cert-manager&rsquo;s validating webhook refuses more than the CRDs do, and launcher
-repeats none of it:</strong> an issuer of no type or of two, a keystore with a password
-beside a reference that names a Secret or with neither, a certificate that names no
-subject. Such a component builds and is refused at apply. The one rule the CRDs
-write as an expression (a <code>venafi</code> issuer names exactly one platform) is not
-repeated either.</li><li><strong>No host these objects name is held to the allowed registries</strong> (an ACME directory,
-a Vault server, a certificate platform, a DNS server, a CRL or OCSP endpoint): none
-is an artifact source. <strong>No field of an issuer is checked for a literal secret:</strong> a
-credential is a reference to a Secret, and the free JSON of a webhook solver&rsquo;s
-<code>config</code> is written as authored.</li><li>A duration is carried in Go&rsquo;s spelling (<code>2160h</code> as <code>2160h0m0s</code>). Labels and
-annotations are the <code>labels</code> and <code>annotations</code> properties, as on every kind
-component.</li></ul></li><li><p><strong>Shipped: the four kinds of Cilium&rsquo;s BGP control plane, <code>cilium.io/v2</code>,</strong>
-<code>cilium-bgpadvertisement</code>, <code>cilium-bgpclusterconfig</code>, <code>cilium-bgpnodeconfigoverride</code>
-and <code>cilium-bgppeerconfig</code> (<code>cilium_bgpadvertisement.go</code>, <code>cilium_bgpclusterconfig.go</code>,
-<code>cilium_bgpnodeconfigoverride.go</code>, <code>cilium_bgppeerconfig.go</code>, with what they share in
-<code>cilium_bgp_common.go</code>), each the strict projection of its spec type, built on
-<code>policyFreeKind</code>, cluster-scoped, declaring its object and taking <code>objectName</code>. The
-type names carry a prefix: MetalLB has a BGPAdvertisement too.</p><ul><li><strong>No capability is required and nothing gates them:</strong> on a cluster without Cilium&rsquo;s
-CRDs the component builds and the object is refused at apply.</li><li>The required lists follow the rule above, read from the CRDs of the linked module: a
-test holds each list to the CRD&rsquo;s <code>required</code> entries the Go type would write
-unauthored.</li><li>The CRDs carry six expression rules. The five on an advertisement entry (<code>service</code>
-with type <code>Service</code> and only with it, <code>interface</code> with type <code>Interface</code> and only
-with it, no <code>selector</code> with type <code>PodCIDR</code>) are checked: each compares authored
-fields. The one on a peer configuration&rsquo;s <code>timers</code> (<code>keepAliveTimeSeconds</code> not
-larger than <code>holdTimeSeconds</code>) is checked too; with one authored, the other is
-the default the API server fills before it evaluates the rule, and the kind
-compares with that default (30 and 90, the linked CRD&rsquo;s, held to it by a test)
-and names it in the refusal. A test fails on a rule of the linked CRDs that is neither
-listed as checked nor as left, and holds each checked rule to the API server&rsquo;s own
-expression validator, run over the linked CRD after its defaults: the validator
-refuses what breaks the rule and accepts what is next to it, and the kind agrees on
-both.</li><li><strong>No host these objects name is held to the allowed registries</strong> (a peer&rsquo;s
-address, a session&rsquo;s local address, a router ID): none is an artifact source. <strong>No
-field is checked for a literal secret:</strong> <code>authSecretRef</code> is the name of a Secret,
-and no field holds a password.</li><li>A peer configuration selects its advertisements by label: those are written under
-the advertisement&rsquo;s <code>labels</code>, as on every kind component. An override takes effect
-on the CiliumBGPNodeConfig of the same name, which <code>objectName</code> sets.</li></ul></li><li><p><strong>Shipped: five more kinds of Cilium&rsquo;s API, <code>cilium.io/v2</code>,</strong> <code>cilium-cidrgroup</code>,
-<code>cilium-loadbalancerippool</code>, <code>cilium-egressgatewaypolicy</code>, <code>cilium-localredirectpolicy</code>
-and <code>cilium-nodeconfig</code> (<code>cilium_cidrgroup.go</code>, <code>cilium_loadbalancerippool.go</code>,
-<code>cilium_egressgatewaypolicy.go</code>, <code>cilium_localredirectpolicy.go</code>,
-<code>cilium_nodeconfig.go</code>), each the strict projection of its spec type, built on
-<code>policyFreeKind</code>, declaring its object and taking <code>objectName</code>. The first three are
-cluster-scoped; the redirect policy and the node configuration are namespaced.</p><ul><li><strong>No capability is required and nothing gates them,</strong> as for the BGP kinds.</li><li>The required lists are read from the CRDs of the linked module and held to them by
-a test, with the helper the BGP kinds use for a selector&rsquo;s match expressions.</li><li>A redirect frontend takes exactly one of <code>addressMatcher</code> and <code>serviceMatcher</code>: the
-CRD&rsquo;s schema says so, it is one comparison of authored fields, and the kind refuses
-neither and both.</li><li>The CRDs carry five expression rules and none is checked. That an <code>egressIP</code> is an
-IP address (twice) is one field&rsquo;s value rule. The three on a redirect policy refuse
-a change of the stored object, which a build does not have. A test fails on a rule
-of the linked CRDs that is not listed as left.</li><li>Three defaults of the CRDs sit on fields the Go type omits when empty (<code>disabled</code>,
-<code>skipRedirectFromBackend</code>, <code>egressGateways</code>). Each default is that empty value, so
-an authored <code>false</code> or <code>[]</code> is left out and filled back the same; a test holds the
-defaults to that.</li><li><strong>No address or CIDR these objects hold is held to the allowed registries:</strong> none
-is an artifact source, and no field names a host. <strong>No field is checked for a
-literal secret:</strong> none refers to a Secret, and a node configuration&rsquo;s <code>defaults</code> is
-a free map of strings, written as authored and not checked.</li><li>A CIDR group is referred to by its name, which <code>objectName</code> sets, or selected by
-the labels written under its <code>labels</code>, as on every kind component.</li></ul></li><li><p><strong>Shipped: the <code>cilium-clusterwidenetworkpolicy</code> kind</strong>
-(<code>cilium_clusterwidenetworkpolicy.go</code>), the cluster-scoped counterpart of the
-<code>cilium-networkpolicy</code> kind: <code>spec</code>, <code>specs</code> or both, each a Cilium rule, with that
-kind&rsquo;s decode and its refusal of an unknown key inside a selector. It declares its
-object and takes <code>objectName</code>. <strong>No capability is required and nothing gates it.</strong></p><ul><li>It refuses what the CRD&rsquo;s schema refuses of the two fields and is one comparison of
-authored fields: an object with no rule, a rule that authors both or neither of
-<code>endpointSelector</code> and <code>nodeSelector</code>, and a rule with no entry in any of its four
-lists. The choices deeper in a rule (how a CIDR entry names its addresses, a DNS
-entry&rsquo;s name or pattern, a port&rsquo;s layer 7 protocol) and every value rule are left to
-the API server. A test lists every choice and expression rule of the linked CRD as
-checked or left, and another holds the refusal of an object with no rule to the API
-server&rsquo;s own expression validator.</li><li>The required list of a rule is read from the CRD and held to it by a test: 59
-fields the Cilium type writes whether or not they were authored. Two optional
-fields are required as well, a listener&rsquo;s <code>priority</code> and the <code>kind</code> of its Envoy
-configuration, because the type writes an unauthored one as <code>0</code> and as the empty
-string, and the API refuses both.</li><li><strong>Hosts are not checked:</strong> the names a rule holds (<code>toFQDNs</code>, DNS rules, an HTTP
-<code>host</code>, server names) and its CIDRs are not artifact sources and are not held to
-the allowed registries. <strong>No literal secret is checked:</strong> an HTTP header match&rsquo;s
-<code>value</code> is written as authored, and a Secret a rule refers to is not looked for.</li></ul></li><li><p><strong>Shipped: five kinds of the Gateway API&rsquo;s <code>gateway.networking.k8s.io/v1</code>
-infrastructure objects,</strong> <code>gatewayclass</code>, <code>gateway</code>, <code>listenerset</code>, <code>referencegrant</code>
-and <code>backendtlspolicy</code> (<code>gatewayclass.go</code>, <code>gateway.go</code>, <code>listenerset.go</code>,
-<code>referencegrant.go</code>, <code>backendtlspolicy.go</code>, with what they share in
-<code>gateway_common.go</code>), each the strict projection of its spec type, declaring its object
-and taking <code>objectName</code>. A GatewayClass is cluster-scoped, the other four namespaced.
-All five are built on <code>policyFreeKind</code>, unchanged: no environment policy applies, no
-default is filled and no <code>Policy</code> method is added.</p><ul><li><strong>No capability is required and nothing gates them,</strong> a GatewayClass and a
-ReferenceGrant (which lets another namespace refer into the build namespace)
-included: on a cluster without the Gateway API&rsquo;s CRDs the component builds and the
-object is refused at apply. The <code>gateway</code> kind is not the Gateway a capability names
-for the <code>httproute</code> trait.</li><li>Required fields follow the rule of the Prometheus operator&rsquo;s kinds: a field the API
-requires that the Go type writes whether or not it was authored must be authored. A
-test holds each list to the CRDs the linked module ships (4 paths for a gatewayclass,
-22 for a gateway, 4 for a listenerset, 7 for a referencegrant, 9 for a
-backendtlspolicy), read in the experimental channel&rsquo;s CRDs, which hold every field
-the Go types do, and held to agree with the standard channel&rsquo;s.</li><li><strong>A field the API requires and the type omits when it is not authored is refused by
-the kind itself,</strong> as <code>servicecidr</code> refuses a missing <code>cidrs</code>, absent or authored
-empty: a <code>listenerset</code> with no <code>listeners</code>, a <code>backendtlspolicy</code> with no
-<code>targetRefs</code>, and <strong>a ListenerSet listener without its <code>name</code>, <code>port</code> or
-<code>protocol</code>,</strong> which a Gateway&rsquo;s listener must author too. The same test derives
-that set from the CRDs, at every depth, and holds each member to the kind&rsquo;s refusal
-or to a stated reason the decoded value cannot show the omission; there are five,
-all refused.</li><li><code>defaultScope</code> on a Gateway is an experimental-channel field, the only one of the
-five specs; a test holds that.</li><li><strong>No host these objects name is held to the allowed registries</strong> (a listener&rsquo;s
-hostname, a requested address, the hostname and subject alternative names a
-BackendTLSPolicy validates): none is an artifact source. <strong>No field holds a literal
-secret and none is checked:</strong> a certificate is a reference, and the free maps a
-controller defines (<code>tls.options</code>, <code>options</code>) are written as authored.</li><li>The pods a controller starts for a Gateway are not sized by the object, so the
-policy&rsquo;s maxima have nothing to hold. Labels and annotations are the <code>labels</code> and
-<code>annotations</code> properties, as on every kind component.</li></ul></li><li><p><strong>Shipped: <code>endpointslice</code></strong> (<code>endpointslice.go</code>), the projection of a
-<code>discovery.k8s.io/v1</code> EndpointSlice on the shared helper <code>policyFreeKind</code>, in the
-build namespace. It was held until the kinds took <code>labels</code> (above).</p><ul><li>An EndpointSlice has no spec: the properties are the object&rsquo;s own fields
-(<code>addressType</code>, <code>endpoints</code>, <code>ports</code>), strictly decoded, and its <code>kind</code>,
-<code>apiVersion</code> and <code>metadata</code> are refused.</li><li>A slice belongs to a Service only through the <code>kubernetes.io/service-name</code> label,
-authored under <code>labels</code>. It is the author&rsquo;s literal and does not follow a
-Service&rsquo;s <code>objectName</code>.</li><li>The required list (<code>addressType</code>, an endpoint&rsquo;s <code>addresses</code>, the <code>name</code> of a zone
-or node hint) is the fields the API&rsquo;s source marks required and the type writes
-whether or not they were authored. A test derives it from the markers of the
-linked <code>k8s.io/api</code> module, and fails on a required field the type omits when
-unauthored: the kind has none. The check is of presence; the form of every value
-is left to the API server.</li><li>The type writes <code>endpoints</code>, <code>ports</code> and an endpoint&rsquo;s <code>conditions</code> when they
-are not authored, and the API does not require them: the object carries them
-empty (<code>null</code>, <code>null</code>, <code>{}</code>).</li><li><strong>Hosts are not checked:</strong> the addresses of an endpoint, FQDNs included, are not
-artifact sources and are not held to the allowed registries.</li></ul></li><li><p><strong>Shipped: <code>role</code>, <code>rolebinding</code>, <code>clusterrole</code>, <code>clusterrolebinding</code></strong> (<code>role.go</code>,
-<code>rolebinding.go</code>, <code>clusterrole.go</code>, <code>clusterrolebinding.go</code>, with what they share in
-<code>rbac_common.go</code>), the projections of the four objects of the
-<code>rbac.authorization.k8s.io/v1</code> API on the shared helper <code>policyFreeKind</code>. The first
-two are in the build namespace, the last two cluster-scoped.</p><ul><li><strong>They are ungated: no capability and no environment-policy check restricts what a
-role grants,</strong> nor to whom a binding grants it.</li><li>None has a spec: the properties are the object&rsquo;s own fields (<code>rules</code>; <code>rules</code> and
-<code>aggregationRule</code>; <code>subjects</code> and <code>roleRef</code>), strictly decoded, and its <code>kind</code>,
-<code>apiVersion</code> and <code>metadata</code> are refused.</li><li>The required lists (a rule&rsquo;s <code>verbs</code>; a binding&rsquo;s <code>roleRef</code> with its <code>kind</code> and
-<code>name</code>, and a subject&rsquo;s <code>kind</code> and <code>name</code>; the <code>key</code> and <code>operator</code> of a match
-expression of an aggregation selector) are derived from the markers of the linked
-<code>k8s.io/api</code> module by the test that derives the <code>endpointslice</code> kind&rsquo;s, which also
-fails on a required field the type omits when unauthored: the four have none.</li><li>Beyond the markers, the kinds check presence rules read by hand from the API
-server&rsquo;s validation at Kubernetes v1.37.1, which no linked module holds and no
-test derives: a rule names <code>apiGroups</code> and <code>resources</code>, or in a ClusterRole
-<code>nonResourceURLs</code> instead, which are refused in a Role and beside resources; a
-ClusterRoleBinding&rsquo;s ServiceAccount subject names its <code>namespace</code>; an
-<code>aggregationRule</code> holds a selector. The form of a value that validation checks
-is left to the API server; whether a verb, a resource or an API group exists is
-checked by neither.</li><li><code>roleRef.apiGroup</code> may be left out: the object carries it empty and the API server
-fills the RBAC group. <code>roleRef.name</code> and the names of subjects are the author&rsquo;s
-literals and follow no component&rsquo;s <code>objectName</code>.</li><li>An aggregated ClusterRole is emitted with <code>rules: null</code> when <code>rules</code> is not
-authored and with <code>[]</code> when authored so; the control plane fills the rules.</li><li>They stand beside the <code>rbac</code> trait, which grants to a workload&rsquo;s own
-ServiceAccount. A trait&rsquo;s object and a component&rsquo;s of one kind and name are
-refused as a name collision.</li></ul></li><li><p><strong>Shipped: the four kinds of the External Secrets Operator, <code>external-secrets.io/v1</code>,</strong>
-<code>secretstore</code>, <code>clustersecretstore</code>, <code>externalsecret</code> and <code>clusterexternalsecret</code>
-(<code>secretstore.go</code>, <code>clustersecretstore.go</code>, <code>externalsecret.go</code>,
-<code>clusterexternalsecret.go</code>, with what they share in <code>externalsecrets_common.go</code>), each
-the strict projection of its spec type, declaring its object and taking <code>objectName</code>.
-The two cluster kinds are cluster-scoped. All four are built on <code>policyHeldKind</code>.</p><ul><li><strong>No capability is required and nothing gates them:</strong> on a cluster without the
-operator&rsquo;s CRDs the component builds and the object is refused at apply. The
-cluster&rsquo;s <code>external-secret</code> capability is the trait&rsquo;s; the kinds do not read it,
-and an <code>externalsecret</code> names its own store.</li><li>The required lists follow the rule above, read from the Go source of the linked
-module, which ships no CRD. <strong>A store&rsquo;s list is generated</strong> (251 paths over every
-provider at this pin, in <code>zz_generated_externalsecrets_required.go</code>), and a test
-fails where the file and the derivation differ. Four more fields of a store are
-ones the API would default and the type always writes, so the default never
-applies and the value must be written: <strong>a Vault store writes its <code>version</code>.</strong></li><li>An authored <code>false</code> or <code>0</code> the type would omit and the API would replace with
-another default is refused, on three fields of single providers.</li><li>Of the API&rsquo;s count and expression rules two are checked: a store configures exactly
-one provider, and a <code>data</code> entry&rsquo;s <code>sourceRef</code> names no generator (the object
-always carries its <code>storeRef</code>; <code>dataFrom</code> takes a generator). The others, and what
-the operator&rsquo;s validating webhook adds (an external secret with neither <code>data</code> nor
-<code>dataFrom</code>, among others), are left to the API server. A test fails on a rule of
-the linked source that is neither listed as checked nor as left.</li><li><strong>A credential written into a store is refused under an environment policy that
-forbids explicit secrets:</strong> the <code>value</code> of seven credential fields that also take a
-reference to a Secret, and the data of the <code>fake</code> provider. An identifier in the
-same shape of field is not. <strong>Not checked, under any policy:</strong> a webhook&rsquo;s headers
-and body, a Vault provider&rsquo;s headers, the user part of a URL and the template of
-the Secret an external secret writes, where a reference and a literal look alike.
-<strong>No host these objects name is held to the allowed registries</strong> (a provider&rsquo;s
-server, URL or endpoint): none is an artifact source.</li><li><strong>An object an external secret has the operator write instead of a Secret
-(<code>target.manifest</code>) gets no more than the same policy gives that kind on
-<code>passthrough</code>.</strong> Its content is rendered in the cluster and cannot be read at
-build, so a kind the rendered-object check reads (a workload, a claim, a
-PersistentVolume, a HorizontalPodAutoscaler, in any version) is refused, under
-every policy and under the default one; a core Secret is refused where
-<code>passthrough</code> refuses it; any other kind passes as it would there, and whether
-the operator writes it at all is the cluster&rsquo;s (the operator&rsquo;s generic-target
-setting and its RBAC). That is stricter than <code>passthrough</code> where the policy
-would pass the object it read (a claim under a policy with no storage maximum,
-an autoscaler under one with no replica maximum): here there is nothing to
-read. An <code>apiVersion</code> there that is no API version (a version, or a group and
-a version, each a name the API can have) is refused under every policy, since
-nothing can write such an object and, where the value does not split into the
-two, its kind cannot be read.</li><li>A trait&rsquo;s ExternalSecret and an <code>externalsecret</code> component&rsquo;s are one kind: given
-one name in one namespace they are refused as a collision.</li></ul></li><li><p><strong>Shipped: the two kinds of VolSync&rsquo;s <code>volsync.backube/v1alpha1</code> API,</strong>
+as on every kind component.</li></ul></li><li><p><strong>Shipped: the two kinds of VolSync&rsquo;s <code>volsync.backube/v1alpha1</code> API,</strong>
 <code>replicationsource</code> and <code>replicationdestination</code> (<code>replicationsource.go</code>,
 <code>replicationdestination.go</code>, with what they share in <code>volsync_common.go</code>), each the
 strict projection of its spec type, declaring its namespaced object and taking
@@ -914,7 +908,16 @@ object that configures no replication method or more than one.</li><li><strong>H
 source. <strong>No literal secret is checked:</strong> a credential is the name of a Secret, and
 the <code>parameters</code> of an <code>external</code> provider are written as authored.</li><li>The <code>volsync</code> trait still builds a ReplicationSource for a workload&rsquo;s claim, named
 <code>&lt;sourcePVC>-backup</code>; its object and a <code>replicationsource</code> component&rsquo;s of the same
-name are refused as a collision.</li></ul></li><li><p><strong>Not offered: Endpoints.</strong> Deprecated upstream in favour of EndpointSlice; its
+name are refused as a collision.</li></ul></li><li><p><strong>Shipped: the <code>secret</code> kind</strong> (<code>secret.go</code>), the <code>secret</code> trait&rsquo;s twin (§4.3).</p><ul><li>It projects a v1 Secret through the parser and the generator the trait runs
+(<code>ParseSecretProperties</code>, <code>GenerateSecret</code>): <code>stringData</code>, <code>data</code>, <code>type</code>,
+<code>immutable</code>. Every entry is emitted under <code>data</code>, base64 and not encrypted, and no
+refusal repeats a value.</li><li>It is held to the environment policy, unlike the other kinds of this group: a policy
+that forbids explicit secrets (<code>oam.ExplicitSecretPolicy</code>) refuses it, as it refuses
+the trait.</li><li>The trait names its Secret under no role, so a <code>secret</code> component and a <code>secret</code>
+trait that name one Secret are refused among the generated objects with both named,
+as a <code>configmap</code> component and trait are. The Secret a <code>helm</code> component generates for
+<code>secretValues</code> is claimed under role <code>values-secret</code>, so a <code>secret</code> component under
+that name is refused as a name collision.</li></ul></li><li><p><strong>Not offered: Endpoints.</strong> Deprecated upstream in favour of EndpointSlice; its
 inventory row is <code>not authorable</code> with that note.</p></li><li><p><strong>Field gaps</strong> in the hand-parsed kinds (upstream fields with no schema key):</p><ul><li><code>statefulset</code>: the raw <code>affinity</code> shape (it keeps the four-key shorthand);
 <code>tolerations</code> and <code>topologySpreadConstraints</code> are read;</li><li><code>daemonset</code>: no scheduling field is left; the raw <code>affinity</code>, <code>tolerations</code>,
 <code>topologySpreadConstraints</code> and <code>sidecars</code> are read;</li><li><code>job</code>, <code>cronjob</code>: the raw <code>affinity</code>, <code>tolerations</code> and <code>topologySpreadConstraints</code>
@@ -1050,10 +1053,10 @@ PersistentVolume. The environment policy makes no statement about them: one woul
 new part of the policy every consumer implements, and no use case asked for it.</li></ul><p>Item 5 was decided as &ldquo;document&rdquo; and needed no text: tiers are declared, never
 derived, since go-kure/launcher#783 (§2.2).</p><p><code>kurel</code>&rsquo;s global <code>-f/--output-file</code>, which <code>build</code> ignores, is filed separately as
 go-kure/launcher#795 and deferred with the rest of the <code>kurel</code> CLI work.</p><hr><h2 id=8-ticket-index>8. Ticket index<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>State is what the code holds: <strong>shipped</strong> (the ticket&rsquo;s whole target), <strong>partly</strong> (the
-section says which part), or <strong>open</strong> (nothing of it).</p><table><thead><tr><th>Issue</th><th>Ticket</th><th>Section</th><th>State</th><th>Needs</th></tr></thead><tbody><tr><td><a href=https://github.com/go-kure/launcher/issues/781 rel=external>go-kure/launcher#781</a></td><td>Remove Flux delivery fields from library output, and <code>kurel</code>&rsquo;s delivery mode</td><td>§1.3</td><td>Shipped</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/782 rel=external>go-kure/launcher#782</a></td><td>Delivery intent instead of Flux annotations</td><td>§1.3</td><td>Shipped</td><td><a href=https://github.com/go-kure/kure/issues/974 rel=external>go-kure/kure#974</a> (delivery intent), go-kure/launcher#781</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/783 rel=external>go-kure/launcher#783</a></td><td>Explicit ordering only; one bundle shape</td><td>§2.2</td><td>Shipped</td><td>go-kure/launcher#781; go-kure/launcher#787 for the name override (can follow)</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/784 rel=external>go-kure/launcher#784</a></td><td><code>oci</code> as an upper-level component; new <code>fluxcd-kustomization</code> kind</td><td>§2.3</td><td>Shipped</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/785 rel=external>go-kure/launcher#785</a></td><td>Release name default (rescopes <a href=https://github.com/go-kure/launcher/issues/776 rel=external>go-kure/launcher#776</a>)</td><td>§4.2</td><td>Shipped</td><td>go-kure/launcher#793</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/786 rel=external>go-kure/launcher#786</a></td><td>Secret values</td><td>§4.3</td><td>Shipped</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/787 rel=external>go-kure/launcher#787</a></td><td>Name overrides</td><td>§3.2</td><td>Partly: authored names used as written or refused; <code>scaler</code>, <code>rbac</code>, <code>networkpolicy</code> and <code>postgresql</code> overrides; <code>objectName</code> on kind components; the consumer <code>Naming</code> hook for the roles of §3.2; the hook-group names and their <code>hook-group</code> role; the HelmRelease of a <code>helm</code> component (<code>helm-release</code>) and the Kustomization and the kept source of an <code>oci</code> component (<code>oci-kustomization</code>, <code>oci-source</code>); the Deployment, the Service and the ServiceAccount of a <code>webservice</code> or <code>worker</code> component (<code>workload-deployment</code>, <code>workload-service</code>, <code>workload-serviceaccount</code>); the Cluster and the ObjectStore of a <code>postgresql</code> component (<code>postgresql-cluster</code>, <code>postgresql-objectstore</code>). Open: an author override for bundle, ordered-group and synthesized NetworkPolicy names; a hook role for the names outside the roles of §3.2, among them the claim a <code>pvc</code> volume generates</td><td>go-kure/launcher#783, go-kure/launcher#793</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/788 rel=external>go-kure/launcher#788</a></td><td>Component label and provenance</td><td>§3.4</td><td>Shipped</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/789 rel=external>go-kure/launcher#789</a></td><td>Contract metadata</td><td>§6.1</td><td>Shipped</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/790 rel=external>go-kure/launcher#790</a></td><td>Full spec and full set of kind components</td><td>§6.2</td><td>Partly: the kind inventory; the <code>namespace</code>, <code>limitrange</code>, <code>resourcequota</code>, <code>persistentvolume</code>, <code>pod</code>, <code>replicaset</code>, <code>replicationcontroller</code>, <code>podtemplate</code>, <code>storageclass</code>, <code>volumeattributesclass</code>, <code>priorityclass</code>, <code>runtimeclass</code>, <code>ingressclass</code>, <code>csidriver</code>, <code>ingress</code>, <code>httproute</code>, <code>networkpolicy</code>, <code>cilium-networkpolicy</code>, <code>servicecidr</code>, <code>poddisruptionbudget</code>, <code>horizontalpodautoscaler</code>, <code>secret</code>, <code>servicemonitor</code>, <code>podmonitor</code>, <code>prometheus-probe</code>, <code>prometheusrule</code>, <code>issuer</code>, <code>clusterissuer</code>, <code>certificate</code>, <code>cilium-bgpadvertisement</code>, <code>cilium-bgpclusterconfig</code>, <code>cilium-bgpnodeconfigoverride</code>, <code>cilium-bgppeerconfig</code>, <code>cilium-cidrgroup</code>, <code>cilium-loadbalancerippool</code>, <code>cilium-egressgatewaypolicy</code>, <code>cilium-localredirectpolicy</code>, <code>cilium-nodeconfig</code>, <code>cilium-clusterwidenetworkpolicy</code>, <code>gatewayclass</code>, <code>gateway</code>, <code>listenerset</code>, <code>referencegrant</code>, <code>backendtlspolicy</code>, <code>endpointslice</code>, <code>role</code>, <code>rolebinding</code>, <code>clusterrole</code>, <code>clusterrolebinding</code>, <code>secretstore</code>, <code>clustersecretstore</code>, <code>externalsecret</code>, <code>clusterexternalsecret</code>, <code>replicationsource</code> and <code>replicationdestination</code> kinds; <code>labels</code> and <code>annotations</code> on every kind component</td><td><a href=https://github.com/go-kure/kure/issues/981 rel=external>go-kure/kure#981</a> (missing constructors), go-kure/launcher#787</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/791 rel=external>go-kure/launcher#791</a></td><td>Security on template delivery</td><td>§5.2</td><td>Shipped</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/792 rel=external>go-kure/launcher#792</a></td><td>Hook-group child names unique across applications</td><td>§3.3</td><td>Shipped</td><td>go-kure/launcher#793, go-kure/launcher#787</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/793 rel=external>go-kure/launcher#793</a></td><td>One shortening rule</td><td>§3.3</td><td>Shipped</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/794 rel=external>go-kure/launcher#794</a></td><td>Asymmetries</td><td>§7</td><td>Shipped</td><td>go-kure/launcher#783, go-kure/launcher#784, go-kure/launcher#788</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/795 rel=external>go-kure/launcher#795</a></td><td><code>kurel build</code> ignores the global <code>-f/--output-file</code> (deferred)</td><td>§7</td><td>Open</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/849 rel=external>go-kure/launcher#849</a></td><td>Policy refusals carry a class</td><td>§5.3</td><td>Shipped</td><td>—</td></tr></tbody></table><footer class=footline></footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/launcher/dev/index.html><span class="logo-title default-animation">Go Kure — Launcher</span>
+section says which part), or <strong>open</strong> (nothing of it).</p><table><thead><tr><th>Issue</th><th>Ticket</th><th>Section</th><th>State</th><th>Needs</th></tr></thead><tbody><tr><td><a href=https://github.com/go-kure/launcher/issues/781 rel=external>go-kure/launcher#781</a></td><td>Remove Flux delivery fields from library output, and <code>kurel</code>&rsquo;s delivery mode</td><td>§1.3</td><td>Shipped</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/782 rel=external>go-kure/launcher#782</a></td><td>Delivery intent instead of Flux annotations</td><td>§1.3</td><td>Shipped</td><td><a href=https://github.com/go-kure/kure/issues/974 rel=external>go-kure/kure#974</a> (delivery intent), go-kure/launcher#781</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/783 rel=external>go-kure/launcher#783</a></td><td>Explicit ordering only; one bundle shape</td><td>§2.2</td><td>Shipped</td><td>go-kure/launcher#781; go-kure/launcher#787 for the name override (can follow)</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/784 rel=external>go-kure/launcher#784</a></td><td><code>oci</code> as an upper-level component; new <code>fluxcd-kustomization</code> kind</td><td>§2.3</td><td>Shipped</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/785 rel=external>go-kure/launcher#785</a></td><td>Release name default (rescopes <a href=https://github.com/go-kure/launcher/issues/776 rel=external>go-kure/launcher#776</a>)</td><td>§4.2</td><td>Shipped</td><td>go-kure/launcher#793</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/786 rel=external>go-kure/launcher#786</a></td><td>Secret values</td><td>§4.3</td><td>Shipped</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/787 rel=external>go-kure/launcher#787</a></td><td>Name overrides</td><td>§3.2</td><td>Partly: authored names used as written or refused; <code>scaler</code>, <code>rbac</code>, <code>networkpolicy</code> and <code>postgresql</code> overrides; <code>objectName</code> on kind components; the consumer <code>Naming</code> hook for the roles of §3.2; the hook-group names and their <code>hook-group</code> role; the HelmRelease of a <code>helm</code> component (<code>helm-release</code>) and the Kustomization and the kept source of an <code>oci</code> component (<code>oci-kustomization</code>, <code>oci-source</code>); the Deployment, the Service and the ServiceAccount of a <code>webservice</code> or <code>worker</code> component (<code>workload-deployment</code>, <code>workload-service</code>, <code>workload-serviceaccount</code>); the Cluster and the ObjectStore of a <code>postgresql</code> component (<code>postgresql-cluster</code>, <code>postgresql-objectstore</code>). Open: an author override for bundle, ordered-group and synthesized NetworkPolicy names; a hook role for the names outside the roles of §3.2, among them the claim a <code>pvc</code> volume generates</td><td>go-kure/launcher#783, go-kure/launcher#793</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/788 rel=external>go-kure/launcher#788</a></td><td>Component label and provenance</td><td>§3.4</td><td>Shipped</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/789 rel=external>go-kure/launcher#789</a></td><td>Contract metadata</td><td>§6.1</td><td>Shipped</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/790 rel=external>go-kure/launcher#790</a></td><td>Full spec and full set of kind components</td><td>§6.2</td><td>Partly: the kind inventory; the kinds §6.2 lists as shipped; <code>labels</code> and <code>annotations</code> on every kind component</td><td><a href=https://github.com/go-kure/kure/issues/981 rel=external>go-kure/kure#981</a> (missing constructors), go-kure/launcher#787</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/791 rel=external>go-kure/launcher#791</a></td><td>Security on template delivery</td><td>§5.2</td><td>Shipped</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/792 rel=external>go-kure/launcher#792</a></td><td>Hook-group child names unique across applications</td><td>§3.3</td><td>Shipped</td><td>go-kure/launcher#793, go-kure/launcher#787</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/793 rel=external>go-kure/launcher#793</a></td><td>One shortening rule</td><td>§3.3</td><td>Shipped</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/794 rel=external>go-kure/launcher#794</a></td><td>Asymmetries</td><td>§7</td><td>Shipped</td><td>go-kure/launcher#783, go-kure/launcher#784, go-kure/launcher#788</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/795 rel=external>go-kure/launcher#795</a></td><td><code>kurel build</code> ignores the global <code>-f/--output-file</code> (deferred)</td><td>§7</td><td>Open</td><td>—</td></tr><tr><td><a href=https://github.com/go-kure/launcher/issues/849 rel=external>go-kure/launcher#849</a></td><td>Policy refusals carry a class</td><td>§5.3</td><td>Shipped</td><td>—</td></tr></tbody></table><footer class=footline></footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/launcher/dev/index.html><span class="logo-title default-animation">Go Kure — Launcher</span>
 </a><search><form action=/launcher/dev/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
 <label class=a11y-only for=R-search-by>Search</label>
 <input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
 <button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/launcher/dev/index.html><a class=padding href=/launcher/dev/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul><li class=R-versionswitcher><div class="padding menu-control"><i class="fa-fw fas fa-code-branch"></i>
 <span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-version>Version</label>
-<select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/launcher/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main default-animation"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/launcher/dev/getting-started/index.html><a class="padding default-animation" href=/launcher/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li class=parent data-nav-id=/launcher/dev/concepts/index.html><a class="padding default-animation" href=/launcher/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu><li data-nav-id=/launcher/dev/concepts/design/index.html><a class=padding href=/launcher/dev/concepts/design/index.html>Design</a></li><li class=active data-nav-id=/launcher/dev/concepts/delivery-scope/index.html><a class=padding href=/launcher/dev/concepts/delivery-scope/index.html>Delivery Scope</a></li><li data-nav-id=/launcher/dev/concepts/oam-gvk/index.html><a class=padding href=/launcher/dev/concepts/oam-gvk/index.html>API Group & GVK</a></li><li data-nav-id=/launcher/dev/concepts/oam-package/index.html><a class=padding href=/launcher/dev/concepts/oam-package/index.html>Kurel Packages</a></li><li data-nav-id=/launcher/dev/concepts/oam-cluster-profile/index.html><a class=padding href=/launcher/dev/concepts/oam-cluster-profile/index.html>Cluster Profiles</a></li><li data-nav-id=/launcher/dev/concepts/oam-param-syntax/index.html><a class=padding href=/launcher/dev/concepts/oam-param-syntax/index.html>Parameter Syntax</a></li><li data-nav-id=/launcher/dev/concepts/oam-capability-schema/index.html><a class=padding href=/launcher/dev/concepts/oam-capability-schema/index.html>Capability Schema</a></li><li data-nav-id=/launcher/dev/concepts/oam-policy-interface/index.html><a class=padding href=/launcher/dev/concepts/oam-policy-interface/index.html>Policy Interface</a></li><li data-nav-id=/launcher/dev/concepts/oam-lowering-engine/index.html><a class=padding href=/launcher/dev/concepts/oam-lowering-engine/index.html>Lowering Engine</a></li><li data-nav-id=/launcher/dev/concepts/oam-operator-cr-components/index.html><a class=padding href=/launcher/dev/concepts/oam-operator-cr-components/index.html>Operator CR Components</a></li><li data-nav-id=/launcher/dev/concepts/oam-package-composition/index.html><a class=padding href=/launcher/dev/concepts/oam-package-composition/index.html>Package Composition</a></li><li data-nav-id=/launcher/dev/concepts/oam-external-secret-shorthand/index.html><a class=padding href=/launcher/dev/concepts/oam-external-secret-shorthand/index.html>External Secret Shorthand</a></li></ul></li><li data-nav-id=/launcher/dev/contributing/index.html><a class="padding default-animation" href=/launcher/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/api-reference/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/changelog/index.html><a class="padding default-animation" href=/launcher/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/launcher/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1791273724 defer></script><script src=/launcher/dev/js/theme.min.js?1791273724 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
+<select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/launcher/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main default-animation"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/launcher/dev/getting-started/index.html><a class="padding default-animation" href=/launcher/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li class=parent data-nav-id=/launcher/dev/concepts/index.html><a class="padding default-animation" href=/launcher/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu><li data-nav-id=/launcher/dev/concepts/design/index.html><a class=padding href=/launcher/dev/concepts/design/index.html>Design</a></li><li class=active data-nav-id=/launcher/dev/concepts/delivery-scope/index.html><a class=padding href=/launcher/dev/concepts/delivery-scope/index.html>Delivery Scope</a></li><li data-nav-id=/launcher/dev/concepts/oam-gvk/index.html><a class=padding href=/launcher/dev/concepts/oam-gvk/index.html>API Group & GVK</a></li><li data-nav-id=/launcher/dev/concepts/oam-package/index.html><a class=padding href=/launcher/dev/concepts/oam-package/index.html>Kurel Packages</a></li><li data-nav-id=/launcher/dev/concepts/oam-cluster-profile/index.html><a class=padding href=/launcher/dev/concepts/oam-cluster-profile/index.html>Cluster Profiles</a></li><li data-nav-id=/launcher/dev/concepts/oam-param-syntax/index.html><a class=padding href=/launcher/dev/concepts/oam-param-syntax/index.html>Parameter Syntax</a></li><li data-nav-id=/launcher/dev/concepts/oam-capability-schema/index.html><a class=padding href=/launcher/dev/concepts/oam-capability-schema/index.html>Capability Schema</a></li><li data-nav-id=/launcher/dev/concepts/oam-policy-interface/index.html><a class=padding href=/launcher/dev/concepts/oam-policy-interface/index.html>Policy Interface</a></li><li data-nav-id=/launcher/dev/concepts/oam-lowering-engine/index.html><a class=padding href=/launcher/dev/concepts/oam-lowering-engine/index.html>Lowering Engine</a></li><li data-nav-id=/launcher/dev/concepts/oam-operator-cr-components/index.html><a class=padding href=/launcher/dev/concepts/oam-operator-cr-components/index.html>Operator CR Components</a></li><li data-nav-id=/launcher/dev/concepts/oam-package-composition/index.html><a class=padding href=/launcher/dev/concepts/oam-package-composition/index.html>Package Composition</a></li><li data-nav-id=/launcher/dev/concepts/oam-external-secret-shorthand/index.html><a class=padding href=/launcher/dev/concepts/oam-external-secret-shorthand/index.html>External Secret Shorthand</a></li></ul></li><li data-nav-id=/launcher/dev/contributing/index.html><a class="padding default-animation" href=/launcher/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/api-reference/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/changelog/index.html><a class="padding default-animation" href=/launcher/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/launcher/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1791363412 defer></script><script src=/launcher/dev/js/theme.min.js?1791363412 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
