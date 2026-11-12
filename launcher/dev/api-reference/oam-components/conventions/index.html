@@ -1,0 +1,491 @@
+<!doctype html><html id=R-html lang=en-us dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.169.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Conventions Handlers use k8s.io/api constants for well-known Kubernetes enum values (access modes, restart policies, etc.) rather than string literals — never re-define values that already exist upstream.
+Every generated object owns its label maps. Generate hands back objects the caller owns and routinely edits — stamping ownership, environment or version labels onto the workloads it emits — so no two fields and no two objects ever share one map[string]string. Concretely: the object’s metadata.labels, the pod template’s metadata.labels, the Service selector and the labelSelector of every topology spread constraint and pod anti-affinity term are separate maps with equal contents. Inside this package appLabels and selectorFrom (both unexported, common.go) are what enforce that: call appLabels once per assignment rather than hoisting its result into a variable used twice, and let selectorFrom copy what it is handed rather than store it. A custom handler outside this package cannot call either and does not need to — the rule is to build a fresh map[string]string at each assignment site, and to maps.Clone any map before storing it in a selector."><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Conventions :: Go Kure — Launcher"><meta name=twitter:description content="Conventions Handlers use k8s.io/api constants for well-known Kubernetes enum values (access modes, restart policies, etc.) rather than string literals — never re-define values that already exist upstream.
+Every generated object owns its label maps. Generate hands back objects the caller owns and routinely edits — stamping ownership, environment or version labels onto the workloads it emits — so no two fields and no two objects ever share one map[string]string. Concretely: the object’s metadata.labels, the pod template’s metadata.labels, the Service selector and the labelSelector of every topology spread constraint and pod anti-affinity term are separate maps with equal contents. Inside this package appLabels and selectorFrom (both unexported, common.go) are what enforce that: call appLabels once per assignment rather than hoisting its result into a variable used twice, and let selectorFrom copy what it is handed rather than store it. A custom handler outside this package cannot call either and does not need to — the rule is to build a fresh map[string]string at each assignment site, and to maps.Clone any map before storing it in a selector."><meta property="og:url" content="https://www.gokure.dev/launcher/dev/api-reference/oam-components/conventions/index.html"><meta property="og:site_name" content="Go Kure — Launcher"><meta property="og:title" content="Conventions :: Go Kure — Launcher"><meta property="og:description" content="Conventions Handlers use k8s.io/api constants for well-known Kubernetes enum values (access modes, restart policies, etc.) rather than string literals — never re-define values that already exist upstream.
+Every generated object owns its label maps. Generate hands back objects the caller owns and routinely edits — stamping ownership, environment or version labels onto the workloads it emits — so no two fields and no two objects ever share one map[string]string. Concretely: the object’s metadata.labels, the pod template’s metadata.labels, the Service selector and the labelSelector of every topology spread constraint and pod anti-affinity term are separate maps with equal contents. Inside this package appLabels and selectorFrom (both unexported, common.go) are what enforce that: call appLabels once per assignment rather than hoisting its result into a variable used twice, and let selectorFrom copy what it is handed rather than store it. A custom handler outside this package cannot call either and does not need to — the rule is to build a fresh map[string]string at each assignment site, and to maps.Clone any map before storing it in a selector."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="API Reference"><meta itemprop=name content="Conventions :: Go Kure — Launcher"><meta itemprop=description content="Conventions Handlers use k8s.io/api constants for well-known Kubernetes enum values (access modes, restart policies, etc.) rather than string literals — never re-define values that already exist upstream.
+Every generated object owns its label maps. Generate hands back objects the caller owns and routinely edits — stamping ownership, environment or version labels onto the workloads it emits — so no two fields and no two objects ever share one map[string]string. Concretely: the object’s metadata.labels, the pod template’s metadata.labels, the Service selector and the labelSelector of every topology spread constraint and pod anti-affinity term are separate maps with equal contents. Inside this package appLabels and selectorFrom (both unexported, common.go) are what enforce that: call appLabels once per assignment rather than hoisting its result into a variable used twice, and let selectorFrom copy what it is handed rather than store it. A custom handler outside this package cannot call either and does not need to — the rule is to build a fresh map[string]string at each assignment site, and to maps.Clone any map before storing it in a selector."><meta itemprop=wordCount content="7116"><title>Conventions :: Go Kure — Launcher</title><link href=/launcher/dev/css/auto-complete/auto-complete.min.css?1794503122 rel=stylesheet><script src=/launcher/dev/js/auto-complete/auto-complete.min.js?1794503122 defer></script><script src=/launcher/dev/js/search-lunr.min.js?1794503122 defer></script><script src=/launcher/dev/js/search.min.js?1794503122 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/launcher/dev/searchindex.en.js?1794503122"</script><script src=/launcher/dev/js/lunr/lunr.min.js?1794503122 defer></script><script src=/launcher/dev/js/lunr/lunr.stemmer.support.min.js?1794503122 defer></script><script src=/launcher/dev/js/lunr/lunr.multi.min.js?1794503122 defer></script><script src=/launcher/dev/js/lunr/lunr.en.min.js?1794503122 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794503122 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794503122 rel=stylesheet></noscript><link href=/launcher/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1794503122 rel=stylesheet><link href=/launcher/dev/css/theme.min.css?1794503122 rel=stylesheet><link href=/launcher/dev/css/format-html.min.css?1794503122 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/api-reference/oam-components/conventions/index.html",window.relearn.relBasePath="../../..",window.relearn.relBaseUri="../../../../..",window.relearn.absBaseUri="https://www.gokure.dev/launcher/dev",window.relearn.version_js_url="/launcher/dev/versionindex.en.js?1794503122",window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-origin=/launcher/dev/api-reference/oam-components/conventions/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#conventions>Conventions</a><ul><li><a href=#the-app-label>The <code>app</code> label</a></li><li><a href=#the-object-name-objectname>The object name (<code>objectName</code>)</a></li><li><a href=#the-objects-labels-and-annotations-labels-annotations>The object’s labels and annotations (<code>labels</code>, <code>annotations</code>)</a></li><li><a href=#the-pod-templates-labels-and-annotations-podmetadata>The pod template’s labels and annotations (<code>podMetadata</code>)</a></li><li><a href=#a-label-selectors-match-expressions>A label selector&rsquo;s match expressions</a></li><li><a href=#required-fields-a-kind-writes-unauthored-and-does-not-refuse>Required fields a kind writes unauthored and does not refuse</a></li><li><a href=#every-spec-field-is-this-packages-to-write>Every spec field is this package&rsquo;s to write</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/index.html><span itemprop=name>launcher</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/index.html><span itemprop=name>API Reference</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/oam-components/index.html><span itemprop=name>Component Handlers</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Conventions</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html title="The null contract and two spellings of one field (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-traits/index.html title="Trait Handlers (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable api-reference" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><h1 id=conventions>Conventions</h1><h2 id=conventions>Conventions<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Handlers use <code>k8s.io/api</code> constants for well-known Kubernetes enum values (access
+modes, restart policies, etc.) rather than string literals — never re-define values
+that already exist upstream.</p><p>Every generated object owns its label maps. <code>Generate</code> hands back objects the caller
+owns and routinely edits — stamping ownership, environment or version labels onto the
+workloads it emits — so no two fields and no two objects ever share one
+<code>map[string]string</code>. Concretely: the object&rsquo;s <code>metadata.labels</code>, the pod template&rsquo;s
+<code>metadata.labels</code>, the Service selector and the <code>labelSelector</code> of every topology
+spread constraint and pod anti-affinity term are separate maps with equal contents.
+Inside this package <code>appLabels</code> and <code>selectorFrom</code> (both unexported, <code>common.go</code>) are
+what enforce that: call <code>appLabels</code> once per assignment rather than hoisting its result
+into a variable used twice, and let <code>selectorFrom</code> copy what it is handed rather than
+store it. A custom handler outside this package cannot call either and does not need to
+— the rule is to build a fresh <code>map[string]string</code> at each assignment site, and to
+<code>maps.Clone</code> any map before storing it in a selector.</p><p>This is a correctness rule, not tidiness. A selector that aliases the pod template&rsquo;s
+labels follows the caller&rsquo;s edits, and a topology spread constraint&rsquo;s <code>labelSelector</code>
+defines the pod set over which skew is computed — so a version label leaking into it
+makes a rollout spread each version separately instead of spreading the workload.</p><p>The same rule runs in the other direction: <strong>a generated object never shares a pointer
+or a map with the config that produced it.</strong> A handler config is reusable — the same one
+can be rendered more than once — so every value a <code>*SpecConfig.apply</code> projects onto a
+generated object is deep-copied on the way out: the claim template&rsquo;s <code>selector</code>,
+<code>resources.limits</code>, <code>dataSourceRef</code>, <code>volumeMode</code> and <code>volumeAttributesClassName</code>, and at
+the workload level <code>updateStrategy</code> (whose struct holds a pointer, so <code>*c.UpdateStrategy</code>
+alone would not be enough), <code>revisionHistoryLimit</code>, <code>persistentVolumeClaimRetentionPolicy</code>
+and <code>ordinals</code>. The deployment kind projects the same two shapes and follows the same rule:
+<code>strategy</code> (holding a <code>*RollingUpdateDeployment</code>), <code>revisionHistoryLimit</code> and
+<code>progressDeadlineSeconds</code>. <code>applyJobSpec</code> follows the same rule for the <code>job</code> and <code>cronjob</code>
+kinds: its ten scalar pointers go through the generic <code>copyPtr</code>, and <code>successPolicy</code> and
+<code>podFailurePolicy</code> — whose structs each own a slice of rules — through <code>DeepCopy</code>.
+The pod template every workload kind shares follows it too: <code>buildPodSpec</code> starts from a
+<code>DeepCopy</code> of the authored pod-level fields (<code>nodeSelector</code>, <code>podSecurityContext</code>,
+<code>terminationGracePeriodSeconds</code>, <code>imagePullSecrets</code>, …) and deep-copies each volume,
+toleration, topology spread constraint, the affinity, and the main, init and sidecar
+containers as it adds them — an <code>append</code> alone copies the element structs but shares the
+pointers, maps and slices they carry. The <code>postgresql</code> Cluster follows it for
+<code>spec.inheritedMetadata</code>: its <code>labels</code> and <code>annotations</code> are clones of the config&rsquo;s
+<code>InheritedLabels</code>/<code>InheritedAnnotations</code>, not the maps themselves
+(go-kure/launcher#396). Without that, editing the first rendered object — the same in-place
+customization the label rule above assumes — writes back into the config and reappears in
+every later render, with the symptom surfacing on a different object than the one that was
+edited.</p><h3 id=the-app-label>The <code>app</code> label<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Every <code>app</code> label and <code>app</code> selector this package generates to identify a component is
+valued at <code>oam.ComponentLabelValue(&lt;component>)</code>, never the raw component name —
+<code>appLabels</code> and <code>deploymentComponentLabels</code> call it, and nothing else writes the value.
+Authored values are emitted as written: an authored <code>selector</code> on a <code>service</code> component
+replaces the generated one and is not projected, and a type that emits authored objects
+(<code>passthrough</code>, for one) adds no <code>app</code> label. The one authored value that is checked is
+an <code>app</code> label on the pod template of a <code>replicaset</code> or <code>replicationcontroller</code> component, which gets the generated
+label beside its authored ones: the component&rsquo;s own label value is kept, another is
+refused. A component name
+is a DNS-1123 subdomain (up to 253 characters), a label value at most 63: the function
+returns a name of 63 characters or fewer unchanged, so output for those names is
+byte-identical, and projects a longer one onto a readable prefix of at most 52 characters
+(its first 52, with trailing <code>-</code> and <code>.</code> trimmed) plus <code>-</code> and
+a 10-hex-character sha256 digest (go-kure/launcher#572). The workload kinds and <code>service</code> never reach
+the projection, since their container name or Service name already refuses a name over 63
+characters; the <code>helm</code> values ConfigMap and values Secret do (a values
+ConfigMap that previously omitted <code>app</code> past 63 characters now carries the projected value). Object names are not projected. A custom handler
+that labels its objects by component uses the same function, so its selectors and the
+built-in traits&rsquo; selectors (a PodDisruptionBudget, a NetworkPolicy <code>podSelector</code>) agree.</p><p>The component label (<code>&lt;domain>/component</code>) is not this package&rsquo;s to write: the transform
+adds it to every object a component&rsquo;s config generates, and to its pod templates, with the
+authored component&rsquo;s value, where the key is absent (go-kure/launcher#788). Where the key is
+there with another value, the transform&rsquo;s output is refused when it is generated
+(go-kure/launcher#790): that holds for what a component type of this package emits from
+authored objects or a rendered chart (<code>passthrough</code>, <code>manifests</code>, <code>helmtemplate</code>, <code>helm</code>
+under template delivery) as for any other, so the key is one nothing else writes. A lowered part
+named differently from its component (the <code>postgresql</code> pooler, a database, an object store)
+carries the component&rsquo;s value, not its own name. A source a lowering rule generates and the
+application bundle holds (the repository a <code>helm</code> component generates) carries none. A
+<code>HelmRelease</code> also gets a post-renderer that sets the label on the chart&rsquo;s pod templates.
+See &ldquo;Component label and ownership&rdquo; in the
+<a href=https://pkg.go.dev/github.com/go-kure/launcher/pkg/oam rel=external>OAM model</a>.</p><h3 id=the-object-name-objectname>The object name (<code>objectName</code>)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Every kind component takes <code>objectName</code>, which names its one object in place of the component
+name (go-kure/launcher#787): every component type with a handler
+(<code>builtinComponentHandlers</code>) but four, as <code>TestObjectName_EveryComponentTypeChooses</code>
+(<code>pkg/cmd/kurel</code>) holds; a type that is lowered to others has none. <code>helmtemplate</code>,
+<code>manifests</code>, <code>crd</code> and <code>passthrough</code> generate no
+single object named after the component and refuse it. The rules for the name, the <code>Naming</code>
+hook&rsquo;s role <code>object</code> and the references that follow it are under &ldquo;<code>objectName</code>: the object of
+a kind component&rdquo; in the
+<a href=https://pkg.go.dev/github.com/go-kure/launcher/pkg/oam rel=external>OAM model</a>.</p><p>The property is not in any handler&rsquo;s <code>PropertySchema</code>: the engine adds it to the schema of
+every type whose handler declares its object (<code>ComponentObject</code>, in <code>object_name.go</code> or, for
+a kind added since, in the kind&rsquo;s own file),
+reads it, and hands <code>ToApplicationConfig</code> the resolved name as <code>Component.ObjectName()</code>. A
+handler&rsquo;s config carries it as <code>ObjectName</code>, empty when it is the component&rsquo;s name, and
+<code>Generate</code> names the object with it. Everything else the handler writes keeps the component
+name: the <code>app</code> label and selectors, the pod template&rsquo;s labels, the main container&rsquo;s name;
+the one exception is the pod selector of a <code>cnpg-cluster</code> or <code>cnpg-pooler</code> endpoint, below.
+A handler&rsquo;s own check of the name (a Service&rsquo;s DNS-1123 label, a CloudNativePG Cluster&rsquo;s
+length, a CronJob&rsquo;s 52 characters, a Job&rsquo;s 63 and the room an Indexed job&rsquo;s last index
+needs) runs on the object name, since that is what the object carries.</p><p>What a config tells a trait or the transform about its object follows the object name: a
+<code>service</code> component&rsquo;s <code>BackendServiceName</code>, a <code>serviceaccount</code> component&rsquo;s
+<code>ServiceAccountName</code>, and the pod selector of a <code>cnpg-cluster</code> or <code>cnpg-pooler</code> endpoint. Two
+consequences are the kind&rsquo;s own: a <code>statefulset</code>&rsquo;s pods and claims take the StatefulSet&rsquo;s
+name, so they follow <code>objectName</code>; a <code>helmrelease</code>&rsquo;s <code>spec.releaseName</code> default stays the
+component name, so the release does not.</p><h3 id=the-objects-labels-and-annotations-labels-annotations>The object&rsquo;s labels and annotations (<code>labels</code>, <code>annotations</code>)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Every kind component, the same types that take <code>objectName</code>, takes two optional properties,
+<code>labels</code> and <code>annotations</code>, each a map of strings (go-kure/launcher#790). They go on the
+metadata of the component&rsquo;s one object and nowhere else. On a workload kind the pod template
+keeps the labels of the kind, its <code>app</code> label and what <code>template.metadata</code> authors, and no
+selector reads an authored label. <code>helmtemplate</code>, <code>manifests</code>, <code>crd</code> and <code>passthrough</code>
+generate no single object named after the component and refuse both. A top-level spec
+field named <code>labels</code> therefore cannot keep its name: a <code>thanosruler</code>&rsquo;s Prometheus external
+labels are its <code>externalLabels</code> property (see <strong>thanosruler</strong>); a <code>prometheus</code>&rsquo;s are its
+spec&rsquo;s own <code>externalLabels</code> field, under its upstream name.</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>web</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>type</span>: <span style=color:#ae81ff>deployment</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>properties</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>image</span>: <span style=color:#ae81ff>ghcr.io/example/web:1.0.0</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>labels</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>team</span>: <span style=color:#ae81ff>payments</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>annotations</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>example.com/owner</span>: <span style=color:#e6db74>&#34;payments@example.com&#34;</span></span></span></code></pre></div><p>Refused, naming the component, the property and the key:</p><ul><li>a value that is no map, and an entry that is no string (quote a number or a boolean); a
+null value or entry is an absent one;</li><li>a key or value the API server refuses: a label key or value that is no valid label, an
+annotation key that is no valid annotation key, annotations whose keys and values hold more
+than 262144 bytes together;</li><li>the <code>app</code> label with another value than the component&rsquo;s (its name, or the hashed form of a
+name over 63 characters), which is what the kinds that set <code>app</code> select by;</li><li>the component label key with another value than the component&rsquo;s (see &ldquo;Component label and
+ownership&rdquo; above);</li><li>a key the kind already sets on its object with another value;</li><li>a key the consumer reserved for itself (<code>ReservedMetadataKeys</code>), as on every generated
+object.</li></ul><p>A label that names another object is the author&rsquo;s literal: it does not follow that object&rsquo;s
+<code>objectName</code> or the <code>Naming</code> hook&rsquo;s answer for it. An object that belongs to another through
+a label (an EndpointSlice&rsquo;s <code>kubernetes.io/service-name</code>) is written with the name the other
+object takes.</p><p>An annotation a delivery engine acts on (a Flux annotation such as
+<code>kustomize.toolkit.fluxcd.io/force</code>, for one) is written as authored too: launcher does not
+refuse it and does not carry out what the engine does with it. <code>Transformer.WarnForcedVolumes</code>
+warns about a PersistentVolume or PersistentVolumeClaim that has the force key enabled, and
+changes nothing. A consumer that keeps such keys to itself reserves them with
+<code>TransformContext.ReservedMetadataKeys</code>.</p><p>As <code>objectName</code>, the two are in no handler&rsquo;s <code>PropertySchema</code>: the engine adds them to the
+schema of every type whose handler declares its object, reads and checks them, removes them
+from the properties and hands <code>ToApplicationConfig</code> the result as
+<code>Component.ObjectMetadata()</code>. A handler&rsquo;s config carries it as <code>Metadata</code> and <code>Generate</code> puts
+it on the object through <code>kindObject</code>, the one helper every kind returns its object through
+(the Flux sources through <code>emitFluxSource</code>, which does the same before it writes a long
+<code>spec.timeout</code>). <code>TestObjectMetadata_EveryKindComponentTakesIt</code> holds every registered kind
+to the two properties, so a kind added later cannot ship without them.</p><h3 id=the-pod-templates-labels-and-annotations-podmetadata>The pod template&rsquo;s labels and annotations (<code>podMetadata</code>)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><code>labels</code> and <code>annotations</code> above go on the object and never on a pod template. The five kinds
+whose spec holds a pod template the author does not write whole (<code>deployment</code>, <code>statefulset</code>,
+<code>daemonset</code>, <code>job</code> and <code>cronjob</code>) take a fourth property, <code>podMetadata</code>, for the pod template&rsquo;s
+own metadata (go-kure/launcher#1178). On a <code>cronjob</code> it is the pod template inside the job
+template, not the CronJob&rsquo;s or the job template&rsquo;s metadata. <code>webservice</code> and <code>worker</code> take it
+too (go-kure/launcher#1216), with the same name and shape as <code>deployment</code>: the rule hands it to
+its deployment member, so it lands on that Deployment&rsquo;s pod template and nowhere else. The
+Service a <code>webservice</code> generates selects on the component&rsquo;s <code>app</code> label alone, so an authored
+label is on the pods and not in the Service&rsquo;s selector. A document moves a workload between
+<code>webservice</code>, <code>worker</code> and <code>deployment</code> without renaming it.</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>properties</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>image</span>: <span style=color:#ae81ff>ghcr.io/example/web:v1.0.0</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>podMetadata</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>labels</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>example.com/team</span>: <span style=color:#ae81ff>payments</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>annotations</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>example.com/owner</span>: <span style=color:#ae81ff>payments team</span></span></span></code></pre></div><ul><li><strong>What it does.</strong> The kind writes its pod template labels first and the authored ones are added
+beside them. A change to either map is a pod template change, so the controller&rsquo;s update
+strategy decides whether it reaches the pods that exist (a rolling update replaces them,
+<code>OnDelete</code> waits for a deletion, and a <code>cronjob</code> only changes the Jobs it creates later). A
+<code>job</code> has no strategy: the API server refuses a change to the pod template of a Job that is
+not suspended.</li><li><strong>What it never does.</strong> It does not reach the object&rsquo;s metadata, the selector or any other
+object. The selector is a map of its own (<code>appLabels</code>, <code>deploymentComponentLabels</code>), so an
+authored label cannot change which pods a workload owns.</li><li><strong>Refused where the component is read.</strong> A key beside <code>labels</code> and <code>annotations</code>; a label key
+or value that is no valid label; a value that is no string; an annotation key that is no valid
+annotation key; annotations over the size the API server accepts (counted again with the
+annotations the kind sets); and, on <code>job</code> and <code>cronjob</code> only, the four labels the Job controller
+owns (<code>batch.kubernetes.io/controller-uid</code>, <code>batch.kubernetes.io/job-name</code>, <code>controller-uid</code>,
+<code>job-name</code>), since the API server generates the selector of a Job from them. That last refusal
+can be loosened later without invalidating a document.</li><li><strong>Refused where the object is generated.</strong> <code>app</code>, or any other key the kind sets, with another
+value than the one the kind writes; writing the kind&rsquo;s own value is accepted.</li><li><strong>Checked as on any pod template.</strong> A key the consumer reserves
+(<code>TransformContext.ReservedMetadataKeys</code>) is refused, and the component label is stamped and
+held, by the checks that already read every generated pod template. A kubernetes.io or
+k8s.io key is not refused here: the API server and the Job controller own what they own.</li><li><strong>Traits.</strong> The traits written so far change the pod spec only, so they leave the authored keys
+as they are.</li></ul><p>The property is an addition to the document format: a document that wrote none is unchanged, and
+the keys refused above were not expressible before.</p><h3 id=a-label-selectors-match-expressions>A label selector&rsquo;s match expressions<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>A kind component whose spec holds a Kubernetes label selector (<code>metav1.LabelSelector</code>) decodes
+it strictly, and the strict decode refuses nothing of a match expression: the Go type writes
+<code>key</code> and <code>operator</code> whether or not they were authored, and reads any string as an operator.
+Three defects of an expression are therefore refused where the component is read, with or
+without an environment policy, each named by its path (go-kure/launcher#790):</p><ul><li><strong>An expression without its <code>key</code> or its <code>operator</code></strong>
+(<code>selector.matchExpressions[0].operator: required (the operator of the expression: In, NotIn, Exists or DoesNotExist)</code>). The object would carry <code>key: ""</code> or <code>operator: ""</code> and not show
+the omission.</li><li><strong>An <code>operator</code> that is none of the four</strong>
+(<code>selector.matchExpressions[0].operator: "Equals" is not a label selector operator (In, NotIn, Exists or DoesNotExist)</code>).</li><li><strong>An operator and <code>values</code> that do not go together</strong>: <code>In</code> or <code>NotIn</code> without a value
+(<code>selector.matchExpressions[0].values: required with the operator In (at least one value)</code>),
+<code>Exists</code> or <code>DoesNotExist</code> with one (<code>…values: not allowed with the operator Exists (it takes no value)</code>).</li></ul><p>The API server refuses each of the three on every selector listed below, through one function,
+<code>ValidateLabelSelectorRequirement</code> of <code>k8s.io/apimachinery</code>, and under every option it passes
+that function. <code>TestValidateLabelSelector_MatchesAPIMachinery</code> holds launcher&rsquo;s check to the
+linked function on those three.</p><p><strong>That function judges more, and these kinds do not.</strong> It also refuses an expression <code>key</code> that
+is no label name, an expression value that is no label value (on the objects that still check
+it), and a <code>matchLabels</code> key or value that is no label name or value. Those are value rules,
+left to the API server as for every typed kind: a selector with <code>key: "not a label"</code> builds
+here and is refused at apply. An authored empty <code>key</code> (<code>key: ""</code>) is one of them: it differs
+from an unauthored key only in that the unauthored one is refused here, and the API server
+refuses both.</p><p><strong>Where it holds:</strong></p><table><thead><tr><th>Kind</th><th>Selectors</th></tr></thead><tbody><tr><td><code>networkpolicy</code></td><td><code>podSelector</code>; the <code>podSelector</code> and <code>namespaceSelector</code> of every <code>ingress[].from[]</code> and <code>egress[].to[]</code> peer</td></tr><tr><td><code>poddisruptionbudget</code></td><td><code>selector</code></td></tr><tr><td><code>clusterrole</code></td><td>every entry of <code>aggregationRule.clusterRoleSelectors</code></td></tr><tr><td><code>validatingwebhookconfiguration</code>, <code>mutatingwebhookconfiguration</code></td><td>the <code>namespaceSelector</code> and <code>objectSelector</code> of every webhook</td></tr><tr><td><code>validatingadmissionpolicy</code>, <code>mutatingadmissionpolicy</code></td><td>the <code>namespaceSelector</code> and <code>objectSelector</code> of <code>matchConstraints</code></td></tr><tr><td><code>validatingadmissionpolicybinding</code>, <code>mutatingadmissionpolicybinding</code></td><td><code>paramRef.selector</code>; the <code>namespaceSelector</code> and <code>objectSelector</code> of <code>matchResources</code></td></tr><tr><td><code>pod</code>, and under <code>template.spec</code> <code>podtemplate</code>, <code>replicaset</code> and <code>replicationcontroller</code></td><td>the <code>labelSelector</code> and <code>namespaceSelector</code> of every <code>podAffinity</code> and <code>podAntiAffinity</code> term, required or preferred; a topology spread constraint&rsquo;s <code>labelSelector</code>; a projected <code>clusterTrustBundle</code> source&rsquo;s <code>labelSelector</code>; the <code>selector</code> of a generic ephemeral volume&rsquo;s claim template</td></tr></tbody></table><p>A <code>replicaset</code>&rsquo;s own <code>selector</code> is refused for the same defects by the check that compares it
+with the <code>app</code> label, with apimachinery&rsquo;s reason and not the texts above (see its entry);
+<code>TestReplicaSetSelector_RefusedAsAPIMachineryReadsIt</code> holds that to each of them. The Cilium
+kinds hold the <code>key</code> and <code>operator</code> of Cilium&rsquo;s own selector type through the same required
+list, with the same wording; their entries say what else Cilium requires.</p><p><strong>Presence only, where a CRD defines the object.</strong> On the kinds below an expression without its
+<code>key</code> or its <code>operator</code> is refused, by the same required list and in the same words. The CRD
+requires both fields, and the Go type writes each whether or not it was authored, so the object
+would not show the omission: the document as authored is one the API server refuses, and the
+kind refuses the omission by presence, as it does every required field its type writes
+unauthored. An authored empty string is a value, left to the API server. Nothing else of the
+expression is refused: an operator that is none of the four and a mismatched <code>values</code> are left
+to the API server and to the operator&rsquo;s own admission, since a CRD&rsquo;s schema requires the two
+fields and says nothing of the pair.</p><table><thead><tr><th>Kind</th><th>Selectors</th><th>Ground</th></tr></thead><tbody><tr><td><code>servicemonitor</code>, <code>podmonitor</code></td><td><code>selector</code></td><td>the linked type, by the generator&rsquo;s rule (below)</td></tr><tr><td><code>prometheus-probe</code></td><td><code>targets.ingress.selector</code></td><td>the same</td></tr><tr><td><code>alertmanager</code></td><td>the selectors a <code>pod</code> holds, at the top of the spec; the <code>selector</code> of the claim template of <code>storage.volumeClaimTemplate</code> and of <code>storage.ephemeral</code>; <code>alertmanagerConfigSelector</code>; <code>alertmanagerConfigNamespaceSelector</code></td><td>the same</td></tr><tr><td><code>thanosruler</code></td><td>the selectors a <code>pod</code> holds, at the top of the spec; the <code>selector</code> of the claim template of <code>storage.volumeClaimTemplate</code> and of <code>storage.ephemeral</code>; <code>ruleSelector</code>; <code>ruleNamespaceSelector</code></td><td>the same</td></tr><tr><td><code>prometheus</code></td><td>the selectors a <code>pod</code> holds, at the top of the spec; the <code>selector</code> of the claim template of <code>storage.volumeClaimTemplate</code> and of <code>storage.ephemeral</code>; the selector and the namespace selector of the ServiceMonitors, PodMonitors, Probes, ScrapeConfigs and rules it reads (<code>serviceMonitorSelector</code>, <code>serviceMonitorNamespaceSelector</code>, <code>podMonitorSelector</code>, <code>podMonitorNamespaceSelector</code>, <code>probeSelector</code>, <code>probeNamespaceSelector</code>, <code>scrapeConfigSelector</code>, <code>scrapeConfigNamespaceSelector</code>, <code>ruleSelector</code>, <code>ruleNamespaceSelector</code>)</td><td>the same</td></tr><tr><td><code>cnpg-cluster</code></td><td>the <code>labelSelector</code> and <code>namespaceSelector</code> of every <code>affinity.additionalPodAffinity</code> and <code>affinity.additionalPodAntiAffinity</code> term, required or preferred; <code>topologySpreadConstraints[].labelSelector</code>; a <code>projectedVolumeTemplate</code> <code>clusterTrustBundle</code> source&rsquo;s <code>labelSelector</code>; the <code>selector</code> of <code>ephemeralVolumeSource.volumeClaimTemplate.spec</code> and of the <code>pvcTemplate</code> of <code>storage</code>, <code>walStorage</code> and each tablespace; <code>podSelectorRefs[].selector</code></td><td>the Cluster CRD of the linked module</td></tr><tr><td><code>cnpg-pooler</code></td><td>under <code>template.spec</code>, the selectors a <code>pod</code> holds</td><td>the Pooler CRD of the linked module</td></tr><tr><td><code>issuer</code>, <code>clusterissuer</code></td><td>the <code>labelSelector</code> and <code>namespaceSelector</code> of every pod affinity and anti-affinity term of an HTTP01 solver&rsquo;s <code>podTemplate.spec.affinity</code>, under <code>ingress</code> and under <code>gatewayHTTPRoute</code></td><td>the Issuer and ClusterIssuer CRDs of the linked module</td></tr><tr><td><code>gateway</code>, <code>listenerset</code></td><td>a listener&rsquo;s <code>allowedRoutes.namespaces.selector</code>; a Gateway&rsquo;s <code>allowedListeners.namespaces.selector</code></td><td>the CRDs of both Gateway API channels</td></tr><tr><td><code>cilium-nodeconfig</code></td><td><code>nodeSelector</code></td><td>the CiliumNodeConfig CRD of the linked module</td></tr><tr><td><code>secretstore</code>, <code>clustersecretstore</code></td><td><code>conditions[].namespaceSelector</code></td><td>the linked type, by the generator&rsquo;s rule (below)</td></tr><tr><td><code>clusterexternalsecret</code></td><td><code>namespaceSelector</code>; every entry of <code>namespaceSelectors</code></td><td>the same</td></tr><tr><td><code>imageupdateautomation</code></td><td><code>policySelector</code></td><td>the same</td></tr><tr><td><code>resourcesetinputprovider</code></td><td>every entry of <code>selectors</code></td><td>the ResourceSetInputProvider CRD of the linked module, and the linked type, by the generator&rsquo;s rule</td></tr><tr><td><code>replicationsource</code>, <code>replicationdestination</code></td><td>the <code>labelSelector</code> and <code>namespaceSelector</code> of every pod affinity and anti-affinity term of a mover&rsquo;s <code>moverAffinity</code>, required or preferred: <code>rclone</code>, <code>restic</code>, <code>rsyncTLS</code>, and on a source <code>syncthing</code></td><td>the ReplicationSource and ReplicationDestination CRDs of the linked module</td></tr></tbody></table><p>The Prometheus operator&rsquo;s module, the External Secrets Operator&rsquo;s and Flux&rsquo;s image automation
+module ship no CRD to read, so the ground of their kinds is the source of the linked
+<code>metav1.LabelSelectorRequirement</code>; the Flux Operator&rsquo;s module ships its CRDs, and its kind is
+held to both, to its CRD and, as the other Flux kinds are, to that source: the schema generators
+require a field that carries no optional marker and whose json tag keeps it when empty, and
+<code>key</code> and <code>operator</code> are such fields
+where <code>values</code> is not. <code>TestExternalSecretsKinds_RequiredMatchSource</code> derives the two from
+that source by that rule, beside the fields the operator&rsquo;s own types mark required, and holds
+each kind&rsquo;s list to them. The monitoring and Flux kinds&rsquo; lists are generated from the same
+source by the same rule
+(<a href=/launcher/dev/api-reference/oam-components/conventions/index.html#required-fields-a-kind-writes-unauthored-and-does-not-refuse>Required fields a kind writes unauthored and does not refuse</a>),
+which also requires every other field of an embedded Kubernetes type the rule requires (a
+container&rsquo;s <code>name</code>, a Secret key reference&rsquo;s <code>key</code>). CloudNativePG&rsquo;s admission
+webhook runs apimachinery&rsquo;s whole selector validation on <code>podSelectorRefs[].selector</code>; that
+fuller check is the operator&rsquo;s, not launcher&rsquo;s.</p><p><strong>Not held: the metric selectors of a <code>horizontalpodautoscaler</code></strong>
+(<code>metrics[].object.metric.selector</code>, <code>metrics[].pods.metric.selector</code>,
+<code>metrics[].external.metric.selector</code>). The API server&rsquo;s validation of an autoscaler does not
+read them, and a kind does not refuse what the API admits.</p><p>A config that is exported (<code>NetworkPolicyConfig</code>, <code>PodConfig</code>, <code>PodTemplateConfig</code>,
+<code>ReplicaSetConfig</code>, <code>ReplicationControllerConfig</code>) repeats at <code>Generate</code> the two checks its
+typed value can show: the operator, an empty one included, and the pair. A missing <code>key</code> shows
+only in what was authored, so it is refused where the component is read.
+<code>TestLabelSelectorKinds_CoverEverySelector</code> walks the type of every strictly decoded kind and
+fails on a selector path that is neither held nor listed as left out with its reason, so a
+selector added by a dependency bump or a new kind cannot go unread. For a presence-only kind it
+also reads the CRDs named above, fails where one does not require <code>key</code> and <code>operator</code> at a
+held path, and asks the API server&rsquo;s own validation of a custom resource at each: the object
+the kind emits for a whole expression is accepted, and the same object with the <code>key</code> or the
+<code>operator</code> taken out is refused for that field alone. With the field as the empty string the
+type writes, the object is accepted again, which is why the omission is refused where the
+component is read.</p><p>The walk covers the kinds that decode a type. The hand-parsed kinds (<code>deployment</code>, <code>daemonset</code>,
+<code>job</code>, <code>cronjob</code>, <code>statefulset</code>, <code>persistentvolumeclaim</code>) hold their selectors through their own
+parser (<code>parseLabelSelectorOpts</code>), which refuses the same and more, so their absence from the
+test&rsquo;s list is not a gap.</p><h3 id=required-fields-a-kind-writes-unauthored-and-does-not-refuse>Required fields a kind writes unauthored and does not refuse<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>A field the API requires can still reach the object unauthored. Where the Go type writes the
+field whatever was authored (<code>""</code>, <code>0</code>, <code>{}</code>, <code>null</code>), the object carries a value the author
+did not write and does not show the omission. A kind refuses the omission of such a field only
+where its required list or its own validation names it (<code>helmrelease</code> checks a <code>valuesFrom</code>
+entry&rsquo;s <code>kind</code> and <code>name</code> by hand); every other one is written and left to the API server and to
+the operator. The section above and each kind&rsquo;s entry list the ones that are refused. This
+section states the rule that refuses them where a kind&rsquo;s list is generated, and the ones that
+are not refused, as they are at this pin.</p><p><strong>Generated lists.</strong> The required list of <code>issuer</code>, <code>clusterissuer</code>, <code>certificate</code>,
+<code>secretstore</code>, <code>clustersecretstore</code>, <code>externalsecret</code>, <code>clusterexternalsecret</code>, <code>cnpg-cluster</code>,
+<code>cnpg-pooler</code>, <code>cnpg-objectstore</code>, <code>cnpg-database</code>, <code>prometheus</code>, <code>alertmanager</code>,
+<code>thanosruler</code>, <code>servicemonitor</code>, <code>podmonitor</code>, <code>prometheus-probe</code>, <code>prometheusrule</code>, the
+fourteen Flux kinds (<code>helmrelease</code>, <code>fluxcd-kustomization</code>, <code>bucket</code>, <code>ocirepository</code>,
+<code>gitrepository</code>, <code>helmchart</code>, <code>helmrepository</code>, <code>artifactgenerator</code>, <code>fluxcd-alert</code>,
+<code>fluxcd-provider</code>, <code>fluxcd-receiver</code>, <code>imagepolicy</code>, <code>imagerepository</code>,
+<code>imageupdateautomation</code>), <code>resourcesetinputprovider</code>, the ten Gateway API kinds
+(<code>gatewayclass</code>, <code>gateway</code>, <code>listenerset</code>, <code>referencegrant</code>, <code>backendtlspolicy</code>, <code>httproute</code>,
+<code>grpcroute</code>, <code>tcproute</code>, <code>udproute</code>, <code>tlsroute</code>), <code>replicationsource</code>,
+<code>replicationdestination</code>, the four MetalLB kinds that require a field (<code>metallb-ipaddresspool</code>,
+<code>metallb-l2advertisement</code>, <code>metallb-bgpadvertisement</code>, <code>metallb-bgppeer</code>), the seven further
+cnpg kinds (<code>cnpg-imagecatalog</code>, <code>cnpg-clusterimagecatalog</code>, <code>cnpg-backup</code>,
+<code>cnpg-scheduledbackup</code>, <code>cnpg-databaserole</code>, <code>cnpg-publication</code>, <code>cnpg-subscription</code>) and the
+nine Cilium kinds other than the two network policies (<code>cilium-bgpadvertisement</code>,
+<code>cilium-bgpclusterconfig</code>, <code>cilium-bgpnodeconfigoverride</code>, <code>cilium-bgppeerconfig</code>,
+<code>cilium-cidrgroup</code>, <code>cilium-egressgatewaypolicy</code>, <code>cilium-loadbalancerippool</code>,
+<code>cilium-localredirectpolicy</code>, <code>cilium-nodeconfig</code>) is generated:
+every field the kind&rsquo;s API requires and its Go type writes unauthored is refused where the
+author leaves it out under an authored parent, whatever type declares it. The paths are in
+<code>zz_generated_kind_required.go</code> (<code>kindRequiredPaths</code>), read through the same derivation as the
+measurement below (<code>deriveRequiredWritten</code>), so the two cannot drift.
+<code>TestKindComponents_RequiredIsGenerated</code> fails where the file differs from the derivation, a
+path added or gone, so a dependency bump that moves a field fails CI until the file is
+regenerated with <code>UPDATE_KIND_REQUIRED=1</code> (refused where <code>CI</code> is set). Left out, each by a named
+rule and never by the type that declares it:</p><ul><li>a field whose written value the API takes as authored (the valid values below);</li><li>a field the schema gives a default, that is not nullable and that the type writes <code>null</code>:
+the API server drops that null and fills the default (<code>cnpg-cluster</code>&rsquo;s
+<code>replicationSlots.synchronizeReplicas.enabled</code>);</li><li>a field under a path the kind refuses whatever is authored there (see Method);</li><li>an entry of <code>requiredWrittenExceptions</code>, the test&rsquo;s named exceptions, each with the API
+server&rsquo;s answer for the object without it, in one of two classes. <strong>Accepted</strong>: the API
+server accepts the omission as the kind writes it, and the operator handles it. At this pin:
+<code>cnpg-pooler</code>&rsquo;s <code>template.spec.containers</code>, which the kind writes <code>[]</code> and the Pooler CRD
+accepts, the template&rsquo;s <code>spec</code> authored or left out; the operator adds its <code>pgbouncer</code>
+container. <strong>Pruned</strong>: the Go source requires the field and the kind&rsquo;s CRD does not declare
+it, so the API server prunes it, authored or not, and requires nothing of it. At this pin: on
+<code>prometheus</code>, <code>alertmanager</code> and <code>thanosruler</code>, the <code>apiVersion</code>, <code>kind</code>, <code>name</code> and <code>uid</code> of
+an owner reference in the metadata of an ephemeral volume&rsquo;s claim template
+(<code>storage.ephemeral</code> and <code>volumes[].ephemeral</code>), 8 per kind. The Go source declares the whole
+<code>ObjectMeta</code> there; the operator&rsquo;s CRDs declare that metadata as an object with no field, so
+the API server prunes an owner reference there (strict field validation refuses it as an
+unknown field) and requires none of its fields.</li></ul><p>A refusal reads the kind&rsquo;s own text for the field where it has one, else <code>the &lt;API> API requires this field</code> (or <code>requires the name of what this refers to</code>, for a reference&rsquo;s
+<code>name</code>). A field under a parent the type writes unauthored and the API does not require is
+asked for only where that parent is authored; the generated file names each such field with
+what the API server answers for the object with the parent left out, and the test holds every
+one to an answer. A monitoring basic auth (<code>basicAuth</code>, wherever a kind holds one) is such a
+parent: the API server accepts it without a <code>username</code> or <code>password</code>, and the Prometheus
+operator reads both keys and refuses the basic auth without either, so the kind refuses an
+authored basic auth that leaves either out; a web or cluster TLS server&rsquo;s <code>keySecret</code> is asked
+for only where it is authored, <code>keyFile</code> being the alternative. The test shows what the kind
+does with each, and what the API server answers on the operator&rsquo;s CRD: the object without the
+parent where the kind builds one, else the object with the parent as the type writes it
+unauthored (a <code>prometheus-probe</code>&rsquo;s <code>prober</code> without a <code>url</code>, which the API server refuses as
+the kind does). Of the stores, the fields whose API default never applies because the type
+writes them (<code>secretStoreUnappliedDefaults</code>) are generated by the same test.</p><p>The Flux kinds that decode their properties themselves (<code>helmrelease</code>, <code>fluxcd-kustomization</code>,
+<code>bucket</code>, <code>ocirepository</code>, <code>gitrepository</code>, <code>helmchart</code>, <code>helmrepository</code>) run the generated
+refusal after their own checks, so a field one of those checks requires (a <code>bucket</code>&rsquo;s
+<code>bucketName</code>, a <code>helmrelease</code>&rsquo;s <code>valuesFrom[].kind</code>) is refused in the words it always was;
+the test names those fields (<code>generatedRefusedFirst</code>). An <code>httproute</code> and a <code>grpcroute</code> run it
+after their decode checks too. A refusal of these kinds that their list did not name before
+says its class&rsquo;s sentence. No path of a Flux or Gateway kind needs a recorded answer for a
+parent left out. The Gateway API&rsquo;s module ships its CRDs, and so does the Flux Operator&rsquo;s: the
+test runs a row of each Gateway kind and of <code>resourcesetinputprovider</code> through the API server.</p><p><strong>Vendored CRDs.</strong> The Prometheus operator&rsquo;s module, the Flux controllers&rsquo; API modules and the
+External Secrets Operator&rsquo;s API module ship no CRD, so the test reads copies, vendored for the
+tests only and each checked against its git blob id by <code>TestVendoredCRDs_MatchSource</code>, which
+also holds each directory to the tag of the module <code>go.mod</code> links:</p><ul><li>the seven <code>monitoring.coreos.com</code> CRDs of the monitoring kinds, from
+<code>example/prometheus-operator-crd/</code> of prometheus-operator <code>v0.95.1</code>, beside the operator
+excerpt in <code>testdata/upstream/prometheus-operator/</code> (<code>scripts/vendor-prometheus-operator-gates.sh</code>);</li><li>the CRDs of the fourteen Flux kinds, from <code>config/crd/bases/</code> of each controller&rsquo;s repository
+at the tag of its API module (<code>api/v1.7.1</code> of helm-controller, <code>api/v1.10.1</code> of
+kustomize-controller and source-controller, <code>api/v1.10.0</code> of notification-controller,
+<code>api/v1.3.0</code> of image-reflector-controller and image-automation-controller, <code>api/v2.3.1</code> of
+source-watcher), one directory per repository under <code>testdata/upstream/</code> with its <code>LICENSE</code>
+(<code>scripts/vendor-flux-crds.sh</code>). The one addition to their bytes is an <code>allow-term</code> pragma
+comment line above an upstream line that names a term the repository&rsquo;s forbidden-terms guard
+lists (a receiver type of the <code>Receiver</code> CRD), as a whole word or inside an identifier: the
+script reads the guard&rsquo;s own matcher (<code>scripts/forbidden-terms-lib.sh</code>, self-tested by <code>make test-forbidden-terms</code>), so it marks every line the guard would refuse, under the C locale or
+C.UTF-8. Each <code>file</code> pin in <code>SOURCE</code> is the blob id of
+the committed file; a file carrying pragma lines also has an <code># upstream</code> line naming
+upstream&rsquo;s blob id, which the file must hash to with those lines stripped. A file with an
+<code># upstream</code> line and no pragma, a pragma in a file with none, and a pragma whose next line
+does not name its term all fail the test;</li><li>the CRDs of the four External Secrets kinds (<code>secretstore</code>, <code>clustersecretstore</code>,
+<code>externalsecret</code>, <code>clusterexternalsecret</code>), unmodified from <code>config/crds/bases/</code> of
+external-secrets <code>v2.14.0</code>, under the same path in <code>testdata/upstream/external-secrets/</code> with
+its <code>LICENSE</code> (<code>scripts/vendor-external-secrets-crds.sh</code>, <code>mise run vendor-external-secrets-crds vX.Y.Z</code>; go-kure/launcher#1108). <code>go.mod</code> links the API module
+at a pseudo-version of a commit, not at a tag of its own, and that commit is the release tag
+<code>v2.14.0</code>, a lightweight tag: its ref names the commit, with no tag object. So the
+<code>tag-object</code> line of <code>SOURCE</code> is the object the tag ref names, the commit, and the test
+requires its first 12 hex digits to be the pseudo-version&rsquo;s; the script takes the tag, checks
+with <code>git ls-remote</code> that it names that commit, and refuses an annotated tag or another
+commit. Copied unmodified, these files take no pragma: the script refuses one with a line the
+forbidden-terms guard would refuse, read with the guard&rsquo;s own matcher as above.</li></ul><p>The kinds&rsquo; lists stay derived from the markers of the Go source; the CRDs answer for them. Every
+generated kind&rsquo;s CRD is read, shipped or vendored, and a kind whose CRD is not read fails the
+test.
+Of every type that holds a generated path, the test creates the object with one such path
+authored, which the API server accepts, and without it, which the API server refuses as
+missing a required field (a path whose CRD gives it a default is passed over for another of
+its type: the API server fills a default only where the field is left out of the object, not
+where the type writes it empty). A type whose every generated path the CRD defaults (a Vault
+store&rsquo;s JWT authentication, whose one generated path is its mount <code>path</code>, defaulted to <code>jwt</code>)
+is answered instead with the field authored and left out, both accepted, the default filled
+in the second, and written <code>""</code> as the type writes it unauthored, which the API server keeps:
+the default never applies, which is why the kind refuses it. Every generated path is one the
+CRD declares. The rows author what the marker schema cannot: a URL, duration or enumerated
+value where the filled control&rsquo;s would break a pattern or an enum, and, of the External
+Secrets stores, one authentication method where a provider&rsquo;s property count or expression rule
+requires exactly one (<code>generatedHarnessSamples</code>).</p><p>The VolSync, MetalLB, further cnpg and Cilium kinds are derived from the CRDs their linked
+modules ship, and the test runs a row of each of their types that holds a generated field
+through the API server, on those CRDs. <code>replicationsource</code> and <code>replicationdestination</code> run the
+generated refusal after their own checks, as the Flux kinds do; their generated list adds the
+required fields of the Kubernetes types their movers embed to what their hand-kept lists held.
+The MetalLB, further cnpg and Cilium kinds&rsquo; generated lists hold exactly what their hand-kept
+lists held, and are read where those were, before the kinds&rsquo; own checks, so no document is
+refused that was not and every refusal reads as it did. None of these needs a recorded answer
+for a parent left out.</p><p><strong>Kept by hand.</strong> The <code>cilium-networkpolicy</code> and <code>cilium-clusterwidenetworkpolicy</code> kinds keep
+their hand-kept list: it is one rule&rsquo;s list (<code>requiredfields.CiliumRule</code>), shared with the
+<code>cilium-networkpolicy</code> trait in another package; it is read under the <code>spec</code> and <code>specs</code>
+prefixes, which the generated lists&rsquo; API server harness does not take; two of its fields
+(<code>labels[].key</code>, <code>icmps[].fields[].type</code>) the decode refuses first, which that harness&rsquo;s
+both-ways rows do not handle, though the derivation lists both; and it holds fields no
+generated list has a place for (a listener&rsquo;s <code>priority</code> and Envoy configuration <code>kind</code>, which
+the API does not require and refuses written). Both refuse
+every field the derivation finds, and <code>TestCiliumNetworkPolicy_RequiredMatchCRD</code> and
+<code>TestCiliumClusterwideNetworkPolicy_RequiredMatchCRD</code> hold the list to their CRDs.</p><p><strong>Families.</strong> The test names each field by the type that holds it:</p><table><thead><tr><th>Family</th><th>Owner type</th><th>Typical fields</th></tr></thead><tbody><tr><td><code>AFF</code></td><td>the <code>core/v1</code> affinity terms: <code>NodeSelectorRequirement</code>, <code>PodAffinityTerm</code>, <code>PreferredSchedulingTerm</code>, <code>WeightedPodAffinityTerm</code></td><td>a node selector requirement&rsquo;s <code>key</code> and <code>operator</code>; a pod affinity term&rsquo;s <code>topologyKey</code>; a weighted or preferred term&rsquo;s <code>weight</code>, <code>podAffinityTerm</code> and <code>preference</code></td></tr><tr><td><code>SEC</code></td><td><code>SeccompProfile</code>, <code>AppArmorProfile</code>, <code>Sysctl</code></td><td>a profile&rsquo;s <code>type</code>; a sysctl&rsquo;s <code>name</code> and <code>value</code></td></tr><tr><td><code>POD</code></td><td>any other <code>core/v1</code> type</td><td>the <code>key</code> of a secret or config map key reference; a container&rsquo;s <code>name</code>; a pooler template&rsquo;s <code>containers</code></td></tr><tr><td><code>KIND</code></td><td>a type of the kind&rsquo;s own API, or of <code>metav1</code> other than a label selector&rsquo;s match expression</td><td>the <code>ownerReferences[]</code> fields of a Prometheus operator workload kind&rsquo;s ephemeral claim template</td></tr></tbody></table><p>A fifth family of the test, <code>SEL</code> (the <code>key</code> and <code>operator</code> of a <code>metav1</code> label selector&rsquo;s
+match expression), has no member: those are refused on every kind
+(<a href=/launcher/dev/api-reference/oam-components/conventions/index.html#a-label-selectors-match-expressions>A label selector&rsquo;s match expressions</a>).</p><p><strong>Per kind.</strong></p><table><thead><tr><th>Kind</th><th>Not refused</th><th>AFF</th><th>SEC</th><th>POD</th><th>KIND</th></tr></thead><tbody><tr><td><code>cnpg-pooler</code></td><td>1</td><td></td><td></td><td>1</td><td></td></tr><tr><td><code>prometheus</code>, <code>alertmanager</code>, <code>thanosruler</code></td><td>8 each</td><td></td><td></td><td></td><td>8</td></tr></tbody></table><p>Every remaining member is an exception. None is left on the other kinds whose list is
+generated (<code>cnpg-pooler</code> keeps its accepted exception, and <code>prometheus</code>, <code>alertmanager</code> and
+<code>thanosruler</code> their pruned owner reference fields), nor on the two Cilium network policy
+kinds, whose list is kept by hand. <code>metallb-bfdprofile</code> and <code>metallb-community</code> are not
+measured: their CRDs require no field, and <code>TestMetalLBKinds_RequiredMatchCRD</code> holds each kind&rsquo;s
+empty list to its CRD. Nor is <code>apiservice</code>: no CRD serves it, the API server&rsquo;s aggregation layer
+does.
+<code>TestRequiredWrittenKinds_CoverEveryCRDKind</code> holds the measured kinds to the kind inventory:
+every <code>kind</code> row whose API group client-go&rsquo;s scheme does not register, so a CRD serves it, is
+measured or named as not measured with its reason, so a new kind component of such an API
+fails there until it is one or the other. Most members are written
+<code>""</code>; the rest are <code>0</code> (mostly a preferred term&rsquo;s <code>weight</code> or a <code>port</code>), <code>{}</code>, <code>[]</code>, <code>null</code> or
+an object of such values.</p><p><strong>What the API server makes of them</strong> is a value rule of each field, not read here. The
+exceptions are shown: <code>TestKindComponents_GeneratedRequiredBothWays</code> creates the Pooler without
+<code>template.spec.containers</code>, and without the template&rsquo;s <code>spec</code>, and the API server accepts both.
+It creates each workload kind of the Prometheus operator with an owner reference in an
+ephemeral claim template&rsquo;s metadata authored whole, and with the field taken out: the API
+server names that <code>ownerReferences</code> an unknown field in both, and nothing else, and accepts
+the object it prunes it from, so it drops the owner reference whatever it holds.
+Before go-kure/launcher#883 generated their lists, the same was shown of <code>imageCatalogRef</code> on
+<code>cnpg-cluster</code> and <code>pgbouncer.imageCatalogRef</code> on <code>cnpg-pooler</code>: a <code>kind</code> written <code>""</code> refused
+by the CRD&rsquo;s own rule on the reference, a <code>name</code> written <code>""</code> and a <code>major</code> written <code>0</code> accepted.
+All three are refused now.</p><p><strong>Excluded as valid values.</strong> A member whose written value the API takes as authored is not
+listed: <code>cnpg-cluster</code>&rsquo;s <code>instances</code> (<code>1</code>, the CRD&rsquo;s default) and
+<code>postgresql.syncReplicaElectionConstraint.enabled</code> (<code>false</code>, which the CRD requires and gives
+no default; the Go type&rsquo;s zero value is a valid one); of the Flux kinds, <code>interval</code> of
+<code>bucket</code>, <code>fluxcd-kustomization</code>, <code>gitrepository</code>, <code>helmchart</code> and <code>helmrelease</code>
+(<code>"1h0m0s"</code>, the kind&rsquo;s own default), a verification&rsquo;s <code>provider</code> on <code>helmchart</code>,
+<code>helmrelease</code> (<code>chart.spec.verify.provider</code>) and <code>ocirepository</code> (<code>"cosign"</code>, the API&rsquo;s
+default, which the kind writes), and <code>fluxcd-kustomization</code>&rsquo;s <code>prune</code> (<code>false</code>, a valid zero
+value). The test names the eleven (<code>requiredWrittenValidDefaults</code>) and checks that their
+omission builds and writes exactly that value. Nor is a field the schema gives a default, that
+is not nullable and that the type writes <code>null</code> (<code>cnpg-cluster</code>&rsquo;s
+<code>replicationSlots.synchronizeReplicas.enabled</code>): the API server drops the null and fills the
+default.</p><p><strong>Method.</strong> For each field the kind&rsquo;s API requires and its Go type writes unauthored,
+<code>TestKindComponents_RequiredWrittenNotRefused</code> builds the kind with the field authored, with
+the required fields around it filled, then builds it again with the field taken out. The field
+is a member when the second build succeeds and the object still holds the field. A
+<code>helmrelease</code>&rsquo;s fields of the OCIRepository its chart template inlines are measured under a
+template of <code>chart.kind</code> OCIRepository, the only kind that reads them. A field under
+a path the kind refuses whatever is authored there is skipped, and the test names those paths
+with their reason: a <code>cilium-networkpolicy</code>&rsquo;s <code>nodeSelector</code>, a <code>cnpg-pooler</code>&rsquo;s
+<code>template.spec.ephemeralContainers</code>, and the <code>generatorRef</code> of an <code>externalsecret</code>&rsquo;s or a
+<code>clusterexternalsecret</code>&rsquo;s <code>data[].sourceRef</code>. A refused omission counts only where the error
+names the field or one under it, by its full path; the two Cilium policy kinds refuse a label&rsquo;s
+<code>key</code> and an ICMP field&rsquo;s <code>type</code> in their decode instead, with an error naming no field, and the
+test names those with their reason. Any other field that cannot be measured fails the test. The
+required lists are those of the CRDs of the linked modules. The Prometheus operator, Flux and
+External Secrets kinds are read through the schema markers of their linked sources, by the same
+reader as their own required-list tests; <code>resourcesetinputprovider</code> is read from the CRD the
+flux-operator module ships. The members are pinned in
+<code>testdata/required-written-not-refused.txt</code>, one line per field (kind, path, family, written
+value). The test fails on any difference, a new member or one that is gone, so a dependency
+bump or a kind change that moves the set fails CI; <code>UPDATE_REQUIRED_WRITTEN_PIN=1</code> rewrites
+the file, and is refused where <code>CI</code> is set.</p><p>At this pin the file holds 25 members, every one an exception: the accepted
+<code>cnpg-pooler template.spec.containers</code> and the 24 pruned owner reference fields. The External
+Secrets kinds&rsquo; generated paths are held to the API server too, on their vendored CRDs
+(go-kure/launcher#1108).</p><h3 id=every-spec-field-is-this-packages-to-write>Every spec field is this package&rsquo;s to write<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Since go-kure/launcher#361 this package builds against kure&rsquo;s release-1 builder
+contract (<code>go-kure/kure</code> ≥ <code>v0.2.0-beta.11</code>). Under it a <code>Create&lt;Kind></code>
+constructor returns an object carrying TypeMeta plus <code>metadata.name</code> and
+<code>metadata.namespace</code> and <strong>nothing else</strong> — no labels, no annotations, no
+selector, no injected defaults. Everything else is the handler&rsquo;s own literal or
+an explicit field assignment. Two consequences a reader needs:</p><p><strong><code>spec.selector</code> is written explicitly, and must agree with the pod template.</strong>
+Deployment, StatefulSet and DaemonSet all require <code>spec.selector</code> and get no
+server-side default for it, so each handler assigns
+<code>&amp;metav1.LabelSelector{MatchLabels: …}</code> from the same helper that produced
+<code>spec.template.metadata.labels</code> — <code>deploymentComponentLabels</code> for <code>deployment</code>
+and for <code>worker</code>, which lowers to a <code>deployment</code> component (its affinity selector
+uses <code>appLabels</code>), and <code>appLabels</code> for <code>webservice</code>, <code>statefulset</code> and <code>daemonset</code> (both
+return a fresh <code>{"app": &lt;label value>}</code> map, per the ownership rule above, valued
+as <a href=/launcher/dev/api-reference/oam-components/conventions/index.html#the-app-label>The <code>app</code> label</a> describes). This is
+the one field the compiler cannot check: a selector that disagrees with the
+template labels compiles and is refused by the apiserver at apply time. The labels an
+author adds with <code>podMetadata</code> go on the pod template only, so they cannot make the two
+disagree. <code>job</code> and
+<code>cronjob</code> are the deliberate exception — the Job controller fills <code>spec.selector</code>
+and its matching pod labels itself.</p><p><strong>Two injected defaults are gone from the emitted manifests.</strong> The constructors
+used to write <code>imagePullPolicy: IfNotPresent</code> onto every container and
+<code>podManagementPolicy: OrderedReady</code> onto every StatefulSet; neither is emitted
+now. <code>OrderedReady</code> is the apiserver&rsquo;s own default for that field, so that one
+is unchanged in effect. <code>imagePullPolicy</code> is written only when a component
+authors it (see <a href=/launcher/dev/api-reference/oam-components/common-config/index.html#container-fields>Container fields</a>); what follows is about
+the omitted case. Kubernetes defaults an omitted
+value from the image reference and keys that decision on the <code>latest</code> tag, so
+what matters here is that no accepted image can carry one: <code>ValidateImageRef</code>
+(<code>common.go</code>) refuses an untagged reference and an explicit <code>:latest</code> tag on
+every main, init and sidecar image — including a digest reference that still
+carries the tag (<code>repo:latest@sha256:...</code>), which it rejects for exactly this
+reason. A digest reference with <em>no</em> tag is the case this argument does not
+reach, and no golden covers that form; it is pinned by digest either way, and
+this package does not assert what a cluster defaults for it. The argument is
+about the <em>parsed</em> path, which is where <code>ValidateImageRef</code> runs
+(<code>ToApplicationConfig</code>): a handler config a library consumer builds directly
+carries whatever image it was given, so <code>:latest</code> with no pull policy remains
+reachable that way. That is also the only other path with a delta here — raw
+manifests, <code>passthrough</code>, Helm-rendered objects and Flux patches never went
+through the constructors, so nothing was ever injected into them to lose.</p><p>A third delta from the same contract change is metadata rather than a default, but
+belongs in the same inventory: under <code>valuesMode: configMap</code> the generated values ConfigMap used to take an <code>app</code> label <em>and</em> an
+<code>app</code> annotation from the constructor, both valued at the ConfigMap&rsquo;s own name
+(<code>&lt;component>-values</code>). It now carries the label only, valued at the component&rsquo;s
+label value (<code>&lt;component></code>, projected when the name exceeds 63 characters — see
+<a href=/launcher/dev/api-reference/oam-components/conventions/index.html#the-app-label>The <code>app</code> label</a>), matching every other object this package emits. A consumer
+selecting that ConfigMap by <code>app=&lt;component>-values</code> must be repointed.</p><p>The <code>obj.Annotations = nil</code>
+assignments scattered through the handlers, which existed to strip the <code>app:</code>
+annotation the constructors used to stamp, are now no-ops — kept so the field
+stays at a known value regardless of what a future constructor does.</p><p><strong><code>postgresql</code> writes every CNPG value itself (kure <code>v0.2.0-beta.13</code>).</strong> kure&rsquo;s
+release-2 builder contract retired the CNPG config-struct layer
+(<code>cnpg.Cluster</code>/<code>Pooler</code>/<code>ObjectStore</code>/<code>Database</code> and their <code>*Options</code> types) that
+<code>postgresql</code> used to go through. The handler then called the generated
+<code>CreateCluster</code>/<code>CreatePooler</code>/<code>CreateObjectStore</code>/<code>CreateDatabase</code> and assigned the
+upstream <code>cnpgv1</code> / barman-cloud structs directly. Since go-kure/launcher#281 the
+<code>postgresql</code> rule builds those structs as the properties of the <code>cnpg-*</code> kind
+components it lowers onto, whose <code>Generate</code> calls the same constructors, and
+<code>enablePDB</code> comes from the post-policy step the rule attaches to the Cluster.
+The values that layer used to inject are written explicitly, so the emitted
+manifests are unchanged byte for byte: <code>enablePDB</code> (true only for more than one
+instance), <code>primaryUpdateStrategy: unsupervised</code>, the <code>ACCESS_KEY_ID</code> /
+<code>SECRET_ACCESS_KEY</code> key names on backup and objectStore credentials, the
+barman-cloud WAL-archiver plugin entry when an <code>objectStore</code> is declared (its
+plugin name and parameters were corrected afterwards by go-kure/launcher#643),
+the pooler <code>type</code> (<code>rw</code> unless <code>ro</code> was authored) and its always-present
+<code>pgbouncer</code> block, and <code>ensure: present</code> on every extension not authored <code>absent</code>.
+The layer&rsquo;s guards are kept too: <code>inheritedMetadata</code>, <code>managed</code>, <code>bootstrap</code>,
+<code>postgresql.synchronous</code> and the credential references are omitted when their input
+is empty, a pooler <code>instances</code> of zero or less is omitted when nobody authored
+it (an authored count is written as authored since go-kure/launcher#790, see
+the postgresql entry), and a role&rsquo;s or database&rsquo;s <code>ensure</code> /
+<code>databaseReclaimPolicy</code> is written only for <code>absent</code> / <code>delete</code>.</p><footer class=footline></footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/launcher/dev/index.html><span class="logo-title default-animation">Go Kure — Launcher</span>
+</a><search><form action=/launcher/dev/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Search</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
+<button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/launcher/dev/index.html><a class=padding href=/launcher/dev/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul><li class=R-versionswitcher><div class="padding menu-control"><i class="fa-fw fas fa-code-branch"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-version>Version</label>
+<select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/launcher/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main default-animation"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/launcher/dev/getting-started/index.html><a class="padding default-animation" href=/launcher/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/concepts/index.html><a class="padding default-animation" href=/launcher/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu></ul></li><li class=parent data-nav-id=/launcher/dev/api-reference/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/kurel-cli/index.html><a class=padding href=/launcher/dev/api-reference/kurel-cli/index.html>kurel CLI</a></li><li class=alwaysopen data-nav-id=/launcher/dev/api-reference/oam/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/oam/index.html>OAM Model</a><ul id=R-subsections-85257ea7983d512c6d1887735c85123a class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/api-reference/oam-models/index.html><a class=padding href=/launcher/dev/api-reference/oam-models/index.html>Component Models</a></li><li class="parent alwaysopen" data-nav-id=/launcher/dev/api-reference/oam-components/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/oam-components/index.html>Component Handlers</a><ul id=R-subsections-8500a965f661268b80bcfcc8403ee9e4 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/oam-components/common-config/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/common-config/index.html>Common config</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/policy-and-endpoints/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/policy-and-endpoints/index.html>Policy defaults, endpoints and outputs</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-core-workloads/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-core-workloads/index.html>Kinds: core workloads</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-networking/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-networking/index.html>Kinds: networking</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-access-and-admission/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-access-and-admission/index.html>Kinds: access and admission</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-flux/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-flux/index.html>Kinds: Flux</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-helm/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-helm/index.html>Kinds: Helm</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html>Kinds: monitoring</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html>Kinds: MetalLB</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html>Kinds: PostgreSQL and CloudNativePG</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html>Kinds: secrets, certificates and backup</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/adding-a-kind/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/adding-a-kind/index.html>Adding a kind component: where its lines go</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/upstream-fields-not-read/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/upstream-fields-not-read/index.html>Upstream fields a hand-parsed kind does not read</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/extending/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/extending/index.html>Extending</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html>The null contract and two spellings of one field</a></li><li class=active data-nav-id=/launcher/dev/api-reference/oam-components/conventions/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/conventions/index.html>Conventions</a></li></ul></li><li data-nav-id=/launcher/dev/api-reference/oam-traits/index.html><a class=padding href=/launcher/dev/api-reference/oam-traits/index.html>Trait Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-policies/index.html><a class=padding href=/launcher/dev/api-reference/oam-policies/index.html>Policy Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-registry/index.html><a class=padding href=/launcher/dev/api-reference/oam-registry/index.html>Built-in Registry</a></li><li data-nav-id=/launcher/dev/api-reference/errors/index.html><a class=padding href=/launcher/dev/api-reference/errors/index.html>Errors</a></li><li data-nav-id=/launcher/dev/api-reference/patch/index.html><a class=padding href=/launcher/dev/api-reference/patch/index.html>Patch Engine</a></li></ul></li><li data-nav-id=/launcher/dev/contributing/index.html><a class="padding default-animation" href=/launcher/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/changelog/index.html><a class="padding default-animation" href=/launcher/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul></ul></div><div id=R-footer class=default-animation><p id=R-revision>Version dev, built from commit <a href=https://github.com/go-kure/launcher/commit/aa2a8f49>aa2a8f49</a></p><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/launcher/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1794503122 defer></script><script src=/launcher/dev/js/theme.min.js?1794503122 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
