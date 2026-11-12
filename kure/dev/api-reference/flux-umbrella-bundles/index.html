@@ -1,0 +1,372 @@
+<!doctype html><html lang=en-us dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.169.0"><meta name=generator content="Relearn 8.0.0+9803d5122ebb3276acea823f476e9eb44f607862"><meta name=description content="A Bundle with a non-empty Children slice becomes an umbrella: a parent Flux Kustomization that aggregates the readiness of its children, via auto-generated spec.healthChecks or, where its build applies them, via spec.wait. This gives downstream consumers a single stable anchor regardless of how many internal tiers the umbrella contains. A generator that sets OmitUmbrellaChildHealthChecks gives up the first of the two (see With OmitUmbrellaChildHealthChecks ).
+Resource generation ResourceGenerator.GenerateForBundle detects umbrella bundles and, when Bundle.Wait is unset or false:"><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Flux Umbrella Bundles :: Go Kure"><meta name=twitter:description content="A Bundle with a non-empty Children slice becomes an umbrella: a parent Flux Kustomization that aggregates the readiness of its children, via auto-generated spec.healthChecks or, where its build applies them, via spec.wait. This gives downstream consumers a single stable anchor regardless of how many internal tiers the umbrella contains. A generator that sets OmitUmbrellaChildHealthChecks gives up the first of the two (see With OmitUmbrellaChildHealthChecks ).
+Resource generation ResourceGenerator.GenerateForBundle detects umbrella bundles and, when Bundle.Wait is unset or false:"><meta property="og:url" content="https://www.gokure.dev/kure/dev/api-reference/flux-umbrella-bundles/index.html"><meta property="og:site_name" content="Go Kure"><meta property="og:title" content="Flux Umbrella Bundles :: Go Kure"><meta property="og:description" content="A Bundle with a non-empty Children slice becomes an umbrella: a parent Flux Kustomization that aggregates the readiness of its children, via auto-generated spec.healthChecks or, where its build applies them, via spec.wait. This gives downstream consumers a single stable anchor regardless of how many internal tiers the umbrella contains. A generator that sets OmitUmbrellaChildHealthChecks gives up the first of the two (see With OmitUmbrellaChildHealthChecks ).
+Resource generation ResourceGenerator.GenerateForBundle detects umbrella bundles and, when Bundle.Wait is unset or false:"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="API Reference"><meta itemprop=name content="Flux Umbrella Bundles :: Go Kure"><meta itemprop=description content="A Bundle with a non-empty Children slice becomes an umbrella: a parent Flux Kustomization that aggregates the readiness of its children, via auto-generated spec.healthChecks or, where its build applies them, via spec.wait. This gives downstream consumers a single stable anchor regardless of how many internal tiers the umbrella contains. A generator that sets OmitUmbrellaChildHealthChecks gives up the first of the two (see With OmitUmbrellaChildHealthChecks ).
+Resource generation ResourceGenerator.GenerateForBundle detects umbrella bundles and, when Bundle.Wait is unset or false:"><meta itemprop=wordCount content="6181"><title>Flux Umbrella Bundles :: Go Kure</title><link href=/kure/dev/css/auto-complete/auto-complete.min.css?1794480378 rel=stylesheet><script src=/kure/dev/js/auto-complete/auto-complete.min.js?1794480378 defer></script><script src=/kure/dev/js/search-lunr.min.js?1794480378 defer></script><script src=/kure/dev/js/search.min.js?1794480378 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/kure/dev/searchindex.en.js?1794480378"</script><script src=/kure/dev/js/lunr/lunr.min.js?1794480378 defer></script><script src=/kure/dev/js/lunr/lunr.stemmer.support.min.js?1794480378 defer></script><script src=/kure/dev/js/lunr/lunr.multi.min.js?1794480378 defer></script><script src=/kure/dev/js/lunr/lunr.en.min.js?1794480378 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/kure/dev/fonts/fontawesome/css/fontawesome-all.min.css?1794480378 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/kure/dev/fonts/fontawesome/css/fontawesome-all.min.css?1794480378 rel=stylesheet></noscript><link href=/kure/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1794480378 rel=stylesheet><link href=/kure/dev/css/theme.min.css?1794480378 rel=stylesheet><link href=/kure/dev/css/format-html.min.css?1794480378 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/api-reference/flux-umbrella-bundles/index.html",window.relearn.relBasePath="../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://www.gokure.dev/kure/dev",window.relearn.version_js_url="/kure/dev/versionindex.en.js?1794480378",window.relearn.disableAnchorCopy=!1,window.relearn.disableAnchorScrolling=!1,window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.relearn.getItem=(e,t)=>e.getItem(t),window.relearn.setItem=(e,t,n)=>e.setItem(t,n),window.relearn.removeItem=(e,t)=>e.removeItem(t),window.T_Copy_to_clipboard=`Copy to clipboard`,window.T_Copied_to_clipboard=`Copied to clipboard!`,window.T_Copy_link_to_clipboard=`Copy link to clipboard`,window.T_Link_copied_to_clipboard=`Copied link to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantname="my-custom-variant",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.relearn.setItem(window.localStorage,window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.relearn.getItem(window.localStorage,window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.relearn.getItem(window.localStorage,window.relearn.absBaseUri+"/variant")??"";e==window.relearn.customvariantname||(!e||!window.relearn.themevariants.includes(e))&&(e=window.relearn.themevariants[0],window.relearn.setItem(window.localStorage,window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-url=/kure/dev/api-reference/flux-umbrella-bundles/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar><div class=topbar-wrapper><div class=topbar-sidebar-divider></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><button class=topbar-control onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></div><div class="topbar-button topbar-button-toc" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><button class=topbar-control onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-list-alt"></i></button><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#resource-generation>Resource generation</a></li><li><a href=#placement-in-layouts>Placement in layouts</a></li><li><a href=#on-disk-shape>On-disk shape</a></li><li><a href=#with-umbrellasdonotwait>With <code>UmbrellasDoNotWait</code></a></li><li><a href=#with-omitumbrellachildhealthchecks>With <code>OmitUmbrellaChildHealthChecks</code></a></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/kure/dev/index.html><span itemprop=name>Kure</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/kure/dev/api-reference/index.html><span itemprop=name>API Reference</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Flux Umbrella Bundles</span><meta itemprop=position content="3"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><a class=topbar-control href=/kure/dev/api-reference/flux-bootstrap-generation/index.html title="Flux Bootstrap Generation (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></div><div class="topbar-button topbar-button-next" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><a class=topbar-control href=/kure/dev/api-reference/flux-child-layout-crs/index.html title="Flux Non-Bundle Child Layout CRs (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></div><div class="topbar-button topbar-button-more" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><button class=topbar-control onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable api-reference" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><details open class="box cstyle notices warning"><summary class=box-label tabindex=-1><i class="fa-fw fas fa-exclamation-triangle"></i>
+Work in Progress</summary><div class=box-content><p>You are viewing <strong>development</strong> documentation built from the latest commit on <code>main</code> (last tag <code>v0.2.0-rc.1</code>, source commit <code>cf68f15c</code>).
+APIs and features are subject to change.</p></div></details><h1 id=flux-umbrella-bundles>Flux Umbrella Bundles</h1><p>A <code>Bundle</code> with a non-empty <code>Children</code> slice becomes an <strong>umbrella</strong>: a parent
+Flux Kustomization that aggregates the readiness of its children, via
+auto-generated <code>spec.healthChecks</code> or, where its build applies them, via
+<code>spec.wait</code>. This gives downstream
+consumers a single stable anchor regardless of how many internal tiers the
+umbrella contains. A generator that sets <code>OmitUmbrellaChildHealthChecks</code> gives
+up the first of the two (see
+<a href=#with-omitumbrellachildhealthchecks>With <code>OmitUmbrellaChildHealthChecks</code></a>
+).</p><h2 id=resource-generation>Resource generation</h2><p><code>ResourceGenerator.GenerateForBundle</code> detects umbrella bundles and, when <code>Bundle.Wait</code> is unset
+or false:</p><ul><li>prepends one <code>HealthChecks</code> entry per direct child (referencing the child&rsquo;s
+own Kustomization by name/namespace; the name is the child&rsquo;s <code>KustomizationName</code> when it sets
+one), unless the generator sets <code>OmitUmbrellaChildHealthChecks</code> (see
+<a href=#with-omitumbrellachildhealthchecks>With <code>OmitUmbrellaChildHealthChecks</code></a>
+)</li><li>leaves user-supplied <code>HealthChecks</code> appended after the auto entries</li></ul><p>With <code>Wait</code> true it writes no entry for the children: upstream documents that when <code>wait</code> is
+enabled &ldquo;the HealthChecks are ignored&rdquo;, so an entry would make nothing wait. Each child&rsquo;s
+Kustomization name is checked all the same. The caller&rsquo;s own <code>HealthChecks</code> are handled as
+they were before the child entries were dropped under <code>wait</code>, including the exception <code>Wait</code>
+already made for a check on <code>b</code>&rsquo;s own Kustomization (below); <a href=/kure/dev/api-reference/flux-names-and-paths/#one-kustomization-per-directory>One Kustomization per directory</a>
+says how the other entry points map them.</p><p><code>spec.wait</code> is <strong>not</strong> forced to <code>true</code>; it is the caller&rsquo;s <code>Bundle.Wait</code> input like any other
+field. With <code>wait</code>, a Kustomization waits for every object its own build applied (see
+&ldquo;Readiness through the chain&rdquo; under <a href=/kure/dev/api-reference/flux-child-layout-crs/#per-layout-settings>Per-layout settings</a>
+), so whether that
+covers the children depends on where their Kustomization objects are written:</p><ul><li><strong><code>FluxIntegratedPerBundle</code> and <code>FluxIntegratedPerLayout</code>:</strong> each child&rsquo;s Kustomization object
+is written in the umbrella&rsquo;s directory (see <a href=#placement-in-layouts>Placement in layouts</a>
+),
+so the umbrella applies it and its wait covers the child&rsquo;s <code>Ready</code>, with the two limits of
+&ldquo;Readiness through the chain&rdquo;.</li><li><strong><code>FluxSeparate</code>:</strong> the children&rsquo;s Kustomization objects are not in the umbrella&rsquo;s build
+(they are in <code>flux-system</code>, which the root applies), so <code>wait: true</code> does not wait for the
+children. A caller who needs the umbrella to wait for them there leaves <code>Wait</code> unset or false,
+so the generated entries take effect. This gap was there before the entries were dropped
+under <code>wait</code>, when Flux ignored them, and dropping them does not change it. Those entries hold
+a kustomize-controller worker while the umbrella waits; a caller who would rather not hold one
+sets <code>OmitUmbrellaChildHealthChecks</code> and gives up the umbrella&rsquo;s wait on its children (see
+<a href=#with-omitumbrellachildhealthchecks>With <code>OmitUmbrellaChildHealthChecks</code></a>
+).</li><li><strong><code>GenerateForBundle</code> alone</strong> neither generates nor places the children&rsquo;s Kustomization
+objects, and takes <code>path</code> as given, so whether <code>wait: true</code> covers them depends on whether the
+caller&rsquo;s build at that path applies them. Where it does not, leave <code>Wait</code> unset or false.</li></ul><p><code>GenerateForBundle(b, path)</code> is strictly self-only — it never recurses into
+<code>b.Children</code>. <code>GenerateFromLayout</code> and <code>GenerateFromCluster</code> cover the whole
+umbrella closure, because the walker renders every umbrella child as a layout
+of its own. It builds no origin index either, so it cannot see every bundle
+that shares a Kustomization name; what it does see it checks: a <code>DependsOn</code>
+bundle or a child that would get <code>b</code>&rsquo;s own Kustomization name
+(<code>KustomizationName</code>, or <code>Name</code> without it), <code>b</code> itself in <code>DependsOn</code> or in
+<code>Children</code>, that name in <code>NamedDependsOn</code>, or a health check on <code>b</code>&rsquo;s own
+Kustomization, is an error, since the Kustomization would otherwise depend on
+itself or wait for itself. A longer cycle of <code>Children</code> is <code>Bundle.Validate</code>&rsquo;s
+to refuse. Two children that would get one Kustomization name are an error as
+well, whatever <code>Wait</code> says: two Kustomizations would share the name, and
+without <code>wait</code> the umbrella would health-check it twice. The health
+check on <code>b</code>&rsquo;s own Kustomization stays accepted when <code>b.Wait</code> is true, and is
+written as given: Flux ignores <code>spec.healthChecks</code> under <code>spec.wait</code>, so
+nothing waits for itself. <code>GenerateFromLayout</code> and <code>GenerateFromCluster</code> drop
+a bundle&rsquo;s dependency or health check on itself instead.</p><p>The name a Kustomization gets is the bundle&rsquo;s name in effect (<code>UnitName()</code>:
+its <code>KustomizationName</code>, or its <code>Name</code> without one), so the generator refuses
+one that <code>stack.ValidateKustomizationName</code> refuses: not a DNS-1123 subdomain,
+or longer than 63 characters. The check runs before anything is written: in
+<code>GenerateFromCluster</code>, <code>GenerateFromLayout</code>, <code>GenerateForBundle</code> and the
+layout integrator under every <code>FluxPlacement</code>. The 63-character limit is
+checked only there. It is Flux&rsquo;s, so <code>stack.ValidateCluster</code> and
+<code>Bundle.Validate</code> accept a name of up to 253 characters, which the
+ArgoCD workflow renders; they do refuse a <code>Name</code> or <code>KustomizationName</code> that
+is not a DNS-1123 subdomain, so that refusal reaches <code>GenerateFromCluster</code> and
+<code>CreateLayoutWithResources</code> from cluster validation first. A <code>Name</code> over 63
+characters beside a <code>KustomizationName</code> within the limit generates: that
+<code>Name</code> is no Kustomization&rsquo;s. The error names the bundle by <code>Bundle.GetPath</code>,
+an umbrella child of a walked cluster with its umbrella&rsquo;s path before its own
+name (<code>platform/platform-infra</code>), and the field that holds the name.</p><p>Which names are checked follows from what the entry point returns:</p><ul><li><code>GenerateForBundle</code> takes a bundle no validation has seen and returns one
+Kustomization. It checks the bundle&rsquo;s own name and the names that
+Kustomization refers to: each umbrella child, named in a health check
+(checked too where no health check is written: with <code>Wait</code> true,
+<code>UmbrellasDoNotWait</code> or <code>OmitUmbrellaChildHealthChecks</code>), and each
+<code>DependsOn</code> bundle, named in <code>spec.dependsOn</code>. It builds no
+Kustomization for them, so it refuses an umbrella whose child&rsquo;s name Flux
+cannot reconcile instead of returning a reference to it.</li><li><code>GenerateFromCluster</code>, <code>GenerateFromLayout</code> and the layout integrator build
+one Kustomization per directory that renders bundles, and check that
+Kustomization&rsquo;s name, which is its first bundle&rsquo;s (see &ldquo;One Kustomization
+per directory&rdquo;). The name of a bundle merged into it is written nowhere and
+is not checked. A reference to one of the cluster&rsquo;s bundles, an umbrella
+child or a <code>DependsOn</code> bundle, is written as the name of the Kustomization
+that applies that bundle, which the same call builds and checks. A
+<code>DependsOn</code> bundle that is not one of the cluster&rsquo;s bundles gets no
+Kustomization from the call and is written under its own name, so that name
+is checked like the bundle&rsquo;s own.</li><li>A <code>NamedDependsOn</code> entry and a health check the caller lists are not
+checked. <code>GenerateForBundle</code> writes them as given; the other entry points
+write one that names a rendered bundle&rsquo;s Kustomization as the name of the
+Kustomization that applies that bundle, and any other as given.</li></ul><h2 id=placement-in-layouts>Placement in layouts</h2><p><code>LayoutIntegrator</code> places umbrella child Flux CRs at the <strong>parent</strong> layout
+node, with <code>spec.path</code> = the child&rsquo;s own directory:</p><ul><li><strong>Integrated, <code>BundleGrouping: GroupByName</code></strong>: the walker creates a bundle sub-layout
+under the node layout. Umbrella child Kustomization CRs are appended to the
+bundle sub-layout&rsquo;s <code>Resources</code>, which that layout lists (it is written in
+<code>KustomizationExplicit</code> mode); their Source CRs, if the child has a
+<code>SourceRef.URL</code>, go to the root node&rsquo;s layout like every generated Source. Nested umbrella children are placed at their
+enclosing umbrella child&rsquo;s layout node.</li><li><strong>Integrated, <code>BundleGrouping: GroupFlat</code></strong>: there is no intermediate bundle
+layer, so umbrella children become direct sub-layouts of the node layout,
+and their Flux CRs sit at the node layout. The root node is the exception
+(go-kure/kure#979): its bundle has a directory of its own inside the root
+node&rsquo;s, and the umbrella children and their Flux CRs sit there.</li><li><strong>FluxSeparate</strong>: the <code>flux-system</code> layout directory receives every bundle&rsquo;s
+Kustomization CR, umbrella descendants included, as a flat list.</li></ul><p>Under both integrated placements a node bundle&rsquo;s own CR is hosted by the
+<strong>parent</strong> of the layout that renders the bundle: that directory is applied by
+its own Kustomization only, so the CR that creates it cannot live inside it.
+The root node&rsquo;s bundle has a parent too, the root node&rsquo;s layout
+(go-kure/kure#979).</p><h2 id=on-disk-shape>On-disk shape</h2><p>When a parent layout has an umbrella child, the parent&rsquo;s <code>kustomization.yaml</code>
+lists the child&rsquo;s Kustomization CR file (it is one of the parent&rsquo;s own
+resources) instead of the child subdirectory. The child subdirectory still exists and still contains its own
+<code>kustomization.yaml</code> plus workload YAML files — but <strong>no</strong> Flux CR files, so
+Flux does not double-apply the child&rsquo;s resources.</p><h2 id=with-umbrellasdonotwait>With <code>UmbrellasDoNotWait</code></h2><p><code>ResourceGenerator.UmbrellasDoNotWait</code>, off by default, keeps every umbrella from holding a
+kustomize-controller worker. A Kustomization that waits (with <code>wait</code>, or on health checks) holds
+one of the controller&rsquo;s workers (<code>--concurrent</code>, 4 by default) until what it waits for is Ready.
+A <code>dependsOn</code> that is not met requeues instead and holds none. A tree with as many waiting
+umbrellas as workers, each waiting for a child that needs a worker to reconcile, stalls: every
+worker waits and no child is applied. With the setting, readiness flows through <code>dependsOn</code>
+instead of nested waits:</p><ul><li><strong>R1: an umbrella does not wait.</strong> An umbrella here is any Kustomization the call generates
+whose build applies a Flux Kustomization: a bundle with <code>Children</code>, a directory that hosts the
+CRs of child nodes or, under <code>FluxIntegratedPerLayout</code>, of the layouts inside it, and one whose
+objects include a Flux Kustomization, an <code>AppFileSingle</code> application&rsquo;s file written into its
+directory among them. It gets no <code>wait</code> and no <code>healthChecks</code>, the automatic
+entries for its children included. An explicit <code>Wait</code> true that reaches it (the bundle&rsquo;s, the
+layout&rsquo;s, or the one a layout inherits from the bundle that holds its application) and
+<code>HealthChecks</code> on it are refused with <code>ErrUmbrellaWait</code>, naming the Kustomization and where the
+input comes from: the setting exists to remove that wait, so it is not dropped without a word.</li><li><strong>R2: a leaf waits.</strong> An unset <code>Wait</code> on any other Kustomization resolves to <code>true</code>, so it is
+Ready only once its objects are. An explicit <code>false</code> is kept. Bundles merged into one directory
+are compared on the resolved value once the pass knows what their shared Kustomization is: an
+unset <code>Wait</code> and an explicit <code>false</code> conflict on a leaf, and not on an umbrella, which R1 writes
+without a wait either way.</li><li><strong>R3: a dependency on an umbrella is one on its terminal leaves.</strong> A <code>dependsOn</code> entry that
+names an umbrella is replaced by entries naming its terminal leaves: the Kustomizations it
+applies that no other one it applies depends on, an umbrella among them replaced by its own
+terminal leaves in turn, each listed once. R3 writes a plain entry (no <code>readyExpr</code>) on each
+terminal leaf. The rewrite&rsquo;s result check demands a plain entry on every leaf wherever the
+caller&rsquo;s entry on the umbrella waited for <code>Ready</code> or an expression; an existence-only entry is
+satisfied by the umbrella entry kept as it is, or by any entry on each leaf. Dependencies are
+compared as R3 writes them: a
+generated Kustomization&rsquo;s <code>dependsOn</code> entry naming an umbrella of the subtree stands for its
+terminal leaves, and a Kustomization whose entries together await every terminal leaf of an
+umbrella depends on it, so a tree the setting wrote has the same terminal leaves. A Flux
+Kustomization an application emits is a leaf by its own name, also when it is an item of a
+<code>List</code>; its <code>dependsOn</code> is not rewritten, so an entry there naming an umbrella awaits none of
+its leaves. Its spec is read in the same way whatever form the application hands it over in
+(the typed object, its own type embedding one, another API version, or unstructured); one
+that cannot be read in typed form is refused with the read error under the setting. A
+Kustomization inside the umbrella&rsquo;s
+subtree that depends on it is refused with <code>ErrUmbrellaDependency</code>, since it would depend on
+itself, and so is an umbrella without a terminal leaf. So is a rewrite onto a terminal leaf
+that cannot become Ready before the dependent applies: one that depends on the dependent, or
+that health-checks it or waits for it (an application&rsquo;s Kustomization read as its author wrote
+it, in its context: see below), or that the dependent&rsquo;s apply creates, directly or through Kustomizations applications
+emit (an <code>AppFileSingle</code> application&rsquo;s file included), also when the dependent already names
+the leaf itself. The edge onto the umbrella closed no cycle the reconcile-order check sees;
+the edge onto the leaf closes one, and the error names the chain. A health check is not
+rewritten, nor is a Flux Kustomization the integration did not place (an application&rsquo;s, or the
+caller&rsquo;s): a Kustomization health check naming an umbrella, on any Kustomization but an
+umbrella, and such a Kustomization&rsquo;s <code>dependsOn</code> naming one are refused with
+<code>ErrUmbrellaDependency</code> too, since the umbrella does not wait and so is Ready before what it
+applies. The error names the terminal leaves to name instead. Under
+<code>AdditiveCELDependencyCheckOff</code> an entry whose <code>readyExpr</code> is exactly <code>"true"</code> waits only for
+the dependency to exist, so it is none of these: it is kept as written and judged by no rule
+here. When terminal leaves are picked, an entry with any <code>readyExpr</code>, with the setting or
+without, makes no Kustomization it names depended on: Flux skips its own readiness check for
+it, so a dependent of the umbrella also waits for that Kustomization. Where a Flux
+Kustomization of the tree sets <code>spec.patches</code> or <code>spec.components</code>, which may rewrite such an
+expression, these rules read each entry as the build of the tree shows it, patches applied. Only
+when that build cannot be made do they read the tree as it holds it, and then every entry counts
+as waiting for <code>Ready</code>, as without the setting, wherever that decides a refusal; the terminal
+leaves follow the same reading.</li></ul><p>These checks read a Flux Kustomization in its context. One the integration places or keeps builds
+the directory of the tree its <code>spec.path</code> names. For any other (an application&rsquo;s, or the
+caller&rsquo;s), <code>spec.path</code> is a directory of the tree, and its <code>wait</code> waits for what that directory&rsquo;s
+build applies, only when it reads the Source of the Kustomization whose apply writes it (its <code>spec.sourceRef</code>, an omitted
+namespace its own; the Source&rsquo;s identity, so another Source of the same repository, at another
+ref, is another Source) and sets no <code>spec.kubeConfig</code>. Such a Kustomization the Flux bootstrap
+writes, one on another Source, and one applying to another cluster build no directory of this
+tree: they add no wait, and are never refused for one. Nor does one whose <code>spec.path</code> names an
+<code>AppFileSingle</code> layout other than the top of the tree: that layout is one file written into its
+<code>Namespace</code>, with no directory of its own, so Flux finds no path there and the Kustomization
+creates, keeps and waits for none of the tree&rsquo;s objects (go-kure/kure#1197). Such a file never
+stands for a directory of the same path beside it, which is read as any other. Their <code>dependsOn</code> and health checks are
+still judged: such a Kustomization that depends on, or health-checks, one that cannot be Ready
+before it is refused as any other. One that transforms its build (<code>spec.patches</code>,
+<code>spec.components</code>, <code>spec.namePrefix</code>, <code>spec.nameSuffix</code> or <code>spec.targetNamespace</code>) waits for
+what that build applies, read as kustomize-controller builds it: a renamed or moved Kustomization
+under its built name, one a patch deletes not at all, and one marked as local config only when
+a patch keeps it (kustomize patches before it drops local config). A health check on another cluster
+(<code>spec.kubeConfig</code>) names none of the tree&rsquo;s Kustomizations. Health-check expressions on Flux
+Kustomizations (<code>spec.healthCheckExprs</code>) are read conservatively, as readiness: an expression is
+arbitrary CEL and may itself wait for the <code>Ready</code> condition, so the check, and what a <code>wait</code>
+polls, waits for the checked Kustomization to be Ready, whatever the expression says.</p><p>These checks read what Flux&rsquo;s apply and wait do with a Kustomization&rsquo;s spec, as follows
+(go-kure/kure#1094):</p><ul><li><strong>Objects an apply skips.</strong> A Flux Kustomization that a Kustomization&rsquo;s apply skips is left out
+of what its <code>wait</code> waits for. Skipped means <code>kustomize.toolkit.fluxcd.io/ssa: Ignore</code> or
+<code>kustomize.toolkit.fluxcd.io/reconcile: disabled</code>, as a label or annotation in any case, on the
+object with the Kustomization&rsquo;s <code>spec.commonMetadata</code> applied over it. It is read on the object
+as that Kustomization&rsquo;s build makes it, so a patch that sets or clears the mark counts. <code>ssa: IfNotPresent</code> is
+not skipped: the apply creates the object and waits for it. A health check on a skipped object
+still waits for it. A mark in <code>spec.commonMetadata</code> is that Kustomization&rsquo;s alone, so another
+apply, the root&rsquo;s included, still creates the object. A mark on the object itself skips it in
+every apply whose <code>spec.commonMetadata</code> does not override it. If every apply skips it, the
+object never exists: a stall, which the checks do not judge.</li><li><strong>A health check on the checker itself.</strong> As Flux does, a check that carries the checker&rsquo;s own
+namespace and name is dropped. One with no namespace never passes: it is refused, saying so.</li><li><strong><code>spec.ignore</code>.</strong> A Kustomization&rsquo;s <code>spec.ignore</code> holds drift rules, which a fresh install does
+not use. A Source&rsquo;s <code>spec.ignore</code> and <code>.sourceignore</code> files are not read.</li><li><strong><code>spec.suspend</code>.</strong> A cycle through a suspended Kustomization stays refused: a suspended
+Kustomization never applies on a fresh install, so the tree would not converge either.</li><li><strong><code>spec.healthCheckExprs</code> on Flux Kustomizations.</strong> An expression is read as readiness,
+whatever it says. Flux evaluates it after its own generation guard, and it is arbitrary CEL, so
+a check written as an expression that waits for nothing more is still refused. Drop the check,
+or order the two Kustomizations with a <code>dependsOn</code> that closes no cycle.</li><li><strong>An alternate creator.</strong> A check on what a generated Kustomization&rsquo;s build writes waits for
+that apply, even where another Kustomization of the tree writes it as well and would apply
+first. Let one Kustomization write the target.</li></ul><p>They read each build as kustomize-controller builds it (see <a href=/kure/dev/api-reference/flux-names-and-paths/#one-kustomization-per-directory>One Kustomization per
+directory</a>
+): a generated Kustomization&rsquo;s patches rewriting a
+child Kustomization&rsquo;s spec, <code>spec.postBuild</code> substitution and a build&rsquo;s own transforms are applied
+before anything is read, and a Kustomization a patched build keeps as local config is read as that
+build makes it, its own <code>wait</code> included. A built object is read as its JSON, so a number in it,
+a port say, is read like any other field, before and after substitution (go-kure/kure#1199). An
+unstructured object a caller builds in Go should hold JSON-typed values, as apimachinery&rsquo;s
+<code>Unstructured</code> requires: an <code>int64</code>, not an <code>int</code>, because its <code>Nested*</code> reads and <code>DeepCopy</code>
+panic on any other. kure reads such an object as its JSON, so it does not panic on one
+(go-kure/kure#1201, go-kure/kure#1252).
+<code>IntegrateWithLayout</code>, <code>CreateLayoutWithResources</code> (through it),
+<code>GenerateFromLayout</code>, <code>GenerateFromCluster</code> (through it) and <code>UmbrellaTerminals</code> first replace the
+<code>Object</code> map of each unstructured object in the layouts they are given, a <code>List</code>&rsquo;s items included
+(also the unstructured items of a typed <code>List</code>, and of the typed Lists it holds, an unstructured <code>List</code>
+among them, whose own <code>Object</code> map is replaced like its items&rsquo;, and an unstructured object, or <code>List</code>,
+that a typed object that is no <code>List</code> holds in a field, the <code>Object</code> of a <code>RawExtension</code> included, such a
+typed object as an item of a typed <code>List</code> too), that holds another value with a copy that holds
+JSON-typed values. This changes the object the caller passed: its <code>Object</code> field holds a new map, and
+the map the caller built is not changed. A typed <code>List</code> is read from the items it writes, so an object
+it holds in a field and does not write is left as it is. An unstructured object or <code>List</code> held by value in a
+map or in an interface of a typed object that is copied, which cannot be replaced, is refused when it
+holds a value that is not JSON typed. The accepted shapes are a closed list. A <code>string</code>, <code>int64</code>,
+<code>float64</code>, <code>bool</code>, <code>nil</code>,
+<code>json.Number</code>, <code>map[string]interface{}</code> and <code>[]interface{}</code> are kept as they are. A Go integer kind
+(<code>int</code>, <code>int8</code> to <code>int32</code>, <code>uint</code>, <code>uint8</code> to <code>uint32</code>, <code>uintptr</code>, and a <code>uint64</code> up to the largest
+<code>int64</code>) becomes an <code>int64</code>, so an integer above 2^53 stays exact. A <code>float32</code> becomes the
+<code>float64</code> of its shortest 32-bit decimal form, as <code>encoding/json</code> writes it (<code>float32(0.1)</code> is
+<code>0.1</code>), and a byte slice becomes its base64 string, as <code>encoding/json</code> writes it. A named <code>string</code>,
+<code>bool</code>, integer or float kind becomes its base type. A map with string keys and a slice of any
+element type (<code>[]string</code>, <code>map[string]string</code>) are converted element by element. Anything else is refused instead of converted: a struct, a pointer, an array, a channel, a
+function, a complex number, a map with other keys, a <code>uint64</code> above the largest <code>int64</code>, and every type
+with a <code>MarshalJSON</code> or <code>MarshalText</code> method (<code>json.RawMessage</code> and <code>net.IP</code> among them). So is a value
+that holds itself through maps and slices, one nested deeper than 10,000 levels (the depth <code>encoding/json</code> takes), a call whose objects
+need more than 4 million values converted or checked in all, and a byte slice of more than 4 million bytes. This is a contract of every entry point, stricter than the code before it (go-kure/kure#1201): everything a caller passes is normalized at entry, including a value that no path of that entry point reads, so an unstructured object holding a byte slice of more than 4 million bytes is refused by an entry point that never reads the slice. The objects of one call that need conversion or a check share the one budget of 4 million values (the bytes of a byte slice count as values each time the slice is converted or checked, and an object of a typed <code>List</code> is checked before the <code>List</code> is written); an unstructured object that holds JSON-typed values only is kept as it is and is not charged to it. An unstructured object held in a field of a typed object, which needs conversion, is checked and then converted, so each of its values counts twice, as the values of a <code>List</code>&rsquo;s items do. A value past a bound of this section is refused: the bounds are part of the contract of the package. A refusal names the layout, the object
+and the field, and replaces no object. The walk never calls a method of a caller&rsquo;s value, a marshaler
+included, also not to read a typed <code>List</code> that holds such an object; the metadata methods are called by the entry probe described below, a pass of its own. A typed object is walked, field by
+field, before it is written, and refused when it holds itself, when it is nested deeper than 40,000
+steps (a pointer, a field, an element, a map value, a map key of interface type and an embedded struct are each one step, and an interface is none, so a value past this bound is refused even where <code>encoding/json</code> would take it), when the walk of that one typed object meets more than 4 million values (an interface is one of them) or when an unstructured object in it holds a
+value that would call a method when written. A typed object that holds a type with a <code>MarshalJSON</code>,
+<code>MarshalText</code> or <code>MarshalYAML</code> method, as a field, an element or a map key, is refused, naming the
+type, unless the type is from <code>k8s.io</code>, <code>sigs.k8s.io</code>, <code>github.com/fluxcd</code>, <code>github.com/go-kure</code> or
+one of the standard library packages that define such a type (<code>time</code>, <code>net</code>, <code>net/netip</code>, <code>net/url</code>,
+<code>math/big</code>, <code>regexp</code>, <code>log/slog</code> and <code>encoding/json</code>), or is the Cilium <code>XDSResource</code> of a Cilium Envoy
+config, or the Cilium policy <code>EndpointSelector</code> (its <code>IsZero</code> tests one field for nil, and kure&rsquo;s own CiliumNetworkPolicy builders emit it). Each is an audited type, trusted by its exact name. The <code>XDSResource</code> marshaler writes a protobuf <code>Any</code> with <code>protojson</code>, which resolves the type URL in the global protobuf registry, so a message type a caller registered there still runs. A field tagged <code>omitzero</code> whose type has an <code>IsZero</code> method is judged the same way, as <code>encoding/json</code> calls that method when it writes the field: the typed object is refused, naming the type, unless the type is from one of those packages or is one of the exact types listed above. For an interface field the type judged is the one the interface holds, and a nil pointer, or an interface that holds one, is not judged, since <code>encoding/json</code> calls no <code>IsZero</code> on it. A type that only promotes <code>IsZero</code> from an embedded type is judged by its own package. An embedded struct (or pointer to one) with no name in its tag is flattened by <code>encoding/json</code>, which calls no <code>IsZero</code> for it, so it is not judged. A struct embedded under a name and an embedded interface are fields, and are judged. A field tagged <code>json:"-"</code>, which <code>encoding/json</code> never writes, is walked, charged and judged like any other field, so an untrusted <code>IsZero</code> inside it is refused: <code>encoding/json</code> does not write it, but a marshaler or kure&rsquo;s own code can (a <code>RawExtension</code> marshals its <code>Object</code>, which is tagged <code>-</code>), and each exemption tried here left a hole. The check does not copy the rest of how <code>encoding/json</code> picks fields, and refuses where that choice is subtle: a field with the same JSON name as a shallower field, which <code>encoding/json</code> drops, is still judged, and so is an embedded struct under a tag name that is not valid for JSON. A refusal is the safe side, and a copy of those rules could miss a method that is called. A <code>RawExtension</code> whose <code>Object</code> holds its own List is refused whatever <code>Raw</code> holds, since a copy of the object follows <code>Object</code>. A type of <code>package main</code> is not trusted. A named struct that only promotes such a method from an embedded type of a trusted package (a type that embeds <code>*unstructured.Unstructured</code>) is accepted; one that declares the method itself is not. A wrapper that embeds an <code>unstructured.Unstructured</code> (by pointer or by value, directly or through another embedded struct, as a resource or as an item of a typed List) is not normalized: it is refused, naming its Go type, when the map it embeds holds a value that is not JSON typed, and kept as it is when it holds none, since a copy put in its place would no longer carry what is done to the wrapper. Hold the object as a plain <code>*unstructured.Unstructured</code> to have it converted. The object that counts is the one Go promotes the methods of, the shallowest; a wrapper that embeds two at the same depth is refused, naming both paths. A wrapper with a <code>DeepCopyObject</code> of its own, one embedded on the way to the object that has one, or one that embeds a nil pointer, is refused. So is a wrapper that embeds an interface, or a named type that is not a struct, with a <code>DeepCopyObject</code> above the object, where Go promotes that method and not the object&rsquo;s, or at its depth, where Go promotes neither: it is refused whatever the map holds, naming the type and the path to the embedded interface or type. An embedded interface or non-struct type without that method, or one deeper than the object, changes nothing. This holds for a wrapper around an <code>unstructured.UnstructuredList</code> as well. A typed resource whose own method panics when kure reads
+its kind (a struct that embeds a nil pointer) is refused, naming the layout, the resource&rsquo;s place in it
+and its Go type; so is a typed nil resource, an unstructured one included. The paths below guard a
+call to a method of a caller&rsquo;s object, and a panic in any is a refusal that names only the Go types
+of the object and of the panic value, never the panic&rsquo;s text:</p><ul><li>the read of a built tree, and the labels and annotations that <code>Bundle.Generate</code> gives the objects of
+its applications;</li><li>the entry probe (go-kure/kure#1245): <code>IntegrateWithLayout</code>, <code>CreateLayoutWithResources</code>,
+<code>UmbrellaTerminals</code>, <code>GenerateFromLayout</code>, <code>GenerateFromCluster</code> and the layout writers
+(<code>WriteToDisk</code>, <code>WriteToTar</code>, <code>WritePackagesToDisk</code>, <code>WriteManifest</code>) call <code>GetObjectKind</code>,
+<code>GetName</code>, <code>GetNamespace</code>, <code>GetLabels</code> and <code>GetAnnotations</code> once on each object they are given, and
+on each object a typed <code>List</code> holds, before they read any. <code>GenerateFromLayout</code> and
+<code>GenerateFromCluster</code> call these methods only when bundles merged into one directory share a
+Kustomization and a bundle&rsquo;s patch has a target, which is matched against the other bundles'
+objects; they probe at entry all the same, so the contract does not depend on that shape.
+An item that is no <code>client.Object</code> is probed through the metadata it exposes with
+<code>ObjectMetaAccessor</code>, as the writers read it. The generator, the integrator and <code>UmbrellaTerminals</code>
+also probe the objects the origin records of the layouts retain (<code>OriginApplicationObjects</code>), which a
+delivery intent is applied to, and the objects each bundle of a layout emitted
+(<code>OriginBundleObjects</code>), which that patch check reads: the layouts hold the same values, but a
+caller can drop one from a layout and leave it in a record. The probe is a separate pass that
+follows the normalization above. It changes no caller&rsquo;s object; the one write it makes is the one
+every read of <code>OriginBundleObjects</code> makes, copying the annotations of a <code>configMapGenerator</code> entry
+to its stand-in, which is kure&rsquo;s own object. A nil left in the record of a bundle&rsquo;s emitted objects,
+a typed nil pointer or a nil interface, is refused at entry with an error naming the layout and the
+bundle, in the words used for a typed nil in a layout&rsquo;s <code>Resources</code>: the patch check calls a method
+on every element of that record. An object whose metadata methods panic is refused at
+entry, whether or not a later phase would have called the method that panics, and a refused
+<code>GenerateFromLayout</code> or <code>GenerateFromCluster</code> puts back what the normalization replaced.
+<code>WalkCluster</code> reads no metadata method beyond the guarded read of the kind, and has no probe;</li><li>the annotations an application&rsquo;s delivery intent sets on its objects, and takes back when a later
+check refuses the call. A setter cannot be probed, so the call that sets and the call that takes
+back are each guarded. A refusal while setting leaves the object annotated by no call. A panic
+while taking back is reported in the same error as the refusal that started it, names the Go type
+and says the object could not be restored.</li></ul><p>The paths leave out a method that answers or panics differently on a later call than on the probe&rsquo;s,
+and a method that never returns. A setter that panics part-way may leave the object changed, and then
+the undo cannot promise to restore it.</p><p>kure reads
+the items of a <code>List</code> by reflection and never formats a caller&rsquo;s object, so an item that is no
+object cannot make it format without end. The cases the issue names (a
+plain <code>int</code> in an object, nested in a <code>sourceRef</code>, in a <code>List</code>&rsquo;s items, in a <code>Source</code> <code>spec</code>) all stay accepted. A
+call that refuses later, for another reason, puts every <code>Object</code> map it replaced back, as long as the
+caller does not change the tree during the call. What they still leave out:</p><ul><li><strong>An object a build moves.</strong> A health check on an object&rsquo;s name as its file writes it, where a
+<code>spec.targetNamespace</code> or a name prefix or suffix applies it under another, names an object that
+never exists: a stall, which the checks do not judge. Name the object as the build applies it.</li><li><strong>Strict substitution.</strong> kustomize-controller substitutes strictly by default since v1.9
+(<code>StrictPostBuildSubstitutions</code>, kustomize-controller v1.10.1 <code>internal/features/features.go</code>),
+so a variable <code>spec.postBuild</code> does not set and that has no default fails the build. kure
+substitutes non-strictly and reads it as empty. That Kustomization then never applies and the
+tree stalls whatever kure reads, so the read may refuse such a tree but never admits a deadlock.</li><li><strong><code>readyExpr</code>.</strong> Read as a wait for <code>Ready</code>, or for existence when the expression is exactly
+<code>"true"</code> and the generator sets <code>AdditiveCELDependencyCheckOff</code> (see <a href=/kure/dev/api-reference/flux-names-and-paths/#with-additiveceldependencycheckoff>With
+<code>AdditiveCELDependencyCheckOff</code></a>
+). Terminal selection and
+a node&rsquo;s kept <code>dependsOn</code> count only an entry with no <code>readyExpr</code> as a wait for <code>Ready</code>.</li><li><strong><code>openapi</code>.</strong> A build that reads a kustomization file setting <code>openapi</code> is not read:
+kustomize-controller isolates its schema by resetting kustomize&rsquo;s global one around each build,
+which kure does not do (see <a href=/kure/dev/api-reference/flux-names-and-paths/#one-kustomization-per-directory>One Kustomization per
+directory</a>
+). Drop the field. kure tells a kustomization file
+by its name, so a generator&rsquo;s data file named <code>kustomization.yaml</code>, <code>kustomization.yml</code> or
+<code>Kustomization</code> whose content sets <code>openapi</code> is refused too, though kustomize reads it only as
+data: rename it.</li><li><strong>Remote references.</strong> A build that reads a remote reference, a Git repository or an <code>http(s)</code>
+URL kustomize-controller would fetch, is not read, naming the file and the reference: an
+integration never fetches (see <a href=/kure/dev/api-reference/flux-names-and-paths/#one-kustomization-per-directory>One Kustomization per
+directory</a>
+). Vendor the base into the tree, or reference it
+through a Flux Source.</li></ul><p>A tree refused for a cycle through one of these integrates once the dependency or health check
+that closes the reported chain is dropped, or names another Kustomization. The &ldquo;umbrellas do not
+wait&rdquo; rewrite and <code>UmbrellaTerminals</code> read the Kustomizations of the tree as it holds them, and
+on a tree that patches they read each <code>dependsOn</code> entry as the build shows it (go-kure/kure#1226).
+So a local-config Kustomization a patched build may keep, and that cannot be read in typed form,
+is still refused there.</p><p>The rules apply to the Kustomizations the call generates. One kept from an earlier integration
+is not rewritten; it is refused when it breaks R1 (with <code>ErrUmbrellaWait</code>, for <code>wait</code> or any
+<code>healthChecks</code>) or R3 (with <code>ErrUmbrellaDependency</code>), since it was placed without the setting.
+A tree the setting wrote integrates again unchanged: a node&rsquo;s kept Kustomization whose
+<code>dependsOn</code> names the terminal leaves of an umbrella the node depends on satisfies that
+dependency, and one that names neither is refused with <code>ErrUmbrellaDependency</code>. An entry that
+names a leaf only with a <code>readyExpr</code> names it for existence, so it counts as naming neither. The
+reconcile-order check (see <a href=/kure/dev/api-reference/flux-names-and-paths/#one-kustomization-per-directory>One Kustomization per directory</a>
+) runs on the
+rewritten specs.</p><table><thead><tr><th>Entry point</th><th>With the setting</th></tr></thead><tbody><tr><td><code>IntegrateWithLayout</code>, <code>CreateLayoutWithResources</code> under <code>FluxIntegratedPerBundle</code> or <code>FluxIntegratedPerLayout</code></td><td>R1, R2 and R3</td></tr><tr><td><code>GenerateForBundle</code></td><td>R1 and R2 on the Kustomization it returns, a bundle with <code>Children</code> being the umbrella. It sees no other Kustomization, so R3 is the caller&rsquo;s</td></tr><tr><td><code>GenerateFromLayout</code>, <code>GenerateFromCluster</code>, and <code>FluxSeparate</code> placement</td><td>refused with <code>ErrUmbrellaWait</code></td></tr></tbody></table><p><code>UmbrellaTerminals(roots ...)</code> returns the terminal leaves of each umbrella in one or more
+integrated trees, keyed <code>namespace/name</code>, so that a caller can point a dependency from outside a
+tree (a <code>NamedDependsOn</code> entry) at the leaves instead of the umbrella. Only a Kustomization the
+integration placed or kept can be an umbrella there: each integration records, per layout
+(<code>layout.ManifestLayout.FluxKustomizations</code>), the Kustomizations it placed or kept, and one counts while
+its <code>spec.path</code>, <code>spec.sourceRef</code> and presence of <code>spec.kubeConfig</code> are still the recorded ones, in
+any form (typed, unstructured, a <code>List</code> item). Every other Kustomization is a leaf: one an
+application emits and the integration did not keep, one a caller added, one whose Source, cluster or
+path changed after the integration, and every one of a tree built by hand or read back from disk. A
+caller that places its own records them with <code>SetFluxKustomizations</code>. A record counts when it equals the Kustomization&rsquo;s
+current one, both read as kure reads identities: the path cleaned, an omitted namespace <code>default</code>,
+an omitted Source namespace the Kustomization&rsquo;s own. A Kustomization that two trees
+both hold, and a tree whose objects cannot be read, are refused with <code>ErrUmbrellaTerminals</code>.
+It counts only a <code>dependsOn</code> entry with no <code>readyExpr</code> as a wait for <code>Ready</code>: a sibling that
+another one names with a <code>readyExpr</code> is a terminal leaf, with <code>AdditiveCELDependencyCheckOff</code> or
+without, and in a tree with a patching Kustomization or without. It runs no cycle check, so a tree
+whose entries wait for each other only through a <code>readyExpr</code> returns its leaves instead of
+<code>ErrUmbrellaTerminals</code>. The generator&rsquo;s method <code>ResourceGenerator.UmbrellaTerminals</code> returns the
+same leaves; it stays for callers that already use it.</p><h2 id=with-omitumbrellachildhealthchecks>With <code>OmitUmbrellaChildHealthChecks</code></h2><p><code>ResourceGenerator.OmitUmbrellaChildHealthChecks</code>, off by default, writes no automatic health
+check on an umbrella&rsquo;s children. It is for an umbrella whose children are applied by their own
+Kustomizations, as under <code>FluxSeparate</code>, where the children&rsquo;s Kustomization objects are not in the
+umbrella&rsquo;s build. There the automatic entries make the umbrella&rsquo;s reconcile wait until every
+child is Ready, holding one of kustomize-controller&rsquo;s workers the whole time, while each child
+needs a worker of its own to become Ready. <code>UmbrellasDoNotWait</code> is refused under <code>FluxSeparate</code>,
+and <code>Wait</code> true makes Flux ignore the caller&rsquo;s own <code>HealthChecks</code> too, so this setting is the
+one that drops the automatic entries alone.</p><ul><li><strong>What it changes:</strong> an umbrella&rsquo;s Kustomization gets no entry per child, whatever <code>Wait</code>
+says, in every placement and from every entry point (<code>GenerateForBundle</code>,
+<code>GenerateFromLayout</code>, <code>GenerateFromCluster</code>, the layout integrator). No other field changes:
+the caller&rsquo;s own <code>HealthChecks</code> are written and mapped as without it, and each child&rsquo;s
+Kustomization name is still checked. The reconcile-order check reads health checks as edges,
+so it no longer sees one from the umbrella to each child.</li><li><strong>The trade-off:</strong> with <code>Wait</code> unset or false the umbrella no longer waits for its children:
+it is Ready once applied and its own <code>HealthChecks</code>, if any, pass, so a bundle that depends on
+it no longer waits for its children. To keep that, list the children&rsquo;s Kustomizations in the
+umbrella&rsquo;s <code>HealthChecks</code> (which brings the worker wait back for that umbrella), or depend on
+the children directly; <code>UmbrellaTerminals</code> names the last ones to become Ready in an
+integrated tree. With <code>Wait</code> true the field changes nothing in any placement, since no entry
+was written before either; under an integrated placement the umbrella&rsquo;s wait still covers its
+children, under <code>FluxSeparate</code> it never did.</li><li><strong>A kept Kustomization</strong> from an earlier integration under an integrated placement stays as
+written, child entries included, as every kept CR does. Under <code>FluxSeparate</code> an earlier
+<code>flux-system</code> child written with the entries no longer matches, and the integration is
+refused; integrate a freshly walked layout.</li><li><strong>Off:</strong> every tree renders as without the field.</li></ul><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>gen</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fluxcd</span>.<span style=color:#a6e22e>NewResourceGenerator</span>()
+</span></span><span style=display:flex><span><span style=color:#a6e22e>gen</span>.<span style=color:#a6e22e>OmitUmbrellaChildHealthChecks</span> = <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>integrator</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fluxcd</span>.<span style=color:#a6e22e>NewLayoutIntegrator</span>(<span style=color:#a6e22e>gen</span>)</span></span></code></pre></div><footer class=footline></footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><div id=R-header class=default-animation><a href=https://www.gokure.dev/kure/dev/ style=text-decoration:none><div style=margin:0;padding:1rem;color:var(--MENU-SECTIONS-ACTIVE-BG-color)>Go Kure
+<span style=font-size:.5em;vertical-align:middle;opacity:.7>(dev)</span></div></a></div><search><form action=/kure/dev/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Search</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
+<button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class=padding></div><div class="R-sidebarmenu R-shortcutmenu-homelinks"><ul class="space collapsible-menu"><li data-nav-id=/kure/dev/index.html><a class=padding href=/kure/dev/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class=padding></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols"><ul><li class=R-versionswitcher><div class="padding menu-control"><i class="fa-fw fas fa-code-branch"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-version></label><select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/kure/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class=padding></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/kure/dev/start/index.html><a class=padding href=/kure/dev/start/index.html>Start</a></li><li data-nav-id=/kure/dev/deliver-with-flux/index.html><a class=padding href=/kure/dev/deliver-with-flux/index.html>Deliver with Flux</a></li><li data-nav-id=/kure/dev/reference/index.html><a class=padding href=/kure/dev/reference/index.html>Reference</a></li><li data-nav-id=/kure/dev/getting-started/index.html><a class=padding href=/kure/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li data-nav-id=/kure/dev/concepts/index.html><a class=padding href=/kure/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu></ul></li><li data-nav-id=/kure/dev/guides/index.html><a class=padding href=/kure/dev/guides/index.html>Guides</a><ul id=R-subsections-8fc2fd7736125e87cab8840a86c2af5a class=collapsible-menu></ul></li><li data-nav-id=/kure/dev/examples/index.html><a class=padding href=/kure/dev/examples/index.html>Examples</a><ul id=R-subsections-2e4187ca04853a7e1382c8d86f7be6fd class=collapsible-menu></ul></li><li class=parent data-nav-id=/kure/dev/api-reference/index.html><a class=padding href=/kure/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu><li data-nav-id=/kure/dev/api-reference/stack/index.html><a class=padding href=/kure/dev/api-reference/stack/index.html>Stack</a></li><li data-nav-id=/kure/dev/api-reference/stacktest/index.html><a class=padding href=/kure/dev/api-reference/stacktest/index.html>Stack Test Helpers</a></li><li data-nav-id=/kure/dev/api-reference/flux-engine/index.html><a class=padding href=/kure/dev/api-reference/flux-engine/index.html>Flux Engine</a></li><li data-nav-id=/kure/dev/api-reference/flux-names-and-paths/index.html><a class=padding href=/kure/dev/api-reference/flux-names-and-paths/index.html>Flux Names and Paths</a></li><li data-nav-id=/kure/dev/api-reference/flux-defaults/index.html><a class=padding href=/kure/dev/api-reference/flux-defaults/index.html>Flux Defaults</a></li><li data-nav-id=/kure/dev/api-reference/flux-layout-integration/index.html><a class=padding href=/kure/dev/api-reference/flux-layout-integration/index.html>Flux Layout Integration</a></li><li data-nav-id=/kure/dev/api-reference/flux-bootstrap-generation/index.html><a class=padding href=/kure/dev/api-reference/flux-bootstrap-generation/index.html>Flux Bootstrap Generation</a></li><li class=active data-nav-id=/kure/dev/api-reference/flux-umbrella-bundles/index.html><a class=padding href=/kure/dev/api-reference/flux-umbrella-bundles/index.html>Flux Umbrella Bundles</a></li><li data-nav-id=/kure/dev/api-reference/flux-child-layout-crs/index.html><a class=padding href=/kure/dev/api-reference/flux-child-layout-crs/index.html>Flux Non-Bundle Child Layout CRs</a></li><li data-nav-id=/kure/dev/api-reference/layout/index.html><a class=padding href=/kure/dev/api-reference/layout/index.html>Layout Engine</a></li><li data-nav-id=/kure/dev/api-reference/io/index.html><a class=padding href=/kure/dev/api-reference/io/index.html>IO</a></li><li data-nav-id=/kure/dev/api-reference/manifest/index.html><a class=padding href=/kure/dev/api-reference/manifest/index.html>Manifest Classification</a></li><li data-nav-id=/kure/dev/api-reference/kubernetes-builders/index.html><a class=padding href=/kure/dev/api-reference/kubernetes-builders/index.html>Kubernetes Builders</a></li><li data-nav-id=/kure/dev/api-reference/certmanager-builders/index.html><a class=padding href=/kure/dev/api-reference/certmanager-builders/index.html>Cert-Manager Builders</a></li><li data-nav-id=/kure/dev/api-reference/cilium-builders/index.html><a class=padding href=/kure/dev/api-reference/cilium-builders/index.html>Cilium Builders</a></li><li data-nav-id=/kure/dev/api-reference/cnpg-builders/index.html><a class=padding href=/kure/dev/api-reference/cnpg-builders/index.html>CloudNativePG Builders</a></li><li data-nav-id=/kure/dev/api-reference/externalsecrets-builders/index.html><a class=padding href=/kure/dev/api-reference/externalsecrets-builders/index.html>External Secrets Builders</a></li><li data-nav-id=/kure/dev/api-reference/fluxcd-builders/index.html><a class=padding href=/kure/dev/api-reference/fluxcd-builders/index.html>FluxCD Builders</a></li><li data-nav-id=/kure/dev/api-reference/metallb-builders/index.html><a class=padding href=/kure/dev/api-reference/metallb-builders/index.html>MetalLB Builders</a></li><li data-nav-id=/kure/dev/api-reference/prometheus-builders/index.html><a class=padding href=/kure/dev/api-reference/prometheus-builders/index.html>Prometheus Builders</a></li><li data-nav-id=/kure/dev/api-reference/volsync-builders/index.html><a class=padding href=/kure/dev/api-reference/volsync-builders/index.html>VolSync Builders</a></li><li data-nav-id=/kure/dev/api-reference/errors/index.html><a class=padding href=/kure/dev/api-reference/errors/index.html>Errors</a></li><li data-nav-id=/kure/dev/api-reference/logger/index.html><a class=padding href=/kure/dev/api-reference/logger/index.html>Logger</a></li><li data-nav-id=/kure/dev/api-reference/versions/index.html><a class=padding href=/kure/dev/api-reference/versions/index.html>Versions</a></li><li data-nav-id=/kure/dev/api-reference/compatibility/index.html><a class=padding href=/kure/dev/api-reference/compatibility/index.html>Compatibility Matrix</a></li><li data-nav-id=/kure/dev/api-reference/api-tables/index.html><a class=padding href=/kure/dev/api-reference/api-tables/index.html>Kinds and Field Maturity</a></li></ul></li><li data-nav-id=/kure/dev/contributing/index.html><a class=padding href=/kure/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li data-nav-id=/kure/dev/changelog/index.html><a class=padding href=/kure/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin></div><div class="R-menu-divider default-animation"><hr class=padding></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols"><ul></ul></div><div id=R-footer></div></div></aside><script src=/kure/dev/js/clipboard/clipboard.min.js?1794480378 defer></script><script src=/kure/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1794480378 defer></script><script src=/kure/dev/js/theme.min.js?1794480378 defer></script></body></html>

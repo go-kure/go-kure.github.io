@@ -1,0 +1,525 @@
+<!doctype html><html lang=en-us dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.169.0"><meta name=generator content="Relearn 8.0.0+9803d5122ebb3276acea823f476e9eb44f607862"><meta name=description content='Kustomization names A bundle’s Kustomization is named after the bundle, unless the bundle sets KustomizationName:
+// The bundles keep their names and directories; their Kustomizations // get the names set here. db := &amp;stack.Bundle{Name: "db", KustomizationName: "apps-db"} shop := &amp;stack.Bundle{Name: "shop", KustomizationName: "apps-shop", DependsOn: []*stack.Bundle{db}} objects, err := fluxcd.NewResourceGenerator().GenerateForBundle(shop, "clusters/prod/shop") if err != nil { panic(err) } kust := objects[0].(*kustv1.Kustomization) fmt.Println(kust.Name, kust.Spec.Path, kust.Spec.DependsOn[0].Name) Bundle.Name stays the bundle’s identity, and the field does not move the bundle’s directory (named by Bundle.DirName, or by Name without one; see Directory names ), so spec.path is the same with and without the field. Bundle.UnitName() returns the name in effect, and everything that refers to the bundle’s Kustomization uses it:'><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Flux Names and Paths :: Go Kure"><meta name=twitter:description content='Kustomization names A bundle’s Kustomization is named after the bundle, unless the bundle sets KustomizationName:
+// The bundles keep their names and directories; their Kustomizations // get the names set here. db := &amp;stack.Bundle{Name: "db", KustomizationName: "apps-db"} shop := &amp;stack.Bundle{Name: "shop", KustomizationName: "apps-shop", DependsOn: []*stack.Bundle{db}} objects, err := fluxcd.NewResourceGenerator().GenerateForBundle(shop, "clusters/prod/shop") if err != nil { panic(err) } kust := objects[0].(*kustv1.Kustomization) fmt.Println(kust.Name, kust.Spec.Path, kust.Spec.DependsOn[0].Name) Bundle.Name stays the bundle’s identity, and the field does not move the bundle’s directory (named by Bundle.DirName, or by Name without one; see Directory names ), so spec.path is the same with and without the field. Bundle.UnitName() returns the name in effect, and everything that refers to the bundle’s Kustomization uses it:'><meta property="og:url" content="https://www.gokure.dev/kure/dev/api-reference/flux-names-and-paths/index.html"><meta property="og:site_name" content="Go Kure"><meta property="og:title" content="Flux Names and Paths :: Go Kure"><meta property="og:description" content='Kustomization names A bundle’s Kustomization is named after the bundle, unless the bundle sets KustomizationName:
+// The bundles keep their names and directories; their Kustomizations // get the names set here. db := &amp;stack.Bundle{Name: "db", KustomizationName: "apps-db"} shop := &amp;stack.Bundle{Name: "shop", KustomizationName: "apps-shop", DependsOn: []*stack.Bundle{db}} objects, err := fluxcd.NewResourceGenerator().GenerateForBundle(shop, "clusters/prod/shop") if err != nil { panic(err) } kust := objects[0].(*kustv1.Kustomization) fmt.Println(kust.Name, kust.Spec.Path, kust.Spec.DependsOn[0].Name) Bundle.Name stays the bundle’s identity, and the field does not move the bundle’s directory (named by Bundle.DirName, or by Name without one; see Directory names ), so spec.path is the same with and without the field. Bundle.UnitName() returns the name in effect, and everything that refers to the bundle’s Kustomization uses it:'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="API Reference"><meta itemprop=name content="Flux Names and Paths :: Go Kure"><meta itemprop=description content='Kustomization names A bundle’s Kustomization is named after the bundle, unless the bundle sets KustomizationName:
+// The bundles keep their names and directories; their Kustomizations // get the names set here. db := &amp;stack.Bundle{Name: "db", KustomizationName: "apps-db"} shop := &amp;stack.Bundle{Name: "shop", KustomizationName: "apps-shop", DependsOn: []*stack.Bundle{db}} objects, err := fluxcd.NewResourceGenerator().GenerateForBundle(shop, "clusters/prod/shop") if err != nil { panic(err) } kust := objects[0].(*kustv1.Kustomization) fmt.Println(kust.Name, kust.Spec.Path, kust.Spec.DependsOn[0].Name) Bundle.Name stays the bundle’s identity, and the field does not move the bundle’s directory (named by Bundle.DirName, or by Name without one; see Directory names ), so spec.path is the same with and without the field. Bundle.UnitName() returns the name in effect, and everything that refers to the bundle’s Kustomization uses it:'><meta itemprop=wordCount content="8665"><title>Flux Names and Paths :: Go Kure</title><link href=/kure/dev/css/auto-complete/auto-complete.min.css?1794480378 rel=stylesheet><script src=/kure/dev/js/auto-complete/auto-complete.min.js?1794480378 defer></script><script src=/kure/dev/js/search-lunr.min.js?1794480378 defer></script><script src=/kure/dev/js/search.min.js?1794480378 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/kure/dev/searchindex.en.js?1794480378"</script><script src=/kure/dev/js/lunr/lunr.min.js?1794480378 defer></script><script src=/kure/dev/js/lunr/lunr.stemmer.support.min.js?1794480378 defer></script><script src=/kure/dev/js/lunr/lunr.multi.min.js?1794480378 defer></script><script src=/kure/dev/js/lunr/lunr.en.min.js?1794480378 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/kure/dev/fonts/fontawesome/css/fontawesome-all.min.css?1794480378 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/kure/dev/fonts/fontawesome/css/fontawesome-all.min.css?1794480378 rel=stylesheet></noscript><link href=/kure/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1794480378 rel=stylesheet><link href=/kure/dev/css/theme.min.css?1794480378 rel=stylesheet><link href=/kure/dev/css/format-html.min.css?1794480378 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/api-reference/flux-names-and-paths/index.html",window.relearn.relBasePath="../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://www.gokure.dev/kure/dev",window.relearn.version_js_url="/kure/dev/versionindex.en.js?1794480378",window.relearn.disableAnchorCopy=!1,window.relearn.disableAnchorScrolling=!1,window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.relearn.getItem=(e,t)=>e.getItem(t),window.relearn.setItem=(e,t,n)=>e.setItem(t,n),window.relearn.removeItem=(e,t)=>e.removeItem(t),window.T_Copy_to_clipboard=`Copy to clipboard`,window.T_Copied_to_clipboard=`Copied to clipboard!`,window.T_Copy_link_to_clipboard=`Copy link to clipboard`,window.T_Link_copied_to_clipboard=`Copied link to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantname="my-custom-variant",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.relearn.setItem(window.localStorage,window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.relearn.getItem(window.localStorage,window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.relearn.getItem(window.localStorage,window.relearn.absBaseUri+"/variant")??"";e==window.relearn.customvariantname||(!e||!window.relearn.themevariants.includes(e))&&(e=window.relearn.themevariants[0],window.relearn.setItem(window.localStorage,window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-url=/kure/dev/api-reference/flux-names-and-paths/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar><div class=topbar-wrapper><div class=topbar-sidebar-divider></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><button class=topbar-control onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></div><div class="topbar-button topbar-button-toc" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><button class=topbar-control onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-list-alt"></i></button><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#kustomization-names>Kustomization names</a></li><li><a href=#kustomization-paths>Kustomization paths</a><ul><li><a href=#directory-names>Directory names</a></li><li><a href=#one-kustomization-per-directory>One Kustomization per directory</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/kure/dev/index.html><span itemprop=name>Kure</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/kure/dev/api-reference/index.html><span itemprop=name>API Reference</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Flux Names and Paths</span><meta itemprop=position content="3"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><a class=topbar-control href=/kure/dev/api-reference/flux-engine/index.html title="Flux Engine (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></div><div class="topbar-button topbar-button-next" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><a class=topbar-control href=/kure/dev/api-reference/flux-defaults/index.html title="Flux Defaults (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></div><div class="topbar-button topbar-button-more" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><button class=topbar-control onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable api-reference" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><details open class="box cstyle notices warning"><summary class=box-label tabindex=-1><i class="fa-fw fas fa-exclamation-triangle"></i>
+Work in Progress</summary><div class=box-content><p>You are viewing <strong>development</strong> documentation built from the latest commit on <code>main</code> (last tag <code>v0.2.0-rc.1</code>, source commit <code>cf68f15c</code>).
+APIs and features are subject to change.</p></div></details><h1 id=flux-names-and-paths>Flux Names and Paths</h1><h2 id=kustomization-names>Kustomization names</h2><p>A bundle&rsquo;s Kustomization is named after the bundle, unless the bundle sets <code>KustomizationName</code>:</p><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// The bundles keep their names and directories; their Kustomizations</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// get the names set here.</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>db</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;db&#34;</span>, <span style=color:#a6e22e>KustomizationName</span>: <span style=color:#e6db74>&#34;apps-db&#34;</span>}
+</span></span><span style=display:flex><span><span style=color:#a6e22e>shop</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;shop&#34;</span>, <span style=color:#a6e22e>KustomizationName</span>: <span style=color:#e6db74>&#34;apps-shop&#34;</span>, <span style=color:#a6e22e>DependsOn</span>: []<span style=color:#f92672>*</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>db</span>}}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>objects</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fluxcd</span>.<span style=color:#a6e22e>NewResourceGenerator</span>().<span style=color:#a6e22e>GenerateForBundle</span>(<span style=color:#a6e22e>shop</span>, <span style=color:#e6db74>&#34;clusters/prod/shop&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>    panic(<span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#a6e22e>kust</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>objects</span>[<span style=color:#ae81ff>0</span>].(<span style=color:#f92672>*</span><span style=color:#a6e22e>kustv1</span>.<span style=color:#a6e22e>Kustomization</span>)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>kust</span>.<span style=color:#a6e22e>Name</span>, <span style=color:#a6e22e>kust</span>.<span style=color:#a6e22e>Spec</span>.<span style=color:#a6e22e>Path</span>, <span style=color:#a6e22e>kust</span>.<span style=color:#a6e22e>Spec</span>.<span style=color:#a6e22e>DependsOn</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>Name</span>)</span></span></code></pre></div><p><code>Bundle.Name</code> stays the bundle&rsquo;s identity, and the field does not move the bundle&rsquo;s directory
+(named by <code>Bundle.DirName</code>, or by <code>Name</code> without one; see <a href=#directory-names>Directory names</a>
+),
+so <code>spec.path</code> is the same with and without the field. <code>Bundle.UnitName()</code> returns the name in effect, and everything that refers to
+the bundle&rsquo;s Kustomization uses it:</p><table><thead><tr><th>Reference</th><th>Written as</th></tr></thead><tbody><tr><td><code>metadata.name</code> of the bundle&rsquo;s Kustomization</td><td>the bundle&rsquo;s <code>KustomizationName</code>, or its <code>Name</code></td></tr><tr><td><code>spec.dependsOn</code> of a bundle that lists it in <code>DependsOn</code></td><td>the same name</td></tr><tr><td>an umbrella&rsquo;s health check on it as a child</td><td>the same name</td></tr><tr><td>a <code>NamedDependsOn</code> entry</td><td>it names a Kustomization, not a bundle: a bundle that sets <code>KustomizationName</code> is reached by that value. Its <code>Name</code> then reaches whichever bundle&rsquo;s Kustomization has that name, and is kept as written when none has, like any name no generated Kustomization has</td></tr></tbody></table><p>Two bundles whose Kustomizations would get one name are refused, and the error names both bundles
+by their paths. <code>Bundle.Name</code> stays unique too. A bundle may hold an object that is itself a Flux
+Kustomization named like the bundle (a component that delivers its own content): give the bundle
+another <code>KustomizationName</code> and the generated Kustomization no longer collides with it.</p><p>Without it the tree is refused under every placement: the generated Kustomization and the one in
+the tree would be two objects of one name in one namespace. The error names the one in the tree by
+its layout and <code>spec.path</code>, and by the application and bundle that hold it; it names what the
+generated one is for (the bundle, or under <code>FluxIntegratedPerLayout</code> the node or layout that gets
+a Kustomization of its own); and it names the way out: the field that names the generated one
+(<code>Bundle.KustomizationName</code>, <code>Node.KustomizationName</code> or <code>ManifestLayout.KustomizationName</code>), or
+another name for the one in the tree. For a node whose walked layout carries a name the node does
+not set, that is the layout and its field: the layout&rsquo;s name is the one in effect. A Kustomization
+that no application holds, such as one added to a walked layout by hand or put where an
+application&rsquo;s was, is named by its layout alone.</p><p><code>Bundle.Validate</code> compares the names in effect wherever it compares against a Kustomization
+reference. A bundle that lists the bundle <code>db</code> in <code>DependsOn</code> and the name <code>db</code> in
+<code>NamedDependsOn</code> is valid when <code>db</code> sets <code>KustomizationName: "db-cr"</code>: the two are different
+Kustomizations. The entry <code>db-cr</code> is then the duplicate.</p><p>A <code>DependsOn</code> entry that is a copy of a bundle of the cluster (another <code>Bundle</code> value with its
+<code>Name</code>) is that bundle: <code>spec.dependsOn</code> gets the bundle&rsquo;s Kustomization name whether the copy
+carries that name as its <code>KustomizationName</code> or none. Every entry point that takes a cluster or a
+walked layout refuses a copy that sets another <code>KustomizationName</code>, naming both, and a copy of a
+bundle whose Kustomization name is also in <code>NamedDependsOn</code>. <code>GenerateForBundle</code> has no cluster to
+resolve a copy against and writes the name the entry carries. One valid input is refused: a name-only
+copy of a bundle that sets <code>KustomizationName</code>, beside a <code>NamedDependsOn</code> entry equal to the
+bundle&rsquo;s <code>Name</code>; set the bundle&rsquo;s <code>KustomizationName</code> on the copy (see the
+<a href=/kure/dev/api-reference/stack/>stack</a>
+).</p><h2 id=kustomization-paths>Kustomization paths</h2><p>The layout tree is the only authority on directories. Every walked layout records which stack
+nodes, bundles and application it renders (<code>ManifestLayout.OriginNodes</code>, <code>OriginBundles</code>,
+<code>OriginApplication</code>), and <code>layout.IndexOrigins(root, cluster)</code> resolves each bundle to the one
+layout whose directory holds its resources. A bundle&rsquo;s Kustomization <code>spec.path</code> is that layout&rsquo;s
+<code>FullRepoPath()</code> — <code>OriginIndex.KustomizationPath(b)</code> — and nothing else:</p><table><thead><tr><th>Tree</th><th>Rules</th><th>Bundle</th><th><code>spec.path</code></th></tr></thead><tbody><tr><td>node <code>platform</code>, bundle <code>web</code></td><td><code>GroupByName</code></td><td><code>web</code></td><td><code>platform/web</code></td></tr><tr><td>node <code>platform</code>, bundle <code>platform</code></td><td><code>GroupByName</code></td><td><code>platform</code></td><td><code>platform/platform</code></td></tr><tr><td>root node <code>platform</code> (bundle <code>platform</code>) with child node <code>apps</code> (bundle <code>apps-bundle</code>)</td><td>bundles and applications <code>GroupFlat</code>, <code>ClusterName: "prod"</code></td><td><code>platform</code>, <code>apps-bundle</code></td><td><code>prod/platform/platform</code>, <code>prod/platform/apps</code></td></tr><tr><td>unnamed root node, bundle <code>web</code></td><td>bundles and applications <code>GroupFlat</code>, <code>ClusterName: "."</code></td><td><code>web</code></td><td><code>web</code></td></tr></tbody></table><p>The path is emitted as <code>FullRepoPath()</code> returns it (no <code>./</code> prefix; Flux treats <code>x</code> and <code>./x</code>
+alike) and is relative to the root of what the writer wrote: the <code>WriteToDisk</code> / <code>WriteToTar</code>
+base, or <code>&lt;basePath>/&lt;ManifestsDir></code> for <code>layout.WriteManifest</code>. Root the Flux source there.</p><p>The root node&rsquo;s directory renders no bundle (go-kure/kure#979): with a flat <code>BundleGrouping</code> its
+bundle has a directory inside it, named after the bundle (by its <code>DirName</code> when it sets one, see
+<a href=#directory-names>Directory names</a>
+), as the last two rows show. Before, the
+bundle rendered in the root node&rsquo;s directory (<code>prod/platform</code> and <code>.</code> in those rows), and the
+Kustomization that applied that directory was hosted inside it. See &ldquo;The root node&rsquo;s bundles&rdquo; in
+the layout package README, also for the path move this is on a deployed tree.</p><h3 id=directory-names>Directory names</h3><p>A bundle&rsquo;s directory is named after the bundle. <code>Bundle.DirName</code> names it otherwise, and
+leaves the Kustomization&rsquo;s name and every reference to it alone; <code>spec.path</code> follows the
+directory, in every placement:</p><table><thead><tr><th>Umbrella <code>shop</code> at <code>platform/apps</code>, child</th><th>Directory</th><th>Kustomization</th><th><code>spec.path</code></th></tr></thead><tbody><tr><td><code>Name: "shop-infra"</code></td><td><code>platform/apps/shop-infra</code></td><td><code>shop-infra</code></td><td><code>platform/apps/shop-infra</code></td></tr><tr><td><code>Name: "shop-infra"</code>, <code>DirName: "00-infra"</code></td><td><code>platform/apps/00-infra</code></td><td><code>shop-infra</code></td><td><code>platform/apps/00-infra</code></td></tr><tr><td><code>Name: "shop-infra"</code>, <code>DirName: "00-infra"</code>, <code>KustomizationName: "apps-shop-infra"</code></td><td><code>platform/apps/00-infra</code></td><td><code>apps-shop-infra</code></td><td><code>platform/apps/00-infra</code></td></tr></tbody></table><p>The field applies wherever a bundle&rsquo;s name becomes a directory: for an umbrella child, for a
+node&rsquo;s bundle under <code>BundleGrouping: GroupByName</code>, and for the root node&rsquo;s bundle under
+<code>GroupFlat</code>, which has a directory inside the root node&rsquo;s (root node <code>platform</code> with bundle
+<code>platform-bundle</code> and <code>DirName: "00-platform"</code> gives the Kustomization <code>platform-bundle</code> with
+<code>spec.path: platform/00-platform</code>). Under <code>GroupFlat</code> below the root a node&rsquo;s bundle is rendered
+in its node&rsquo;s directory, which the node names, and its <code>DirName</code> has no effect. Bundles a flat
+<code>NodeGrouping</code> merges into the root node share one directory and one Kustomization (see below):
+the directory takes the first merged bundle&rsquo;s <code>DirName</code>, or its <code>Name</code>, and a <code>DirName</code> on a
+later one has no effect.</p><p>A <code>DirName</code> must be one path segment (<code>stack.ValidateDirectoryName</code>); every entry point that
+takes a cluster refuses any other value before it walks. It is no object name and may hold upper
+case.</p><p>Two bundles whose own directories would be one, two umbrella children with one <code>DirName</code> for
+example (or with two that differ in case only, which the writers treat as one directory), are
+refused before any Kustomization is generated, and the error names both bundles by their paths. The checks on the root node&rsquo;s bundle directory compare the directory it gets, so
+they follow a <code>DirName</code>: a child node of the root with that name is refused, and so is a
+<code>DirName</code> of <code>flux-system</code> under <code>FluxSeparate</code>. The directory is set on the bundle, not on the
+layout: a bundle&rsquo;s own layout renamed between <code>WalkCluster</code> and <code>IntegrateWithLayout</code> is refused,
+and the error points at <code>DirName</code>. Such a rename used to be accepted, and gave the directory
+another name without renaming the bundle or its Kustomization; a caller that relied on it sets
+<code>DirName</code> instead.</p><h3 id=one-kustomization-per-directory>One Kustomization per directory</h3><p>A directory is what a Flux Kustomization applies, so kure emits exactly one per directory that
+renders bundles. When a <code>GroupFlat</code> axis merges several bundles into one directory, they share that
+Kustomization, named after the first of them (the absorbing node&rsquo;s own bundle when it has one), by
+its <code>KustomizationName</code> when it sets one. A reference to any of the merged bundles&rsquo; Kustomization
+names resolves to the shared one.</p><p>Each such directory has <strong>one owner</strong>: it is applied by its own Kustomization and by nothing else.
+No parent <code>kustomization.yaml</code> lists a child directory that renders bundles, in any placement, so
+two Kustomizations never apply (and prune, and patch) the same objects. The child&rsquo;s CR is what
+applies it — in <code>flux-system</code> under <code>FluxSeparate</code>, in the parent directory under the integrated
+placements. Building a parent directory therefore does not include its child units.</p><p>A Kustomization is never hosted inside the directory it applies. Every directory that renders
+bundles has a parent to host its CR: the top of the tree <code>layout.WalkCluster</code> returns renders none
+(go-kure/kure#979). <code>IntegrateWithLayout</code> refuses a tree whose top does render a bundle, in every
+placement: integrate the whole tree <code>layout.WalkCluster</code> returns. A subtree of a walked tree,
+integrated on its own, can be such a tree, and so can the <code>layout.WalkClusterByPackage</code> tree of a
+package the root node is not in, under a flat <code>NodeGrouping</code>.</p><p>The bundles merged into one directory combine as follows:</p><table><thead><tr><th>Bundle setting</th><th>In the shared Kustomization</th></tr></thead><tbody><tr><td><code>SourceRef</code>, <code>Interval</code>, <code>Timeout</code>, <code>RetryInterval</code>, <code>Prune</code>, <code>Wait</code>, <code>Force</code>, <code>Suspend</code>, <code>PostBuild</code>, <code>ServiceAccountName</code></td><td>must be the same for every merged bundle (unset compares as the default; an omitted <code>SourceRef</code> namespace is the generator&rsquo;s <code>DefaultNamespace</code>; without a <code>URL</code> only its kind, name and namespace are compared, the fields a Kustomization carries), else an error naming the setting and the bundles</td></tr><tr><td><code>HealthChecks</code>, umbrella health checks</td><td>combined, each listed once; a check on a Flux Kustomization names the unit that applies that bundle, and one on the unit itself is dropped; under <code>UmbrellasDoNotWait</code> a unit that applies a Flux Kustomization has none (see <a href=/kure/dev/api-reference/flux-umbrella-bundles/#with-umbrellasdonotwait>With <code>UmbrellasDoNotWait</code></a>
+); under <code>OmitUmbrellaChildHealthChecks</code> a unit has no automatic entries for umbrella children, only the checks its bundles list (see <a href=/kure/dev/api-reference/flux-umbrella-bundles/#with-omitumbrellachildhealthchecks>With <code>OmitUmbrellaChildHealthChecks</code></a>
+)</td></tr><tr><td><code>Labels</code>, <code>Annotations</code></td><td>combined; one key with two values is an error</td></tr><tr><td><code>Patches</code></td><td>combined, but only when every patch has a <code>Target</code> that selects none of the other merged bundles&rsquo; objects (see <a href=#patches-in-a-shared-directory>Patches in a shared directory</a>
+)</td></tr><tr><td><code>DependsOn</code></td><td>mapped to the Kustomization that applies each dependency; dependencies between the merged bundles are dropped</td></tr><tr><td><code>NamedDependsOn</code></td><td>combined and mapped like <code>DependsOn</code>: a name that is a rendered bundle&rsquo;s Kustomization name (see <a href=#kustomization-names>Kustomization names</a>
+) becomes the name of the Kustomization that applies it (dropped when that is this one); any other name is kept as given</td></tr></tbody></table><p><code>GenerateFromLayout</code> and the integrator refuse a set of Kustomizations kure generates that can
+never all become Ready. Applying waits for every <code>dependsOn</code> to be Ready; becoming Ready waits for
+every Kustomization it health-checks, unless <code>wait</code> is set (Flux then ignores health checks and
+waits for everything it applied, the CRs it created included); and, under integrated placement, a
+CR exists only once the Kustomization whose directory references reach its file has applied — a CR
+the root directory reaches is created by the Flux bootstrap. Identities are namespace and name. A
+health check on another cluster (<code>spec.kubeConfig</code>) is no wait. A <code>spec.healthCheckExprs</code> entry
+for Flux Kustomizations is read as a wait for readiness, whatever its expression says. A
+cycle among these waits is refused, naming the chain. Kustomizations an application emits itself,
+and objects in other namespaces, are outside this check; the integrator&rsquo;s check below reads
+health checks on objects. A merge can close one (a health
+check or dependency on a bundle merged into a unit that waits for it), and so can a parent node&rsquo;s
+bundle depending on a child node&rsquo;s bundle whose CR only the parent&rsquo;s directory holds (both
+integrated placements). The root node&rsquo;s bundle cannot close that one any more: the CRs of the
+root&rsquo;s child nodes are hosted in the root node&rsquo;s directory, which the bundle&rsquo;s Kustomization does
+not build, and are created by whatever applies that directory (go-kure/kure#979). The bundle&rsquo;s own
+directory still hosts the CRs of its umbrella children and, under <code>FluxIntegratedPerLayout</code>, of
+the layouts inside it, as every bundle&rsquo;s directory does. A per-layout Kustomization with <code>wait</code>
+(its layout&rsquo;s, or the one it inherits: see <a href=/kure/dev/api-reference/flux-child-layout-crs/#per-layout-settings>Per-layout settings</a>
+) waits for
+the CRs its directory hosts like any other, so a layout that depends on the application layout
+above it closes a cycle once that one has <code>wait</code>. Under <code>UmbrellasDoNotWait</code> no Kustomization
+that applies another one waits, and a <code>dependsOn</code> on it names its terminal leaves, so these
+cycles through a wait are gone; the check runs on the rewritten specs. ArgoCD
+Applications get the unit rule but not this check: only a <code>DependsOn</code> cycle between units is
+refused there. Give bundles directories of their own (<code>NodeGrouping</code> or
+<code>BundleGrouping</code> <code>GroupByName</code>) when they need different settings.</p><p>Every integrator entry point, in every placement, then judges the order of the Kustomizations the
+integration placed or kept again (go-kure/kure#1133), each <code>dependsOn</code> as built (a kept
+Kustomization&rsquo;s <code>dependsOn</code> that closes a cycle on a later integration is refused too), each
+<code>wait</code> and each health check. A health check on an object that is no Flux Kustomization, on a
+Kustomization without <code>wait</code> or <code>spec.kubeConfig</code>, waits for that object to exist: Flux fetches a
+checked object before it evaluates any <code>spec.healthCheckExprs</code> entry, whatever the expression
+says. As Flux does, a check on a Kustomization of any group that carries the checker&rsquo;s own
+namespace and name is dropped, a check on a Flux Kustomization included; there the checker&rsquo;s
+namespace is the one it has on the cluster, <code>default</code> for a checker written without one. Flux does not default a
+check&rsquo;s namespace, so a check on itself written with no namespace is not dropped: its poller
+rejects it, the checker never becomes Ready, and the integration refuses it, saying so.</p><p>Every Kustomization and object is read as its writer&rsquo;s build makes it (go-kure/kure#1094). A
+writer is a Kustomization whose build is the tree&rsquo;s: the Flux bootstrap, each one the integration
+placed or kept, and each other one written into the tree on this cluster (no <code>spec.kubeConfig</code>),
+whose <code>spec.path</code> is a directory of the tree and whose Source is that of the Kustomization that
+writes it, or, for one the Flux bootstrap writes, the Source of a member whose build reads its
+directory. kure reads that last kind only where the tree would otherwise hold a member no apply
+creates, in a second view: every check runs over the first view and then the second, and a
+refusal of either refuses the tree, so the only verdict it changes is that one
+(go-kure/kure#1174). The tree as held (<code>UmbrellasDoNotWait</code>, <code>UmbrellaTerminals</code>) still reads a
+Kustomization the bootstrap writes as building nothing. kure builds each writer as kustomize-controller does: its <code>spec.patches</code>,
+<code>spec.components</code>, <code>spec.namePrefix</code>, <code>spec.nameSuffix</code> and <code>spec.targetNamespace</code> applied, its
+local config dropped, its generators run, then its <code>spec.postBuild</code> substitution, and a writer is
+built from its spec as its own writer&rsquo;s result holds it. The build uses Flux&rsquo;s kustomize options
+but not Flux&rsquo;s reset of kustomize&rsquo;s global OpenAPI schema around each build: that reset writes a
+schema every other use of kustomize in the process reads, so two integrations, or one beside any
+other kustomize build, would race. kure builds only with kustomize&rsquo;s built-in schema, which it
+has kustomize parse before any of its uses of kustomize reads it, again after a reset. That is a
+contract with the rest of the process, since kustomize&rsquo;s schema is process-global: another user of
+kustomize must not set, reset or add definitions to it while an integration builds. kure reads the
+schema&rsquo;s version, so it does not read a build under a custom schema or another built-in version,
+naming the version. Definitions added to the built-in schema (<code>openapi.AddSchema</code>, <code>openapi.AddDefinitions</code>)
+leave the version unchanged but can change how a field merges, so a verdict
+could go either way (a definition that merges a Kustomization&rsquo;s <code>spec.dependsOn</code> by name keeps a
+dependency a patch replaced, so kure would report a cycle Flux&rsquo;s build does not have). kure
+therefore compares a SHA-256 of a walk over every field of the schema&rsquo;s definitions, exported or
+not, with a pinned one for the built-in schema, before the first build of a tree and again after
+its last, and does not read any build of a tree when either differs, naming the definitions. Any
+difference counts, a CRD schema another use of kustomize registered included, and so does a value
+moved to a field kyaml does not read, such as an extension moved to <code>ExtraProps</code>, which marshals
+to the same JSON. A change made and reverted between the two checks is not seen. One check costs
+about 17 ms, and about 110 ms under <code>-race</code>. A tree that a view reads pays it twice, and a tree built only to
+name a patch in a refusal pays it once. The check covers
+the definitions kyaml exposes, and the schema kyaml&rsquo;s per-resource-type index serves for every kind
+they declare: the index holds a copy of each definition, apart from the one in the definitions, so
+a write through the schema kyaml returns for a kind changes what a build reads and leaves the
+definitions alone. Every kyaml path that registers a definition leaves an entry there. It does not
+see code that registers a definition and then deletes its entry from
+<code>openapi.Schema().Definitions</code> by hand: the index still serves the registered schema, and no
+definition declares its kind any more. That needs deliberate concealment by code in the
+same process, which no in-process check can stop, so it is out of scope. The definitions are not the
+whole of what kyaml keeps from a schema added: it also records, from the schema&rsquo;s paths, which kinds
+are cluster-scoped, and kustomize&rsquo;s namespace filter and name references decide on that. A schema
+added with a path alone for a kind leaves the definitions as they were and still changes a build, so
+each build also asks kyaml, through its public <code>IsNamespaceScoped</code>, for the scope of every kind it
+made, and of every kind in a file or inline patch it read, an object an overlay deletes later
+included (kustomize reads a kind&rsquo;s scope as it loads the object), and is not read when one differs
+from the built-in schema&rsquo;s. A kind only a generator made and an overlay deleted is not asked. Kinds are read from the YAML nodes of each file, with aliases followed one hop and merge keys
+followed through their whole chain, each shared node read once, so the work grows with the size of the file and not with the paths through its aliases or the mappings that share a merge key&rsquo;s sequence; an object that reaches a merge chain that leads back to itself, or a List nested more than eight deep that holds an object (a mapping with a <code>metadata</code> key, of its own or through merge keys at any depth, at any depth below the eighth List), or an object with an apiVersion or kind of more than 1024 bytes,
+makes the build not read (a mapping with no <code>metadata</code> key, in no List that has one and holding none below the eighth, is no object and is never refused for it; deep Lists of such data, a merge chain that leads back to itself in such data, and an apiVersion or kind over 1024 bytes on it, are not read or are read without a refusal). In a merge cycle each mapping keeps the <code>apiVersion</code>, <code>kind</code> and <code>items</code> it sets itself and takes of those it lacks the one value the other members offer, whichever member the file reaches it by; when they offer different values, any mapping that reaches the cycle makes the build not read, data included, since what it holds would depend on the order of the file. It orders only its own goroutines:
+another user&rsquo;s concurrent set or reset of the schema races with a build (go-kure/kure#1166).</p><p><strong>An integration never fetches; a remote reference is reported as not read.</strong>
+kustomize-controller fetches what a build names remotely: a Git repository in <code>resources</code>,
+<code>bases</code>, <code>components</code> or a <code>generators</code>, <code>transformers</code> or <code>validators</code> entry, which it clones,
+and an <code>http(s)</code> URL in any of those or in a field kustomize loads a file through (<code>patches</code>,
+<code>replacements</code>, <code>crds</code>, <code>configurations</code>, generator <code>files</code> and <code>envs</code>, and the same fields of a
+builtin plugin config), which it requests. kure fetches nothing. A build that reads a file naming
+a remote reference is not read, naming the file and the reference, and kure refuses the file
+before kustomize reads its fields, so nothing is cloned or requested. The check fails closed: a
+build is not read either when it reads a file kure cannot check, a kustomization or plugin config
+file that does not parse, a plugin config that is not builtin (Flux builds with builtins only and
+refuses it too) or of a builtin kure does not classify, or a <code>generators</code>, <code>transformers</code> or
+<code>validators</code> entry that is a directory, whose plugin configs a kustomization builds. A local path
+shaped like a repository, such as <code>github.com/org/repo</code>, is read as one. A data file named like a
+kustomization file is checked as one. The property rests on one dependency: kustomize reads files
+through no field kure leaves unclassified, which kure&rsquo;s tests pin to every field of kustomize&rsquo;s
+<code>Kustomization</code>, every builtin plugin, and the kustomize version kure builds with. Vendor a remote
+base into the tree, or reference it through a Flux Source.</p><p><strong>kustomize&rsquo;s schema is the process&rsquo;s, not kure&rsquo;s.</strong> kure guarantees that its own goroutines,
+concurrent integrations included, do not race each other on it. It refuses a build under a custom
+schema or another built-in version, naming it, and every build of a tree whose schema holds
+definitions other than the built-in ones, such as those kyaml&rsquo;s <code>AddSchema</code> and <code>AddDefinitions</code>
+add, checked before the tree&rsquo;s first build and after its last (about 17 ms each). A process that
+registers CRD schemas with kustomize beside an integration therefore gets no reconcile-order
+verdict from it: kure cannot tell such a definition from one that changes how a field merges. It
+cannot order another use of kustomize in the same process: one that sets or resets the schema
+while an integration runs, <code>fluxcd/pkg/kustomize</code>&rsquo;s <code>Build</code> among them, races with it, and one that
+makes kustomize parse the schema for the first time while an integration starts may too. Run such
+a use apart from an integration. The pinned fingerprint is for the kyaml this module builds with and
+for the layout of the types the walk reads (kyaml&rsquo;s schema type is <code>k8s.io/kube-openapi</code>&rsquo;s
+<code>spec.Schema</code>, read field by field): a bump of either that changes the definitions or those types
+fails <code>TestDefinitions_BuiltInMatchesThePin</code>, which prints the value to set in
+<code>internal/kustomizeschema</code>.</p><p>A copy whose apply skips it,
+<code>kustomize.toolkit.fluxcd.io/ssa: Ignore</code> or <code>kustomize.toolkit.fluxcd.io/reconcile: disabled</code> on
+it or in its writer&rsquo;s <code>spec.commonMetadata</code>, overwrites nothing and creates nothing: the
+Kustomization is read from the first copy an apply does not skip, and is created by a writer that
+applies it. A member every apply skips is still read, from its first copy. Eight cases are refused,
+each naming the Kustomization: a build that fails, as the controller&rsquo;s apply would; a build kure
+does not read, which Flux may build and apply, when it reads a kustomization file setting
+<code>openapi</code>, naming the file, since kustomize would keep its schema for every later build and kure
+does not reset it, when it reads a file naming a remote reference, or one kure cannot check for
+one, a kustomization file kustomize rejects among them, naming the file, since an integration
+never fetches, when another use of kustomize in the process has set a schema other than the
+built-in one, naming it, or when it loads, as a kustomization (a component&rsquo;s included), a file
+holding a <code>secretGenerator</code> entry with <code>behavior: merge</code> or a <code>generators</code> entry and the
+Kustomization sets <code>spec.decryption</code> or the binary links another kustomize than the audited one,
+naming the file (see the merging build below), or when the Kustomization sets <code>spec.decryption</code> and
+it reads a file holding a SOPS marker, or one it cannot read, naming the file (see the encrypted
+sources below); a
+Kustomization two writers apply with a different <code>dependsOn</code>, <code>wait</code>, <code>healthChecks</code>,
+<code>healthCheckExprs</code>, <code>path</code>, <code>sourceRef</code>, <code>kubeConfig</code>, <code>postBuild</code>, <code>commonMetadata</code>, <code>decryption</code>, <code>images</code>
+(which Flux&rsquo;s generator writes into the build) or transform (<code>ignoreMissingComponents</code> included,
+which decides whether a missing component fails the build), which both keep overwriting (a copy
+that sets <code>wait</code> or <code>ignoreMissingComponents</code> to <code>false</code> or <code>null</code>, <code>decryption</code> to <code>null</code>, or <code>dependsOn</code>, <code>healthChecks</code>,
+<code>healthCheckExprs</code>, <code>patches</code>, <code>components</code> or <code>images</code> to an empty list or <code>null</code>, agrees with one
+that omits the field, which Flux applies alike; every other compared field and value compares as
+written (a field a later Flux adds is compared only once kure lists it, and as written until its
+zero value is listed too), so <code>namePrefix: ""</code> (the CRD requires a non-empty value), a value of
+another type (<code>wait: ""</code>), an empty <code>postBuild</code> or a null entry in a map still differs, which can
+refuse a tree and never admit one; a key in another case (<code>Wait:</code>) is no field, as the API server
+and kure&rsquo;s own read treat it, so it compares as nothing); a member
+built from what no apply creates, a skipped copy, the first its writers&rsquo; results showed, or its
+spec as the tree holds it, where no result held it yet, when the first copy that is applied
+differs in those fields, since what it applies cannot then be read; a member built from its spec as the tree holds it that no apply creates
+once every writer is known (a parent&rsquo;s patch deleted or renamed it), since nothing applies what
+it builds, naming each Kustomization the bootstrap applies that may create it but whose build kure
+does not read; a member a build applies with <code>spec.kubeConfig</code>, or with another Source than its
+spec in the tree names, since it then applies on another cluster or another Source&rsquo;s directory;
+a Kustomization that is the eighth along its own chain of writers (each built from a copy the one
+before wrote) to build one <code>spec.path</code>, since a Kustomization that builds the directory holding it
+can write, after a substitution, a copy of itself under a new name, and so on without end, so the
+writers cannot all be found (a chain that comes back to a copy already built stops there and is
+admitted; the bound cannot tell a chain that would converge only after eight builds from one that
+never does, and refuses both);
+and, with <code>spec.postBuild.substituteFrom</code>, a
+variable that a Flux Kustomization of the build, or any object&rsquo;s <code>apiVersion</code> or kind, references
+and <code>spec.postBuild.substitute</code> does not set, since its value is read from the cluster; with it
+too, any variable in a key at an object&rsquo;s top level, which Flux may make its <code>apiVersion</code>, kind or
+metadata, and an inline value with a line break YAML reads but Flux keeps (a carriage return,
+U+0085, U+2028 or U+2029) that an object references, which may move a value the cluster sets
+anywhere in it; and with it, an <code>apiVersion</code> or kind referencing a variable whose text, as Flux
+substitutes it with <code>spec.postBuild.substitute</code>&rsquo;s values (defaults, replacements and the text
+around the variables included), is more than a name (letters, digits, <code>.</code>, <code>/</code>, <code>_</code> and <code>-</code>, bare
+or inside one pair of quotes), on an object that references a variable it does not set, since such
+a text (an alias, an open quote) may move a value the cluster sets into it. An object is a Flux
+Kustomization by the <code>apiVersion</code> and kind the inline values make, each value with every newline
+removed, as Flux removes it before substituting. Every object is read as the tree&rsquo;s writers write
+it to its file: they drop server fields, the <code>kubectl.kubernetes.io/last-applied-configuration</code>
+annotation, a null creation timestamp and an empty status from each resource&rsquo;s top-level object
+(a List&rsquo;s items are written as they are), so none of these reaches Flux, and none is read. A
+value read from the cluster is assumed to be plain text that keeps the structure Flux substitutes it into: one
+holding YAML syntax (a line break, a quote, a comment, <code>: </code>in a key) can change any field at
+apply, which no offline reading sees, as main&rsquo;s reading of the object as written does not either.
+An object&rsquo;s namespace or name is unknown where a cluster value reaches it through an inline YAML
+anchor and alias in another field, as where it references the variable itself: kure substitutes
+the object again with the variables it references that <code>spec.postBuild.substitute</code> does not set
+bound, each to a value of its own, twice, and reads the identity as unknown where either run differs from the
+offline one (go-kure/kure#1176). A value that reaches it only through a form neither run triggers
+(a substring past the length of both) is not seen, and the identity stays certain, which may
+refuse a tree Flux converges and never admits a deadlock.
+One input is read in a way that may refuse a tree Flux converges, never admit a deadlock: a
+generator over SOPS-encrypted sources, hashed from the ciphertext Flux
+decrypts first (go-kure/kure#1178). A writer that substitutes (a <code>spec.postBuild</code> with <code>substitute</code>,
+<code>substituteFrom</code> or <code>substituteStrategy: Always</code>) over a directory that generates a ConfigMap is
+built as kustomize-controller builds it, so the ConfigMap is read under its hashed name and
+substituted as the rest are (go-kure/kure#1177). That build is refused as any other is: a tree
+that was admitted with such a writer whose generator kure cannot build (a remote file source, a
+kustomize failure) is now refused, naming the build.
+A Kustomization is read as it is
+applied: kustomize-controller drops its <code>status</code> and <code>metadata.creationTimestamp</code> first, so
+neither keeps it from being read.</p><p>A build that merges into a Secret is read as built. A merge changes a Secret another file writes,
+and kustomize hashes the merged Secret&rsquo;s name over its merged content inside the build, so the
+build gives the name Flux computes: the unhashed name for a merge into a literal Secret or one
+whose hash is disabled, the hash of the merged data for a generated one (the name before the merge
+then has no writer). A build may merge when a kustomization file it loads as one (a component&rsquo;s
+included) holds a <code>secretGenerator</code> entry with <code>behavior: merge</code>, or a <code>generators</code> entry, whose
+generator may merge too. kure decodes each such file as kustomize does: keys in any case, YAML
+anchors, aliases and merge keys expanded, and the last of duplicate keys taking effect; a build that
+reads a file it cannot decode is not read, as above, so no merge is missed. A file no build reads,
+or one a generator reads only as data, merges nothing.</p><p>Such a build is not read, naming the file and the reason, in two cases kure cannot build as Flux
+does. The Kustomization sets <code>spec.decryption</code> (any provider): Flux decrypts sources before the
+build and resources after it, so decrypted data may change the hash, and nothing follows which
+data reaches a name. A copy of the Kustomization that differs from the one built only in
+<code>decryption</code> is refused as any other difference between two applied copies is (a null <code>decryption</code>
+is none). Or the binary links another kustomize api than the one kustomize-controller v1.10.1
+builds with (v0.21.1): v0.21.2 normalises <code>stringData</code> before a merge, v0.21.1 does not, so the hash
+can differ. kure reads the module the binary links as Go reports it, the replacement when there is
+one, by path and version; a module that imports kure resolves v0.21.2 unless it repeats kure&rsquo;s
+<code>replace</code> directives, and its merging builds stay unread. This refuses conservatively: a tree
+whose build merges into a Secret in these cases is refused even where Flux converges.</p><p><strong>Encrypted sources.</strong> With <code>spec.decryption</code> set (any provider), Flux decrypts, before it builds,
+the files a <code>secretGenerator</code> entry reads and every <code>patches[].path</code> file, in the directories of
+<code>resources</code> and <code>components</code>, whenever a file holds a SOPS marker; it decrypts built Secrets and
+whole-resource SOPS documents after the build. The names and namespaces a build gives are over what
+the files decrypt to: a generator&rsquo;s hash, a <code>replacements</code> entry carrying a decrypted value into a
+name or namespace, a <code>bases</code> or legacy <code>env</code> consumer of a decrypted file, a patch that changes
+generated data. kure reads only the ciphertext, so such a build is not read, naming the file and
+the marker. kure tests every file the build reads for the four marker strings of Flux&rsquo;s formats
+(<code>"mac": "ENC[</code>, <code>sops_mac=ENC[</code>, <code>[sops]</code>, <code>mac: ENC[</code>) whatever the file&rsquo;s name, and a file it
+cannot read, other than an absent one, counts as marked. This refuses more than Flux decrypts: a
+marker in any file the build reads, in another format, a <code>configMapGenerator</code> source Flux does not
+decrypt, a comment or a fixture, a provider other than <code>sops</code>, or a file over 5 MiB, which Flux
+refuses to decrypt, makes the build unread. A build that is not read refuses the whole tree, not only its Kustomization, as for any
+other build kure cannot read: no object of it, of any kind, is read. It applies only to a
+Kustomization kure builds, one with <code>patches</code>, <code>components</code>, <code>namePrefix</code>, <code>nameSuffix</code> or
+<code>targetNamespace</code>, or one with post-build substitution (<code>postBuild</code> with a <code>substitute</code>, a
+<code>substituteFrom</code> or <code>substituteStrategy: Always</code>) over a directory whose layout generates a
+ConfigMap; any other is read as the tree holds it, which holds no <code>secretGenerator</code> and no patch
+Flux decrypts. Without <code>spec.decryption</code> a marked file refuses nothing. The refusal never
+admits a wrong name.</p><p>kure adds the existence wait only when the object&rsquo;s writers are certain: only writers other than
+the Flux bootstrap apply an object matching it by group, kind, namespace and name as built (the
+version ignored; an empty <code>apiVersion</code> is <code>apps/v1</code>, as Flux reads it), none of those applies
+skips it, and no other apply may write it under an identity the tree does not show. A writer may
+be a Kustomization an application emits, when its build is the tree&rsquo;s. With one writer the check
+waits for its apply. With several it waits for whichever creates the object first, so the tree is
+refused only when every writer&rsquo;s apply waits for the checking Kustomization&rsquo;s <code>Ready</code> through a
+chain of these waits, and the checker, or a Kustomization on any such chain from a writer, is one
+a cycle through it would be refused for: a member, or one a build writes under a name the tree
+holds none by (below; the refusal names one chain per writer). A chain
+does not pass through another health check with several writers, so a deadlock that needs two of
+them at once is admitted, which errs towards admitting (go-kure/kure#1172). A new refusal through
+a health check on such an object comes only from such a wait. A matching copy its apply excludes,
+<code>kustomize.toolkit.fluxcd.io/ssa: Ignore</code> or <code>kustomize.toolkit.fluxcd.io/reconcile: disabled</code>
+(any case) on it or in that apply&rsquo;s <code>spec.commonMetadata</code>, is never created, so it counts neither
+as a match nor as another writer, as for a Flux Kustomization&rsquo;s copy above. That holds only when
+neither the copy as written nor that <code>spec.commonMetadata</code> holds <code>$</code> or <code>ENC[</code> anywhere: a
+substitution or a decryption may change the copy&rsquo;s marks, so a templated or encrypted copy is
+counted as before. These leave the writers uncertain and add no wait, so a cycle through them
+passes:</p><ul><li>a check with no namespace, or a matching object written with none that its apply does not
+exclude, a cluster-scoped one included (it may exist before any apply);</li><li>a <code>configMapGenerator</code> entry of a directory read as the tree holds it (the bootstrap&rsquo;s, that of a
+writer that is not built, that is, one that transforms nothing and substitutes nothing over a
+directory that generates a ConfigMap, or that of a Kustomization whose build is not the tree&rsquo;s)
+whose name, or that name and a dash, begins the checked name, as kustomize appends a content
+hash; a built writer&rsquo;s generated names are read as built, substituted;</li><li>an object whose identity may change at apply, whatever it names, unless only the results of the
+object&rsquo;s writers hold it: <code>$</code> left after substitution or <code>ENC[</code> (SOPS) in its <code>apiVersion</code>, kind,
+namespace or name, or a namespace or name a <code>substituteFrom</code> variable sets. Another apply may
+give it the checked identity. For a ConfigMap, so does such a <code>configMapGenerator</code> entry read as
+held;</li><li>a matching object whose labels or annotations as built, with its writer&rsquo;s
+<code>spec.commonMetadata</code> set over them, carry <code>kustomize.toolkit.fluxcd.io/ssa: IfNotPresent</code> (any
+case), as the apply skips it only when it already exists, or an exclusion on a copy counted as
+above (written with <code>$</code> or <code>ENC[</code>). With <code>spec.postBuild.substituteFrom</code>, these labels and
+annotations are read as written, before substitution, as main reads them: a skip holds only where it is written literally and the
+substitution leaves it as written, never as a default or an inline value makes it
+(<code>${SKIP:=Ignore}</code> does not skip, with <code>SKIP</code> set inline or not, nor does a key
+<code>${KEY:=kustomize.toolkit.fluxcd.io/ssa}</code>). The cluster may set a variable, and an inline value
+may carry YAML that moves a value the cluster sets into a skip, so whether the apply skips the
+object is then not known. A key holding a <code>$</code> may become a skip key at apply and meet a written
+one, so no skip is read from labels or annotations holding one, even beside a skip written
+literally; a key of the object&rsquo;s metadata referencing a variable <code>spec.postBuild.substitute</code> does
+not set may become its labels or annotations at apply, so no skip is read from either beside one.
+No skip at all is read from an object referencing any variable <code>spec.postBuild.substitute</code> does
+not set: an expression the cluster controls may change the text around a skip at apply (a
+substring of an inline quote whose length the cluster sets swallows the skip line), while an
+object every variable of which is set inline applies as substituted offline, inline values
+overriding the cluster&rsquo;s. This errs towards refusing;</li><li>a ServiceAccount <code>default</code> or a ConfigMap <code>kube-root-ca.crt</code>, which Kubernetes creates in every
+namespace; this list is closed;</li><li>a match the Flux bootstrap applies that its apply does not exclude;</li><li>a Kustomization on this cluster whose <code>spec.path</code> is a directory of the tree but whose build is
+not the tree&rsquo;s (another Source), read from its first copy an apply does not skip (one every
+apply skips applies nothing). One no result holds is read as the tree holds it, unless every
+directory holding a copy of it is loaded by some writer&rsquo;s build and by the build of no other
+Kustomization of the tree: each writer&rsquo;s build then deleted it, or wrote it under another name
+read as that one, so no apply creates it (go-kure/kure#1183). Otherwise it may apply a match it
+does not exclude, read as its directory
+holds it, or write
+the object under another identity: with <code>spec.components</code>; with <code>spec.patches</code>, when its
+directory holds any object or <code>configMapGenerator</code> entry (a patch may change a kind, or keep an
+object marked <code>config.kubernetes.io/local-config</code>); or with a name prefix or suffix or a target
+namespace, when it holds an object of the checked group and kind (for a ConfigMap, also a
+<code>configMapGenerator</code> entry);</li><li>a Kustomization of the tree that cannot be read in typed form, even from its writer&rsquo;s
+substituted result.</li></ul><p>The check assumes that an object the tree writes literally is created only by the applies of the
+tree&rsquo;s own directories. An object that a controller also creates (a HelmRelease&rsquo;s chart, an
+operator), or that a Kustomization outside the modelled tree also writes (another source, or a
+path that is no directory of the tree), is outside the model: such a tree has two owners of one
+object, and the check can then refuse a tree Flux would converge.</p><p>A <code>spec.healthCheckExprs</code> entry adds that existence wait only, never readiness. A Kustomization an
+application emits, or the caller writes, is followed as a placed one is, with or without
+<code>UmbrellasDoNotWait</code>, read from its writer&rsquo;s result: its <code>dependsOn</code>, <code>wait</code> and health checks are
+judged, so a tree can be refused for a cycle through one. One that cannot be read in typed form
+even there (a variable no <code>postBuild</code> sets) adds no wait: its writer&rsquo;s apply fails, a stall,
+which the checks do not judge. A cycle made only of Kustomizations the integration did not place,
+under the names the tree holds them by, is their author&rsquo;s, and is admitted. A Kustomization a
+build writes under a name the tree holds no Kustomization by (a member renamed by a name prefix,
+for one) may be a member, and the tree cannot tell whose it is: it is judged as the
+integration&rsquo;s, and a cycle through it is refused. Such a one that every apply skips is never
+created, and is not judged.</p><p>A <code>dependsOn</code> with a <code>readyExpr</code>, on any Kustomization, waits for the dependency&rsquo;s <code>Ready</code>. With
+kustomize-controller&rsquo;s <code>AdditiveCELDependencyCheck</code> feature gate off, its default
+(kustomize-controller v1.10.1 <code>internal/features/features.go:97-99</code>), Flux evaluates only the
+expression and skips its own readiness check (<code>internal/controller/kustomization_controller.go:614-626</code>).
+kure does not evaluate CEL and cannot see the gate, and an expression may itself require <code>Ready</code>,
+so it reads the readiness wait, which never admits a deadlock. Under the default gate a tree whose
+expression asks for less than <code>Ready</code>, and whose dependsOn closes a cycle, is therefore refused
+although it converges. Drop that <code>dependsOn</code>, depend on the object some other way, or, for a
+<code>readyExpr</code> of exactly <code>"true"</code>, set <code>AdditiveCELDependencyCheckOff</code> (below).</p><p>That read is the safe one for the checks that look for a cycle, where counting too many waits can
+only refuse. It is the wrong one where a check needs proof that a Kustomization is <code>Ready</code> after
+its dependency: picking the terminal leaves of an umbrella, and what a node&rsquo;s kept Kustomization
+must carry. There only a <code>dependsOn</code> entry with no <code>readyExpr</code> counts, with
+<code>AdditiveCELDependencyCheckOff</code> or without. Under the default gate Flux skips its own readiness
+check for an entry with an expression, so it proves nothing about <code>Ready</code>; counting it would drop
+a sibling from the leaves, and a dependent could proceed before that sibling is <code>Ready</code>. The
+&ldquo;umbrellas do not wait&rdquo; integration still refuses an umbrella that has no terminal leaf when every
+entry is read as a wait for <code>Ready</code>, as before, whether or not anything depends on it; the
+standalone <code>UmbrellaTerminals</code> queries run no such check.</p><p>On a tree that patches, the standalone <code>UmbrellaTerminals</code> queries and the &ldquo;umbrellas do not wait&rdquo;
+integration read each <code>dependsOn</code> entry as the build of the tree shows it, with every patch
+applied (go-kure/kure#1226). The integration builds the tree twice, once before the rewrite and
+once after it. Each entry has a class: 2 for an entry with no <code>readyExpr</code>, 1 for any other
+<code>readyExpr</code>, 0 for <code>readyExpr: "true"</code> where <code>AdditiveCELDependencyCheckOff</code> is set (it waits for
+existence only). The integration admits a patched tree when, for every Kustomization, the build
+after the rewrite waits for at least what the build before it waited for, each umbrella replaced
+by its terminal leaves. It refuses the tree when:</p><ul><li>a build gives any Kustomization a <code>dependsOn</code> entry that waits for <code>Ready</code> or an expression and
+whose target is an umbrella of the tree (a patch added it); the rewrite never sees such an
+entry;</li><li>a build gives any Kustomization a <code>dependsOn</code> entry, that waits for <code>Ready</code> or an expression, on
+a Flux Kustomization it makes but the tree does not hold, and that one applies Flux
+Kustomizations (a renamed copy of an umbrella, say);</li><li>a positional or copying patch lands differently on the rewritten list than on the list as
+written, and the build after the rewrite waits for less than the one before it (<code>remove /spec/dependsOn/1</code>, say), or for the same target with a weaker class;</li><li>a build makes a Kustomization under a name the build before the rewrite does not;</li><li>one of the fields the reconcile-order checks read (<code>path</code>, <code>sourceRef</code>, <code>kubeConfig</code>, <code>patches</code>,
+<code>healthChecks</code>, <code>wait</code> and the other graph fields, but not <code>dependsOn</code>) differs between the two
+builds, other than the <code>wait</code> and <code>healthChecks</code> the rewrite clears on an umbrella, and on a
+copy of one that a build makes (a Kustomization the tree does not hold, that applies Flux
+Kustomizations and, before the rewrite, has the whole spec of an umbrella of the tree, every
+field and <code>dependsOn</code> included, as the build shows the umbrella or as the tree holds it: a patch
+of an ancestor&rsquo;s build changes the first and not a copy made from the umbrella&rsquo;s directory); or
+an umbrella regains a <code>wait</code> or health check.</li></ul><p>A tree whose build before the rewrite fails, or that holds a Flux Kustomization the build cannot
+read (an unreadable copy, or a patching non-member on a member&rsquo;s Source that no build reads as a
+writer, whether the tree holds it or a patch keeps it from local config), falls back to the earlier blanket: no entry proves anything and the checks refuse more.
+The fallback asks the build after the rewrite to keep every entry each member held, and to keep
+the terminal leaves written for an umbrella among them.</p><p>These refusals are deliberate. kure cannot tell the author&rsquo;s intent from a lost wait, so it refuses
+these trees, though some of them are fine:</p><ul><li>a patch that removes a held entry by its index in the rewritten list, when the build before the
+rewrite cannot be made;</li><li>a patch that removes an entry on a dependency that exists nowhere, since kure cannot prove a
+target absent;</li><li>a held Kustomization that is no member, with a copy a build makes under its name, whose applied
+copy differs from it in a field the checks read, or is written by a Kustomization that patches,
+renames or substitutes (<code>spec.patches</code>, <code>spec.components</code>, <code>spec.namePrefix</code>, <code>spec.nameSuffix</code>,
+<code>spec.targetNamespace</code> or <code>spec.postBuild</code>), on the fallback path (it is not trusted as a
+stand-in for the copy: the copy may be one a build made from a member, with a wait a patch took
+from it, and no comparison of fields can tell the two apart);</li><li>a renamed copy of an umbrella whose own patches change a field of its spec (its <code>wait</code>,
+<code>healthChecks</code> or <code>dependsOn</code>, say) so that the spec equals neither the umbrella&rsquo;s as the build
+shows it nor as the tree holds it: the specs are compared as the typed Kustomization encodes
+them, so a duration written <code>60s</code> or <code>1m</code>, and an empty or an absent list, compare equal, and
+only a value the typed form keeps can tell two specs apart. Such a copy is no copy of the
+umbrella, and the wait it loses is refused as a different <code>spec.wait</code> or <code>spec.healthChecks</code>.
+A Kustomization with the whole spec of an umbrella, as the build shows it or as the tree holds
+it, is a duplicate of it and loses what the umbrella loses. A copy that equals neither (its own
+patch changes a field the umbrella&rsquo;s patch did not, or sets one the umbrella&rsquo;s patch set to
+another value) is refused.</li></ul><p>Not handled: two CEL expressions are never compared, so an entry of class 1 only has to stay of
+class 1.</p><h4 id=with-additiveceldependencycheckoff>With <code>AdditiveCELDependencyCheckOff</code></h4><p><code>ResourceGenerator.AdditiveCELDependencyCheckOff</code> states that every kustomize-controller
+reconciling the tree runs with its <code>AdditiveCELDependencyCheck</code> feature gate off. That is Flux&rsquo;s
+default since v1.7 (kustomize-controller v1.10.1 <code>internal/features/features.go:97-99</code>), so an
+operator running the default controller sets it to true. kure cannot see the gate.</p><ul><li><strong>false</strong>, the default, keeps the conservative read: a <code>dependsOn</code> with a <code>readyExpr</code> waits for
+the dependency&rsquo;s <code>Ready</code>, whatever the expression says.</li><li><strong>true</strong> changes one case: a <code>dependsOn</code> whose <code>readyExpr</code> is exactly <code>"true"</code> waits only for
+the dependency to exist. With the gate off Flux evaluates the expression instead of its own
+readiness check, and it always requires the dependency to exist first
+(<code>internal/controller/kustomization_controller.go:597-628</code>). The reconcile-order checks then
+wait for the apply of the Kustomization that creates the dependency, or for nothing when no
+Kustomization of the tree does (the Flux bootstrap, say); a chain through that wait is reported
+as <code>exist namespace/name</code>. Every other expression still waits for <code>Ready</code>.</li><li><strong>The risk:</strong> set on a cluster whose gate is on, where Flux checks <code>Ready</code> after the expression
+(<code>:630-655</code>), the checks can admit a tree that never becomes Ready.</li><li><strong>Where it applies:</strong> Kustomizations kure generates carry no <code>readyExpr</code>, so the field changes
+only how Kustomizations an application emits, or a caller keeps, patches or substitutes, are
+judged, in every check: the members&rsquo; check, the tree&rsquo;s, and the &ldquo;umbrellas do not wait&rdquo; rewrite
+(an existence wait on an umbrella is kept as written). That rewrite reads each entry as the
+build of the tree shows it, patches applied (above): an existence-only entry on a patched tree is
+admitted when the built class is existence-only, and refused when a patch makes it anything else.
+Terminal leaves do not depend on the setting: an entry with a <code>readyExpr</code> never makes a sibling
+depended on.
+No entry point refuses it. A v1beta2 Kustomization&rsquo;s <code>dependsOn</code> has no <code>readyExpr</code> field, so
+it still waits for <code>Ready</code>.</li></ul><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>gen</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fluxcd</span>.<span style=color:#a6e22e>NewResourceGenerator</span>()
+</span></span><span style=display:flex><span><span style=color:#a6e22e>gen</span>.<span style=color:#a6e22e>AdditiveCELDependencyCheckOff</span> = <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>integrator</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fluxcd</span>.<span style=color:#a6e22e>NewLayoutIntegrator</span>(<span style=color:#a6e22e>gen</span>)</span></span></code></pre></div><h4 id=patches-in-a-shared-directory>Patches in a shared directory</h4><p>Flux applies a Kustomization&rsquo;s patches to <strong>everything that Kustomization builds</strong>, not to the
+bundle that declared them. While a bundle has a directory of its own that is the same thing. Once
+a <code>GroupFlat</code> axis puts several bundles in one directory, the shared
+Kustomization builds all their objects, so a patch meant for one bundle would also change the
+others&rsquo; — and a layout setting would silently change what a bundle&rsquo;s patch does. kure refuses
+that instead of generating it:</p><ul><li>an untargeted patch in a shared directory is refused;</li><li>a targeted patch is refused when its <code>Target</code> selects any object another bundle in that
+directory renders, a ConfigMap an augmenter&rsquo;s <code>configMapGenerator</code> makes included, in the
+application&rsquo;s own layout or a child layout below it (matched with the annotations its entry
+sets, those of a <a href=/kure/dev/api-reference/flux-layout-integration/#delivery-intent>delivery intent</a>
+among them). Matching is
+kustomize&rsquo;s own: <code>Group</code>, <code>Version</code>, <code>Kind</code>, <code>Name</code> and <code>Namespace</code> are anchored regular
+expressions (an empty one matches anything; <code>Namespace</code> is matched against the object&rsquo;s
+effective namespace, <code>default</code> for a namespaced object that names none), <code>LabelSelector</code> and
+<code>AnnotationSelector</code> are Kubernetes selector expressions. A written object&rsquo;s labels and
+annotations are matched as kustomize reads them from the written file, every value as its
+text: an object decoded from YAML may hold a boolean, a number or null there, which reads as
+<code>true</code>, <code>3</code>, <code>1.5</code> (a whole number as an integer, <code>2</code>) or <code>null</code>, and its other labels or
+annotations are still matched (go-kure/kure#1100). An annotation the writer leaves out of the
+file (<code>kubectl.kubernetes.io/last-applied-configuration</code>) is not matched. A generated
+ConfigMap is not written: its entry&rsquo;s annotations are matched as they are, that one included,
+as kustomize puts them on the ConfigMap. The same matching decides whether a patch with a
+<code>Target</code> selects a hosted Source. Only objects the shared Kustomization
+builds count: under <code>FluxIntegratedPerLayout</code> a per-app directory is applied by its own CR, so
+its objects are outside the patch&rsquo;s reach. A bundle <code>b1</code> with <code>Target: {Kind: ConfigMap}</code> merged with a
+bundle that renders a ConfigMap is refused; <code>Target: {Kind: ConfigMap, Name: one-cm}</code>, naming
+<code>b1</code>&rsquo;s own ConfigMap, is accepted.</li></ul><p>The error names both bundles, the target and the object it reaches. Narrow the target to the
+bundle&rsquo;s own objects, or give the bundles directories of their own (<code>NodeGrouping</code> or
+<code>BundleGrouping</code> <code>GroupByName</code>). Not covered: objects inside an <code>ExtraFiles</code> file (they are not
+kustomize resources) and objects without a kind. Under <code>FluxIntegratedPerLayout</code> the check counts
+no generated ConfigMap, and needs none: no walked tree has a shared directory that builds one. An
+augmenter application that wants its own layout keeps a directory, which its own Kustomization applies without
+patches, and <code>FlattenSingleTier</code> collapses no directory that renders a bundle (go-kure/kure#979).</p><p>The generator computes no path, the integrator matches nothing by name, and <code>FlattenSingleTier</code>
+rewrites nothing afterwards: it collapses no directory that renders a bundle
+(go-kure/kure#979), so it changes no Kustomization&rsquo;s path and merges no bundles. An umbrella
+child&rsquo;s path is its own directory, in every mode (an earlier <code>KustomizationRecursive</code> rule
+pointed it at the parent bundle&rsquo;s directory, whose kustomization excludes the child).</p><p><code>IndexOrigins</code> refuses a tree it cannot resolve unambiguously: a hand-built, partial or
+other-cluster tree (the rendered set is not what the cluster reaches), a bundle or node rendered
+twice, two bundles with one name or with one Kustomization name, a bundle&rsquo;s own directory
+under another name than the bundle&rsquo;s <code>DirName</code> (or its <code>Name</code> without one), two bundles with
+one directory of their own, and a node or bundle
+layout in <code>AppFileSingle</code> mode (written into its <code>Namespace</code>, not its own directory). Build the
+tree with <code>layout.WalkCluster</code>. Not covered: a bundle whose <code>SourceRef.URL</code> names another
+artifact — its path is relative to that artifact.</p><footer class=footline></footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><div id=R-header class=default-animation><a href=https://www.gokure.dev/kure/dev/ style=text-decoration:none><div style=margin:0;padding:1rem;color:var(--MENU-SECTIONS-ACTIVE-BG-color)>Go Kure
+<span style=font-size:.5em;vertical-align:middle;opacity:.7>(dev)</span></div></a></div><search><form action=/kure/dev/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Search</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
+<button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class=padding></div><div class="R-sidebarmenu R-shortcutmenu-homelinks"><ul class="space collapsible-menu"><li data-nav-id=/kure/dev/index.html><a class=padding href=/kure/dev/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class=padding></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols"><ul><li class=R-versionswitcher><div class="padding menu-control"><i class="fa-fw fas fa-code-branch"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-version></label><select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/kure/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class=padding></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/kure/dev/start/index.html><a class=padding href=/kure/dev/start/index.html>Start</a></li><li data-nav-id=/kure/dev/deliver-with-flux/index.html><a class=padding href=/kure/dev/deliver-with-flux/index.html>Deliver with Flux</a></li><li data-nav-id=/kure/dev/reference/index.html><a class=padding href=/kure/dev/reference/index.html>Reference</a></li><li data-nav-id=/kure/dev/getting-started/index.html><a class=padding href=/kure/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li data-nav-id=/kure/dev/concepts/index.html><a class=padding href=/kure/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu></ul></li><li data-nav-id=/kure/dev/guides/index.html><a class=padding href=/kure/dev/guides/index.html>Guides</a><ul id=R-subsections-8fc2fd7736125e87cab8840a86c2af5a class=collapsible-menu></ul></li><li data-nav-id=/kure/dev/examples/index.html><a class=padding href=/kure/dev/examples/index.html>Examples</a><ul id=R-subsections-2e4187ca04853a7e1382c8d86f7be6fd class=collapsible-menu></ul></li><li class=parent data-nav-id=/kure/dev/api-reference/index.html><a class=padding href=/kure/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu><li data-nav-id=/kure/dev/api-reference/stack/index.html><a class=padding href=/kure/dev/api-reference/stack/index.html>Stack</a></li><li data-nav-id=/kure/dev/api-reference/stacktest/index.html><a class=padding href=/kure/dev/api-reference/stacktest/index.html>Stack Test Helpers</a></li><li data-nav-id=/kure/dev/api-reference/flux-engine/index.html><a class=padding href=/kure/dev/api-reference/flux-engine/index.html>Flux Engine</a></li><li class=active data-nav-id=/kure/dev/api-reference/flux-names-and-paths/index.html><a class=padding href=/kure/dev/api-reference/flux-names-and-paths/index.html>Flux Names and Paths</a></li><li data-nav-id=/kure/dev/api-reference/flux-defaults/index.html><a class=padding href=/kure/dev/api-reference/flux-defaults/index.html>Flux Defaults</a></li><li data-nav-id=/kure/dev/api-reference/flux-layout-integration/index.html><a class=padding href=/kure/dev/api-reference/flux-layout-integration/index.html>Flux Layout Integration</a></li><li data-nav-id=/kure/dev/api-reference/flux-bootstrap-generation/index.html><a class=padding href=/kure/dev/api-reference/flux-bootstrap-generation/index.html>Flux Bootstrap Generation</a></li><li data-nav-id=/kure/dev/api-reference/flux-umbrella-bundles/index.html><a class=padding href=/kure/dev/api-reference/flux-umbrella-bundles/index.html>Flux Umbrella Bundles</a></li><li data-nav-id=/kure/dev/api-reference/flux-child-layout-crs/index.html><a class=padding href=/kure/dev/api-reference/flux-child-layout-crs/index.html>Flux Non-Bundle Child Layout CRs</a></li><li data-nav-id=/kure/dev/api-reference/layout/index.html><a class=padding href=/kure/dev/api-reference/layout/index.html>Layout Engine</a></li><li data-nav-id=/kure/dev/api-reference/io/index.html><a class=padding href=/kure/dev/api-reference/io/index.html>IO</a></li><li data-nav-id=/kure/dev/api-reference/manifest/index.html><a class=padding href=/kure/dev/api-reference/manifest/index.html>Manifest Classification</a></li><li data-nav-id=/kure/dev/api-reference/kubernetes-builders/index.html><a class=padding href=/kure/dev/api-reference/kubernetes-builders/index.html>Kubernetes Builders</a></li><li data-nav-id=/kure/dev/api-reference/certmanager-builders/index.html><a class=padding href=/kure/dev/api-reference/certmanager-builders/index.html>Cert-Manager Builders</a></li><li data-nav-id=/kure/dev/api-reference/cilium-builders/index.html><a class=padding href=/kure/dev/api-reference/cilium-builders/index.html>Cilium Builders</a></li><li data-nav-id=/kure/dev/api-reference/cnpg-builders/index.html><a class=padding href=/kure/dev/api-reference/cnpg-builders/index.html>CloudNativePG Builders</a></li><li data-nav-id=/kure/dev/api-reference/externalsecrets-builders/index.html><a class=padding href=/kure/dev/api-reference/externalsecrets-builders/index.html>External Secrets Builders</a></li><li data-nav-id=/kure/dev/api-reference/fluxcd-builders/index.html><a class=padding href=/kure/dev/api-reference/fluxcd-builders/index.html>FluxCD Builders</a></li><li data-nav-id=/kure/dev/api-reference/metallb-builders/index.html><a class=padding href=/kure/dev/api-reference/metallb-builders/index.html>MetalLB Builders</a></li><li data-nav-id=/kure/dev/api-reference/prometheus-builders/index.html><a class=padding href=/kure/dev/api-reference/prometheus-builders/index.html>Prometheus Builders</a></li><li data-nav-id=/kure/dev/api-reference/volsync-builders/index.html><a class=padding href=/kure/dev/api-reference/volsync-builders/index.html>VolSync Builders</a></li><li data-nav-id=/kure/dev/api-reference/errors/index.html><a class=padding href=/kure/dev/api-reference/errors/index.html>Errors</a></li><li data-nav-id=/kure/dev/api-reference/logger/index.html><a class=padding href=/kure/dev/api-reference/logger/index.html>Logger</a></li><li data-nav-id=/kure/dev/api-reference/versions/index.html><a class=padding href=/kure/dev/api-reference/versions/index.html>Versions</a></li><li data-nav-id=/kure/dev/api-reference/compatibility/index.html><a class=padding href=/kure/dev/api-reference/compatibility/index.html>Compatibility Matrix</a></li><li data-nav-id=/kure/dev/api-reference/api-tables/index.html><a class=padding href=/kure/dev/api-reference/api-tables/index.html>Kinds and Field Maturity</a></li></ul></li><li data-nav-id=/kure/dev/contributing/index.html><a class=padding href=/kure/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li data-nav-id=/kure/dev/changelog/index.html><a class=padding href=/kure/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin></div><div class="R-menu-divider default-animation"><hr class=padding></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols"><ul></ul></div><div id=R-footer></div></div></aside><script src=/kure/dev/js/clipboard/clipboard.min.js?1794480378 defer></script><script src=/kure/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1794480378 defer></script><script src=/kure/dev/js/theme.min.js?1794480378 defer></script></body></html>
