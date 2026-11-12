@@ -1,0 +1,495 @@
+<!doctype html><html id=R-html lang=en-us dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.169.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Property schemas Handlers may implement PropertySchemaProvider (PropertySchema() map[string]PropertySchema) to declare a constrained schema for their user-facing properties. PropertySchema is launcher’s single schema vocabulary — the same type also backs kurel.yaml parameters (ParameterDecl) and CapabilityDefinition rendering properties. It has Type (string/integer/boolean/number/array/object), Types, Description, Required, Default, Enum, nested Properties, Items, AdditionalProperties (default false; escape-hatch fields set it true), and Exclusive. The rich fields (Types, Enum, Properties, Items, AdditionalProperties, Exclusive) are meaningful only for handler properties: the two flat call sites (kurel parameters, capability rendering) reject them at decode time, so unifying the type does not widen their accepted behavior."><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Property schemas and contract metadata :: Go Kure — Launcher"><meta name=twitter:description content="Property schemas Handlers may implement PropertySchemaProvider (PropertySchema() map[string]PropertySchema) to declare a constrained schema for their user-facing properties. PropertySchema is launcher’s single schema vocabulary — the same type also backs kurel.yaml parameters (ParameterDecl) and CapabilityDefinition rendering properties. It has Type (string/integer/boolean/number/array/object), Types, Description, Required, Default, Enum, nested Properties, Items, AdditionalProperties (default false; escape-hatch fields set it true), and Exclusive. The rich fields (Types, Enum, Properties, Items, AdditionalProperties, Exclusive) are meaningful only for handler properties: the two flat call sites (kurel parameters, capability rendering) reject them at decode time, so unifying the type does not widen their accepted behavior."><meta property="og:url" content="https://www.gokure.dev/launcher/dev/api-reference/oam/schemas-and-contract/index.html"><meta property="og:site_name" content="Go Kure — Launcher"><meta property="og:title" content="Property schemas and contract metadata :: Go Kure — Launcher"><meta property="og:description" content="Property schemas Handlers may implement PropertySchemaProvider (PropertySchema() map[string]PropertySchema) to declare a constrained schema for their user-facing properties. PropertySchema is launcher’s single schema vocabulary — the same type also backs kurel.yaml parameters (ParameterDecl) and CapabilityDefinition rendering properties. It has Type (string/integer/boolean/number/array/object), Types, Description, Required, Default, Enum, nested Properties, Items, AdditionalProperties (default false; escape-hatch fields set it true), and Exclusive. The rich fields (Types, Enum, Properties, Items, AdditionalProperties, Exclusive) are meaningful only for handler properties: the two flat call sites (kurel parameters, capability rendering) reject them at decode time, so unifying the type does not widen their accepted behavior."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="API Reference"><meta itemprop=name content="Property schemas and contract metadata :: Go Kure — Launcher"><meta itemprop=description content="Property schemas Handlers may implement PropertySchemaProvider (PropertySchema() map[string]PropertySchema) to declare a constrained schema for their user-facing properties. PropertySchema is launcher’s single schema vocabulary — the same type also backs kurel.yaml parameters (ParameterDecl) and CapabilityDefinition rendering properties. It has Type (string/integer/boolean/number/array/object), Types, Description, Required, Default, Enum, nested Properties, Items, AdditionalProperties (default false; escape-hatch fields set it true), and Exclusive. The rich fields (Types, Enum, Properties, Items, AdditionalProperties, Exclusive) are meaningful only for handler properties: the two flat call sites (kurel parameters, capability rendering) reject them at decode time, so unifying the type does not widen their accepted behavior."><meta itemprop=wordCount content="6987"><title>Property schemas and contract metadata :: Go Kure — Launcher</title><link href=/launcher/dev/css/auto-complete/auto-complete.min.css?1794485552 rel=stylesheet><script src=/launcher/dev/js/auto-complete/auto-complete.min.js?1794485552 defer></script><script src=/launcher/dev/js/search-lunr.min.js?1794485552 defer></script><script src=/launcher/dev/js/search.min.js?1794485552 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/launcher/dev/searchindex.en.js?1794485552"</script><script src=/launcher/dev/js/lunr/lunr.min.js?1794485552 defer></script><script src=/launcher/dev/js/lunr/lunr.stemmer.support.min.js?1794485552 defer></script><script src=/launcher/dev/js/lunr/lunr.multi.min.js?1794485552 defer></script><script src=/launcher/dev/js/lunr/lunr.en.min.js?1794485552 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794485552 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794485552 rel=stylesheet></noscript><link href=/launcher/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1794485552 rel=stylesheet><link href=/launcher/dev/css/theme.min.css?1794485552 rel=stylesheet><link href=/launcher/dev/css/format-html.min.css?1794485552 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/api-reference/oam/schemas-and-contract/index.html",window.relearn.relBasePath="../../..",window.relearn.relBaseUri="../../../../..",window.relearn.absBaseUri="https://www.gokure.dev/launcher/dev",window.relearn.version_js_url="/launcher/dev/versionindex.en.js?1794485552",window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-origin=/launcher/dev/api-reference/oam/schemas-and-contract/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#property-schemas>Property schemas</a><ul><li><a href=#what-an-explicit-null-means-on-the-emitted-path>What an explicit <code>null</code> means on the emitted path</a></li></ul></li><li><a href=#contract-metadata>Contract metadata</a><ul><li><a href=#lowering-targets-and-seal>Lowering targets and <code>Seal</code></a></li><li><a href=#the-no-handler-error>The &ldquo;no handler&rdquo; error</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/index.html><span itemprop=name>launcher</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/index.html><span itemprop=name>API Reference</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/oam/index.html><span itemprop=name>OAM Model</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Property schemas and contract metadata</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam/transform-and-lowering/index.html title="Transform, extension and lowering (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam/policy-and-capability/index.html title="Policy defaults and capability system (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable api-reference" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><h1 id=property-schemas-and-contract-metadata>Property schemas and contract metadata</h1><h2 id=property-schemas>Property schemas<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Handlers may implement <code>PropertySchemaProvider</code> (<code>PropertySchema() map[string]PropertySchema</code>)
+to declare a constrained schema for their user-facing properties. <code>PropertySchema</code> is launcher&rsquo;s
+single schema vocabulary — the same type also backs <code>kurel.yaml</code> parameters (<code>ParameterDecl</code>) and
+<code>CapabilityDefinition</code> rendering properties. It has <code>Type</code> (string/integer/boolean/number/array/object),
+<code>Types</code>, <code>Description</code>, <code>Required</code>, <code>Default</code>, <code>Enum</code>, nested <code>Properties</code>, <code>Items</code>, <code>AdditionalProperties</code>
+(default false; escape-hatch fields set it true), and <code>Exclusive</code>. The rich fields (<code>Types</code>, <code>Enum</code>, <code>Properties</code>, <code>Items</code>,
+<code>AdditionalProperties</code>, <code>Exclusive</code>) are meaningful only for handler properties: the two flat call sites (kurel
+parameters, capability rendering) reject them at decode time, so unifying the type does not widen
+their accepted behavior.</p><p>A kurel parameter&rsquo;s <code>Type</code> is <code>string</code>, <code>integer</code>, <code>boolean</code>, <code>array</code> or <code>object</code>
+(go-kure/launcher#421). <code>ResolveParameters</code> replaces a whole-value <code>${name}</code> for an <code>array</code> or
+<code>object</code> parameter with the value&rsquo;s YAML list or map. With no <code>items</code> or <code>properties</code> to declare,
+the parameter checks only that shape (its default too, and a string default is refused); the
+substituted value is checked by <code>ValidateAuthoredProperties</code> against the consuming handler&rsquo;s schema
+like any authored property. Such a parameter cannot be embedded in a larger string, in the template
+or in another parameter&rsquo;s string default.</p><p><code>Types</code> is the union idiom (go-kure/launcher#383): a leaf that accepts more than one scalar type
+lists them, and a value is accepted when any member&rsquo;s single <code>Type</code> accepts it — whatever order the
+members are listed in — normalised exactly as the first member, in declared order, that accepts it
+would (below). Members are two or more distinct scalar types (string, integer,
+number, boolean); <code>Type</code> and <code>Types</code> are mutually exclusive. A schema that sets both, or a malformed
+union, is a schema error reported as soon as a value reaches the leaf. Every Kubernetes
+<code>intstr.IntOrString</code> leaf — the rolling-update <code>maxUnavailable</code>/<code>maxSurge</code> knobs, the networkpolicy
+<code>port</code>, the <code>service</code> kind&rsquo;s <code>ports[].targetPort</code> — declares <code>integer</code>/<code>string</code>, and every <code>resource.Quantity</code> leaf (<code>cpu</code>, <code>memory</code>, a claim&rsquo;s
+<code>storage</code>) declares <code>string</code>/<code>number</code>, because their parsers take a fractional number too. <code>Type</code>
+stays empty on a union leaf, so a schema consumer that does not read <code>Types</code> sees an untyped leaf and
+keeps accepting every member. A completeness test (<code>pkg/cmd/kurel</code>) enforces that every built-in
+schema node declares exactly one of <code>Type</code> and <code>Types</code>. <code>Transformer.HandlerSchemas()</code> returns a <code>HandlerSchemaSet{ Components, Traits, Policies, Exclusive }</code>
+of every registered handler and lowering rule that declares one, so the downstream runtime&rsquo;s validator can check a
+component&rsquo;s, trait&rsquo;s or policy&rsquo;s properties before the handler is invoked. Built-in examples: the <code>configmap</code> trait and the
+<code>passthrough</code> component.</p><p><code>Exclusive</code> is the one-of idiom (go-kure/launcher#790): on an <code>object</code> node it lists groups of that
+object&rsquo;s <code>Properties</code> keys, <code>ExclusiveGroup{ Keys, Required }</code>, of which a value sets at most one, and
+exactly one when the group is <code>Required</code>. A key counts as set when it is present and not a null, as
+for <code>Required</code>. A handler&rsquo;s top level is a map with no node to carry the groups, so a handler or
+lowering rule declares them through the optional <code>ExclusivePropertiesProvider</code>
+(<code>ExclusiveProperties() []ExclusiveGroup</code>), and <code>HandlerSchemaSet.Exclusive</code> publishes them by
+position and type name. <code>Exclusive</code> is nil when no handler declares a top-level group, so a set
+without one marshals as it did before the field existed; the nested groups travel in the schemas
+themselves. A group&rsquo;s <code>Required</code> is relaxed exactly where field <code>Required</code> is: an authored document&rsquo;s
+top level is held to at most one only, and a capability-bound trait&rsquo;s nested groups are checked on
+the properties merged with the rendering, where a merge that sets two keys of a group is refused
+naming the capability. A component&rsquo;s capability defaults (<code>ComponentCapabilityDefaults</code>) are held to
+the authored bound once merged: a default that fills one key of a top-level group beside an authored
+key of it is refused, naming the capability. Emitted properties are held to both bounds at every level. A group of fewer
+than two keys, a key the object does not declare, a key in two groups, a <code>Required</code> key, or groups
+on a non-object node is a schema error. Property validation always refuses it, whatever the
+document supplies: <code>ValidateAuthoredProperties*</code> and the check of emitted properties hold the whole
+schema, objects and array items the document leaves out included. So does <code>Transform</code> wherever a
+capability rendering may supply values the author did not write (a trait it applies or lowers, a
+component&rsquo;s capability defaults); a caller that skips <code>ValidateAuthoredProperties*</code> gets no other
+schema check, as for every other property rule. It is reported before the document&rsquo;s errors about that object&rsquo;s keys
+(<code>Required</code> and group membership); a reserved-property or value-type error of the document may be
+reported first. A consumer
+that does not read <code>Exclusive</code> sees each key as the optional key it is declared as.
+<code>CheckSchemaNodeGroups(field, path)</code> applies those five rules to one declared node and does not
+recurse, for a caller that walks a schema itself and spells the path itself. <code>model.Load</code> calls it
+for each node of the input schemas it visits, so a malformed group in a model is refused at load.</p><p><code>Description</code> is optional (<code>json:"description,omitempty"</code>) but every built-in property populates it —
+including nested object fields and array item schemas at every depth — so the downstream runtime can surface prose in
+its generated Handler API Reference. A completeness test (<code>pkg/cmd/kurel</code>) enforces that no built-in
+schema node is left without a description.</p><p>A schema field may also be marked <code>PlatformReserved</code>: its value may arrive only via
+<code>ClusterProfile</code> capability rendering, never authored inline. <code>enforcePlatformReserved</code>
+(<code>property_validate.go</code>) rejects an authored value for such a field — including an
+explicit <code>null</code> — before capability rendering is merged in, wrapping
+<code>ErrPlatformReserved</code>; it walks declared nested object fields and the items of a
+declared array of objects too (named <code>properties.items[0]</code>), so a reservation on an
+inner field is enforced wherever it is declared, not only at the top level
+(go-kure/launcher#635).
+<code>createApplications</code> and <code>applyTraits</code> (<code>transform.go</code>) run this check on the authored
+path, and the lowering engine runs it on a <code>TraitLoweringRule</code>&rsquo;s input trait before
+capability rendering is resolved into it (see <a href=/launcher/dev/api-reference/oam/transform-and-lowering/index.html#lowering>Lowering</a>). A value a lowering rule
+recorded with <code>Component.RenderReserved</code> or <code>Trait.RenderReserved</code> is exempt while the
+key still holds it (see <a href=/launcher/dev/api-reference/oam/transform-and-lowering/index.html#lowering>Lowering</a>).</p><p>A schema field may also name a Kubernetes feature gate in <code>Gate</code> (published as <code>gate</code>):
+the field needs that gate on the cluster. A <code>ClusterProfile</code> that states
+<code>spec.kubernetesVersion</code> below the release where the gate is on by default has an authored
+value refused by <code>ValidateAuthoredPropertiesForTarget</code>, naming the property&rsquo;s path, the gate,
+that release and the profile&rsquo;s version; with no version nothing is checked. The gates are
+rows of one table in <code>featuregates.go</code> (name, first release with Default true, read from the
+Kubernetes feature gates reference), held to the schemas by tests in both directions: a <code>Gate</code>
+no row names, or a row no schema uses, fails (go-kure/launcher#1183). Only Kubernetes core
+properties of the built-in components carry one today: <code>EnvFiles</code>
+(<code>env[].valueFrom.fileKeyRef</code>), <code>ContainerRestartRules</code> (<code>restartPolicyRules</code>: an init
+container&rsquo;s on the workload kinds, any container&rsquo;s on the raw-PodSpec kinds below), <code>PodLevelResources</code> (<code>podResources</code>) and <code>HostnameOverride</code>
+(<code>hostnameOverride</code>). The check reads the declared schema, so it stops at an open object
+(<code>AdditionalProperties</code> with no <code>Properties</code>). The raw-PodSpec kinds (<code>pod</code> and the kinds
+that take a pod template, and the <code>template</code> of <code>cnpg-pooler</code>) leave their containers and template spec open, and their open
+nodes carry <code>GatedPaths</code> (published as <code>gatedPaths</code>) instead: gate-relative paths
+(<code>env[].valueFrom.fileKeyRef</code>, with <code>[]</code> after an array key) to the gate the field needs,
+read by the gate check alone, so property validation and what a document is accepted as do
+not change (go-kure/launcher#1245). A consumer that predates <code>gatedPaths</code> ignores it.
+The gate check reads a value as the writer writes it. A property value built in Go can
+hold a struct from the Kubernetes API types (a <code>corev1.PodSpec</code> in a template, a
+<code>[]corev1.EnvVar</code>) where a decoded document holds a map. The check reads such a struct, a
+pointer to one, or a slice of either, through its JSON form, so it is held to the same
+gates as the decoded document. A struct that encodes to null is absent, as a decoded null
+is. A struct that does not encode as JSON is refused, with its path, where a gate
+below it is off at the target (go-kure/launcher#1320). The read comes before the null
+check, so a nil slice of a named type whose own <code>MarshalJSON</code> writes an array is present,
+and a pointer type that is its own element type (<code>type P *P</code>) is read through its JSON
+form like any other (go-kure/launcher#1450).</p><p>A gate may also cover single values of an enum property: <code>ValueGates</code> (published as
+<code>valueGates</code>) maps an <code>Enum</code> value to the gate that value alone needs, and the property is
+accepted at every version for its other values. An authored value listed there is refused
+below the gate&rsquo;s release with the same fields plus the value
+(<code>value "Never" requires the Kubernetes feature gate ContainerRestartRules, ...</code>). A key
+that is not an <code>Enum</code> value, or a gate no row names, fails the schema tests. Like <code>Gate</code>,
+the key is rejected at the two flat call sites, so it is absent from their allow-sets
+(go-kure/launcher#1230). Two properties carry it today: an init container&rsquo;s
+<code>restartPolicy</code> (<code>Never</code> and <code>OnFailure</code>, <code>ContainerRestartRules</code>) and <code>service</code>&rsquo;s
+<code>trafficDistribution</code> (<code>PreferSameZone</code> and <code>PreferSameNode</code>, <code>PreferSameTrafficDistribution</code>).
+<code>GatedPaths</code> names a field, not a value. A path that gates values sits in <code>ValueGatedPaths</code>
+(published as <code>valueGatedPaths</code>): a gate-relative path maps to a map from a value to its
+gate, and the check walks the path as it walks <code>GatedPaths</code>. The raw-PodSpec kinds use it
+for the <code>restartPolicy</code> of an init container, from the same table as the shorthand
+(<code>Never</code> and <code>OnFailure</code>, <code>ContainerRestartRules</code>). Their <code>restartPolicy</code> on a regular
+container is a plain <code>GatedPaths</code> entry, because Kubernetes forbids the field there with
+the gate off, <code>Always</code> included. A null, a value that is not a string and a string the table
+does not name use no gate. Like <code>Gate</code>, the key is rejected at the two flat call sites
+(go-kure/launcher#1330).</p><p>Separately, <code>validateProperties</code> (<code>property_validate.go</code>) checks an EMITTED
+component/trait/policy&rsquo;s properties against its TARGET handler&rsquo;s declared schema —
+enforcing <code>Required</code>, <code>Type</code>/<code>Types</code>, <code>Enum</code>, and nested <code>Properties</code>/<code>Items</code>/
+<code>AdditionalProperties</code> — immediately after a lowering rule returns it, so a rule
+cannot silently produce properties its own target handler would reject.</p><p>Both this check and the authored one below write a normalised value back where the
+handler&rsquo;s reader would not accept what was supplied: a typed Go collection becomes
+<code>[]any</code>/<code>map[string]any</code>; a <code>string</code>, <code>boolean</code> or <code>number</code> value of a named Go type
+(<code>type Mode string</code>) becomes its predeclared type; and an <code>integer</code> value of kind
+<code>int8</code>, <code>int16</code> or any unsigned kind, or of any named integer type
+(<code>type Replicas int32</code>), becomes <code>int</code> — a value outside the <code>int</code> range is rejected
+instead. Values already of type <code>int</code>, <code>int32</code>, <code>int64</code> or <code>float64</code> are left as they
+are, because some readers accept <code>int</code> but not <code>int64</code>; a named integer type becomes
+<code>int</code> rather than its underlying type for the same reason. A <code>Types</code> union leaf is
+rewritten by whichever member the value matched. A property whose schema declares
+neither <code>Type</code> nor <code>Types</code>, or a key an open object leaves undeclared, is not rewritten.</p><p><code>ValidateAuthoredProperties</code> (<code>property_validate_authored.go</code>) is that check&rsquo;s
+authored-path counterpart, and closes go-kure/launcher#408. Parsing is strict
+(<code>KnownFields(true)</code>) only down to the envelope: <code>Component.Properties</code>,
+<code>Trait.Properties</code> and <code>ApplicationPolicy.Properties</code> are each <code>map[string]any</code>, so
+before this every handler read the keys it knew and silently dropped the rest — a
+misspelled or stale property built successfully and produced nothing. The check walks
+each authored component and its traits in document order, looks up the same schema
+<code>validateProperties</code> would (terminal handler first, then a <code>ComponentLoweringRule</code> /
+<code>TraitLoweringRule</code> claiming the type), rejects any key the schema does not declare,
+and checks the shape of every key it does. <code>kurel build</code> calls it immediately after
+parsing — and, in package mode, necessarily <em>after</em> <code>ResolveParameters</code>, because a
+<code>${...}</code> placeholder is a bare string until substituted.</p><p><strong>A reason on a refused key.</strong> The refusal of an undeclared <em>top-level</em> key can
+carry the reason the type has for it. A component handler, a component lowering
+rule, a trait handler or a trait lowering rule that has the method
+<code>UnsupportedFieldHint(key string) string</code> is asked for the refused key, and a
+non-empty answer is appended to the refusal after <code>"; "</code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><pre tabindex=0><code>component &#34;batch&#34; (type &#34;job&#34;): properties: unsupported field &#34;scheduling&#34; (allowed: …); scheduling: not read by this component — alpha upstream, behind the WorkloadWithJob feature gate</code></pre></div><p>The built-in hand-parsed kinds answer with the reason they refuse a field of the
+Kubernetes type they project, <code>webservice</code> and <code>worker</code> with their <code>deployment</code>&rsquo;s,
+and the <code>pvc</code> trait with the <code>persistentvolumeclaim</code> kind&rsquo;s
+(<code>pkg/oam/builtin/components/README.md</code>, &ldquo;Upstream fields a hand-parsed kind does
+not read&rdquo;); <code>helmchart</code> and <code>helmrelease</code> point a removed key to its replacement,
+and <code>postgresql</code> a key its <code>backup</code> replaced (<code>objectStore</code>, <code>objectStoreObjectName</code>)
+to where it went (go-kure/launcher#1001).
+An empty answer adds nothing. The hint was asked of a terminal component
+handler alone before go-kure/launcher#790; the three other positions are new.</p><p>A key refused <em>below</em> the top level, inside an object the type declares, is
+never passed to <code>UnsupportedFieldHint</code>, so a hint written for a top-level key is
+not given for a nested key of the same name. At the same four positions, the
+optional method <code>NestedUnsupportedFieldHint(parents []string, key string) string</code>
+is asked instead. <code>parents</code> are the declared keys from the top level down to the
+object that refuses the key, list items unnamed: <code>initContainers[0].probes</code> is
+asked as <code>["initContainers"]</code>, <code>"probes"</code>. A non-empty answer is appended the same
+way:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><pre tabindex=0><code>component &#34;web&#34; (type &#34;webservice&#34;): properties.affinity: unsupported field &#34;nodeAffinity&#34; (allowed: …); affinity.nodeAffinity: not read — …</code></pre></div><p>The built-in workload kinds, <code>webservice</code> and <code>worker</code> answer with the reason
+their parser gives for the key at that position (the components README, &ldquo;Below
+the top level&rdquo;), and <code>postgresql</code> names the replacement of a key <code>backup</code> no longer
+takes (<code>destinationPath</code>, <code>endpointURL</code>, <code>secretName</code>) and the reason <code>backup.objectStore</code> refuses a key
+(<code>serverName</code>, <code>azureCredentials</code>, <code>googleCredentials</code>; go-kure/launcher#1001). Before go-kure/launcher#790 a nested refusal carried no hint.
+The refusal text itself is unchanged at every depth.</p><p><strong>Where a refusal is, as data.</strong> Every refusal the property validators make is a
+<code>*PropertyError</code> (go-kure/launcher#1466): <code>errors.As</code> finds it in the error the call
+returns, a hinted refusal included, and <code>Error()</code> is the text above, byte for byte.
+The one exception is the platform-reservation check described below: its refusal
+wraps <code>ErrPlatformReserved</code>, which <code>errors.Is</code> finds, and it names its location in
+its text only. A caller that maps a refusal to a reply of its own reads these fields
+and parses no text:</p><table><thead><tr><th>Field</th><th>Holds</th></tr></thead><tbody><tr><td><code>Kind</code></td><td><code>unsupported-field</code>, <code>required</code>, <code>exclusive</code>, <code>type</code>, <code>enum</code>, <code>range</code>, <code>null-element</code>, or <code>schema</code> (the handler&rsquo;s own schema is malformed, so the document is not at fault)</td></tr><tr><td><code>Position</code></td><td><code>component</code>, <code>trait</code> or <code>policy</code>; empty where the refusal was made on no authored document (a schema, a property a rule emitted)</td></tr><tr><td><code>Component</code>, <code>Trait</code>, <code>Policy</code></td><td>the component&rsquo;s name (for a trait, the one it sits on), the trait&rsquo;s type, the policy&rsquo;s name; empty where they do not apply</td></tr><tr><td><code>Field</code></td><td>the location below <code>properties</code>: dotted keys, array elements as <code>[n]</code>, as in <code>probes.httpGet[0].port</code>. For <code>unsupported-field</code> and <code>required</code> it is the key itself; for <code>exclusive</code> the object holding the group, empty at the top level; for <code>schema</code> the node whose declaration is wrong</td></tr></tbody></table><div class="highlight actionbar-wrapper wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#66d9ef>var</span> <span style=color:#a6e22e>pe</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>oam</span>.<span style=color:#a6e22e>PropertyError</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#a6e22e>errors</span>.<span style=color:#a6e22e>As</span>(<span style=color:#a6e22e>err</span>, <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>pe</span>) <span style=color:#f92672>&amp;&amp;</span> <span style=color:#a6e22e>pe</span>.<span style=color:#a6e22e>Kind</span> <span style=color:#f92672>==</span> <span style=color:#a6e22e>oam</span>.<span style=color:#a6e22e>PropertyErrorRequired</span> {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// pe.Component, pe.Trait and pe.Field name the missing key</span>
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><p><code>Field</code> is the path as the refusal builds it, so a key that itself holds a dot
+reads the same as a nested one (<code>a.b</code> is one key or two); the kind and the
+position are exact either way. A refusal that names a document position is made
+by the three boundaries of this check; the same refusal made by <code>Transform</code>&rsquo;s
+emission checks carries a kind and no position. The exported helper
+<code>CheckSchemaNodeGroups</code> returns the <code>schema</code> kind too.</p><p>Before any of that, it runs <code>Transform</code>&rsquo;s own reservation check
+(<code>enforcePlatformReserved</code>) over the document, with the same schemas and the same
+error text <code>Transform</code> would report for it. It has to come first: validation drops an
+explicit <code>null</code> under a nested declared object, so a reserved key authored as
+<code>config: {locked: null}</code> would otherwise be gone before <code>Transform</code> could refuse it
+(go-kure/launcher#635).</p><p>The shape check is also the only place an authored scalar&rsquo;s <em>type</em> is enforced for
+every property (go-kure/launcher#325). Many built-in handlers read string properties
+with a comma-ok assertion (<code>cfg.Delivery, _ = props["delivery"].(string)</code>), so on
+the handler alone a <code>delivery: 123</code> becomes <code>""</code> and is defaulted as though it were
+absent. Type-checking once here, against the schema each handler already declares,
+is what rejects it — not a per-field check in each handler. A caller that drives
+<code>Transform</code> directly must therefore call <code>ValidateAuthoredPropertiesWithCapabilities</code>
+first (after any parameter substitution, with the bindings <code>EvaluateProfile</code>
+returned) to get the same guarantee <code>kurel build</code> gives. <code>ValidateAuthoredProperties</code>
+is the same check for a caller with no profile.</p><p>The validators return the document they validated, together with the error:
+<code>validated, err := tr.ValidateAuthoredProperties(app)</code>. It is a copy of <code>app</code> whose
+property trees carry the result of the check: under the schema-declared fields, an
+explicit nested <code>null</code> is stripped, and a named scalar or a typed collection is
+rewritten to the plain Go shape a handler reads. A key accepted through
+<code>AdditionalProperties</code> is left as authored, as before. The <code>app</code> argument is never
+edited, for a plain type name and for a declared type identity alike
+(go-kure/launcher#1282). <code>Transform</code> strips and normalizes
+nothing itself, so <strong><code>Transform</code> the document the validator returned</strong>, not <code>app</code>: a
+nested <code>null</code> in <code>app</code> still reaches the handler as <code>nil</code>. On an error the returned
+document is nil and <code>app</code> is as it was authored. A nil <code>app</code> returns nil and no error.</p><p>Authored policies are checked the same way, after every component, in document order:
+against the <code>PolicyHandler</code> registered for the type, else the <code>PolicyLoweringRule</code>
+claiming it. The built-in policy handlers each declare a <code>PropertySchema</code>, so a
+misspelt <code>placement</code> key such as <code>teir</code> is a build error rather than a
+setting the handler never reads.</p><p>Three positions are exempt, each because there is no schema to check against: a
+component or trait type no handler and no lowering rule claims (rejected separately
+by the type allowlists and by <code>validateSettled</code>); a custom trait type from a
+<code>CapabilityDefinition</code>, which declares that the type <em>exists</em> but not what properties
+it accepts; and a policy type nothing is registered for, which the transform rejects
+with <code>no handler for policy type</code>.</p><p><code>Required</code> is enforced at the top level too, as written, and a null counts as absent
+(go-kure/launcher#1463): <code>component "web" (type "webservice"): properties: "image" is required</code>. Two cases are left to the platform and are not refused here. A trait a
+capability binding matches is checked on the merged properties, as described below, because
+<code>ClusterProfile</code> capability rendering merges into its top-level property map after this
+runs. A component key that its handler lists in <code>ComponentCapabilityDefaults</code> is filled by
+the capability, so its absence is accepted.</p><p>Nested <code>Required</code>, inside an object the author did write, is enforced
+(go-kure/launcher#765), and top-level <code>Required</code> on a matched trait follows the same
+rule:</p><ul><li><code>ValidateAuthoredProperties</code> knows no profile, so it checks nested <code>Required</code> as
+written, on every trait.</li><li><code>ValidateAuthoredPropertiesWithCapabilities(app, capabilities)</code> does the same for a
+trait no binding matches. For a trait a binding matches, it checks the trait&rsquo;s
+properties as the rendering merges into them, recursively
+(go-kure/launcher#750), so a required key the rendering supplies is not refused:
+a partial override such as <code>issuerRef: {kind: Issuer}</code> over a rendered
+<code>issuerRef: {name: ca}</code> is accepted. A missing key is then reported as <code>"name" is required; neither the trait nor capability "certificate"'s rendering sets it</code>. A
+required key inside an array element is always checked as written, because a
+rendering never merges into a list.</li><li><code>ValidateAuthoredPropertiesForTarget(app, capabilities, target)</code> is the capability
+variant plus the feature-gate check (<code>PropertySchema.Gate</code>, above) for a cluster at
+<code>target</code>, a <code>*KubernetesVersion</code> (<code>ClusterProfileSpec.TargetVersion</code> returns the
+profile&rsquo;s). Everything the capability variant refuses is refused first. A nil <code>target</code>
+is an unknown version, and the result is the capability variant&rsquo;s, the validated copy
+included. <code>Transform</code> does not
+read the version: the check only refuses, so an accepted document renders the same at
+any version. <code>ParseKubernetesVersion</code> takes <code>1.35</code>, <code>v1.35</code> and <code>v1.35.2</code> (patch ignored)
+and refuses anything else, a major other than 1 included.</li><li><code>Transform</code> makes the same check itself on every trait&rsquo;s merged properties, at both
+merge sites (trait dispatch and the lowering fixpoint), whether or not a binding
+matched. This is new for a caller that runs <code>Transform</code> without the validator: a
+nested required key missing from both the trait and the rendering used to reach the
+handler and is now refused. <code>kurel build</code> already ran the validator, so its output
+is unchanged.</li></ul><p>The Required keys inside an object are checked only when that object is present after
+the merge. An optional object property that is left out entirely is not checked, as at
+the top level. An object property that is itself Required and is left out is refused as
+a missing key, like any other.</p><p>One property is legal on <strong>every</strong> trait regardless of what its handler declares:
+<code>scope</code>. It is read by the transform engine rather than by a handler —
+<code>buildCapabilityKey</code> builds the <code>"&lt;traitType>.&lt;scope>"</code> capability key for every trait
+type, so a <code>pvc</code> or <code>certificate</code> trait can select a scoped <code>ClusterProfile</code> binding
+even though neither handler declares such a property. <code>expose</code>, <code>ingress</code> and
+<code>httproute</code> do declare it, but for an unrelated reason (sub-application naming), and
+their own declaration wins over the engine default. Engine-owned keys are checked even
+on a trait whose handler or lowering rule declares no <code>PropertySchema</code> at all (for
+example a custom handler registered through <code>RegisterTrait</code>): a non-string <code>scope</code>
+there is rejected, while the handler&rsquo;s own keys stay unchecked because nothing
+declares them. A handler that refuses keys it does not read (for example
+<code>topology-spread</code>, which takes none) asks <code>IsEngineTraitProperty</code> and lets these
+through. It cannot tell an authored <code>scope</code> from one a capability rendering merged
+in, and a rendered one selects nothing (the binding was already chosen), so such a
+handler also refuses rendering keys in <code>ValidateAndApplyDefaults</code>, at
+<code>EvaluateProfile</code>. Add to <code>engineTraitProperties</code> if
+another engine-read property is ever introduced; the merge never mutates the
+handler&rsquo;s returned schema, so <code>HandlerSchemas</code> still advertises only what each handler
+actually declares.</p><p><code>validateProperties</code>&rsquo;s null check (<code>isNullValue</code>) treats a typed-nil pointer,
+slice, or map — not just a bare <code>nil</code> interface — as <code>null</code>: a Go type assertion
+alone can&rsquo;t tell an uninitialized slice/map apart from a validly-typed empty
+collection, so a lowering rule that emits an unset (rather than empty) collection
+field is still caught.</p><p><code>IsNullValue</code> is the exported form of that check, and with it the contract itself:
+<strong>a null value is absent, not present-and-empty.</strong> The predicate is nil-ness, not
+serialization, and that distinction is load-bearing rather than pedantic: whether
+the two shapes serialize differently depends on the ENCODER. <code>encoding/json</code> (and
+<code>sigs.k8s.io/yaml</code>, which routes through it) writes <code>null</code> for a nil map or slice
+and <code>{}</code>/<code>[]</code> for an allocated empty one, but <code>gopkg.in/yaml.v3</code> — the YAML library
+this package parses with — renders both as <code>{}</code>/<code>[]</code>, because its encoder
+dispatches on <code>reflect.Kind</code>. Keying the contract on nil-ness rather than on
+rendered output is what makes it hold under either. The predicate parts company
+with every encoder only on values no document round-trips (a nil channel is
+reported null though <code>encoding/json</code> cannot marshal it at all).</p><p>It exists for parsers outside this package — handler and trait property readers,
+and out-of-tree lowering rules — that must classify a null the same way the
+validator does. Use it rather than <code>value == nil</code>: a typed nil is a non-nil
+interface holding a nil value, so <code>== nil</code> is false and a <code>.(map[string]any)</code>
+assertion on it succeeds with <code>ok=true</code> and a nil map, making the key read as an
+authored empty collection. Where empty and absent mean different things that
+difference is a behaviour change, not a cosmetic one. The standing example is a
+<code>metav1.LabelSelector</code> in a <code>NetworkPolicy</code> peer: an empty one matches everything,
+while a nil one applies no constraint on that axis — which is <em>not</em> the same as
+matching nothing, since what the peer then selects depends on the sibling fields it
+still has (<code>k8s.io/api</code> <code>networking/v1/types.go:199-222</code>).</p><p><code>IntegerValue</code> is the matching reader for integers. It returns a property value as
+an <code>int64</code> when it is a whole number of any Go integer kind, named or not, or a
+finite integral float. It refuses a fraction, NaN/±Inf, a non-number, an unsigned
+value above <code>math.MaxInt64</code>, and a float outside −2^63 ≤ value &lt; 2^63 (−2^63 itself
+fits <code>int64</code> and reads; 2^63 does not). The builtin handlers
+read every integer property through it, and each then checks the result against its
+own target (a port is 1–65535, a replica count fits <code>int32</code>), refusing a value that
+does not fit rather than converting it. So a plain <code>int32</code> or <code>int64</code> from a lowering
+rule or a Go caller reads the same as the <code>int</code> the YAML decoder produces, and a
+value that would only fit after wrapping, like 2^32+80 for a port, is an error
+instead of port 80. An out-of-tree handler should read integers through it for the
+same reason. <code>IntegerInRange(value, lo, hi)</code> adds the target check and names the true
+refusal reason, so an overflow like <code>1e20</code> never reads as a type error; a capability
+<code>integer</code> property is checked with it too.</p><h3 id=what-an-explicit-null-means-on-the-emitted-path>What an explicit <code>null</code> means on the emitted path<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>The contract, stated once because &ldquo;null&rdquo; has several readers here and aligning
+them one at a time is what made this take six rounds:</p><blockquote><p>A value that serializes to JSON null is absent, at every depth, on every path;
+a null is never a member of any <code>Items</code> type, so a null array element is a type
+error; reservation is about the KEY being written.</p></blockquote><p>Applied in two places, because a key and an array element are not the same kind
+of thing:</p><ul><li><p><strong>A declared, optional object key holding a null is DELETED</strong> before its value
+is checked. <code>Required</code> already classifies a null as absent, so materialising it
+as a present key contradicted the classification the file had already made — and
+a handler parser decides presence with a bare two-value map lookup, so it saw a
+key the validator had decided was not there.</p></li><li><p><strong>A null ARRAY ELEMENT is rejected</strong>, by an explicit guard rather than by the
+type check. An element cannot be absent — it is present by being in the list —
+so there is nothing to normalise it to, and dropping it would renumber its
+siblings under a schema that may constrain length and order. The guard is
+necessary rather than decorative: a <em>typed</em> nil (<code>map[string]any(nil)</code>,
+<code>[]any(nil)</code>, reachable from a rule written in Go) satisfies the plain type
+assertion the object/array coercers try first, and iterating the resulting empty
+collection rejects nothing, so the type check alone accepted it. An <code>Items</code>
+schema with no declared type checks nothing at all — and so does <em>no</em> <code>Items</code>
+schema, which is why the guard runs before the <code>Items</code> walk rather than inside
+it: declaring no element schema says nothing about the members, but it does not
+license the one member no <code>Items</code> type could ever have matched.</p></li><li><p><strong>An <code>Enum</code> member holding a null where the value&rsquo;s null would be stripped or
+rejected is refused.</strong> Members are compared against a value that has already been
+normalised, while the declared members are not, so such a member could never
+match anything that reaches the comparison. Refusing it names the schema defect
+instead of leaving an <code>Enum</code> that silently never matches.</p><p>The member is walked alongside its schema, because normalisation does not reach
+everywhere: a key an object leaves to <code>AdditionalProperties: true</code>, anything inside
+an array element with no <code>Items</code> schema, and anything below a schema with no
+declared <code>Type</code> pass through as written. A value can hold a null there, so a member
+holding the same null matches it and is accepted — <code>{opaque: null}</code> against
+<code>Enum: [{opaque: null}]</code> on an open object. A member&rsquo;s null compares equal only to
+a null value, whatever either side&rsquo;s Go type, and never to an empty collection. The
+rule is one-sided: where only the <em>value</em> holds a typed nil under such a key and the
+member holds an empty <code>[]</code>/<code>{}</code>, the two still match, as they always have — an
+undeclared key is outside every normalisation rule, so this does not start
+distinguishing a typed nil from an empty collection there. A member that cannot match
+for another reason — the wrong shape for the schema&rsquo;s type, or a key a closed
+object refuses — is still refused for any null it holds, as before.</p><p>Refused per <em>member</em>, not per schema type. Refusing every <code>Enum</code> declared on an
+array or object type is simpler to state and was the first shape of this rule,
+but it also refuses the null-free compound enums that match perfectly well —
+and <code>PropertySchema</code> is exported, so a handler outside this repo would have seen
+a schema this validator used to accept start failing for a reason that does not
+apply to it. No built-in schema declares an <code>Enum</code> on a non-scalar type today,
+but nothing asserts that as a rule and this check does not depend on it. What is
+asserted is the rule above: <code>TestBuiltinHandlerSchemaEnumMembersHoldNoNull</code>
+(<code>pkg/cmd/kurel</code>) walks every schema that ships for a member holding a null,
+because the runtime arm only fires once a document validates against the property
+carrying the <code>Enum</code>.</p><p>That walk is exported as <code>CheckEnumMembersHoldNoNull(schema PropertySchema) error</code>,
+so a handler outside this package can assert the same of its own schemas. It
+reports every <code>Enum</code> member — on the schema and on every schema nested under its
+<code>Properties</code> (in sorted key order) or <code>Items</code> — that holds a null anywhere, named
+by schema path and member index, and returns <code>nil</code> when none does. It is
+deliberately <strong>stricter</strong> than the runtime arm: it does not read the schema around
+a member, so it also reports the matchable nulls described above (under an
+<code>AdditionalProperties</code> key, inside an array element with no <code>Items</code>, below a schema
+with no <code>Type</code>). A schema it passes is never refused by the runtime&rsquo;s null rule; one
+it fails may still validate. A member nesting past the validator&rsquo;s depth bound
+counts as holding a null, as it does at runtime.</p></li></ul><p>Two things this deliberately does not do:</p><ul><li><strong>It makes no exception for <code>PlatformReserved</code> keys.</strong> Reservation
+(<code>enforcePlatformReserved</code>) is a rule about what a user <em>wrote</em>. On the authored
+surface the two rules never meet — it runs upstream of any emission validation, and
+<code>ValidateAuthoredProperties</code> runs it before its own strip —
+so reservation keeps treating an explicit null as <em>present</em> while the strip
+treats one as absent. Exempting reserved keys here would not have preserved the
+authored rule; it would only have handed a reserved null to the type check,
+producing a loud rejection with the wrong reason. The <strong>component</strong> and <strong>trait</strong>
+surfaces keep the same separation: an authored component or trait is checked
+before any rule can rewrite it. One a rule emitted from checked input — whose
+properties are the ones the strip touches — is exempt from reservation; the output
+of a rule whose input was not checked stays authored, and its components and
+traits are checked as they are emitted, before the strip (see the rule-output
+contract in <a href=/launcher/dev/api-reference/oam/transform-and-lowering/index.html#lowering>Lowering</a>).</li><li><strong>A key the schema does not declare is untouched</strong>, including inside an object
+that sets <code>AdditionalProperties</code>. Nothing describes such a value, so nothing
+here can normalise it, and a null inside an opaque object still reaches the
+handler parser. This is the same horizon as validation itself.</li></ul><p>Scope, because this contract is not settled repository-wide: <code>ValidateAuthoredProperties</code>
+(above) <em>does</em> reach <code>validatePropertyValue</code> — it calls it directly for every
+authored key, with no strip of its own first. That is why
+<code>validatePropertyValue</code> carries its own top-level null check
+(<code>if isNullValue(value) { return value, nil }</code>) rather than relying entirely on
+<code>validateObjectProperties</code>&rsquo;s strip: on the emitted path the strip runs first and
+the check is usually moot, but on the authored path it is what makes an
+explicit null under an optional field read as absence instead of a type error.
+What the contract does <em>not</em> reach is any path that skips both validators
+entirely — a component a lowering rule constructs directly in Go, or a
+built-in parser&rsquo;s own field read (<code>pkg/oam/builtin/components</code>) — which is why
+those parsers keep their explicit-null guards regardless. Aligning that
+parser-level layer with this contract is a separate, lower-level concern,
+tracked as <code>go-kure/launcher#394</code>, and is not closed by this.</p><p>Two surfaces used to be named here as sitting outside the contract; both are now
+fixed, so the note is historical rather than a live caveat:</p><ul><li><strong>Capability rendering</strong> (<code>checkCapabilityValueType</code>, <code>capability.go</code>) is still
+outside the contract by the scope sentence — it is a parallel implementation,
+not a call-through to <code>validatePropertyValue</code> — but it now agrees with the
+contract&rsquo;s own behaviour: a present null reads as absence, matching the handler
+surface, and the type switch has a <code>default</code> arm. See <a href=/launcher/dev/api-reference/oam/policy-and-capability/index.html#capability-rendering-types-and-nulls>Capability rendering:
+types and nulls</a> for the current, authoritative description. Fixed as
+<code>go-kure/launcher#431</code>.</li><li><strong>The networkpolicy peer parser</strong> used to read a <em>typed</em> nil <code>namespaceSelector</code>
+differently from an untyped one. Fixed as <code>go-kure/launcher#430</code> — both parsers
+now route their presence check through <code>oam.IsNullValue</code>&rsquo;s reflect-based
+classification, so a typed nil reads as omission on every path that reaches it,
+the same as an untyped one.</li></ul><h2 id=contract-metadata>Contract metadata<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Handlers and lowering rules may implement <code>ContractDescriber</code> (<code>ContractMetadata() ContractMetadata</code>) to declare registration metadata about the contract they
+implement: <code>Family</code>, <code>Version</code>, <code>RequiredCapabilityKeys</code> (the <code>ClusterProfile</code>
+capability keys an entity of this contract needs), <code>Prerequisites</code> and <code>Readiness</code> (see
+below), <code>Deprecated</code>, and <code>DeprecationMessage</code>. It is primarily a discovery/documentation surface — the engine
+does not enforce any of these fields (<code>CapabilityAware.CapabilityRequired</code> is what the
+engine actually enforces). Two fields are read. A lowering rule&rsquo;s <code>Version</code> composes
+the <code>"@&lt;version>"</code> suffix on <code>Origin.Rule</code> (see below). <code>Deprecated</code> turns every
+authored component or trait of that type into one warning through the Transformer&rsquo;s
+warning handler (<code>SetWarningHandler</code>), in document order: <code>component "&lt;name>": type &lt;t> is deprecated[: &lt;DeprecationMessage>]</code>, or <code>trait type &lt;t></code> for a trait. Both
+<code>Transform</code> and <code>TransformWithPolicy</code> warn; <code>LowerRaws</code> does not, because its output
+re-enters <code>Transform</code> as authored and warns there. The check reads the authored
+document before lowering, so a component a rule synthesizes never warns. A
+deprecation is never an error and never changes the output. Nothing else here is
+read or enforced. Consumers otherwise: schema publication, artifact
+provenance in a downstream consumer, and deprecation tooling. Metadata rides the
+existing registration mechanism; there is no separate contract registry.</p><p><code>Transformer.HandlerContracts()</code> returns a <code>HandlerContractSet{ Components, Traits, Policies }</code> of every registered component, trait and policy handler, and every
+component, trait and policy lowering rule, that implements <code>ContractDescriber</code> — the
+same six registries <code>HandlerSchemas()</code> covers (componentHandlers, traitHandlers,
+policyHandlers and the three lowering-rule registries), for the identical reason: a
+type reachable only through a lowering rule must still publish its metadata.
+<strong>Breaking library change</strong> (go-kure/launcher#789): <code>HandlerContractSet</code> gained the
+<code>Policies</code> field, so an unkeyed composite literal of it no longer compiles.</p><p>A lowering rule that implements <code>ContractDescriber</code> also has its <code>Version</code> folded
+into the lowering-rule identity recorded on <code>Origin.Rule</code> (see <a href=/launcher/dev/api-reference/oam/transform-and-lowering/index.html#lowering>Lowering</a>), e.g.
+<code>"trait/expose@v1alpha1"</code>.</p><p>Every built-in handler and lowering rule implements <code>ContractDescriber</code>
+(go-kure/launcher#789). The scheme: <code>Family</code> is the type name the built-in is
+registered under (<code>webservice</code>, <code>expose</code>, <code>placement</code>), <code>Version</code> is
+<code>builtin.ContractVersion</code> (<code>v1alpha1</code>, one value for all of them), and
+<code>RequiredCapabilityKeys</code> is the type name for a built-in whose
+<code>CapabilityAware.CapabilityRequired</code> returns <code>true</code> (<code>certificate</code>, <code>expose</code>) and
+empty otherwise. No built-in is deprecated. A built-in rule&rsquo;s identity therefore
+reads <code>component/webservice@v1alpha1</code>, on <code>Origin.Rule</code>, on <code>LoweringStep.Rule</code> and
+in a <code>LoweringError</code> chain, where it read <code>component/webservice</code>.</p><p><code>Prerequisites</code> (go-kure/launcher#1027) lists what must be in place in the target
+cluster, or beside it, for the output to work once applied: an operator, a CRD, an
+object the output names and does not create. Each <code>ContractPrerequisite{ Name, Version, When }</code> is text for a reader: <code>Version</code> is <code>""</code> when any version will do,
+<code>When</code> is the use of the entity that needs it, <code>""</code> when every use does. The build
+runs offline and checks none of them, and the engine never reads the field; a
+consumer can, for example to check a cluster before the first apply. Unlike
+<code>CapabilityAware.CapabilityRequired</code> it never fails a build. A nil list means none is
+declared, not that none is needed: a contract whose output is a CRD&rsquo;s object needs
+that CRD and its controller whether it lists them or not. Of the built-ins only the
+<code>postgresql</code> rule sets it, with the prerequisites of its <code>backup</code> and <code>recovery</code>
+(When <code>backup or recovery set</code>): the CloudNativePG operator, the Barman Cloud
+plugin, its <code>objectstores.barmancloud.cnpg.io</code> CRD, and the bucket and Secrets the
+objects name; and, each When its property is set, the ObjectStore
+<code>recovery.source.objectStoreName</code> names and the owner&rsquo;s Secret <code>recovery.secret.name</code>
+names. <code>docs/postgresql-backup-recovery.md</code> has the same list with the
+reasons. cert-manager
+is not on it: the plugin&rsquo;s install recommends it for its own TLS, which can be
+supplied otherwise. <strong>Breaking library change</strong>: <code>ContractMetadata</code> gained the
+field, so an unkeyed composite literal of it no longer compiles.</p><p><code>Readiness</code> (go-kure/launcher#1134) lists, for each kind of resource an entity of
+this contract provides, how a reader judges that the resource is ready. Each
+<code>ContractReadiness{ Group, Kind, NamePattern, Condition, Field, Value, Generic }</code> names
+the kind (<code>Group</code> is <code>""</code> for the core group), says in text how the resource is named
+(<code>NamePattern</code>, for example <code>&lt;component>-pooler</code>), and gives its signal: either
+<code>Condition</code>, a status condition type that reads <code>True</code> when the resource is ready, or
+<code>Field</code> with the <code>Value</code> it holds when ready, never both. <code>Generic</code> says whether a
+generic health check, one that reads a <code>Ready</code> condition and applies no other rule,
+can judge the kind: <code>GenericJudges</code> (<code>"judges"</code>, valid only with <code>Condition: "Ready"</code>),
+<code>GenericCannotJudge</code> (<code>"cannot-judge"</code>, the kind needs a resource-specific rule; both
+signal fields may then be empty when the entity gives none), or <code>GenericUndeclared</code>
+(<code>""</code>, the entity does not say). An entity that provides several kinds lists one
+entry per kind, in a stable order. The declaration is made by the entity, read by a
+consumer and enforced by nothing: the engine never reads the field, no registration
+or build step checks it, and nothing checks that the named condition or field exists
+on the real resource. A nil list means none is declared, not that the resources are
+ready at once or need no waiting; an empty non-nil list reads the same as nil. Only
+<code>postgresql</code> declares readiness (go-kure/launcher#1144), one entry for each kind it
+lowers into; <code>pkg/oam/builtin/components/README.md</code> lists them. <strong>Breaking library change</strong>: <code>ContractMetadata</code>
+gained the field, so an unkeyed composite literal of it no longer compiles.</p><h3 id=lowering-targets-and-seal>Lowering targets and <code>Seal</code><span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>A lowering rule emits elements other handlers render, so a registry that holds the
+rule without them fails only when a document reaches the gap. A rule that
+implements <code>LoweringTargetDeclarer</code> declares, in a <code>LoweringTargets{ ComponentTypes, TraitTypes, PolicyTypes }</code>, every type it can emit over all of its inputs: the
+components it emits, the traits it emits or attaches to a component it emits, and
+the policies it emits. A type it only forwards from its input is not a target, and
+document kinds are not listed.</p><p><code>Transformer.Seal()</code> checks every registered rule that declares targets, of any
+kind (document, raw document, component, trait, policy): each declared type must be
+registered at its position, as a handler or as another lowering rule. The check
+cannot run at registration, because a rule and the handlers of its targets are
+registered in any order. <code>Transform</code> and <code>TransformWithPolicy</code> call <code>Seal</code> first, so
+an incomplete registry is refused whether or not the document uses the rule;
+<code>LowerRaws</code> does not, because it dispatches no handler. A caller that has finished
+registering may call <code>Seal</code> itself to learn of a gap before it has a document. The
+error names each rule and the type it is missing, sorted:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>registry incomplete: lowering rule component/webservice@v1alpha1 lowers into component type &#34;service&#34;, which is not registered</span></span></code></pre></div><p><code>Seal</code> stores nothing and locks nothing: it reads the registry as it stands, may be
+called any number of times, and accepts on the next call a type registered after a
+refusal. A rule that does not implement <code>LoweringTargetDeclarer</code> is not checked, and
+the engine does not check that a rule emits only what it declares.
+<strong>Breaking library change</strong> (go-kure/launcher#789): a consumer that registers a
+built-in lowering rule without the types it lowers into now fails at <code>Seal</code> or at
+the first transform, where it failed only for a document that reached the missing
+type. The built-in rules declare:</p><table><thead><tr><th>Rule</th><th>Components</th><th>Traits</th><th>Policies</th></tr></thead><tbody><tr><td><code>webservice</code></td><td><code>deployment</code>, <code>service</code>, <code>serviceaccount</code></td><td><code>topology-spread</code>, <code>pvc</code></td><td></td></tr><tr><td><code>worker</code></td><td><code>deployment</code>, <code>serviceaccount</code></td><td><code>topology-spread</code>, <code>pvc</code></td><td></td></tr><tr><td><code>helm</code></td><td><code>helmrelease</code>, <code>helmtemplate</code>, <code>helmrepository</code>, <code>ocirepository</code>, <code>gitrepository</code>, <code>bucket</code></td><td><code>configmap</code>, <code>secret</code></td><td></td></tr><tr><td><code>postgresql</code></td><td><code>cnpg-cluster</code>, <code>cnpg-objectstore</code>, <code>cnpg-pooler</code>, <code>cnpg-database</code>, <code>cnpg-scheduledbackup</code></td><td></td><td><code>dependency</code>, <code>placement</code></td></tr><tr><td><code>expose</code> (trait)</td><td></td><td><code>ingress</code>, <code>httproute</code></td><td></td></tr></tbody></table><h3 id=the-no-handler-error>The &ldquo;no handler&rdquo; error<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>A type with no registered handler fails the transform, and the message names where
+the element is: <code>no handler for component type "x" (component "web")</code>, <code>no handler for trait type "x" (on component "web")</code>, <code>no handler for policy type "x" (policy "first")</code>. For an element a lowering rule emitted, it also names the rule and the
+authored component it lowered:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>no handler for component type &#34;service&#34; (component &#34;web&#34;, emitted by lowering rule component/role for component &#34;web&#34; (type &#34;role&#34;) in document &#34;app&#34; (kind &#34;Application&#34;))</span></span></code></pre></div><p>A trait the author wrote, forwarded by a rule onto a component the rule emitted under
+another name, names that component and, through it, the rule and the authored
+component: <code>no handler for trait type "x" (on component "web-rendered", itself emitted by lowering rule component/role for component "web" (type "role") in document "app" (kind "Application"))</code>. One a document rule moved to another component names the
+component it was written on: <code>(on component "worker", authored on component "web" (type "webservice") in document "app" (kind "Moving"))</code>. On the component the author wrote it
+on, by name, the clause is left out.</p><p>The emitted form is reached only for a type the package knows and the registry holds no
+handler for, and only for a rule that does not declare the type as a target (<code>Seal</code>
+refuses a declared one first). A type the package does not know is refused earlier,
+when the lowered document is validated.</p><footer class=footline></footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/launcher/dev/index.html><span class="logo-title default-animation">Go Kure — Launcher</span>
+</a><search><form action=/launcher/dev/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Search</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
+<button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/launcher/dev/index.html><a class=padding href=/launcher/dev/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul><li class=R-versionswitcher><div class="padding menu-control"><i class="fa-fw fas fa-code-branch"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-version>Version</label>
+<select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/launcher/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main default-animation"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/launcher/dev/getting-started/index.html><a class="padding default-animation" href=/launcher/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/concepts/index.html><a class="padding default-animation" href=/launcher/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu></ul></li><li class=parent data-nav-id=/launcher/dev/api-reference/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/kurel-cli/index.html><a class=padding href=/launcher/dev/api-reference/kurel-cli/index.html>kurel CLI</a></li><li class="parent alwaysopen" data-nav-id=/launcher/dev/api-reference/oam/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/oam/index.html>OAM Model</a><ul id=R-subsections-85257ea7983d512c6d1887735c85123a class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/oam/pipeline/index.html><a class=padding href=/launcher/dev/api-reference/oam/pipeline/index.html>Pipeline</a></li><li data-nav-id=/launcher/dev/api-reference/oam/labels-and-ownership/index.html><a class=padding href=/launcher/dev/api-reference/oam/labels-and-ownership/index.html>Component label and ownership</a></li><li data-nav-id=/launcher/dev/api-reference/oam/names-and-overrides/index.html><a class=padding href=/launcher/dev/api-reference/oam/names-and-overrides/index.html>Names and overrides</a></li><li data-nav-id=/launcher/dev/api-reference/oam/parsing-and-types/index.html><a class=padding href=/launcher/dev/api-reference/oam/parsing-and-types/index.html>Parsing and type identity</a></li><li data-nav-id=/launcher/dev/api-reference/oam/transform-and-lowering/index.html><a class=padding href=/launcher/dev/api-reference/oam/transform-and-lowering/index.html>Transform, extension and lowering</a></li><li class=active data-nav-id=/launcher/dev/api-reference/oam/schemas-and-contract/index.html><a class=padding href=/launcher/dev/api-reference/oam/schemas-and-contract/index.html>Property schemas and contract metadata</a></li><li data-nav-id=/launcher/dev/api-reference/oam/policy-and-capability/index.html><a class=padding href=/launcher/dev/api-reference/oam/policy-and-capability/index.html>Policy defaults and capability system</a></li></ul></li><li data-nav-id=/launcher/dev/api-reference/oam-models/index.html><a class=padding href=/launcher/dev/api-reference/oam-models/index.html>Component Models</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/index.html>Component Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-traits/index.html><a class=padding href=/launcher/dev/api-reference/oam-traits/index.html>Trait Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-policies/index.html><a class=padding href=/launcher/dev/api-reference/oam-policies/index.html>Policy Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-registry/index.html><a class=padding href=/launcher/dev/api-reference/oam-registry/index.html>Built-in Registry</a></li><li data-nav-id=/launcher/dev/api-reference/errors/index.html><a class=padding href=/launcher/dev/api-reference/errors/index.html>Errors</a></li><li data-nav-id=/launcher/dev/api-reference/patch/index.html><a class=padding href=/launcher/dev/api-reference/patch/index.html>Patch Engine</a></li></ul></li><li data-nav-id=/launcher/dev/contributing/index.html><a class="padding default-animation" href=/launcher/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/changelog/index.html><a class="padding default-animation" href=/launcher/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul></ul></div><div id=R-footer class=default-animation><p id=R-revision>Version dev, built from commit <a href=https://github.com/go-kure/launcher/commit/5d35a220>5d35a220</a></p><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/launcher/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1794485552 defer></script><script src=/launcher/dev/js/theme.min.js?1794485552 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
