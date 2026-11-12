@@ -1,0 +1,432 @@
+<!doctype html><html lang=en-us dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.169.0"><meta name=generator content="Relearn 8.0.0+9803d5122ebb3276acea823f476e9eb44f607862"><meta name=description content="How layout.LayoutRules decides directory names, file names and where the Flux Kustomizations land. Read the tutorial first for the four steps that produce a tree.
+The Go blocks on this page are the bodies of Example functions in pkg/stack/fluxcd, which go test runs. They use the imports and the helpers named in the tutorial .
+The Layout Engine supports multiple grouping and file organization strategies:
+Option Values Effect NodeGrouping GroupByName, GroupFlat A directory per child node, or merge child nodes into their parent BundleGrouping GroupByName, GroupFlat A directory per bundle, or render bundles in their node’s directory (the root node’s bundle keeps a directory, see below) ApplicationGrouping GroupByName, GroupFlat A directory per app, or write apps into their bundle’s directory FilePer FilePerResource, FilePerKind One file per resource or group by kind FluxPlacement FluxSeparate, FluxIntegratedPerLayout, FluxIntegratedPerBundle Separate dir; a Flux CR per layout node; or Flux CRs at bundle boundaries with application children as directories The three grouping axes are independent; umbrella child bundles always get a directory of their own, and so do augmenter applications that want one (the default)."><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Flux Layout Rules :: Go Kure"><meta name=twitter:description content="How layout.LayoutRules decides directory names, file names and where the Flux Kustomizations land. Read the tutorial first for the four steps that produce a tree.
+The Go blocks on this page are the bodies of Example functions in pkg/stack/fluxcd, which go test runs. They use the imports and the helpers named in the tutorial .
+The Layout Engine supports multiple grouping and file organization strategies:
+Option Values Effect NodeGrouping GroupByName, GroupFlat A directory per child node, or merge child nodes into their parent BundleGrouping GroupByName, GroupFlat A directory per bundle, or render bundles in their node’s directory (the root node’s bundle keeps a directory, see below) ApplicationGrouping GroupByName, GroupFlat A directory per app, or write apps into their bundle’s directory FilePer FilePerResource, FilePerKind One file per resource or group by kind FluxPlacement FluxSeparate, FluxIntegratedPerLayout, FluxIntegratedPerBundle Separate dir; a Flux CR per layout node; or Flux CRs at bundle boundaries with application children as directories The three grouping axes are independent; umbrella child bundles always get a directory of their own, and so do augmenter applications that want one (the default)."><meta property="og:url" content="https://www.gokure.dev/kure/dev/guides/flux-layout-rules/index.html"><meta property="og:site_name" content="Go Kure"><meta property="og:title" content="Flux Layout Rules :: Go Kure"><meta property="og:description" content="How layout.LayoutRules decides directory names, file names and where the Flux Kustomizations land. Read the tutorial first for the four steps that produce a tree.
+The Go blocks on this page are the bodies of Example functions in pkg/stack/fluxcd, which go test runs. They use the imports and the helpers named in the tutorial .
+The Layout Engine supports multiple grouping and file organization strategies:
+Option Values Effect NodeGrouping GroupByName, GroupFlat A directory per child node, or merge child nodes into their parent BundleGrouping GroupByName, GroupFlat A directory per bundle, or render bundles in their node’s directory (the root node’s bundle keeps a directory, see below) ApplicationGrouping GroupByName, GroupFlat A directory per app, or write apps into their bundle’s directory FilePer FilePerResource, FilePerKind One file per resource or group by kind FluxPlacement FluxSeparate, FluxIntegratedPerLayout, FluxIntegratedPerBundle Separate dir; a Flux CR per layout node; or Flux CRs at bundle boundaries with application children as directories The three grouping axes are independent; umbrella child bundles always get a directory of their own, and so do augmenter applications that want one (the default)."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="Guides"><meta itemprop=name content="Flux Layout Rules :: Go Kure"><meta itemprop=description content="How layout.LayoutRules decides directory names, file names and where the Flux Kustomizations land. Read the tutorial first for the four steps that produce a tree.
+The Go blocks on this page are the bodies of Example functions in pkg/stack/fluxcd, which go test runs. They use the imports and the helpers named in the tutorial .
+The Layout Engine supports multiple grouping and file organization strategies:
+Option Values Effect NodeGrouping GroupByName, GroupFlat A directory per child node, or merge child nodes into their parent BundleGrouping GroupByName, GroupFlat A directory per bundle, or render bundles in their node’s directory (the root node’s bundle keeps a directory, see below) ApplicationGrouping GroupByName, GroupFlat A directory per app, or write apps into their bundle’s directory FilePer FilePerResource, FilePerKind One file per resource or group by kind FluxPlacement FluxSeparate, FluxIntegratedPerLayout, FluxIntegratedPerBundle Separate dir; a Flux CR per layout node; or Flux CRs at bundle boundaries with application children as directories The three grouping axes are independent; umbrella child bundles always get a directory of their own, and so do augmenter applications that want one (the default)."><meta itemprop=wordCount content="5947"><title>Flux Layout Rules :: Go Kure</title><link href=/kure/dev/css/auto-complete/auto-complete.min.css?1794472982 rel=stylesheet><script src=/kure/dev/js/auto-complete/auto-complete.min.js?1794472982 defer></script><script src=/kure/dev/js/search-lunr.min.js?1794472982 defer></script><script src=/kure/dev/js/search.min.js?1794472982 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/kure/dev/searchindex.en.js?1794472982"</script><script src=/kure/dev/js/lunr/lunr.min.js?1794472982 defer></script><script src=/kure/dev/js/lunr/lunr.stemmer.support.min.js?1794472982 defer></script><script src=/kure/dev/js/lunr/lunr.multi.min.js?1794472982 defer></script><script src=/kure/dev/js/lunr/lunr.en.min.js?1794472982 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/kure/dev/fonts/fontawesome/css/fontawesome-all.min.css?1794472982 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/kure/dev/fonts/fontawesome/css/fontawesome-all.min.css?1794472982 rel=stylesheet></noscript><link href=/kure/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1794472982 rel=stylesheet><link href=/kure/dev/css/theme.min.css?1794472982 rel=stylesheet><link href=/kure/dev/css/format-html.min.css?1794472982 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/guides/flux-layout-rules/index.html",window.relearn.relBasePath="../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://www.gokure.dev/kure/dev",window.relearn.version_js_url="/kure/dev/versionindex.en.js?1794472982",window.relearn.disableAnchorCopy=!1,window.relearn.disableAnchorScrolling=!1,window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.relearn.getItem=(e,t)=>e.getItem(t),window.relearn.setItem=(e,t,n)=>e.setItem(t,n),window.relearn.removeItem=(e,t)=>e.removeItem(t),window.T_Copy_to_clipboard=`Copy to clipboard`,window.T_Copied_to_clipboard=`Copied to clipboard!`,window.T_Copy_link_to_clipboard=`Copy link to clipboard`,window.T_Link_copied_to_clipboard=`Copied link to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantname="my-custom-variant",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.relearn.setItem(window.localStorage,window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.relearn.getItem(window.localStorage,window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.relearn.getItem(window.localStorage,window.relearn.absBaseUri+"/variant")??"";e==window.relearn.customvariantname||(!e||!window.relearn.themevariants.includes(e))&&(e=window.relearn.themevariants[0],window.relearn.setItem(window.localStorage,window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-url=/kure/dev/guides/flux-layout-rules/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar><div class=topbar-wrapper><div class=topbar-sidebar-divider></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><button class=topbar-control onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></div><div class="topbar-button topbar-button-toc" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><button class=topbar-control onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-list-alt"></i></button><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#layout-paths-breaking-change-in-go-kurekure771>Layout paths (breaking change in go-kure/kure#771)</a></li><li><a href=#flux-paths-come-from-the-layout-breaking-change>Flux paths come from the layout (breaking change)</a></li><li><a href=#kustomization-names>Kustomization names</a></li><li><a href=#the-root-nodes-bundle-has-its-own-directory-breaking-change-in-go-kurekure979>The root node&rsquo;s bundle has its own directory (breaking change in go-kure/kure#979)</a></li><li><a href=#directory-names>Directory names</a></li><li><a href=#node-kustomizations>Node Kustomizations</a></li><li><a href=#application-layout-kustomizations-are-named-after-their-unit-breaking-change>Application layout Kustomizations are named after their unit (breaking change)</a></li><li><a href=#per-layout-kustomizations-take-the-bundles-readiness-settings-and-labels-breaking-change>Per-layout Kustomizations take the bundle&rsquo;s readiness settings and labels (breaking change)</a></li><li><a href=#per-layout-kustomizations-take-the-bundles-interval-prune-force-suspend-postbuild-and-patches-breaking-change>Per-layout Kustomizations take the bundle&rsquo;s interval, prune, force, suspend, postBuild and patches (breaking change)</a></li><li><a href=#a-layouts-kustomization-settings-are-refused-where-it-gets-no-kustomization-breaking-change>A layout&rsquo;s Kustomization settings are refused where it gets no Kustomization (breaking change)</a></li><li><a href=#a-bundle-can-name-the-service-account-flux-applies-it-with>A bundle can name the service account Flux applies it with</a></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/kure/dev/index.html><span itemprop=name>Kure</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/kure/dev/guides/index.html><span itemprop=name>Guides</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Flux Layout Rules</span><meta itemprop=position content="3"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><a class=topbar-control href=/kure/dev/guides/flux-workflow/index.html title="Generating Flux Manifests (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></div><div class="topbar-button topbar-button-next" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><a class=topbar-control href=/kure/dev/guides/flux-umbrella-bundles/index.html title="Umbrella Bundles (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></div><div class="topbar-button topbar-button-more" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><button class=topbar-control onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable guides" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><details open class="box cstyle notices warning"><summary class=box-label tabindex=-1><i class="fa-fw fas fa-exclamation-triangle"></i>
+Work in Progress</summary><div class=box-content><p>You are viewing <strong>development</strong> documentation built from the latest commit on <code>main</code> (last tag <code>v0.2.0-rc.1</code>, source commit <code>468e7c45</code>).
+APIs and features are subject to change.</p></div></details><h1 id=flux-layout-rules>Flux Layout Rules</h1><p>How <code>layout.LayoutRules</code> decides directory names, file names and where the Flux Kustomizations land. Read the <a href=/kure/dev/guides/flux-workflow/>tutorial</a>
+first for the four steps that produce a tree.</p><p>The Go blocks on this page are the bodies of <code>Example</code> functions in <code>pkg/stack/fluxcd</code>, which <code>go test</code> runs. They use the imports and the helpers named in the <a href=/kure/dev/guides/flux-workflow/>tutorial</a>
+.</p><p>The <a href=/kure/dev/api-reference/layout>Layout Engine</a>
+supports multiple grouping and file organization strategies:</p><table><thead><tr><th>Option</th><th>Values</th><th>Effect</th></tr></thead><tbody><tr><td>NodeGrouping</td><td><code>GroupByName</code>, <code>GroupFlat</code></td><td>A directory per child node, or merge child nodes into their parent</td></tr><tr><td>BundleGrouping</td><td><code>GroupByName</code>, <code>GroupFlat</code></td><td>A directory per bundle, or render bundles in their node&rsquo;s directory (the root node&rsquo;s bundle keeps a directory, see below)</td></tr><tr><td>ApplicationGrouping</td><td><code>GroupByName</code>, <code>GroupFlat</code></td><td>A directory per app, or write apps into their bundle&rsquo;s directory</td></tr><tr><td>FilePer</td><td><code>FilePerResource</code>, <code>FilePerKind</code></td><td>One file per resource or group by kind</td></tr><tr><td>FluxPlacement</td><td><code>FluxSeparate</code>, <code>FluxIntegratedPerLayout</code>, <code>FluxIntegratedPerBundle</code></td><td>Separate dir; a Flux CR per layout node; or Flux CRs at bundle boundaries with application children as directories</td></tr></tbody></table><p>The three grouping axes are independent; umbrella child bundles always get a directory of their own,
+and so do augmenter applications that want one (the default).</p><h2 id=layout-paths-breaking-change-in-go-kurekure771>Layout paths (breaking change in go-kure/kure#771)</h2><p>A layout&rsquo;s directory is <code>FullRepoPath()</code>, which is <code>Namespace</code> joined with <code>Name</code>. <code>Namespace</code> is
+always the <strong>parent&rsquo;s</strong> directory, and <code>"."</code> is the root of the tree. The walkers build every layout
+this way. If you build <code>ManifestLayout</code> trees by hand, or add child layouts to a walked tree, set each
+child&rsquo;s <code>Namespace</code> to its parent&rsquo;s <code>FullRepoPath()</code>.</p><p>What changed, and what to do:</p><ul><li><strong>Hand-built children.</strong> <code>FullRepoPath()</code> used to drop <code>Name</code> when <code>Namespace</code> already ended with
+it. A caller that set a child&rsquo;s <code>Namespace</code> to the full path, including the child&rsquo;s own <code>Name</code>
+(<code>Namespace: "apps/web", Name: "web"</code>), now gets that name twice (<code>apps/web/web</code>). Pass the
+parent&rsquo;s path instead (<code>Namespace: "apps"</code>). Since go-kure/kure#979 the writers refuse such a
+child where its parent&rsquo;s <code>kustomization.yaml</code> lists it: the entry <code>web</code> of the parent at <code>apps</code>
+names <code>apps/web</code>, a directory without a <code>kustomization.yaml</code>. <code>WriteToDisk</code>, <code>WriteToTar</code> and
+<code>WriteManifest</code> return an error that names both directories, before anything is written. A
+<code>Namespace</code> that is the child&rsquo;s own path in another case (<code>apps/web</code> for a child named <code>Web</code>)
+is refused the same way. A child its parent does not list, or one placed elsewhere on purpose,
+is written as before; see the <a href=/kure/dev/api-reference/layout/>Layout Engine reference</a>
+for the full
+rule.</li><li><strong>Same-name and suffix-sharing layouts nest.</strong> A bundle and an application with the same name
+now give <code>web/web</code>. Before, they collapsed onto <code>web/</code>, and one of the two <code>kustomization.yaml</code>
+files replaced the other. The same applies to a name that merely ends another as a string: <code>oo</code>
+under <code>foo</code> now gives <code>foo/oo</code>.</li><li><strong>No <code>ClusterName</code>, named root.</strong> The root node now sits at <code>&lt;root></code> instead of <code>cluster/&lt;root></code>,
+and its child nodes stay at <code>&lt;root>/&lt;child></code>. With <code>FluxSeparate</code>, the <code>flux-system/</code> layout now
+sits inside the root&rsquo;s directory, at <code>&lt;root>/flux-system</code>, where the root&rsquo;s <code>kustomization.yaml</code>
+references it. Before, it was written beside the root, and that reference dangled. The ArgoCD
+<code>argocd/</code> layout moved the same way. Point anything outside kure that reads these directories
+(CI scripts, a hand-written sync path) at the new paths.</li><li><strong>No <code>ClusterName</code>, unnamed root.</strong> The root and its child nodes stay at <code>cluster/</code> and
+<code>cluster/&lt;child></code>. Deeper descendants move: a grandchild used to be written at
+<code>&lt;child>/&lt;grandchild></code>, outside <code>cluster/</code> and referenced by nothing. It now sits at
+<code>cluster/&lt;child>/&lt;grandchild></code>.</li><li><strong>With a <code>ClusterName</code>.</strong> Most output is unchanged, and <code>flux-system/</code> stays at
+<code>&lt;ClusterName>/flux-system</code>. When the last segment of <code>ClusterName</code> is the root node&rsquo;s name
+(<code>ClusterName: "platform"</code>, root <code>platform</code>), the root is still the cluster directory. When
+<code>ClusterName</code> only ends with the root&rsquo;s name as a string (<code>ClusterName: "myprod"</code>, root <code>prod</code>),
+the old rule collapsed the root onto <code>myprod</code>. It now nests at <code>myprod/prod</code>, so move any
+external sync path that pointed at <code>myprod</code>.</li><li><strong>Collisions are refused.</strong> <code>WriteToDisk</code>, <code>WriteToTar</code> and <code>WriteManifest</code> check the whole tree
+before writing anything. They refuse two layouts that resolve to the same directory (compared
+case-insensitively), and two <code>AppFileSingle</code> layouts that resolve to the same file. They also
+refuse two layouts holding one object when one kustomize build takes in both: a
+<code>kustomization.yaml</code> and the child directories it lists, or the Flux build of a marked
+<code>KustomizationRecursive</code> directory. kustomize would refuse the second copy. The ConfigMap a
+<code>configMapGenerator</code> generates counts as one of those objects.</li><li><strong>Empty Recursive targets are refused.</strong> A marked <code>KustomizationRecursive</code> directory gets no
+<code>kustomization.yaml</code>. When no other file lands at or below it (a bundle with no applications,
+or applications that render nothing), every writer would leave it empty, and a Git tree drops
+an empty directory, so the Flux Kustomization would name a path that is not committed. Give the
+layout a resource, or write it <code>KustomizationExplicit</code>, which writes it <code>resources: []</code>.</li><li><strong>Directories nothing applies are refused.</strong> In a tree with generated Flux Kustomizations, a
+directory its parent&rsquo;s <code>kustomization.yaml</code> does not list is applied only by a Kustomization
+whose <code>spec.path</code> names it. The integrator marks the root and every directory its
+Kustomizations build (<code>SetFluxBuild</code>), so a tree it built passes. The check runs only when the
+root is marked: a marked tree changed afterwards is refused where such a directory is not
+marked, since its files would be committed and never applied. A tree you place Kustomizations
+in yourself is checked once you mark its root, and then needs the mark on each directory a
+Kustomization of yours builds.</li><li><strong>Kustomization names are unique in a tree.</strong> Two Flux Kustomizations with one namespace and
+name are refused wherever they sit, also in directories that are applied separately and inside
+a <code>List</code>: they are one object in the cluster. One kustomize drops as local-config does not
+count here, since it never reaches the cluster; in the same kustomize build as its namesake it
+is still refused, as kustomize refuses it.</li><li><strong>Objects without a kind or an apiVersion are refused</strong> (breaking change in go-kure/kure#1020).
+Each resource, and each item of a <code>List</code> however deep, must be written with both; a typed
+object whose <code>TypeMeta</code> is unset has neither. kustomize fails on a document without a kind, and
+one without an apiVersion builds into an object nothing applies. Set the <code>TypeMeta</code>, as the
+<code>Create*</code> constructors do, or the two fields of an unstructured object. A <code>List</code>&rsquo;s own
+apiVersion is not required, nor the apiVersion of an object with the
+<code>config.kubernetes.io/local-config</code> annotation at any value but <code>false</code> (the string <code>"false"</code> or
+the boolean <code>false</code>), which kustomize drops from the build.</li><li><strong>No <code>..</code> in a layout&rsquo;s name or namespace.</strong> Every writer refuses a layout whose <code>Name</code> or
+<code>Namespace</code> has a <code>..</code> path segment, with or without extra files.</li><li><strong>The walk validates its rules.</strong> <code>WalkCluster</code> and <code>WalkClusterByPackage</code> run
+<code>LayoutRules.Validate</code> on the rules they are given, and so does every entry point that walks
+(<code>CreateLayoutWithResources</code>, <code>GenerateFromCluster</code>), also for an absent or empty cluster. An
+unknown value of a grouping, <code>FilePer</code>, <code>FluxPlacement</code> or
+<code>FileNaming</code> is now an error; before, it was walked as if it were another value. A <code>ClusterName</code>
+with a <code>..</code> path segment is refused at the walk instead of at write, also one the walk would
+have cleaned away (<code>x/../platform</code>). An unset value is still valid and takes its default. Fix
+the value the error names. The Flux <code>IntegrateWithLayout</code> runs the same check in place of its
+own placement check, so its error for an unknown placement now names the field <code>FluxPlacement</code>
+(it was <code>fluxPlacement</code>).</li><li><strong><code>LayoutRules</code> has no <code>ApplicationFileMode</code>.</strong> No walk ever applied it, so a valid value set
+there changed no layout and no file; the field is removed. Code that sets it no longer
+compiles: delete the line, the layouts and the files written stay the same. A <code>LayoutRules</code>
+value serialised as a whole no longer carries the key, and an unknown value there is no longer
+an error. To write an application as one file, set <code>Config.ApplicationFileMode</code> for
+<code>WriteManifest</code>, or the layout&rsquo;s own <code>ApplicationFileMode</code>.</li></ul><p>See the <a href=/kure/dev/api-reference/layout/>Layout Engine reference</a>
+for the full rule.</p><h2 id=flux-paths-come-from-the-layout-breaking-change>Flux paths come from the layout (breaking change)</h2><p>Every Flux Kustomization <code>spec.path</code> (and ArgoCD Application <code>source.path</code>) is now the directory of
+the layout that renders the bundle, taken from the walked layout tree. Before, the generator
+derived it from bundle names alone, so a node-level bundle&rsquo;s path was just its name and pointed at
+a directory the layout never wrote whenever a node and its bundle were named differently, or a
+<code>ClusterName</code> prefixed the tree. See
+<a href=/kure/dev/api-reference/flux-engine/#kustomization-paths>Kustomization paths</a>
+for the rule.</p><p>What changed, and what to do:</p><ul><li><strong>Removed APIs.</strong> <code>GenerateFromBundle</code>, <code>GenerateFromNode</code>, <code>EngineWithMode</code>, <code>EngineWithConfig</code>,
+<code>NewWorkflowEngineWithConfig</code>, <code>SetKustomizationMode</code> and <code>ResourceGenerator.Mode</code> are gone.
+Generate from a walked layout (<code>ResourceGenerator.GenerateFromLayout</code>) or for one bundle at a path
+you supply (<code>GenerateForBundle</code>).</li><li><strong><code>GenerateFromCluster</code> takes the layout rules.</strong> It walked with <code>layout.DefaultLayoutRules()</code>
+whatever rules the caller wrote the tree with, so with a <code>ClusterName</code> or other groupings its
+paths named directories the tree did not have. It now takes the rules as a second argument, on
+<code>stack.Workflow</code> and on both engines, and each path is a directory a walk with those rules
+writes. Pass the rules you write the tree with; <code>layout.DefaultLayoutRules()</code> keeps the paths it
+returned before that change (the root node&rsquo;s bundle&rsquo;s path has moved since, in
+go-kure/kure#979: see &ldquo;The root node&rsquo;s bundle has its own directory&rdquo; below). The Flux engine
+refuses rules with <code>FluxIntegratedPerLayout</code>: that tree&rsquo;s child
+directories are applied by Kustomizations only <code>CreateLayoutWithResources</code> places, so use that
+entry point for the placement. <code>ResourceGenerator.GenerateFromLayout</code> refuses a tree in which
+any layout carries that placement, for the same reason: use <code>CreateLayoutWithResources</code>, or
+<code>IntegrateWithLayout</code> on the tree you walked. Before, it returned the bundle directories'
+Kustomizations only. Rules the walk refuses are an error from both engines, whatever the
+cluster is: an absent or empty cluster returns nothing only with valid rules.</li><li><strong>Integrate walked layouts only.</strong> <code>IntegrateWithLayout</code> refuses a layout <code>layout.WalkCluster</code>
+did not build from the same cluster — build the tree with <code>WalkCluster</code> instead of by hand.</li><li><strong>PerLayout hosts.</strong> Under <code>FluxIntegratedPerLayout</code> a node bundle&rsquo;s CR now sits in the parent of
+the layout that renders it, like every other PerLayout CR, and the parent&rsquo;s <code>kustomization.yaml</code>
+lists it as a resource file. The writers no longer emit a <code>flux-system-kustomization-&lt;child>.yaml</code>
+reference guessed from a child&rsquo;s name. A bundle-less node layout gets its own CR named
+<code>&lt;path, "/" → "-">-node</code>.</li><li><strong>Sources live in the root.</strong> Under both integrated placements, every GitRepository or
+OCIRepository the integration derives from a <code>SourceRef</code> URL is written once, into the root
+node&rsquo;s layout (the root node&rsquo;s directory, not a <code>ClusterName</code> wrapper above it). Before, each unit&rsquo;s parent layout held a copy, so a Source shared by several
+builds had several owners, and pruning one unit deleted a Source the others still used. Golden
+files move the Source to the root. <code>FluxSeparate</code> is unchanged.</li><li><strong>Refusals.</strong> Two bundles with one name, a CR name used twice, a node or bundle layout written as
+<code>AppFileSingle</code>, and a directory holding two objects with one identity are errors; a <code>List</code> is
+read for the objects it holds, so the two are refused however many Lists deep one of them
+sits. So are a Flux
+Kustomization inside a <code>List</code> that takes another Kustomization&rsquo;s identity (kustomize builds a
+List&rsquo;s items); a Source identity (kind, namespace, name) defined with different content
+anywhere in the pass, in another layout or at another API version; and, under <code>FluxSeparate</code>,
+any Source already in the tree with the identity of one the integration generates into
+<code>flux-system</code>, even an identical one. Under <code>FluxIntegratedPerBundle</code>, a caller&rsquo;s copy of a
+generated Source in a <code>ClusterName</code> wrapper above the root node is refused too: that build also
+includes the root&rsquo;s copy, and kustomize refuses one object twice.
+No Kustomization takes its source from inside what it applies (go-kure/kure#979): under
+<code>FluxIntegratedPerLayout</code> with a <code>ClusterName</code> wrapper above a named root node, the root node&rsquo;s
+directory has a Kustomization of its own, which applies the directory that hosts every
+generated Source. It takes none of them; its source is the one <code>SourceRef</code> without a URL that
+the bundles below share (where two of them differ, the root node&rsquo;s own bundle&rsquo;s, when that has
+no URL), and a tree in which every <code>SourceRef</code> has a URL is refused, naming the
+Kustomization and the Source. Give one bundle a <code>SourceRef</code> without a URL, naming a Source that
+exists before the tree is applied, or use <code>FluxIntegratedPerBundle</code>. Before, the root bundle&rsquo;s
+generated Source was accepted there; the bootstrap points Flux at the <code>ClusterName</code> directory,
+the top of the written tree, so the Kustomization would have waited for a Source only its own
+apply creates.
+A Kustomization already in the tree that the integration keeps in place of its own (same name
+and <code>spec.path</code>, in the layout that would host it) is held to the same refusals as a generated
+one, whether it is typed, unstructured or inside a <code>List</code>: two copies of a generated Source
+that the integration did not add, in the build of its directory; a <code>sourceRef</code> that names a
+generated Source when its build holds the root node&rsquo;s directory; and a cycle through its
+<code>dependsOn</code>, <code>wait</code> or health checks. One that cannot be read as a Flux Kustomization (a field
+of the wrong type, for one) is refused, naming its layout. Its patches and postBuild are its
+own: the one kept Kustomization that builds the directory hosting the generated Sources is the
+root node&rsquo;s layout Kustomization below a <code>ClusterName</code> wrapper under
+<code>FluxIntegratedPerLayout</code>, and since go-kure/kure#979 the bootstrap applies the wrapper, which
+lists that Kustomization and not the directory, so it alone applies those Sources (before, a
+patch or postBuild of it that changed one was refused).</li><li><strong>Grouping axes.</strong> <code>NodeGrouping</code>, <code>BundleGrouping</code> and <code>ApplicationGrouping</code> are independent;
+they used to take effect only when bundles and applications were both flat, and a <code>ClusterName</code>
+always flattened the root bundle. Combinations that were silently rendered fully nested now
+render as configured, and a merged node&rsquo;s umbrella children and augmenter layouts keep their own
+directories and CRs.</li><li><strong>One Kustomization per directory.</strong> Bundles merged into one directory share one Kustomization
+(and one ArgoCD Application), named after the first of them; they must agree on the settings a
+Kustomization holds once, and dependency cycles are refused. A patch is refused there when its
+target would also select another merged bundle&rsquo;s objects: Flux patches everything the shared
+Kustomization builds, so the merge would widen the patch. A target&rsquo;s <code>LabelSelector</code> and
+<code>AnnotationSelector</code> are matched as kustomize reads the written file, each value as its text:
+a label <code>tier: true</code> decoded from YAML as a boolean matches the selector <code>tier=true</code>. A
+generated ConfigMap is matched with the annotations its generator entry sets
+(go-kure/kure#1100).</li><li><strong>One owner per directory.</strong> A directory that renders bundles is applied only by its own
+Kustomization: no parent <code>kustomization.yaml</code> lists it, in any placement. Under
+<code>FluxIntegratedPerBundle</code> a bundle&rsquo;s CR now sits in the parent directory (as under PerLayout),
+and a parent bundle can no longer depend on a child node&rsquo;s bundle there — the child&rsquo;s CR only
+exists once the parent has applied. Building a parent directory no longer includes its child
+units.</li><li><strong>FlattenSingleTier</strong> no longer rewrites Flux CRs a caller added to the tree; generated CRs
+already name the surviving directory.</li></ul><h2 id=kustomization-names>Kustomization names</h2><p>A bundle&rsquo;s Kustomization is named after the bundle. Set <code>Bundle.KustomizationName</code> to give it
+another name without renaming the bundle or moving its directory:</p><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// The bundles keep their names and directories; their Kustomizations</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// get the names set here.</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>db</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;db&#34;</span>, <span style=color:#a6e22e>KustomizationName</span>: <span style=color:#e6db74>&#34;apps-db&#34;</span>}
+</span></span><span style=display:flex><span><span style=color:#a6e22e>shop</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;shop&#34;</span>, <span style=color:#a6e22e>KustomizationName</span>: <span style=color:#e6db74>&#34;apps-shop&#34;</span>, <span style=color:#a6e22e>DependsOn</span>: []<span style=color:#f92672>*</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>db</span>}}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>objects</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fluxcd</span>.<span style=color:#a6e22e>NewResourceGenerator</span>().<span style=color:#a6e22e>GenerateForBundle</span>(<span style=color:#a6e22e>shop</span>, <span style=color:#e6db74>&#34;clusters/prod/shop&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>    panic(<span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#a6e22e>kust</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>objects</span>[<span style=color:#ae81ff>0</span>].(<span style=color:#f92672>*</span><span style=color:#a6e22e>kustv1</span>.<span style=color:#a6e22e>Kustomization</span>)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>kust</span>.<span style=color:#a6e22e>Name</span>, <span style=color:#a6e22e>kust</span>.<span style=color:#a6e22e>Spec</span>.<span style=color:#a6e22e>Path</span>, <span style=color:#a6e22e>kust</span>.<span style=color:#a6e22e>Spec</span>.<span style=color:#a6e22e>DependsOn</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>Name</span>)</span></span></code></pre></div><p>It prints <code>apps-shop clusters/prod/shop apps-db</code>: the Kustomization and its <code>dependsOn</code> entry carry
+the names set on the bundles, and <code>spec.path</code> is the directory, which did not move. Everything
+that refers to a bundle&rsquo;s Kustomization follows the name in effect (<code>Bundle.UnitName()</code>):
+<code>dependsOn</code> entries, an umbrella&rsquo;s health checks (it has none under
+<a href=/kure/dev/guides/flux-umbrella-bundles/#umbrellas-that-do-not-wait><code>UmbrellasDoNotWait</code></a>
+), and the name a merged directory takes from its
+first bundle. A <code>NamedDependsOn</code> entry names a Kustomization, so it reaches a bundle that sets the
+field by that value, not by the bundle&rsquo;s name.</p><p>A <code>DependsOn</code> entry that is a copy of a bundle of the cluster (another <code>Bundle</code> value with the same
+<code>Name</code>) is that bundle, and the dependency is on its Kustomization. Leave <code>KustomizationName</code> empty
+on the copy or set the name of the bundle&rsquo;s Kustomization: a copy that sets another name is
+refused, and so is a copy of a bundle whose Kustomization name is also in <code>NamedDependsOn</code>.</p><p>Two bundles whose Kustomizations would get one name are refused, whether the name comes from the
+field or from the bundle&rsquo;s name. The field is also the way out when a bundle&rsquo;s payload contains a
+Flux Kustomization named like the bundle: give the bundle another <code>KustomizationName</code> and the two
+no longer collide. Without it the tree is refused, and the error names the application and bundle
+that hold the Kustomization in the tree, what the generated one is for, and the field to set. See
+the
+<a href=/kure/dev/api-reference/flux-engine/#kustomization-names>Flux Engine reference</a>
+.</p><h2 id=the-root-nodes-bundle-has-its-own-directory-breaking-change-in-go-kurekure979>The root node&rsquo;s bundle has its own directory (breaking change in go-kure/kure#979)</h2><p>The root node&rsquo;s directory renders no bundle. With a flat <code>BundleGrouping</code> (the default) the root
+node&rsquo;s bundle used to render in the root node&rsquo;s directory, which the bootstrap applies when there
+is no <code>ClusterName</code>, and the
+Flux Kustomization that applied that directory was hosted inside it: it was part of the build it
+applied. The bundle now has a directory inside the root node&rsquo;s, named after the bundle
+(<code>platform/platform-bundle</code> for root node <code>platform</code> with bundle <code>platform-bundle</code>) or by the
+bundle&rsquo;s <code>DirName</code> when it sets one (see <a href=#directory-names>Directory names</a>
+), and its
+Kustomization sits in the root node&rsquo;s directory under the integrated placements, and in the
+<code>flux-system/</code> directory at the top of the tree under <code>FluxSeparate</code>. Bundles that a flat <code>NodeGrouping</code> merges into the root node share that directory, named
+after the first of them. With <code>BundleGrouping: GroupByName</code> nothing changes: the bundle already
+had its directory.</p><p>What changed, and what to do:</p><ul><li><strong>Paths move.</strong> The root node&rsquo;s bundle&rsquo;s files, the <code>spec.path</code> of its Flux Kustomization and the
+<code>source.path</code> of its ArgoCD Application are one directory lower. Golden files change, and so
+does anything outside kure that names the old path. The bootstrap sync path is unchanged.</li><li><strong>On a deployed tree, expect a handover.</strong> The bundle&rsquo;s objects used to be applied by the
+bootstrap as well, as part of the root node&rsquo;s directory. They leave that build, so with prune
+on, the objects can be deleted by the outer owner and re-created by the inner Kustomization.</li><li><strong>A child node named like that directory is refused.</strong> A child node of the root node whose name
+is the name of the root node&rsquo;s bundle&rsquo;s directory would render to the same path; the walk
+refuses it, naming both, also when the names differ only in case (<code>WEB</code> for <code>web</code>). Rename the
+node, or give the bundle&rsquo;s directory another name (its <code>DirName</code>, or its <code>Name</code> without one).
+A name that is not one path segment is refused earlier, when the cluster is validated: a node
+named <code>./web</code>, a bundle named <code>.</code>, <code>/</code> or <code>web/api</code>.</li><li><strong>A root node&rsquo;s bundle whose directory is <code>flux-system</code> is refused under <code>FluxSeparate</code>.</strong> That
+is a bundle with <code>DirName: "flux-system"</code>, or one named <code>flux-system</code> without a <code>DirName</code>.
+Without a <code>ClusterName</code> its directory would be the one the Flux resources are written to. Give
+the bundle&rsquo;s directory another name, or use an integrated placement. The ArgoCD engine refuses
+the directory <code>argocd</code> the same way.</li><li><strong><code>FlattenSingleTier</code> collapses no directory that renders a bundle.</strong> A collapsed directory&rsquo;s
+Kustomization would have no parent to sit in. On a walked tree the option now only collapses a
+single child directory that renders no bundle and has no directory below it (a node with neither
+a bundle nor child nodes, or one with bundle-less nodes merged into it by a flat
+<code>NodeGrouping</code>); a tree that relied on it to put a single-bundle application at the top keeps
+its directories.</li><li><strong>A tree whose top renders a bundle is not integrated.</strong> <code>IntegrateWithLayout</code> refuses it in
+every placement; integrate the whole tree <code>layout.WalkCluster</code> returns, not a subtree of it.</li></ul><p>The <code>SourceRef</code> of the root node&rsquo;s bundle is still the source of the Kustomizations of the root
+node&rsquo;s directory and of the bundle-less directories below it, as before (the Kustomization of the
+root node&rsquo;s directory itself takes it only when it has no URL, see &ldquo;Refusals&rdquo; above). A parent bundle still
+cannot depend on a child node&rsquo;s bundle under the integrated placements, except the root node&rsquo;s
+bundle, whose directory no longer holds the child&rsquo;s Kustomization. See
+<a href=/kure/dev/api-reference/layout/#the-root-nodes-bundles>The root node&rsquo;s bundles</a>
+for the rule.</p><h2 id=directory-names>Directory names</h2><p>A bundle&rsquo;s directory is named after the bundle too. Set <code>Bundle.DirName</code> to give it another
+name, an ordering prefix for example, without renaming the bundle or its Kustomization:</p><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// The children&#39;s directories get the names set here; the bundles and</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// their Kustomizations keep theirs.</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>infra</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;shop-infra&#34;</span>, <span style=color:#a6e22e>DirName</span>: <span style=color:#e6db74>&#34;00-infra&#34;</span>}
+</span></span><span style=display:flex><span><span style=color:#a6e22e>services</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;shop-services&#34;</span>, <span style=color:#a6e22e>DirName</span>: <span style=color:#e6db74>&#34;10-services&#34;</span>, <span style=color:#a6e22e>DependsOn</span>: []<span style=color:#f92672>*</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>infra</span>}}
+</span></span><span style=display:flex><span><span style=color:#a6e22e>shop</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;shop&#34;</span>, <span style=color:#a6e22e>Children</span>: []<span style=color:#f92672>*</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>infra</span>, <span style=color:#a6e22e>services</span>}}
+</span></span><span style=display:flex><span><span style=color:#a6e22e>cluster</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Cluster</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;prod&#34;</span>, <span style=color:#a6e22e>Node</span>: <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Node</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;apps&#34;</span>, <span style=color:#a6e22e>Bundle</span>: <span style=color:#a6e22e>shop</span>}}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>objects</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fluxcd</span>.<span style=color:#a6e22e>Engine</span>().<span style=color:#a6e22e>GenerateFromCluster</span>(<span style=color:#a6e22e>cluster</span>, <span style=color:#a6e22e>layout</span>.<span style=color:#a6e22e>DefaultLayoutRules</span>())
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>    panic(<span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> <span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>obj</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>objects</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>kust</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>obj</span>.(<span style=color:#f92672>*</span><span style=color:#a6e22e>kustv1</span>.<span style=color:#a6e22e>Kustomization</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>kust</span>.<span style=color:#a6e22e>Name</span>, <span style=color:#a6e22e>kust</span>.<span style=color:#a6e22e>Spec</span>.<span style=color:#a6e22e>Path</span>)
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><p>It prints <code>shop apps/shop</code>, <code>shop-infra apps/shop/00-infra</code> and <code>shop-services apps/shop/10-services</code>: the children are written to <code>apps/shop/00-infra</code> and
+<code>apps/shop/10-services</code>, their Kustomizations are still <code>shop-infra</code> and <code>shop-services</code> with
+<code>spec.path</code> at those directories, and the <code>dependsOn</code> entry and the umbrella&rsquo;s health checks keep
+naming the Kustomizations. The disk and tar writers produce the same tree. (<code>shop</code> is the root
+node&rsquo;s bundle here, so it has its directory inside <code>apps</code>; a <code>DirName</code> on it would name that one.)</p><p>The field applies wherever a bundle&rsquo;s name becomes a directory: for an umbrella child, for a node&rsquo;s
+bundle under <code>BundleGrouping: GroupByName</code>, and for the root node&rsquo;s bundle under the default rules.
+Below the root the default rules render a node&rsquo;s bundle in its node&rsquo;s directory, and <code>DirName</code> has
+no effect on it. Bundles a flat <code>NodeGrouping</code> merges into the root node share one directory: it
+takes the first merged bundle&rsquo;s <code>DirName</code>, and one on a later bundle has no effect. A <code>DirName</code> must
+be one path segment; it is no object name, so <code>00_Infra</code> is valid. Two bundles that would get one
+directory are refused, and the error names both. Name the directory on the bundle: a bundle&rsquo;s
+layout renamed after <code>WalkCluster</code> is refused by <code>IntegrateWithLayout</code>. See the
+<a href=/kure/dev/api-reference/flux-engine/#directory-names>Flux Engine reference</a>
+.</p><h2 id=node-kustomizations>Node Kustomizations</h2><p>Under <code>FluxIntegratedPerLayout</code> a node whose directory renders no bundle, such as a group of
+nodes, is applied by a Kustomization of its own. <code>Node.KustomizationName</code> names it, and
+<code>Node.DependsOn</code> and <code>Node.NamedDependsOn</code> order it:</p><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// Two groups of nodes, neither with a bundle of its own. Each group gets</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// a Kustomization that applies its directory; the one for apps waits for</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// the one for platform.</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>source</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>SourceRef</span>{<span style=color:#a6e22e>Kind</span>: <span style=color:#e6db74>&#34;GitRepository&#34;</span>, <span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;flux-system&#34;</span>, <span style=color:#a6e22e>Namespace</span>: <span style=color:#e6db74>&#34;flux-system&#34;</span>}
+</span></span><span style=display:flex><span><span style=color:#a6e22e>platform</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Node</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;platform&#34;</span>, <span style=color:#a6e22e>KustomizationName</span>: <span style=color:#e6db74>&#34;platform&#34;</span>, <span style=color:#a6e22e>Children</span>: []<span style=color:#f92672>*</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Node</span>{
+</span></span><span style=display:flex><span>    {<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;cert-manager&#34;</span>, <span style=color:#a6e22e>Bundle</span>: <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;cert-manager&#34;</span>, <span style=color:#a6e22e>SourceRef</span>: <span style=color:#a6e22e>source</span>}},
+</span></span><span style=display:flex><span>}}
+</span></span><span style=display:flex><span><span style=color:#a6e22e>apps</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Node</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;apps&#34;</span>, <span style=color:#a6e22e>KustomizationName</span>: <span style=color:#e6db74>&#34;apps&#34;</span>, <span style=color:#a6e22e>DependsOn</span>: []<span style=color:#f92672>*</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Node</span>{<span style=color:#a6e22e>platform</span>}, <span style=color:#a6e22e>Children</span>: []<span style=color:#f92672>*</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Node</span>{
+</span></span><span style=display:flex><span>    {<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;shop&#34;</span>, <span style=color:#a6e22e>Bundle</span>: <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;shop&#34;</span>, <span style=color:#a6e22e>SourceRef</span>: <span style=color:#a6e22e>source</span>}},
+</span></span><span style=display:flex><span>}}
+</span></span><span style=display:flex><span><span style=color:#a6e22e>cluster</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Cluster</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;prod&#34;</span>, <span style=color:#a6e22e>Node</span>: <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Node</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;prod&#34;</span>, <span style=color:#a6e22e>Children</span>: []<span style=color:#f92672>*</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Node</span>{<span style=color:#a6e22e>platform</span>, <span style=color:#a6e22e>apps</span>}}}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>rules</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>layout</span>.<span style=color:#a6e22e>DefaultLayoutRules</span>()
+</span></span><span style=display:flex><span><span style=color:#a6e22e>rules</span>.<span style=color:#a6e22e>FluxPlacement</span> = <span style=color:#a6e22e>layout</span>.<span style=color:#a6e22e>FluxIntegratedPerLayout</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ml</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fluxcd</span>.<span style=color:#a6e22e>NewLayoutIntegrator</span>(<span style=color:#a6e22e>fluxcd</span>.<span style=color:#a6e22e>NewResourceGenerator</span>()).<span style=color:#a6e22e>CreateLayoutWithResources</span>(<span style=color:#a6e22e>cluster</span>, <span style=color:#a6e22e>rules</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>    panic(<span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> <span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>obj</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>ml</span>.<span style=color:#a6e22e>Resources</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>kust</span>, <span style=color:#a6e22e>ok</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>obj</span>.(<span style=color:#f92672>*</span><span style=color:#a6e22e>kustv1</span>.<span style=color:#a6e22e>Kustomization</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>ok</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>continue</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>waitsFor</span> []<span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> <span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>dep</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>kust</span>.<span style=color:#a6e22e>Spec</span>.<span style=color:#a6e22e>DependsOn</span> {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>waitsFor</span> = append(<span style=color:#a6e22e>waitsFor</span>, <span style=color:#a6e22e>dep</span>.<span style=color:#a6e22e>Name</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>kust</span>.<span style=color:#a6e22e>Name</span>, <span style=color:#a6e22e>kust</span>.<span style=color:#a6e22e>Spec</span>.<span style=color:#a6e22e>Path</span>, <span style=color:#a6e22e>waitsFor</span>)
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><p>It prints <code>platform prod/platform []</code> and <code>apps prod/apps [platform]</code>. Without the field the two
+would be named <code>prod-platform-node</code> and <code>prod-apps-node</code>, after their paths, and a <code>DependsOn</code>
+entry names its target either way. The fields are refused, not ignored, on a node that has no
+Kustomization of its own (its directory renders a bundle, a grouping rule merged it into another
+node&rsquo;s directory, or it is the top of the tree) and under every other placement. Set the name and
+the named dependencies before the cluster is walked: the walker copies them onto the node&rsquo;s
+layout, and a value the node gets after the walk is refused too. See the
+<a href=/kure/dev/api-reference/flux-engine/#node-kustomizations>Flux Engine reference</a>
+.</p><h2 id=application-layout-kustomizations-are-named-after-their-unit-breaking-change>Application layout Kustomizations are named after their unit (breaking change)</h2><p>Under <code>FluxIntegratedPerLayout</code> the Kustomization of an application layout or of an augmenter&rsquo;s
+child layout is now named <code>&lt;unit name>-&lt;layout name></code>, the unit name being the name of the
+Kustomization that applies the bundles it belongs to: the first bundle&rsquo;s where a grouping axis
+merged several into one directory, not necessarily that of the bundle holding the application.
+It used to be the layout&rsquo;s name alone, so an application named like its
+bundle gave two Kustomizations one name and was refused. What to do:</p><ul><li><strong>Expect the rename on upgrade.</strong> The application <code>web-app</code> of the bundle <code>web</code> is now applied
+by the Kustomization <code>web-web-app</code>. With pruning on, Flux removes the old Kustomization once the
+parent no longer lists it; with pruning off, delete it. A Kustomization that prunes deletes
+what it applied when it is removed, so the layout&rsquo;s objects can be deleted and applied again
+under the new one: keep the old name (last point) where that is not acceptable.</li><li><strong><code>ManifestLayout.DependsOn</code> keeps working for layout names.</strong> An entry that names a layout of
+the same bundle is written as that layout&rsquo;s new Kustomization name.</li><li><strong>A Kustomization name written out by hand changes.</strong> A <code>NamedDependsOn</code> entry, or a
+<code>ManifestLayout.DependsOn</code> entry that names an application layout of another bundle, has to
+carry the new name.</li><li><strong>A Kustomization you placed yourself under the old name stays.</strong> A tree that already holds a
+Kustomization named <code>&lt;layout name></code> for the layout&rsquo;s directory gets the new one beside it, and
+both apply that directory until you remove the old one or set
+<code>ManifestLayout.KustomizationName</code> on the layout to the old name, which keeps yours and
+generates no second one.</li><li><strong>A new name over 63 characters is shortened.</strong> The new name is longer than the old one by the
+unit name, and Flux cannot reconcile a Kustomization whose name is over 63 characters, so the
+integration shortens it to <code>&lt;unit prefix>-&lt;hash>-&lt;layout name></code>, keeping the layout&rsquo;s name. A
+layout name over 54 characters leaves no room for the hash beside it, and the name is its first
+54 bytes, without the hyphens and dots that end them, and the hash:
+<code>&lt;layout name prefix>-&lt;hash></code>, or the hash alone where nothing is left of those bytes
+(go-kure/kure#1036; it was refused before). Set <code>ManifestLayout.KustomizationName</code> on the layout for a name of your own.</li><li><strong>Compute the default instead of composing it.</strong> <code>fluxcd.DefaultLayoutKustomizationName(unit, layoutName)</code> returns the name the integration gives a layout without <code>KustomizationName</code>,
+shortened or not, so a check of your own Kustomization names (collisions, length) sees the name
+kure writes (go-kure/kure#1040). <code>unit</code> is the unit name above (<code>Bundle.UnitName()</code> of the first
+bundle in a merge), <code>layoutName</code> the layout&rsquo;s <code>Name</code>.</li><li><strong>A new name another Kustomization already has is refused.</strong> The application <code>web</code> of the
+bundle <code>platform</code> is now applied by <code>platform-web</code>. If a bundle, a node or another layout
+already has a Kustomization of that name, the integration refuses the tree and names both,
+where the old name <code>web</code> was free. One written with the <code>config.kubernetes.io/local-config</code>
+annotation at any value but <code>false</code> (the string <code>"false"</code> or the boolean <code>false</code>) does not
+count: kustomize drops it from the build
+(go-kure/kure#1059). Set <code>ManifestLayout.KustomizationName</code> on the layout, or
+<code>KustomizationName</code> on the other owner.</li><li><strong>Keep an old name</strong> by setting <code>ManifestLayout.KustomizationName</code> on the layout.</li></ul><h2 id=per-layout-kustomizations-take-the-bundles-readiness-settings-and-labels-breaking-change>Per-layout Kustomizations take the bundle&rsquo;s readiness settings and labels (breaking change)</h2><p>Under <code>FluxIntegratedPerLayout</code> the Kustomization of an application&rsquo;s directory, and of every
+layout below it, now carries <code>wait</code>, <code>timeout</code>, <code>retryInterval</code>, labels and annotations: those of
+the bundle that holds the application, unless the layout sets its own (<code>ManifestLayout.Wait</code>,
+<code>Timeout</code>, <code>RetryInterval</code>, <code>Labels</code>, <code>Annotations</code>). They used to carry none, so a bundle with
+<code>Wait</code> was Ready once those Kustomizations had applied their directories, not once the workloads
+were. Interval, prune and four more settings follow in the next section. What to do:</p><ul><li><strong>Expect the new fields in the output.</strong> A tree whose bundle sets one of the five gains it on
+those Kustomizations. A tree that sets none renders as before.</li><li><strong>Give the layouts below a shorter timeout than their bundle.</strong> With <code>wait</code>, the bundle&rsquo;s
+Kustomization waits for the ones below it under its own timeout. Set <code>Timeout</code> on the layouts,
+and keep the bundle&rsquo;s above theirs; Flux treats any timeout under 30 seconds as 30 seconds.</li><li><strong>A layout that depends on the application layout above it is refused once the bundle sets
+<code>Wait</code>.</strong> That application layout&rsquo;s Kustomization would wait for the one that depends on it.
+Set <code>Wait</code> to a pointer to <code>false</code> on the application&rsquo;s layout; the layouts below keep the
+bundle&rsquo;s.</li><li><strong>A label or annotation the Kubernetes API does not accept is refused</strong> where a per-layout
+Kustomization takes it, naming the layout and, for one it inherits, the bundle.</li><li><strong>A duration Flux does not take is refused</strong>, on every placement and on the bootstrap: a
+negative one (<code>"-1s"</code>) or a positive one under a millisecond (<code>"1us"</code>), in a bundle&rsquo;s <code>Interval</code>,
+<code>Timeout</code> or <code>RetryInterval</code>, a layout&rsquo;s <code>Interval</code>, <code>Timeout</code> or <code>RetryInterval</code>, or a generator&rsquo;s
+<code>DefaultInterval</code>. The Flux API refuses the object such a value is written into, so no
+object it ever accepted changes. <code>Bundle.Validate</code> still accepts these values.</li><li><strong>A node&rsquo;s Kustomization inherits nothing.</strong> Set the fields on the node&rsquo;s walked layout.</li></ul><p>What readiness through such a chain means, and where it stops, is in the
+<a href=/kure/dev/api-reference/flux-engine/#per-layout-settings>Flux Engine reference</a>
+.</p><h2 id=per-layout-kustomizations-take-the-bundles-interval-prune-force-suspend-postbuild-and-patches-breaking-change>Per-layout Kustomizations take the bundle&rsquo;s interval, prune, force, suspend, postBuild and patches (breaking change)</h2><p>Under <code>FluxIntegratedPerLayout</code> the same Kustomizations now also carry <code>interval</code>, <code>prune</code>,
+<code>force</code>, <code>suspend</code>, <code>postBuild</code> and <code>patches</code> (go-kure/kure#1021). Interval, prune, force and
+suspend are the layout&rsquo;s own (<code>ManifestLayout.Interval</code>, <code>Prune</code>, <code>Force</code>, <code>Suspend</code>), or else the
+bundle&rsquo;s; interval and prune fall back to the generator&rsquo;s. <code>postBuild</code> is the bundle&rsquo;s, copied
+whole, and the bundle&rsquo;s patches are placed by object. What to do:</p><ul><li><strong>Expect the new fields in the output.</strong> A tree that sets none of the six renders as before.
+A bundle with <code>Prune</code> on turns garbage collection on for its applications&rsquo; Kustomizations,
+where the generator&rsquo;s <code>Prune</code> applied before.</li><li><strong>Expect a patch to move.</strong> A patch with a target is on the bundle&rsquo;s own Kustomization and on
+every per-layout one. A plain untargeted strategic-merge patch is on the Kustomizations whose
+build holds every object it names, so the bundle&rsquo;s own loses one whose object it does not build;
+its build failed on the cluster before. An untargeted JSON6902 patch, or one carrying a build
+annotation, stays on the bundle&rsquo;s own Kustomization alone and fails there when only a layout
+builds its object: give it a target.</li><li><strong>A plain untargeted patch no build can take is refused</strong> at integration instead of failing on the
+cluster: when no Kustomization of the bundle builds an object it names, give it a target or
+place the object in a build of the bundle; when no one Kustomization builds all the objects it
+names, write one patch per object. A target is for a patch of one object: kustomize refuses one
+on an entry of several documents, or of a <code>List</code> of several items, so split such a patch first.</li><li><strong>After a JSON6902 patch, a patch with one of kustomize&rsquo;s build annotations</strong>
+(<code>internal.config.kubernetes.io/</code>) <strong>or a patch that can remove an object from the build</strong>
+(<code>$patch: delete</code>, or <code>config.kubernetes.io/local-config</code> at any value but <code>"false"</code>),
+the patches that follow are not placed by object and stay
+on the bundle&rsquo;s own Kustomization as well; one whose object only a layout builds still fails
+there. The integration refuses that build, naming the patch, the entry and the object
+(go-kure/kure#1160). Put the patch before that entry, or give it a target (a patch of several
+objects: one patch per object first, each with its target).</li><li><strong>Expect Flux&rsquo;s opt-out on a Kustomization whose postBuild or patches the parent would
+change.</strong> A per-layout Kustomization is in its parent&rsquo;s build, whose postBuild substitution runs
+over its own postBuild and patches first. Where that would change either at all, a plain
+<code>${VAR}</code> in a bundle patch included, it gets <code>kustomize.toolkit.fluxcd.io/substitute: disabled</code>
+and applies them as if no parent had run. That also stops the parent substituting its labels,
+annotations and path, so a tree where the parent&rsquo;s substitution changes a <code>${...}</code> in the
+bundle&rsquo;s patches or substitute values and one in its labels, annotations or the layout&rsquo;s path
+is refused, where it rendered before: drop one of the two. A tree whose annotations leave no
+room for the opt-out under the Kubernetes API&rsquo;s total size is refused as well: shorten them.</li></ul><p>The full rules, the refusals and the limit are in the
+<a href=/kure/dev/api-reference/flux-engine/#per-layout-settings>Flux Engine reference</a>
+.</p><h2 id=a-layouts-kustomization-settings-are-refused-where-it-gets-no-kustomization-breaking-change>A layout&rsquo;s Kustomization settings are refused where it gets no Kustomization (breaking change)</h2><p>A layout&rsquo;s own Kustomization fields (<code>DependsOn</code>, <code>KustomizationName</code>, <code>Wait</code>, <code>Timeout</code>,
+<code>RetryInterval</code>, <code>Labels</code>, <code>Annotations</code>, <code>Interval</code>, <code>Prune</code>, <code>Force</code>, <code>Suspend</code>) used to be
+dropped without an error on a layout that gets no Flux Kustomization of its own. They are now
+refused (go-kure/kure#1032). That is every layout under <code>FluxIntegratedPerBundle</code> and
+<code>FluxSeparate</code> (and <code>GenerateFromLayout</code>), and, under <code>FluxIntegratedPerLayout</code>, the top of the
+tree, a layout that renders a bundle, an umbrella child and an <code>AppFileSingle</code> layout. The error
+names the first such layout, every field it sets and why it has no Kustomization. What to do:</p><ul><li><strong>An augmenter that sets <code>DependsOn</code> (or any of the eleven fields) on a child layout under
+<code>FluxSeparate</code> or <code>FluxIntegratedPerBundle</code> is now refused.</strong> Use <code>FluxIntegratedPerLayout</code>,
+which gives such a child layout its own Kustomization, or leave the fields unset.</li><li><strong>A node&rsquo;s own fields are refused on the node,</strong> once: a value the walk copies from a node to
+its layout is not refused a second time on the layout.</li></ul><h2 id=a-bundle-can-name-the-service-account-flux-applies-it-with>A bundle can name the service account Flux applies it with</h2><p><code>Bundle.ServiceAccountName</code> (go-kure/kure#1034) is written to <code>spec.serviceAccountName</code> of the
+bundle&rsquo;s Kustomization in every placement, and kustomize-controller impersonates that account when
+it applies the bundle. Under <code>FluxIntegratedPerLayout</code> the Kustomization of each of the bundle&rsquo;s
+applications that has a directory of its own, and of each layout below it, carries the same
+account; a layout has no field to change it. Unset, nothing changes in the output.</p><div class="highlight wrap-code" dir=auto><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// The umbrella names an account for its own Kustomization; a child gets</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// one only where it names its own.</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>infra</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;shop-infra&#34;</span>, <span style=color:#a6e22e>ServiceAccountName</span>: <span style=color:#e6db74>&#34;infra-deployer&#34;</span>}
+</span></span><span style=display:flex><span><span style=color:#a6e22e>services</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;shop-services&#34;</span>}
+</span></span><span style=display:flex><span><span style=color:#a6e22e>shop</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;shop&#34;</span>, <span style=color:#a6e22e>ServiceAccountName</span>: <span style=color:#e6db74>&#34;shop-deployer&#34;</span>, <span style=color:#a6e22e>Children</span>: []<span style=color:#f92672>*</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Bundle</span>{<span style=color:#a6e22e>infra</span>, <span style=color:#a6e22e>services</span>}}
+</span></span><span style=display:flex><span><span style=color:#a6e22e>cluster</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Cluster</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;prod&#34;</span>, <span style=color:#a6e22e>Node</span>: <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>stack</span>.<span style=color:#a6e22e>Node</span>{<span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;apps&#34;</span>, <span style=color:#a6e22e>Bundle</span>: <span style=color:#a6e22e>shop</span>}}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>objects</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fluxcd</span>.<span style=color:#a6e22e>Engine</span>().<span style=color:#a6e22e>GenerateFromCluster</span>(<span style=color:#a6e22e>cluster</span>, <span style=color:#a6e22e>layout</span>.<span style=color:#a6e22e>DefaultLayoutRules</span>())
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>    panic(<span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> <span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>obj</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>objects</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>kust</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>obj</span>.(<span style=color:#f92672>*</span><span style=color:#a6e22e>kustv1</span>.<span style=color:#a6e22e>Kustomization</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Printf</span>(<span style=color:#e6db74>&#34;%s %q\n&#34;</span>, <span style=color:#a6e22e>kust</span>.<span style=color:#a6e22e>Name</span>, <span style=color:#a6e22e>kust</span>.<span style=color:#a6e22e>Spec</span>.<span style=color:#a6e22e>ServiceAccountName</span>)
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><p>It prints <code>shop "shop-deployer"</code>, <code>shop-infra "infra-deployer"</code> and <code>shop-services ""</code>: each
+bundle&rsquo;s Kustomization carries the account the bundle names, and the umbrella&rsquo;s is not passed to
+<code>shop-services</code>.</p><ul><li><strong>Create the account and its RBAC yourself.</strong> Flux looks it up in the Kustomization&rsquo;s own
+namespace, the generator&rsquo;s <code>DefaultNamespace</code> (<code>flux-system</code> by default), and kure writes the
+name only.</li><li><strong>Under the integrated placements the account also applies Kustomization objects.</strong> A bundle&rsquo;s
+directory holds the CRs of its umbrella children and, under <code>FluxIntegratedPerLayout</code>, of its
+application layouts, so the bundle&rsquo;s account needs RBAC to manage Kustomizations in that
+namespace.</li><li><strong>Set it on every bundle that needs one.</strong> An umbrella&rsquo;s account is not passed to its children:
+a child without its own is applied with the controller&rsquo;s own identity, or with the default
+service account the controller is started with (<code>--default-service-account</code>), if any.</li><li><strong>Bundles that share a directory share one account.</strong> Bundles a <code>GroupFlat</code> merge puts in one
+directory must set the same value, or the integration is refused, naming both.</li><li><strong>The name is checked.</strong> It must be a DNS-1123 subdomain; <code>Bundle.Validate</code> and the generator
+refuse another, naming the bundle by its path.</li></ul><p>The table of which Kustomization carries which account is in the
+<a href=/kure/dev/api-reference/flux-engine/#service-account>Flux Engine reference</a>
+.</p><footer class=footline></footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><div id=R-header class=default-animation><a href=https://www.gokure.dev/kure/dev/ style=text-decoration:none><div style=margin:0;padding:1rem;color:var(--MENU-SECTIONS-ACTIVE-BG-color)>Go Kure
+<span style=font-size:.5em;vertical-align:middle;opacity:.7>(dev)</span></div></a></div><search><form action=/kure/dev/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Search</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
+<button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class=padding></div><div class="R-sidebarmenu R-shortcutmenu-homelinks"><ul class="space collapsible-menu"><li data-nav-id=/kure/dev/index.html><a class=padding href=/kure/dev/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class=padding></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols"><ul><li class=R-versionswitcher><div class="padding menu-control"><i class="fa-fw fas fa-code-branch"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-version></label><select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/kure/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class=padding></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/kure/dev/getting-started/index.html><a class=padding href=/kure/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li data-nav-id=/kure/dev/concepts/index.html><a class=padding href=/kure/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu></ul></li><li class=parent data-nav-id=/kure/dev/guides/index.html><a class=padding href=/kure/dev/guides/index.html>Guides</a><ul id=R-subsections-8fc2fd7736125e87cab8840a86c2af5a class=collapsible-menu><li data-nav-id=/kure/dev/guides/library-usage/index.html><a class=padding href=/kure/dev/guides/library-usage/index.html>Using Kure as a Library</a></li><li data-nav-id=/kure/dev/guides/flux-workflow/index.html><a class=padding href=/kure/dev/guides/flux-workflow/index.html>Generating Flux Manifests</a></li><li class=active data-nav-id=/kure/dev/guides/flux-layout-rules/index.html><a class=padding href=/kure/dev/guides/flux-layout-rules/index.html>Flux Layout Rules</a></li><li data-nav-id=/kure/dev/guides/flux-umbrella-bundles/index.html><a class=padding href=/kure/dev/guides/flux-umbrella-bundles/index.html>Umbrella Bundles</a></li><li data-nav-id=/kure/dev/guides/flux-augmenters-and-delivery/index.html><a class=padding href=/kure/dev/guides/flux-augmenters-and-delivery/index.html>Augmenters and Delivery Intent</a></li><li data-nav-id=/kure/dev/guides/flux-bootstrap/index.html><a class=padding href=/kure/dev/guides/flux-bootstrap/index.html>Bootstrapping Flux</a></li><li data-nav-id=/kure/dev/guides/patching/index.html><a class=padding href=/kure/dev/guides/patching/index.html>Patching Resources</a></li></ul></li><li data-nav-id=/kure/dev/examples/index.html><a class=padding href=/kure/dev/examples/index.html>Examples</a><ul id=R-subsections-2e4187ca04853a7e1382c8d86f7be6fd class=collapsible-menu></ul></li><li data-nav-id=/kure/dev/api-reference/index.html><a class=padding href=/kure/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu></ul></li><li data-nav-id=/kure/dev/contributing/index.html><a class=padding href=/kure/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li data-nav-id=/kure/dev/changelog/index.html><a class=padding href=/kure/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin></div><div class="R-menu-divider default-animation"><hr class=padding></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols"><ul></ul></div><div id=R-footer></div></div></aside><script src=/kure/dev/js/clipboard/clipboard.min.js?1794472982 defer></script><script src=/kure/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1794472982 defer></script><script src=/kure/dev/js/theme.min.js?1794472982 defer></script></body></html>
