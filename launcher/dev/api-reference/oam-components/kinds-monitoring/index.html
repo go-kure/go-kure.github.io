@@ -1,10 +1,10 @@
-<!doctype html><html id=R-html lang=en-us dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.169.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Each kind below with a heading has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
-alertmanager alertmanager is the kind-named projection of an Alertmanager of the Prometheus operator’s monitoring.coreos.com/v1 API. It is built on policyHeldKind (policyFreeKind with a policy check, see storageclass, below) and emits that one object in the build namespace, named after the component unless objectName names it; the handler adds no label, no annotation and no default, and declares the object as namespaced."><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Kinds: monitoring :: Go Kure — Launcher"><meta name=twitter:description content="Each kind below with a heading has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
-alertmanager alertmanager is the kind-named projection of an Alertmanager of the Prometheus operator’s monitoring.coreos.com/v1 API. It is built on policyHeldKind (policyFreeKind with a policy check, see storageclass, below) and emits that one object in the build namespace, named after the component unless objectName names it; the handler adds no label, no annotation and no default, and declares the object as namespaced."><meta property="og:url" content="https://www.gokure.dev/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html"><meta property="og:site_name" content="Go Kure — Launcher"><meta property="og:title" content="Kinds: monitoring :: Go Kure — Launcher"><meta property="og:description" content="Each kind below with a heading has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
-alertmanager alertmanager is the kind-named projection of an Alertmanager of the Prometheus operator’s monitoring.coreos.com/v1 API. It is built on policyHeldKind (policyFreeKind with a policy check, see storageclass, below) and emits that one object in the build namespace, named after the component unless objectName names it; the handler adds no label, no annotation and no default, and declares the object as namespaced."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="API Reference"><meta itemprop=name content="Kinds: monitoring :: Go Kure — Launcher"><meta itemprop=description content="Each kind below with a heading has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
-alertmanager alertmanager is the kind-named projection of an Alertmanager of the Prometheus operator’s monitoring.coreos.com/v1 API. It is built on policyHeldKind (policyFreeKind with a policy check, see storageclass, below) and emits that one object in the build namespace, named after the component unless objectName names it; the handler adds no label, no annotation and no default, and declares the object as namespaced."><meta itemprop=wordCount content="17867"><title>Kinds: monitoring :: Go Kure — Launcher</title><link href=/launcher/dev/css/auto-complete/auto-complete.min.css?1794564627 rel=stylesheet><script src=/launcher/dev/js/auto-complete/auto-complete.min.js?1794564627 defer></script><script src=/launcher/dev/js/search-lunr.min.js?1794564627 defer></script><script src=/launcher/dev/js/search.min.js?1794564627 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/launcher/dev/searchindex.en.js?1794564627"</script><script src=/launcher/dev/js/lunr/lunr.min.js?1794564627 defer></script><script src=/launcher/dev/js/lunr/lunr.stemmer.support.min.js?1794564627 defer></script><script src=/launcher/dev/js/lunr/lunr.multi.min.js?1794564627 defer></script><script src=/launcher/dev/js/lunr/lunr.en.min.js?1794564627 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794564627 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794564627 rel=stylesheet></noscript><link href=/launcher/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1794564627 rel=stylesheet><link href=/launcher/dev/css/theme.min.css?1794564627 rel=stylesheet><link href=/launcher/dev/css/format-html.min.css?1794564627 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/api-reference/oam-components/kinds-monitoring/index.html",window.relearn.relBasePath="../../..",window.relearn.relBaseUri="../../../../..",window.relearn.absBaseUri="https://www.gokure.dev/launcher/dev",window.relearn.version_js_url="/launcher/dev/versionindex.en.js?1794564627",window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-origin=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#alertmanager>alertmanager</a><ul><li><a href=#properties>Properties</a></li><li><a href=#outputs>Outputs</a></li><li><a href=#validation>Validation</a></li><li><a href=#example>Example</a></li></ul></li><li><a href=#thanosruler>thanosruler</a><ul><li><a href=#properties-1>Properties</a></li><li><a href=#outputs-1>Outputs</a></li><li><a href=#validation-1>Validation</a></li><li><a href=#example-1>Example</a></li></ul></li><li><a href=#kinds-not-yet-in-sections>Kinds not yet in sections</a></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/index.html><span itemprop=name>launcher</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/index.html><span itemprop=name>API Reference</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/oam-components/index.html><span itemprop=name>Component Handlers</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Kinds: monitoring</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-components/kinds-helm/index.html title="Kinds: Helm (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html title="Kinds: MetalLB (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable api-reference" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><h1 id=kinds-monitoring>Kinds: monitoring</h1><p>Each kind below with a heading has the same sections: Properties, Outputs,
-Validation and Example. Its implementation, history and tests are on the
-<a href=/launcher/dev/contributing/oam-reference/kinds-monitoring/index.html>contributor page</a>.</p><h2 id=alertmanager>alertmanager<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p><strong>alertmanager</strong> is the kind-named projection of an Alertmanager of the
+<!doctype html><html id=R-html lang=en-us dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.169.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Each kind below has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
+alertmanager alertmanager is the kind-named projection of an Alertmanager of the Prometheus operator’s monitoring.coreos.com/v1 API. It is built on policyHeldKind (policyFreeKind with a policy check, see storageclass, below) and emits that one object in the build namespace, named after the component unless objectName names it; the handler adds no label, no annotation and no default, and declares the object as namespaced."><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Kinds: monitoring :: Go Kure — Launcher"><meta name=twitter:description content="Each kind below has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
+alertmanager alertmanager is the kind-named projection of an Alertmanager of the Prometheus operator’s monitoring.coreos.com/v1 API. It is built on policyHeldKind (policyFreeKind with a policy check, see storageclass, below) and emits that one object in the build namespace, named after the component unless objectName names it; the handler adds no label, no annotation and no default, and declares the object as namespaced."><meta property="og:url" content="https://www.gokure.dev/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html"><meta property="og:site_name" content="Go Kure — Launcher"><meta property="og:title" content="Kinds: monitoring :: Go Kure — Launcher"><meta property="og:description" content="Each kind below has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
+alertmanager alertmanager is the kind-named projection of an Alertmanager of the Prometheus operator’s monitoring.coreos.com/v1 API. It is built on policyHeldKind (policyFreeKind with a policy check, see storageclass, below) and emits that one object in the build namespace, named after the component unless objectName names it; the handler adds no label, no annotation and no default, and declares the object as namespaced."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="API Reference"><meta itemprop=name content="Kinds: monitoring :: Go Kure — Launcher"><meta itemprop=description content="Each kind below has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
+alertmanager alertmanager is the kind-named projection of an Alertmanager of the Prometheus operator’s monitoring.coreos.com/v1 API. It is built on policyHeldKind (policyFreeKind with a policy check, see storageclass, below) and emits that one object in the build namespace, named after the component unless objectName names it; the handler adds no label, no annotation and no default, and declares the object as namespaced."><meta itemprop=wordCount content="17526"><title>Kinds: monitoring :: Go Kure — Launcher</title><link href=/launcher/dev/css/auto-complete/auto-complete.min.css?1794566328 rel=stylesheet><script src=/launcher/dev/js/auto-complete/auto-complete.min.js?1794566328 defer></script><script src=/launcher/dev/js/search-lunr.min.js?1794566328 defer></script><script src=/launcher/dev/js/search.min.js?1794566328 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/launcher/dev/searchindex.en.js?1794566328"</script><script src=/launcher/dev/js/lunr/lunr.min.js?1794566328 defer></script><script src=/launcher/dev/js/lunr/lunr.stemmer.support.min.js?1794566328 defer></script><script src=/launcher/dev/js/lunr/lunr.multi.min.js?1794566328 defer></script><script src=/launcher/dev/js/lunr/lunr.en.min.js?1794566328 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794566328 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794566328 rel=stylesheet></noscript><link href=/launcher/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1794566328 rel=stylesheet><link href=/launcher/dev/css/theme.min.css?1794566328 rel=stylesheet><link href=/launcher/dev/css/format-html.min.css?1794566328 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/api-reference/oam-components/kinds-monitoring/index.html",window.relearn.relBasePath="../../..",window.relearn.relBaseUri="../../../../..",window.relearn.absBaseUri="https://www.gokure.dev/launcher/dev",window.relearn.version_js_url="/launcher/dev/versionindex.en.js?1794566328",window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-origin=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#alertmanager>alertmanager</a><ul><li><a href=#properties>Properties</a></li><li><a href=#outputs>Outputs</a></li><li><a href=#validation>Validation</a></li><li><a href=#example>Example</a></li></ul></li><li><a href=#thanosruler>thanosruler</a><ul><li><a href=#properties-1>Properties</a></li><li><a href=#outputs-1>Outputs</a></li><li><a href=#validation-1>Validation</a></li><li><a href=#example-1>Example</a></li></ul></li><li><a href=#prometheus>prometheus</a><ul><li><a href=#properties-2>Properties</a></li><li><a href=#outputs-2>Outputs</a></li><li><a href=#validation-2>Validation</a></li><li><a href=#example-2>Example</a></li></ul></li><li><a href=#servicemonitor-podmonitor-prometheus-probe-prometheusrule>servicemonitor, podmonitor, prometheus-probe, prometheusrule</a><ul><li><a href=#properties-3>Properties</a></li><li><a href=#outputs-3>Outputs</a></li><li><a href=#validation-3>Validation</a></li><li><a href=#example-3>Example</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/index.html><span itemprop=name>launcher</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/index.html><span itemprop=name>API Reference</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/oam-components/index.html><span itemprop=name>Component Handlers</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Kinds: monitoring</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-components/kinds-helm/index.html title="Kinds: Helm (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html title="Kinds: MetalLB (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable api-reference" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><h1 id=kinds-monitoring>Kinds: monitoring</h1><p>Each kind below has the same sections: Properties, Outputs, Validation and
+Example. Its implementation, history and tests are on the <a href=/launcher/dev/contributing/oam-reference/kinds-monitoring/index.html>contributor
+page</a>.</p><h2 id=alertmanager>alertmanager<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p><strong>alertmanager</strong> is the kind-named projection of an Alertmanager of the
 Prometheus operator&rsquo;s <code>monitoring.coreos.com/v1</code> API. It is built on
 <code>policyHeldKind</code> (<code>policyFreeKind</code> with a policy check, see <strong>storageclass</strong>,
 below) and emits that one object in the build namespace, named after the
@@ -778,426 +778,388 @@ request above (the resources of a config-reloader no entry patches, the
 arguments it derives, the <code>thanos-ruler-operated</code> Service), is not in the
 object. The object&rsquo;s status is the operator&rsquo;s and is not written.</p><h3 id=example-1>Example<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>The component in <code>pkg/cmd/kurel/testdata/thanosruler-component/app.yaml</code>, built
 against the <code>cluster.yaml</code> beside it, gives the <code>expected.yaml</code> beside it. The
-fixture test compares the two.</p><h2 id=kinds-not-yet-in-sections>Kinds not yet in sections<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>The kinds below are not yet in these sections.</p><ul><li><p><strong>prometheus</strong> (go-kure/launcher#790) is the kind-named projection of a
-Prometheus of the same API. It is built as <code>alertmanager</code> is, on
-<code>policyHeldKind</code> with the same policy check (<code>monitoring_workload.go</code>), and
-emits that one object in the build namespace, named after the component
-unless <code>objectName</code> names it; the handler declares the object as
-namespaced and adds no label and no annotation. Launcher emits no pod, no
-StatefulSet and no Service for it: the operator builds one StatefulSet per
-shard from the object and runs the pods. Unlike on <code>alertmanager</code>, an image
-named without <code>version</code> is not refused, nor is a <code>version</code> the operator
-cannot parse. A parseable <code>version</code> of a major other than 2 or 3 is
-refused, and so is a field the operator reads only from some Prometheus
-version on, or, under <code>thanos</code>, from some Thanos version on, where
-<code>version</code> or <code>thanos.version</code> is below it; both are listed below. What is said of
-<code>alertmanager</code> above holds here unless this entry says otherwise: no
-capability is required and nothing gates the kind; on a listed container, init container
-or volume, an authored <code>0</code> or <code>""</code> the type cannot carry is refused, a
-<code>hostPort</code> of <code>0</code> under <code>hostNetwork: true</code> included, and so is an empty
-<code>schedulerName</code> or <code>imagePullPolicy</code>, which the operator copies unchanged
-to the pods and to its own containers (prometheus, thanos-sidecar and both
-reloaders), where the API server defaults an empty one; so is an empty <code>portName</code>,
-<code>scrapeInterval</code>, <code>evaluationInterval</code> or <code>thanos.blockSize</code>, which the CRD
-defaults to <code>web</code>, <code>30s</code>, <code>30s</code> and <code>2h</code>, and an empty <code>action</code> of a
-relabeling rule (<code>replace</code>) in a <code>remoteWrite</code> entry&rsquo;s
-<code>writeRelabelConfigs</code>, an Alertmanager endpoint&rsquo;s <code>relabelings</code> or
-<code>alertRelabelings</code>, or a scrape class&rsquo;s <code>relabelings</code> or
-<code>metricRelabelings</code> (<code>scrapeInterval: "" cannot be carried by the Prometheus operator API types (…)</code>); the tag rule and the request-over-limit
-check hold with or without a policy; no policy default is filled; an image
-the operator chooses is refused under a registry allowlist, and the
-operator&rsquo;s own replica and shard counts are held, not written (both below);
-the labels and annotations of <code>storage.volumeClaimTemplate</code> are held to the
-reserved metadata keys where it is the arm in use, and no claim template
-takes a component label. An empty <code>retention</code> is not
-refused: its 24h default is the operator&rsquo;s code (where <code>retentionSize</code> and
-<code>retentionPercentage</code> are empty too), not a CRD default, so the derived list
-cannot hold it, and the object then gets the operator&rsquo;s default. The
-operator&rsquo;s behaviour is read from its source at prometheus-operator v0.94.1
-(<code>pkg/prometheus/server/statefulset.go</code>, <code>pkg/prometheus/common.go</code>). The
-operator fills no memory request of its own for the prometheus container
-or the sidecar, so the memory-limit refusal of <code>alertmanager</code> has no
-counterpart.</p><p><strong>No field is renamed.</strong> The spec has no top-level <code>labels</code> or
-<code>annotations</code> field, so every property keeps its upstream name:
-<code>externalLabels</code> is the spec&rsquo;s own field, the Prometheus external labels,
-not Kubernetes labels, and the reserved-key and component-label checks of
-<code>labels</code> do not apply to it.</p><p><strong>Authored.</strong> The properties are the top-level json fields of
-<code>PrometheusSpec</code>, decoded strictly at every depth, less three: the image
-(<code>image</code>, <code>version</code>, <code>imagePullPolicy</code>, <code>imagePullSecrets</code>); the pods, as
-on <code>alertmanager</code>; the StatefulSets (<code>replicas</code>, <code>shards</code>,
-<code>shardingStrategy</code>, <code>serviceName</code>, <code>podManagementPolicy</code>,
-<code>updateStrategy</code>, <code>minReadySeconds</code>, <code>persistentVolumeClaimRetentionPolicy</code>,
-<code>shardRetentionPolicy</code>); what it scrapes (the four selector and namespace
-selector pairs, the scrape settings and limits, <code>scrapeClasses</code>), the rules
-it evaluates and where alerts go (<code>ruleSelector</code>,
-<code>ruleNamespaceSelector</code>, <code>rules</code>, <code>alerting</code>), where its data goes
-(<code>storage</code>, <code>retention</code>, <code>retentionSize</code>, <code>retentionPercentage</code>, <code>tsdb</code>,
-<code>remoteWrite</code>, <code>remoteRead</code>), the Thanos sidecar (<code>thanos</code>), its server
-(<code>web</code>, <code>listenLocal</code>, <code>enableAdminAPI</code>), and the rest of the spec&rsquo;s
-fields. <code>baseImage</code>, <code>tag</code> and <code>sha</code> are refused when not empty; an empty
-one writes nothing, as on <code>alertmanager</code>. The same three of <code>thanos</code> are
-refused whenever set, the empty string included, since the type writes a
-set pointer; a <code>null</code> one sets none (<code>tag: not authorable: the Prometheus operator deprecates the field, …; use image</code>).
-<code>additionalArgs</code> and <code>thanos.additionalArgs</code> are passed as written and are
-not read. An entry of <code>containers</code> named <code>prometheus</code> or <code>config-reloader</code>,
+fixture test compares the two.</p><h2 id=prometheus>prometheus<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p><strong>prometheus</strong> is the kind-named projection of a Prometheus of the same API. It
+is built as <code>alertmanager</code> is, on <code>policyHeldKind</code> with the same policy check
+(<code>monitoring_workload.go</code>), and emits that one object in the build namespace,
+named after the component unless <code>objectName</code> names it; the handler declares the
+object as namespaced and adds no label and no annotation.</p><h3 id=properties-2>Properties<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><strong>No field is renamed.</strong> The spec has no top-level <code>labels</code> or <code>annotations</code>
+field, so every property keeps its upstream name: <code>externalLabels</code> is the spec&rsquo;s
+own field, the Prometheus external labels, not Kubernetes labels, and the
+reserved-key and component-label checks of <code>labels</code> do not apply to it.</p><p><strong>Authored.</strong> The properties are the top-level json fields of <code>PrometheusSpec</code>,
+decoded strictly at every depth, less three: the image (<code>image</code>, <code>version</code>,
+<code>imagePullPolicy</code>, <code>imagePullSecrets</code>); the pods, as on <code>alertmanager</code>; the
+StatefulSets (<code>replicas</code>, <code>shards</code>, <code>shardingStrategy</code>, <code>serviceName</code>,
+<code>podManagementPolicy</code>, <code>updateStrategy</code>, <code>minReadySeconds</code>,
+<code>persistentVolumeClaimRetentionPolicy</code>, <code>shardRetentionPolicy</code>); what it scrapes
+(the four selector and namespace selector pairs, the scrape settings and limits,
+<code>scrapeClasses</code>), the rules it evaluates and where alerts go (<code>ruleSelector</code>,
+<code>ruleNamespaceSelector</code>, <code>rules</code>, <code>alerting</code>), where its data goes (<code>storage</code>,
+<code>retention</code>, <code>retentionSize</code>, <code>retentionPercentage</code>, <code>tsdb</code>, <code>remoteWrite</code>,
+<code>remoteRead</code>), the Thanos sidecar (<code>thanos</code>), its server (<code>web</code>, <code>listenLocal</code>,
+<code>enableAdminAPI</code>), and the rest of the spec&rsquo;s fields. <code>baseImage</code>, <code>tag</code> and
+<code>sha</code> are refused when not empty; an empty one writes nothing, as on
+<code>alertmanager</code>. The same three of <code>thanos</code> are refused whenever set, the empty
+string included, since the type writes a set pointer; a <code>null</code> one sets none
+(<code>tag: not authorable: the Prometheus operator deprecates the field, …; use image</code>). <code>additionalArgs</code> and <code>thanos.additionalArgs</code> are passed as written and
+are not read. An entry of <code>containers</code> named <code>prometheus</code> or <code>config-reloader</code>,
 or <code>thanos-sidecar</code> where <code>thanos</code> is set, is a patch of the container the
 operator generates under that name (<code>makeStatefulSetSpec</code>, merged by
-<code>k8s.MergePatchContainers</code>); of <code>initContainers</code>, <code>init-config-reloader</code>.
-A patch may name no image; any other entry that names none is refused
-(<code>containers[0] "proxy": names no image, and the Prometheus operator generates no container of that name to merge it into; name an image, or the container it patches (prometheus, config-reloader)</code>), and so is a
-<code>thanos-sidecar</code> entry without an image where <code>thanos</code> is unset, since no
-sidecar is generated then. As on <code>alertmanager</code>, a name listed twice in one
-list is refused, and so is a name shared by an init container and a
-container of the pods, generated or listed (<code>containers[0] "init-config-reloader": the name is also that of the init container the Prometheus operator generates, …</code>); and <code>dnsPolicy: None</code> without
+<code>k8s.MergePatchContainers</code>); of <code>initContainers</code>, <code>init-config-reloader</code>. A
+patch may name no image; any other entry that names none is refused
+(<code>containers[0] "proxy": names no image, and the Prometheus operator generates no container of that name to merge it into; name an image, or the container it patches (prometheus, config-reloader)</code>), and so is a <code>thanos-sidecar</code> entry
+without an image where <code>thanos</code> is unset, since no sidecar is generated then. As
+on <code>alertmanager</code>, a name listed twice in one list is refused, and so is a name
+shared by an init container and a container of the pods, generated or listed
+(<code>containers[0] "init-config-reloader": the name is also that of the init container the Prometheus operator generates, …</code>); and <code>dnsPolicy: None</code> without
 <code>dnsConfig.nameservers</code>, and a pod-level
-<code>securityContext.windowsOptions.hostProcess: true</code> without
-<code>hostNetwork: true</code>, are refused: the API refuses the pods the operator
-copies them into. A patch&rsquo;s ports are merged into those the operator gives
-the container by number, as on <code>alertmanager</code>: the <code>prometheus</code> container&rsquo;s
-web port under <code>portName</code> at 9090/TCP and <code>config-reloader</code>&rsquo;s <code>reloader-web</code>
-at 8080/TCP, none of either under <code>listenLocal</code> (<code>config-reloader</code> keeps its
-port under the <code>ProcessSignal</code> <code>reloadStrategy</code>, to which the operator does
-not hand <code>listenLocal</code> on), <code>init-config-reloader</code>&rsquo;s <code>reloader-init</code> at
-8081/TCP, and <code>thanos-sidecar</code>&rsquo;s <code>http</code> at 10902 and <code>grpc</code> at 10901, which
-<code>thanos.listenLocal</code> does not take away. A container whose ports, as the
-pods run them, name two ports alike is refused (<code>containers[0] "prometheus": ports[0] "web" at 8080/TCP: the Prometheus operator merges the patch's ports into the container's by number, which leaves another port of that name, the Prometheus operator's port at 9090/TCP, …</code>). A patch that
-renames the web port (a port at 9090 of another name than <code>portName</code>) is
-refused while a startup, liveness or readiness probe the operator writes
-still names <code>portName</code>, as on <code>alertmanager</code> (<code>containers[0] "prometheus": ports[0] "http" at 9090/TCP renames the web port, whose name portName "web" the Prometheus operator's startup, liveness and readiness probes name; …</code>; go-kure/launcher#963). The operator&rsquo;s probes name <code>portName</code>
-unless <code>listenLocal</code> is set, under which each is an exec and no web port is
-given (<code>BuildProbes</code> and <code>buildProbeHandler</code>,
+<code>securityContext.windowsOptions.hostProcess: true</code> without <code>hostNetwork: true</code>,
+are refused: the API refuses the pods the operator copies them into. A patch&rsquo;s
+ports are merged into those the operator gives the container by number, as on
+<code>alertmanager</code>: the <code>prometheus</code> container&rsquo;s web port under <code>portName</code> at
+9090/TCP and <code>config-reloader</code>&rsquo;s <code>reloader-web</code> at 8080/TCP, none of either
+under <code>listenLocal</code> (<code>config-reloader</code> keeps its port under the <code>ProcessSignal</code>
+<code>reloadStrategy</code>, to which the operator does not hand <code>listenLocal</code> on),
+<code>init-config-reloader</code>&rsquo;s <code>reloader-init</code> at 8081/TCP, and <code>thanos-sidecar</code>&rsquo;s
+<code>http</code> at 10902 and <code>grpc</code> at 10901, which <code>thanos.listenLocal</code> does not take
+away. A container whose ports, as the pods run them, name two ports alike is
+refused (<code>containers[0] "prometheus": ports[0] "web" at 8080/TCP: the Prometheus operator merges the patch's ports into the container's by number, which leaves another port of that name, the Prometheus operator's port at 9090/TCP, …</code>). A
+patch that renames the web port (a port at 9090 of another name than <code>portName</code>)
+is refused while a startup, liveness or readiness probe the operator writes
+still names <code>portName</code>, as on <code>alertmanager</code> (<code>containers[0] "prometheus": ports[0] "http" at 9090/TCP renames the web port, whose name portName "web" the Prometheus operator's startup, liveness and readiness probes name; …</code>). The
+operator&rsquo;s probes name <code>portName</code> unless <code>listenLocal</code> is set, under which each
+is an exec and no web port is given (<code>BuildProbes</code> and <code>buildProbeHandler</code>,
 <code>pkg/prometheus/promcfg.go:1398-1451</code> at prometheus-operator v0.94.1). Two
-<code>volumes</code> of one name are refused, and so is a <code>serviceName</code> that is not a DNS-1123 label (a
-leading digit is refused when <code>spec.kubernetesVersion</code> is below 1.36,
-RelaxedServiceNameValidation, unless <code>spec.featureGates</code> sets that gate on;
-go-kure/launcher#959, go-kure/launcher#1230, <code>docs/delivery-scope.md</code> §3.5).
-A nonempty <code>externalUrl</code> that Prometheus exits on at
-startup is refused too, though the operator and the API accept it: the
-operator passes it unchanged as <code>--web.external-url</code>
-(<code>pkg/prometheus/promcfg.go</code>), and Prometheus exits where it begins or ends
-with a quote (<code>externalUrl: begins or ends with a quote: …</code>) or where Go&rsquo;s
-<code>net/url</code> cannot parse it (<code>externalUrl: not a URL Go's net/url can parse: …</code>; <code>computeExternalURL</code>, <code>cmd/prometheus/main.go</code> of v3.14.0). Prometheus
-checks no scheme, so any scheme builds. Neither message names the value.</p><p><strong>Required: the kind&rsquo;s required list is generated</strong> (go-kure/launcher#883),
-as on <strong>alertmanager</strong>. No top-level field is one. Among the fields it
-refuses unauthored under an authored parent, as before: the <code>name</code> of an
-additional argument (the spec&rsquo;s and the sidecar&rsquo;s), a DNS option&rsquo;s <code>name</code>,
-a host alias&rsquo;s <code>ip</code> and <code>hostnames</code>, the <code>type</code> of an <code>updateStrategy</code>; the
-<code>namespace</code> and <code>resource</code> of an <code>excludedFromEnforcement</code> entry, the
-<code>ruleNamespace</code> and <code>ruleName</code> of a <code>prometheusRulesExcludedFromEnforce</code>
-entry; <code>alerting.alertmanagers</code>, and an endpoint&rsquo;s <code>name</code> and <code>port</code>;
-<code>apiserverConfig.host</code>; a scrape class&rsquo;s <code>name</code>;
-<code>shardRetentionPolicy.retain.retentionPeriod</code>; <code>tracingConfig.endpoint</code>;
-the <code>url</code> of a <code>remoteWrite</code> and a <code>remoteRead</code> entry and the <code>clientId</code>,
-<code>clientSecret</code> and <code>tokenUrl</code> of its <code>oauth2</code>; the <code>clientId</code>, <code>tenantId</code>
-(and, under <code>azureAd.oauth</code>, <code>clientSecret</code>) of a remote write entry&rsquo;s
-Azure AD settings; and the <code>key</code> and <code>operator</code> of a match expression, in
-every label selector the spec holds, presence only. Refused since
-go-kure/launcher#883 (<strong>breaking</strong> for a document that leaves one out under
-an authored parent): the required fields of the Kubernetes types the spec
-embeds (a container&rsquo;s or a volume&rsquo;s <code>name</code>, the <code>key</code> of a Secret key
-reference, a topology spread constraint&rsquo;s or a pod affinity term&rsquo;s
-<code>topologyKey</code>, a seccomp profile&rsquo;s <code>type</code>), and the <code>username</code> and the
-<code>password</code> of the <code>basicAuth</code> of <code>alerting.alertmanagers[]</code>,
-<code>apiserverConfig</code>, and a <code>remoteRead</code> and a <code>remoteWrite</code> entry, which the
-operator refuses left out. The <code>keySecret</code> of <code>web.tlsConfig</code> is asked for
-only where it is authored, the key being readable from <code>keyFile</code> instead.
-<strong>Not refused:</strong> the owner reference fields of an ephemeral claim
-template&rsquo;s metadata, which the API server prunes, as on <strong>alertmanager</strong>,
-and the restart rule and pod certificate fields the type leaves out
-when empty, as on <strong>alertmanager</strong>.</p><p><strong>The group of an excluded object is written.</strong> An
-<code>excludedFromEnforcement</code> entry that leaves <code>group</code> out (or writes it
-<code>null</code>) is written with <code>monitoring.coreos.com</code>, and an authored empty
-group is refused by the entry&rsquo;s index: the Go type writes the field even
-when empty, and the API admits only that one group, which it defaults
-where the field is absent. <code>TestMonitoringExcludedGroup_MatchesMarkers</code>
-holds the written value to the module&rsquo;s default and enum.</p><p><strong>What the operator builds from the spec is checked where the API or the
-operator would break it,</strong> as on <code>alertmanager</code> and by the same shared
-checks, under any policy and none, at <code>pkg/prometheus/common.go</code> and
-<code>pkg/prometheus/server/</code> of prometheus-operator v0.94.1:</p><ul><li><p>a <code>portName</code> the API refuses where the operator writes it: not an IANA
-service name; and unless <code>serviceName</code> names a Service of the author&rsquo;s,
-<code>grpc</code> where <code>thanos</code> is set, the port the operator adds for the sidecar
-to the governing Service it creates (<code>MakeContainerPorts</code>,
-<code>BuildStatefulSetService</code>; server/operator.go:1006-1030).</p></li><li><p>a negative <code>replicas</code>, which the operator runs as 1 (<code>ReplicasNumberPtr</code>),
-and a <code>shards</code> below 1, for which it runs 1 shard (<code>shardsNumber</code>).</p></li><li><p>the storage arms as on <code>alertmanager</code>: a claim template named otherwise
-than <code>prometheus-&lt;name>-db</code> beside <code>storage.emptyDir</code> or
-<code>storage.ephemeral</code>, a claim without a positive storage request, an
-ephemeral claim without access modes, and on the claim template arm a
-claim template name that is not a DNS-1123 label or names a volume the
-operator adds (<code>VolumeClaimName</code>, server/statefulset.go:105-138).</p></li><li><p>an entry of <code>volumes</code> named as a volume the operator adds: <code>config</code>,
+<code>volumes</code> of one name are refused, and so is a <code>serviceName</code> that is not a
+DNS-1123 label (a leading digit is refused when <code>spec.kubernetesVersion</code> is
+below 1.36, RelaxedServiceNameValidation, unless <code>spec.featureGates</code> sets that
+gate on; <code>docs/delivery-scope.md</code> §3.5). A nonempty <code>externalUrl</code> that
+Prometheus exits on at startup is refused too, though the operator and the API
+accept it: the operator passes it unchanged as <code>--web.external-url</code>
+(<code>pkg/prometheus/promcfg.go</code>), and Prometheus exits where it begins or ends with
+a quote (<code>externalUrl: begins or ends with a quote: …</code>) or where Go&rsquo;s <code>net/url</code>
+cannot parse it (<code>externalUrl: not a URL Go's net/url can parse: …</code>;
+<code>computeExternalURL</code>, <code>cmd/prometheus/main.go</code> of v3.14.0). Prometheus checks no
+scheme, so any scheme builds. Neither message names the value.</p><p><strong>Required: the kind&rsquo;s required list is generated</strong>, as on <strong>alertmanager</strong>. No
+top-level field is one. Among the fields it refuses unauthored under an authored
+parent, as before: the <code>name</code> of an additional argument (the spec&rsquo;s and the
+sidecar&rsquo;s), a DNS option&rsquo;s <code>name</code>, a host alias&rsquo;s <code>ip</code> and <code>hostnames</code>, the
+<code>type</code> of an <code>updateStrategy</code>; the <code>namespace</code> and <code>resource</code> of an
+<code>excludedFromEnforcement</code> entry, the <code>ruleNamespace</code> and <code>ruleName</code> of a
+<code>prometheusRulesExcludedFromEnforce</code> entry; <code>alerting.alertmanagers</code>, and an
+endpoint&rsquo;s <code>name</code> and <code>port</code>; <code>apiserverConfig.host</code>; a scrape class&rsquo;s <code>name</code>;
+<code>shardRetentionPolicy.retain.retentionPeriod</code>; <code>tracingConfig.endpoint</code>; the
+<code>url</code> of a <code>remoteWrite</code> and a <code>remoteRead</code> entry and the <code>clientId</code>,
+<code>clientSecret</code> and <code>tokenUrl</code> of its <code>oauth2</code>; the <code>clientId</code>, <code>tenantId</code> (and,
+under <code>azureAd.oauth</code>, <code>clientSecret</code>) of a remote write entry&rsquo;s Azure AD
+settings; and the <code>key</code> and <code>operator</code> of a match expression, in every label
+selector the spec holds, presence only. Refused since go-kure/launcher#883
+(<strong>breaking</strong> for a document that leaves one out under an authored parent): the
+required fields of the Kubernetes types the spec embeds (a container&rsquo;s or a
+volume&rsquo;s <code>name</code>, the <code>key</code> of a Secret key reference, a topology spread
+constraint&rsquo;s or a pod affinity term&rsquo;s <code>topologyKey</code>, a seccomp profile&rsquo;s
+<code>type</code>), and the <code>username</code> and the <code>password</code> of the <code>basicAuth</code> of
+<code>alerting.alertmanagers[]</code>, <code>apiserverConfig</code>, and a <code>remoteRead</code> and a
+<code>remoteWrite</code> entry, which the operator refuses left out. The <code>keySecret</code> of
+<code>web.tlsConfig</code> is asked for only where it is authored, the key being readable
+from <code>keyFile</code> instead. <strong>Not refused:</strong> the owner reference fields of an
+ephemeral claim template&rsquo;s metadata, which the API server prunes, as on
+<strong>alertmanager</strong>, and the restart rule and pod certificate fields the type
+leaves out when empty, as on <strong>alertmanager</strong>.</p><h3 id=outputs-2>Outputs<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Launcher emits no pod, no StatefulSet and no Service for it: the operator builds
+one StatefulSet per shard from the object and runs the pods.</p><p><strong>The group of an excluded object is written.</strong> An <code>excludedFromEnforcement</code>
+entry that leaves <code>group</code> out (or writes it <code>null</code>) is written with
+<code>monitoring.coreos.com</code>, and an authored empty group is refused by the entry&rsquo;s
+index: the Go type writes the field even when empty, and the API admits only
+that one group, which it defaults where the field is absent.</p><p><strong>What the type writes unauthored:</strong> <code>arbitraryFSAccessThroughSMs: {}</code>,
+<code>resources: {}</code> and <code>rules: {alert: {}}</code>, on every Prometheus; on an authored
+<code>thanos</code>, its <code>resources: {}</code>; and, on an authored <code>storage</code>, a
+<code>volumeClaimTemplate</code> with <code>metadata: {}</code> and <code>status: {}</code>.</p><h3 id=validation-2>Validation<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Unlike on <code>alertmanager</code>, an image named without <code>version</code> is not refused, nor
+is a <code>version</code> the operator cannot parse. A parseable <code>version</code> of a major other
+than 2 or 3 is refused, and so is a field the operator reads only from some
+Prometheus version on, or, under <code>thanos</code>, from some Thanos version on, where
+<code>version</code> or <code>thanos.version</code> is below it; both are listed below. What is said
+of <code>alertmanager</code> above holds here unless this entry says otherwise: no
+capability is required and nothing gates the kind; on a listed container, init
+container or volume, an authored <code>0</code> or <code>""</code> the type cannot carry is refused, a
+<code>hostPort</code> of <code>0</code> under <code>hostNetwork: true</code> included, and so is an empty
+<code>schedulerName</code> or <code>imagePullPolicy</code>, which the operator copies unchanged to the
+pods and to its own containers (prometheus, thanos-sidecar and both reloaders),
+where the API server defaults an empty one; so is an empty <code>portName</code>,
+<code>scrapeInterval</code>, <code>evaluationInterval</code> or <code>thanos.blockSize</code>, which the CRD
+defaults to <code>web</code>, <code>30s</code>, <code>30s</code> and <code>2h</code>, and an empty <code>action</code> of a relabeling
+rule (<code>replace</code>) in a <code>remoteWrite</code> entry&rsquo;s <code>writeRelabelConfigs</code>, an
+Alertmanager endpoint&rsquo;s <code>relabelings</code> or <code>alertRelabelings</code>, or a scrape class&rsquo;s
+<code>relabelings</code> or <code>metricRelabelings</code> (<code>scrapeInterval: "" cannot be carried by the Prometheus operator API types (…)</code>); the tag rule and the request-over-limit
+check hold with or without a policy; no policy default is filled; an image the
+operator chooses is refused under a registry allowlist, and the operator&rsquo;s own
+replica and shard counts are held, not written (both below); the labels and
+annotations of <code>storage.volumeClaimTemplate</code> are held to the reserved metadata
+keys where it is the arm in use, and no claim template takes a component label.
+An empty <code>retention</code> is not refused: its 24h default is the operator&rsquo;s code
+(where <code>retentionSize</code> and <code>retentionPercentage</code> are empty too), not a CRD
+default, so the derived list cannot hold it, and the object then gets the
+operator&rsquo;s default. The operator&rsquo;s behaviour is read from its source at
+prometheus-operator v0.94.1 (<code>pkg/prometheus/server/statefulset.go</code>,
+<code>pkg/prometheus/common.go</code>). The operator fills no memory request of its own for
+the prometheus container or the sidecar, so the memory-limit refusal of
+<code>alertmanager</code> has no counterpart.</p><p><strong>What the operator builds from the spec is checked where the API or the
+operator would break it,</strong> as on <code>alertmanager</code> and by the same shared checks,
+under any policy and none, at <code>pkg/prometheus/common.go</code> and
+<code>pkg/prometheus/server/</code> of prometheus-operator v0.94.1:</p><ul><li><p>a <code>portName</code> the API refuses where the operator writes it: not an IANA service
+name; and unless <code>serviceName</code> names a Service of the author&rsquo;s, <code>grpc</code> where
+<code>thanos</code> is set, the port the operator adds for the sidecar to the governing
+Service it creates (<code>MakeContainerPorts</code>, <code>BuildStatefulSetService</code>;
+server/operator.go:1006-1030).</p></li><li><p>a negative <code>replicas</code>, which the operator runs as 1 (<code>ReplicasNumberPtr</code>), and
+a <code>shards</code> below 1, for which it runs 1 shard (<code>shardsNumber</code>).</p></li><li><p>the storage arms as on <code>alertmanager</code>: a claim template named otherwise than
+<code>prometheus-&lt;name>-db</code> beside <code>storage.emptyDir</code> or <code>storage.ephemeral</code>, a
+claim without a positive storage request, an ephemeral claim without access
+modes, and on the claim template arm a claim template name that is not a
+DNS-1123 label or names a volume the operator adds (<code>VolumeClaimName</code>,
+server/statefulset.go:105-138).</p></li><li><p>an entry of <code>volumes</code> named as a volume the operator adds: <code>config</code>,
 <code>tls-assets</code>, <code>config-out</code> and <code>web-config</code> (the last whatever <code>version</code>
-names, though the operator adds it only for Prometheus 2.24.0 on, so
-that raising <code>version</code> does not turn a volume of the author&rsquo;s into a
-clash, as on <code>alertmanager</code>);
-<code>log-file</code> where <code>scrapeFailureLogFile</code> is a file name without a
-directory, or <code>queryLogFile</code> is one and <code>scrapeFailureLogFile</code> is unset;
-<code>thanos-prometheus-http-client-file</code> where <code>thanos</code> is set, whatever
-<code>thanos.version</code> names; any <code>prometheus-&lt;name>-rulefiles-&lt;n></code>, the
-volumes of the rule ConfigMaps, of which the operator mounts at least
-three whatever the rules (<code>&lt;n></code> a decimal without a leading zero, as the
-operator writes it: <code>rulefiles-01</code> is not reserved); the name the operator derives for each of
-<code>secrets</code> and <code>configMaps</code> (<code>secret-&lt;name></code>, <code>configmap-&lt;name></code>); and the
-data volume&rsquo;s. Two entries of <code>secrets</code>, or of <code>configMaps</code>, that the
-operator&rsquo;s naming gives one volume name are refused as well. So is an
-entry whose volume name, cut to 63 characters, ends in <code>-</code>: the operator
-checks the name after the cut and fails to build the pods
-(<code>ResourceNamer.DNS1123Label</code>, common.go:289-292 and :311-314, returned
-at server/statefulset.go:181-184). The volumes of the web TLS
-credentials are not checked, as on <code>alertmanager</code>: the operator names
-each after the credential&rsquo;s source with a hash appended, which the kind
-does not derive, so an entry under one of those names is left to the API
-to refuse.</p></li><li><p>an entry of <code>volumeMounts</code> at a path the operator mounts a volume at in
-the prometheus container: <code>/prometheus</code>, <code>/etc/prometheus/config_out</code>,
+names, though the operator adds it only for Prometheus 2.24.0 on, so that
+raising <code>version</code> does not turn a volume of the author&rsquo;s into a clash, as on
+<code>alertmanager</code>); <code>log-file</code> where <code>scrapeFailureLogFile</code> is a file name
+without a directory, or <code>queryLogFile</code> is one and <code>scrapeFailureLogFile</code> is
+unset; <code>thanos-prometheus-http-client-file</code> where <code>thanos</code> is set, whatever
+<code>thanos.version</code> names; any <code>prometheus-&lt;name>-rulefiles-&lt;n></code>, the volumes of
+the rule ConfigMaps, of which the operator mounts at least three whatever the
+rules (<code>&lt;n></code> a decimal without a leading zero, as the operator writes it:
+<code>rulefiles-01</code> is not reserved); the name the operator derives for each of
+<code>secrets</code> and <code>configMaps</code> (<code>secret-&lt;name></code>, <code>configmap-&lt;name></code>); and the data
+volume&rsquo;s. Two entries of <code>secrets</code>, or of <code>configMaps</code>, that the operator&rsquo;s
+naming gives one volume name are refused as well. So is an entry whose volume
+name, cut to 63 characters, ends in <code>-</code>: the operator checks the name after
+the cut and fails to build the pods (<code>ResourceNamer.DNS1123Label</code>,
+common.go:289-292 and :311-314, returned at server/statefulset.go:181-184).
+The volumes of the web TLS credentials are not checked, as on <code>alertmanager</code>:
+the operator names each after the credential&rsquo;s source with a hash appended,
+which the kind does not derive, so an entry under one of those names is left
+to the API to refuse.</p></li><li><p>an entry of <code>volumeMounts</code> at a path the operator mounts a volume at in the
+prometheus container: <code>/prometheus</code>, <code>/etc/prometheus/config_out</code>,
 <code>/etc/prometheus/certs</code>, <code>/etc/prometheus/web_config/web-config.yaml</code>,
 <code>/var/log/prometheus</code> where <code>log-file</code> is added,
 <code>/etc/prometheus/rules/prometheus-&lt;name>-rulefiles-&lt;n></code>, and
-<code>/etc/prometheus/secrets/&lt;name></code> and <code>/etc/prometheus/configmaps/&lt;name></code>
-for each entry of <code>secrets</code> and <code>configMaps</code>. The mounts of the web TLS
-credentials, under <code>/etc/prometheus/web_config/</code>, are left to the API,
-as their volumes are.</p></li><li><p>an entry of <code>volumeMounts</code> that breaks a rule of a mount
-(go-kure/launcher#1211, go-kure/launcher#1227): a <code>subPath</code> beside a
+<code>/etc/prometheus/secrets/&lt;name></code> and <code>/etc/prometheus/configmaps/&lt;name></code> for
+each entry of <code>secrets</code> and <code>configMaps</code>. The mounts of the web TLS
+credentials, under <code>/etc/prometheus/web_config/</code>, are left to the API, as
+their volumes are.</p></li><li><p>an entry of <code>volumeMounts</code> that breaks a rule of a mount: a <code>subPath</code> beside a
 <code>subPathExpr</code>, either one absolute or holding a <code>..</code> element, a
-<code>mountPropagation</code> that is not <code>None</code>, <code>HostToContainer</code> or
-<code>Bidirectional</code>, a <code>recursiveReadOnly</code> that is not <code>Disabled</code>,
-<code>IfPossible</code> or <code>Enabled</code>, <code>Enabled</code> or <code>IfPossible</code> without
-<code>readOnly: true</code> or beside a propagation other than <code>None</code>, and
-<code>Bidirectional</code> where the prometheus container is not privileged. The
-operator copies the entry as written and merges into it the mount of a
-listed <code>prometheus</code> container at the same <code>mountPath</code>, so the entry is
-judged as merged: that mount can supply <code>readOnly</code> or a propagation, and
+<code>mountPropagation</code> that is not <code>None</code>, <code>HostToContainer</code> or <code>Bidirectional</code>, a
+<code>recursiveReadOnly</code> that is not <code>Disabled</code>, <code>IfPossible</code> or <code>Enabled</code>,
+<code>Enabled</code> or <code>IfPossible</code> without <code>readOnly: true</code> or beside a propagation
+other than <code>None</code>, and <code>Bidirectional</code> where the prometheus container is not
+privileged. The operator copies the entry as written and merges into it the
+mount of a listed <code>prometheus</code> container at the same <code>mountPath</code>, so the entry
+is judged as merged: that mount can supply <code>readOnly</code> or a propagation, and
 only <code>securityContext.privileged: true</code> on that listed container makes the
 container privileged. Checked before the path. An entry of
-<code>thanos.volumeMounts</code> with a nonempty <code>subPath</code> or <code>subPathExpr</code> is
-refused below, as not carried.</p></li><li><p>an entry of <code>containers</code> or <code>initContainers</code> with a <code>volumeMounts</code> entry
-that breaks the same rules, naming the container and the mount. An entry
-named for a container the operator generates is merged into it, and the
-merge can take <code>readOnly: true</code> from the operator&rsquo;s own mount at the path,
-so such an entry is not refused for <code>recursiveReadOnly</code> without
-<code>readOnly: true</code>; every other rule holds, and <code>Bidirectional</code> needs that
-entry&rsquo;s own <code>securityContext.privileged: true</code>.</p></li><li><p>an entry of <code>thanos.volumeMounts</code> at a path the operator mounts a
-volume at in the thanos-sidecar container: <code>/prometheus</code> where
-<code>objectStorageConfig</code> or <code>objectStorageConfigFile</code> is set, and
-<code>/etc/thanos/config</code>, which it mounts from Thanos 0.24.0, reserved
-whatever <code>thanos.version</code> names, as <code>web-config</code> is, so that raising
-<code>thanos.version</code> does not turn a mount of the author&rsquo;s into a clash
-(<code>createThanosContainer</code>, server/statefulset.go:642-671 and :730-738);
-and any field of an entry but <code>name</code> and <code>mountPath</code>
-(<code>readOnly</code>, <code>recursiveReadOnly</code>, <code>subPath</code>, <code>subPathExpr</code>,
-<code>mountPropagation</code>, <code>bindMountOptions</code>), which the operator drops: it
-copies only those two into the sidecar&rsquo;s mount (:642-647).
-<code>TestThanosDroppedMountFields</code> holds the list to every field of the type.</p></li><li><p>an entry of <code>volumeMounts</code>, or of <code>thanos.volumeMounts</code>, at the path of
-an earlier one of the same field written alike: the API refuses two
-mounts at one path. The message names both entries. As on
-<code>alertmanager</code>, a path written otherwise than another entry&rsquo;s, or than a
-path the operator mounts at, as <code>/etc/prometheus/config_out/</code>, is
-admitted: both mounts are made, and one may hide the other, the
-operator&rsquo;s included; where the kubelet makes the two paths equal (a
-relative path and its absolute form), CRI-O makes only one of them
-(go-kure/launcher#1050).</p></li><li><p>a <code>queryLogFile</code> named without a directory beside a
-<code>scrapeFailureLogFile</code> named with one, where the mount that covers
-<code>/var/log/prometheus/&lt;name></code> most closely is read-only, or binds a
-regular file above it, or binds one at it with <code>readOnly</code> set: the
-operator writes the query log under
-<code>/var/log/prometheus</code> but adds the <code>log-file</code> volume there only for the
-scrape failure log file (server/statefulset.go:510, :537;
-common.go:334-347). Where no mount covers it, the file is on the root
-filesystem, which is not judged (next entry).</p></li><li><p>a <code>queryLogFile</code> or <code>scrapeFailureLogFile</code> Prometheus cannot write. This
-check follows what runs at the version named, unlike the reserved paths
-above.</p><p>Where the file is:</p><ul><li>An absolute path whose last element as written is empty, <code>.</code> or <code>..</code>,
-as <code>/etc/prometheus/config_out/query.log/</code>, <code>/</code>,
+<code>thanos.volumeMounts</code> with a nonempty <code>subPath</code> or <code>subPathExpr</code> is refused
+below, as not carried.</p></li><li><p>an entry of <code>containers</code> or <code>initContainers</code> with a <code>volumeMounts</code> entry that
+breaks the same rules, naming the container and the mount. An entry named for
+a container the operator generates is merged into it, and the merge can take
+<code>readOnly: true</code> from the operator&rsquo;s own mount at the path, so such an entry
+is not refused for <code>recursiveReadOnly</code> without <code>readOnly: true</code>; every other
+rule holds, and <code>Bidirectional</code> needs that entry&rsquo;s own
+<code>securityContext.privileged: true</code>.</p></li><li><p>an entry of <code>thanos.volumeMounts</code> at a path the operator mounts a volume at in
+the thanos-sidecar container: <code>/prometheus</code> where <code>objectStorageConfig</code> or
+<code>objectStorageConfigFile</code> is set, and <code>/etc/thanos/config</code>, which it mounts
+from Thanos 0.24.0, reserved whatever <code>thanos.version</code> names, as <code>web-config</code>
+is, so that raising <code>thanos.version</code> does not turn a mount of the author&rsquo;s
+into a clash (<code>createThanosContainer</code>, server/statefulset.go:642-671 and
+:730-738); and any field of an entry but <code>name</code> and <code>mountPath</code> (<code>readOnly</code>,
+<code>recursiveReadOnly</code>, <code>subPath</code>, <code>subPathExpr</code>, <code>mountPropagation</code>,
+<code>bindMountOptions</code>), which the operator drops: it copies only those two into
+the sidecar&rsquo;s mount (:642-647).</p></li><li><p>an entry of <code>volumeMounts</code>, or of <code>thanos.volumeMounts</code>, at the path of an
+earlier one of the same field written alike: the API refuses two mounts at one
+path. The message names both entries. As on <code>alertmanager</code>, a path written
+otherwise than another entry&rsquo;s, or than a path the operator mounts at, as
+<code>/etc/prometheus/config_out/</code>, is admitted: both mounts are made, and one may
+hide the other, the operator&rsquo;s included; where the kubelet makes the two paths
+equal (a relative path and its absolute form), CRI-O makes only one of them.</p></li><li><p>a <code>queryLogFile</code> named without a directory beside a <code>scrapeFailureLogFile</code>
+named with one, where the mount that covers <code>/var/log/prometheus/&lt;name></code> most
+closely is read-only, or binds a regular file above it, or binds one at it
+with <code>readOnly</code> set: the operator writes the query log under
+<code>/var/log/prometheus</code> but adds the <code>log-file</code> volume there only for the scrape
+failure log file (server/statefulset.go:510, :537; common.go:334-347). Where
+no mount covers it, the file is on the root filesystem, which is not judged
+(next entry).</p></li><li><p>a <code>queryLogFile</code> or <code>scrapeFailureLogFile</code> Prometheus cannot write. This check
+follows what runs at the version named, unlike the reserved paths above.</p><p>Where the file is:</p><ul><li>An absolute path whose last element as written is empty, <code>.</code> or <code>..</code>, as
+<code>/etc/prometheus/config_out/query.log/</code>, <code>/</code>,
 <code>/etc/prometheus/config_out/query.log/.</code> or <code>…/config_out/logs/..</code>, is
 refused before any other judging and before it is cleaned, whatever it
 expands to or links through: Prometheus opens it as written
-(prometheus/common <code>JoinDir</code> keeps an absolute path) with <code>O_CREAT</code>,
-which the kernel refuses on a trailing slash (<code>fs/namei.c:3620-3622</code> at
-Linux v6.12) and on a directory (<code>:3750-3751</code>), which <code>/</code>, <code>.</code> and <code>..</code>
-resolve to where they resolve at all.</li><li>A name alone is in <code>/var/log/prometheus</code>; the operator passes any other
-path unchanged (common.go:230-236).</li><li>A relative path with a directory, as <code>logs/query.log</code>, is not judged.
+(prometheus/common <code>JoinDir</code> keeps an absolute path) with <code>O_CREAT</code>, which
+the kernel refuses on a trailing slash (<code>fs/namei.c:3620-3622</code> at Linux
+v6.12) and on a directory (<code>:3750-3751</code>), which <code>/</code>, <code>.</code> and <code>..</code> resolve to
+where they resolve at all.</li><li>A name alone is in <code>/var/log/prometheus</code>; the operator passes any other path
+unchanged (common.go:230-236).</li><li>A relative path with a directory, as <code>logs/query.log</code>, is not judged.
 Prometheus joins it to the directory of its configuration,
 <code>/etc/prometheus/config_out</code> (<code>--config.file</code>, promcfg.go:1258), a
-<code>queryLogFile</code> from v2.21.0 only, cleaning a trailing slash away;
-before that it opens one from its working directory, as written. <code>config_out</code> is an emptyDir (common.go:253-259): an
-<code>initContainer</code> may mount it writable and leave a link there to a
-writable volume, which Prometheus follows when it opens the file
-(Prometheus <code>util/logging/file.go:43</code>).</li><li>A path with a reference <code>$(NAME)</code>, a name of letters, digits and <code>_</code>,
-is not judged: the config reloader expands it from variables the kind
-does not see (<code>--config-envsubst-file</code>, common.go:378; Thanos
+<code>queryLogFile</code> from v2.21.0 only, cleaning a trailing slash away; before
+that it opens one from its working directory, as written. <code>config_out</code> is an
+emptyDir (common.go:253-259): an <code>initContainer</code> may mount it writable and
+leave a link there to a writable volume, which Prometheus follows when it
+opens the file (Prometheus <code>util/logging/file.go:43</code>).</li><li>A path with a reference <code>$(NAME)</code>, a name of letters, digits and <code>_</code>, is not
+judged: the config reloader expands it from variables the kind does not see
+(<code>--config-envsubst-file</code>, common.go:378; Thanos
 <code>pkg/reloader/reloader.go:703</code>). Any other <code>$(</code> reaches Prometheus as
 written and is judged so.</li><li>An absolute path with a <code>..</code> element before its last, as
-<code>/var/log/prometheus/../query.log</code>, is not judged: the kernel follows a
-link on the way before it takes the <code>..</code> (<code>fs/namei.c:2418-2426</code>), so
-the cleaned path may name another file than the one opened.</li><li>A path at a directory above a mount of the <code>prometheus</code> container, the
-operator&rsquo;s or the author&rsquo;s, as <code>/etc/prometheus</code>, or <code>/var/log</code> where
-the operator mounts its <code>log-file</code> volume, is refused
-(go-kure/launcher#1055): the container runtime mounts the deeper mount
-through it, so it is a directory wherever the container runs
-(<code>fs/namei.c:2418-2433</code>), and Prometheus cannot open it as a file
-(<code>:3750-3751</code>).</li></ul><p>Which mount decides: the one that covers the file most closely, at the
-file itself (as a <code>subPath</code> mount of an existing file, which Prometheus
-opens for appending without writing to its directory), at its directory
-or at the nearest directory above it (paths compared cleaned, a relative
-<code>mountPath</code> taken from <code>/</code> as the kubelet does).</p><ul><li>Writable: the data volume at <code>/prometheus</code>, the <code>log-file</code> volume at
+<code>/var/log/prometheus/../query.log</code>, is not judged: the kernel follows a link
+on the way before it takes the <code>..</code> (<code>fs/namei.c:2418-2426</code>), so the cleaned
+path may name another file than the one opened.</li><li>A path at a directory above a mount of the <code>prometheus</code> container, the
+operator&rsquo;s or the author&rsquo;s, as <code>/etc/prometheus</code>, or <code>/var/log</code> where the
+operator mounts its <code>log-file</code> volume, is refused: the container runtime
+mounts the deeper mount through it, so it is a directory wherever the
+container runs (<code>fs/namei.c:2418-2433</code>), and Prometheus cannot open it as a
+file (<code>:3750-3751</code>).</li></ul><p>Which mount decides: the one that covers the file most closely, at the file
+itself (as a <code>subPath</code> mount of an existing file, which Prometheus opens for
+appending without writing to its directory), at its directory or at the
+nearest directory above it (paths compared cleaned, a relative <code>mountPath</code>
+taken from <code>/</code> as the kubelet does).</p><ul><li>Writable: the data volume at <code>/prometheus</code>, the <code>log-file</code> volume at
 <code>/var/log/prometheus</code> where the operator adds it, and <code>config_out</code>. The
 operator mounts <code>config_out</code> read-only, but it is an emptyDir the config
-reloader writes, which an <code>initContainer</code> can reach too, so a link in it
-may lead to a writable volume.</li><li>Read-only, the operator&rsquo;s: the certificate, secret and configMap mounts; each rule ConfigMap&rsquo;s at
+reloader writes, which an <code>initContainer</code> can reach too, so a link in it may
+lead to a writable volume.</li><li>Read-only, the operator&rsquo;s: the certificate, secret and configMap mounts;
+each rule ConfigMap&rsquo;s at
 <code>/etc/prometheus/rules/prometheus-&lt;name>-rulefiles-&lt;n></code>, of which the
-operator mounts at least three (server/statefulset.go:514-534); and,
-from Prometheus v2.24.0 (server/statefulset.go:196), the web
-configuration and the web TLS credentials&rsquo; directories under
-<code>/etc/prometheus/web_config/</code> (<code>secret/&lt;keySecret>-key</code>, and
-<code>secret/</code> or <code>configmap/</code> <code>&lt;name>-cert</code> and <code>&lt;name>-ca</code>,
-<code>pkg/webconfig/tls_credentials.go:54-97</code>).</li><li>A mount of the author&rsquo;s, in <code>volumeMounts</code> or a patch of the
-<code>prometheus</code> container, is read-only only where its volume is one the
-kubelet both writes and mounts read-only: a <code>configMap</code>, <code>secret</code>,
-<code>downwardAPI</code> or <code>projected</code> volume, or one of the operator&rsquo;s own
-volumes, which the spec cannot define: <code>config</code>, <code>tls-assets</code>,
-<code>web-config</code>, <code>thanos-prometheus-http-client-file</code>, a rule ConfigMap&rsquo;s,
-and <code>secret-&lt;name></code>/<code>configmap-&lt;name></code>. The kubelet&rsquo;s only links in
-those point inside the volume (<code>AtomicWriter</code>,
+operator mounts at least three (server/statefulset.go:514-534); and, from
+Prometheus v2.24.0 (server/statefulset.go:196), the web configuration and
+the web TLS credentials&rsquo; directories under <code>/etc/prometheus/web_config/</code>
+(<code>secret/&lt;keySecret>-key</code>, and <code>secret/</code> or <code>configmap/</code> <code>&lt;name>-cert</code> and
+<code>&lt;name>-ca</code>, <code>pkg/webconfig/tls_credentials.go:54-97</code>).</li><li>A mount of the author&rsquo;s, in <code>volumeMounts</code> or a patch of the <code>prometheus</code>
+container, is read-only only where its volume is one the kubelet both writes
+and mounts read-only: a <code>configMap</code>, <code>secret</code>, <code>downwardAPI</code> or <code>projected</code>
+volume, or one of the operator&rsquo;s own volumes, which the spec cannot define:
+<code>config</code>, <code>tls-assets</code>, <code>web-config</code>, <code>thanos-prometheus-http-client-file</code>,
+a rule ConfigMap&rsquo;s, and <code>secret-&lt;name></code>/<code>configmap-&lt;name></code>. The kubelet&rsquo;s
+only links in those point inside the volume (<code>AtomicWriter</code>,
 <code>pkg/volume/util/atomic_writer.go:217</code>, <code>:230</code>, <code>:482</code> at Kubernetes
-v1.37.1), so no file in one leads to a writable volume.</li><li>Admitted as writable, <code>readOnly</code> set or not: an author&rsquo;s mount of any
-other volume, as an <code>emptyDir</code>, <code>hostPath</code>, <code>image</code>,
-<code>persistentVolumeClaim</code> or inline <code>csi</code> volume, or the operator&rsquo;s
-<code>config-out</code>, data or <code>log-file</code> volume. Its content is not seen here,
-an <code>initContainer</code> may write it, and a link in it may lead to a
-writable volume, which Prometheus follows, opening the file for
-appending (<code>util/logging/file.go:43</code> at v3.7.0)
-(go-kure/launcher#1051). The web TLS credentials&rsquo; volumes are named
-with a hash the kind does not derive, so an author&rsquo;s mount of one
-counts as writable.</li><li>A regular file: a mount of a <code>hostPath</code> volume of <code>type: File</code> or
-<code>FileOrCreate</code>. The kubelet checks the path is a regular file,
-following links (<code>pkg/volume/hostpath/host_path.go:488-493</code>,
-<code>pkg/volume/util/hostutil/hostutil.go:82</code>); a <code>subPath</code> binds the
-same file or, naming a path below it, fails to resolve and the
-container does not start
-(<code>pkg/volume/util/subpath/subpath_linux.go:199-202</code>). No file can be
-created under it, so a file below it is refused, <code>readOnly</code> set or
-not; set <code>readOnly</code>, it binds the file read-only
-(<code>kubelet_pods.go:425</code>), leaving no link to follow, so a file at its
-own path is refused too.</li><li>A directory: the path of any mount the operator makes but the web
+v1.37.1), so no file in one leads to a writable volume.</li><li>Admitted as writable, <code>readOnly</code> set or not: an author&rsquo;s mount of any other
+volume, as an <code>emptyDir</code>, <code>hostPath</code>, <code>image</code>, <code>persistentVolumeClaim</code> or
+inline <code>csi</code> volume, or the operator&rsquo;s <code>config-out</code>, data or <code>log-file</code>
+volume. Its content is not seen here, an <code>initContainer</code> may write it, and a
+link in it may lead to a writable volume, which Prometheus follows, opening
+the file for appending (<code>util/logging/file.go:43</code> at v3.7.0). The web TLS
+credentials&rsquo; volumes are named with a hash the kind does not derive, so an
+author&rsquo;s mount of one counts as writable.</li><li>A regular file: a mount of a <code>hostPath</code> volume of <code>type: File</code> or
+<code>FileOrCreate</code>. The kubelet checks the path is a regular file, following
+links (<code>pkg/volume/hostpath/host_path.go:488-493</code>,
+<code>pkg/volume/util/hostutil/hostutil.go:82</code>); a <code>subPath</code> binds the same file
+or, naming a path below it, fails to resolve and the container does not
+start (<code>pkg/volume/util/subpath/subpath_linux.go:199-202</code>). No file can be
+created under it, so a file below it is refused, <code>readOnly</code> set or not; set
+<code>readOnly</code>, it binds the file read-only (<code>kubelet_pods.go:425</code>), leaving no
+link to follow, so a file at its own path is refused too.</li><li>A directory: the path of any mount the operator makes but the web
 configuration file, which is a key of its Secret mounted by <code>subPath</code>
 (<code>pkg/webconfig/config.go:272-278</code>). <code>/prometheus</code>,
-<code>/etc/prometheus/config_out</code> and <code>/var/log/prometheus</code> are emptyDir
-or claim directories (<code>common.go:252-283</code>, <code>:334-347</code>), the rest
-Secret, ConfigMap or projected volumes mounted whole. So is the path of
-an author&rsquo;s mount, in <code>volumeMounts</code> or a patch, without <code>subPath</code> or
-<code>subPathExpr</code>, of an <code>emptyDir</code>, including a volume with no source,
-which the API server defaults to one, <code>configMap</code>, <code>secret</code>, <code>downwardAPI</code>,
-<code>projected</code>, <code>gitRepo</code>, <code>nfs</code>, <code>iscsi</code> or <code>fc</code> volume, or a <code>hostPath</code>
-of <code>type: Directory</code> or <code>DirectoryOrCreate</code>, or of one of the
-operator&rsquo;s volumes of those types (<code>config-out</code> is an emptyDir; not
-the data volume <code>prometheus-&lt;name>-db</code>, whose type <code>storage</code> decides,
-nor the web TLS credentials&rsquo; volumes, whose names are hashed): each
-is set up as a directory at its path (<code>emptyDir</code> <code>SetUpAt</code>, the
-kubelet-written types on a wrapped emptyDir, <code>nfs</code>, <code>iscsi</code> and <code>fc</code>
-on a directory they make, <code>hostPath</code> checked or made one). Prometheus
-cannot open a directory as a file, so a log file at one&rsquo;s own path is
-refused, writable or not, before a read-only one is refused as
-read-only; a file under a writable one is admitted. Not judged a
-directory: a mount with a <code>subPath</code> (the kubelet makes a missing one a
-directory, but an existing one may be a file), and a
-<code>persistentVolumeClaim</code>, <code>ephemeral</code>, <code>csi</code>, <code>flexVolume</code> or <code>image</code>
-volume, a <code>hostPath</code> of another type or of none, and the in-tree
-types with no kubelet plugin of their own, whose content at the path
-is the claim&rsquo;s, the driver&rsquo;s or the runtime&rsquo;s. A <code>hostPath</code> of
-<code>type: Socket</code> is admitted too, though opening a socket fails.</li></ul><p>A patch mount at a path written as an earlier mount&rsquo;s is merged into it
-by the operator&rsquo;s strategic merge: it takes the patch&rsquo;s volume, and keeps
-the earlier mount&rsquo;s <code>readOnly</code>, <code>subPath</code> and <code>subPathExpr</code> where it
-leaves them unset. The operator&rsquo;s data mount at <code>/prometheus</code> carries
-<code>subPath: prometheus-db</code> where <code>storage</code> is set and
-<code>disableMountSubPath</code> is not (<code>SubPathForStorage</code>, common.go:216-224,
-:278-282), so a patch there is not judged a directory then; the
-operator&rsquo;s own data mount is. Of mounts at one path written differently,
-as <code>/data</code> and <code>data/</code>, in <code>volumeMounts</code> or a patch, one writable makes
-it writable, and they are a directory only where every one is, since
-which one the container runtime mounts over the other is not derived.
-Paths are compared as written: the path to a mount resolves to that
-mount; a link redirected by a later, deeper mount is not modelled (a
-refusal there may be false, and an admit there may fail at runtime, as an
-admit of unseen content may). The check refuses only where it knows
-Prometheus cannot open the file for writing: the file or its directory
-is read-only, its directory is a regular file, its path is a directory
-mounted there or above a mount, or it is absolute and ends in a slash,
-<code>/.</code> or <code>/..</code>. A directory below a writable mount counts as
-writable, since it may exist on the volume or be made by an init
-container: <code>/prometheus/wal</code> is made by Prometheus opening its TSDB
-before its first configuration load opens the query log
-(<code>cmd/prometheus/main.go:1438</code> at v3.14.0). Where no mount covers the
-file, it is on the image&rsquo;s root filesystem, whose content is not judged
-(go-kure/launcher#1055): the stock image builds on <code>busybox:latest</code>,
-unpinned, and an authored image&rsquo;s content is not derivable; a link in
-it may lead to a writable volume, which Prometheus follows, and
-containerd mounts an image <code>VOLUME</code> writable. The operator makes the
-root filesystem read-only (server/statefulset.go:349), so such a file
-may still fail at runtime. No mount the container runtime or the
-kubelet adds is modelled, as <code>/dev</code>, <code>/proc</code>, <code>/sys</code>, the service
-account token, <code>/etc/hosts</code>, <code>/etc/resolv.conf</code> or the <code>/etc/mtab</code>
-link: each is made only under conditions the kind does not see, or may
-be hidden by a mount of the pod&rsquo;s. So a path under <code>/dev</code> or <code>/proc</code>,
-as <code>/dev/stdout</code>, is judged by the pod&rsquo;s mounts alone, like any other:
-a read-only or directory mount the pod makes there is refused as
-anywhere. Not judged here, or in the previous entry, is a
-field the operator drops at the version it compares, <code>queryLogFile</code>
-below Prometheus v2.16.0 and <code>scrapeFailureLogFile</code> below v2.55.0: the
-version gate refuses it instead. Where the read-only mount that decides
-is at a path the operator mounts a volume at, which <code>volumeMounts</code> may not
-name as the operator writes it, the refusal advises a file under a writable volume rather than a
-mount there.</p></li><li><p>a negative request or limit in <code>resources</code>, <code>thanos.resources</code> or a
-listed container.</p></li><li><p>a parseable <code>version</code> of a major other than 2 or 3: the operator
-builds no configuration for it (<code>NewConfigGenerator</code>,
-<code>pkg/prometheus/promcfg.go</code>).</p></li><li><p>a remote write entry&rsquo;s <code>azureAd</code> with no authentication method:
-none of <code>managedIdentity</code>, <code>oauth</code>, <code>sdk</code> and <code>workloadIdentity</code>
-(go-kure/launcher#1023). The operator refuses the object at reconcile
-without one, at every version, wherever it generates the configuration
-(<code>validateRemoteWriteSpec</code>, <code>pkg/prometheus/operator.go</code>): not with
-every monitor selector unset, unless it is run with unmanaged
-configuration disabled. The CRD states no rule for it. It is refused
-wherever the operator may reach the entries, the kind not seeing how the
-operator is run: at an unset <code>version</code> or a parseable one of major 2 or
-3 (on another major the major is refused, and an unparsable one is left
-to the operator, which fails before it reads them), ahead of the version
-gates below, so the gate of <code>azureAd</code>, which says the operator drops it
-below 2.45.0, fires only on one with a method
-(<code>remoteWrite[0].azureAd: no authentication method: the Prometheus operator requires one of managedIdentity, oauth, sdk and workloadIdentity, and refuses the object at reconcile without one, at every version, wherever it generates the remote write configuration; set one, or leave azureAd unset</code>).</p></li><li><p>a field the operator reads only from some Prometheus version on, where
-<code>version</code> is below that version. An unset <code>version</code> is judged against
-the operator release launcher vendors (v0.95.1, default v3.14.0), at
-which no field below is refused; an unparsable one is left to the
-operator. Below its version the operator leaves the flag off the
-container, the setting out of the configuration or of the scrape
-configurations of the monitor objects, serves the web endpoints over
-plain HTTP (with <code>web.tlsConfig</code>, while the config reloader and the
-Thanos sidecar it configures speak HTTPS, so their requests fail, and
-without <code>listenLocal</code> so do the probes and the pods never become
-ready), refuses the object at reconcile, or, for an <code>authorization</code>
-other than an Alertmanager endpoint&rsquo;s, panics where it generates the
-configuration that reads it, and exits, to panic again on each restart,
-reconciling only between crashes (<code>retentionPercentage: read by the Prometheus operator only for Prometheus 3.11.0 and later; at version v3.10.0 it drops it from the configuration it generates, and Prometheus runs without it; raise version to 3.11.0 or later, or leave retentionPercentage unset</code>). Where a field holds several gates, the
-highest it misses is named. Where the spec authors several fields
-outside their versions, the three below read only under some version
-included, the operator may reach any one&rsquo;s consequence first (a refusal
-at reconcile, before the configuration a drop is from; a panic
-generating one part, before another), so none is claimed: the refusal
-names each field with the versions it is read at (go-kure/launcher#1022;
-<code>version: refused: fields outside their versions at version v2.50.0: remoteWrite[].messageVersion (read from Prometheus 2.54.0), remoteWrite[].azureAd.sdk (read from Prometheus 2.52.0); the Prometheus operator does not run the object as authored there; raise version to 2.54.0 or later, or leave those fields unset</code>). The version a refusal
+<code>/etc/prometheus/config_out</code> and <code>/var/log/prometheus</code> are emptyDir or claim
+directories (<code>common.go:252-283</code>, <code>:334-347</code>), the rest Secret, ConfigMap or
+projected volumes mounted whole. So is the path of an author&rsquo;s mount, in
+<code>volumeMounts</code> or a patch, without <code>subPath</code> or <code>subPathExpr</code>, of an
+<code>emptyDir</code>, including a volume with no source, which the API server defaults
+to one, <code>configMap</code>, <code>secret</code>, <code>downwardAPI</code>, <code>projected</code>, <code>gitRepo</code>, <code>nfs</code>,
+<code>iscsi</code> or <code>fc</code> volume, or a <code>hostPath</code> of <code>type: Directory</code> or
+<code>DirectoryOrCreate</code>, or of one of the operator&rsquo;s volumes of those types
+(<code>config-out</code> is an emptyDir; not the data volume <code>prometheus-&lt;name>-db</code>,
+whose type <code>storage</code> decides, nor the web TLS credentials&rsquo; volumes, whose
+names are hashed): each is set up as a directory at its path (<code>emptyDir</code>
+<code>SetUpAt</code>, the kubelet-written types on a wrapped emptyDir, <code>nfs</code>, <code>iscsi</code>
+and <code>fc</code> on a directory they make, <code>hostPath</code> checked or made one).
+Prometheus cannot open a directory as a file, so a log file at one&rsquo;s own
+path is refused, writable or not, before a read-only one is refused as
+read-only; a file under a writable one is admitted. Not judged a directory:
+a mount with a <code>subPath</code> (the kubelet makes a missing one a directory, but
+an existing one may be a file), and a <code>persistentVolumeClaim</code>, <code>ephemeral</code>,
+<code>csi</code>, <code>flexVolume</code> or <code>image</code> volume, a <code>hostPath</code> of another type or of
+none, and the in-tree types with no kubelet plugin of their own, whose
+content at the path is the claim&rsquo;s, the driver&rsquo;s or the runtime&rsquo;s. A
+<code>hostPath</code> of <code>type: Socket</code> is admitted too, though opening a socket fails.</li></ul><p>A patch mount at a path written as an earlier mount&rsquo;s is merged into it by the
+operator&rsquo;s strategic merge: it takes the patch&rsquo;s volume, and keeps the earlier
+mount&rsquo;s <code>readOnly</code>, <code>subPath</code> and <code>subPathExpr</code> where it leaves them unset.
+The operator&rsquo;s data mount at <code>/prometheus</code> carries <code>subPath: prometheus-db</code>
+where <code>storage</code> is set and <code>disableMountSubPath</code> is not (<code>SubPathForStorage</code>,
+common.go:216-224, :278-282), so a patch there is not judged a directory then;
+the operator&rsquo;s own data mount is. Of mounts at one path written differently,
+as <code>/data</code> and <code>data/</code>, in <code>volumeMounts</code> or a patch, one writable makes it
+writable, and they are a directory only where every one is, since which one
+the container runtime mounts over the other is not derived. Paths are compared
+as written: the path to a mount resolves to that mount; a link redirected by a
+later, deeper mount is not modelled (a refusal there may be false, and an
+admit there may fail at runtime, as an admit of unseen content may). The check
+refuses only where it knows Prometheus cannot open the file for writing: the
+file or its directory is read-only, its directory is a regular file, its path
+is a directory mounted there or above a mount, or it is absolute and ends in a
+slash, <code>/.</code> or <code>/..</code>. A directory below a writable mount counts as writable,
+since it may exist on the volume or be made by an init container:
+<code>/prometheus/wal</code> is made by Prometheus opening its TSDB before its first
+configuration load opens the query log (<code>cmd/prometheus/main.go:1438</code> at
+v3.14.0). Where no mount covers the file, it is on the image&rsquo;s root
+filesystem, whose content is not judged: the stock image builds on
+<code>busybox:latest</code>, unpinned, and an authored image&rsquo;s content is not derivable;
+a link in it may lead to a writable volume, which Prometheus follows, and
+containerd mounts an image <code>VOLUME</code> writable. The operator makes the root
+filesystem read-only (server/statefulset.go:349), so such a file may still
+fail at runtime. No mount the container runtime or the kubelet adds is
+modelled, as <code>/dev</code>, <code>/proc</code>, <code>/sys</code>, the service account token, <code>/etc/hosts</code>,
+<code>/etc/resolv.conf</code> or the <code>/etc/mtab</code> link: each is made only under conditions
+the kind does not see, or may be hidden by a mount of the pod&rsquo;s. So a path
+under <code>/dev</code> or <code>/proc</code>, as <code>/dev/stdout</code>, is judged by the pod&rsquo;s mounts
+alone, like any other: a read-only or directory mount the pod makes there is
+refused as anywhere. Not judged here, or in the previous entry, is a field the
+operator drops at the version it compares, <code>queryLogFile</code> below Prometheus
+v2.16.0 and <code>scrapeFailureLogFile</code> below v2.55.0: the version gate refuses it
+instead. Where the read-only mount that decides is at a path the operator
+mounts a volume at, which <code>volumeMounts</code> may not name as the operator writes
+it, the refusal advises a file under a writable volume rather than a mount
+there.</p></li><li><p>a negative request or limit in <code>resources</code>, <code>thanos.resources</code> or a listed
+container.</p></li><li><p>a parseable <code>version</code> of a major other than 2 or 3: the operator builds no
+configuration for it (<code>NewConfigGenerator</code>, <code>pkg/prometheus/promcfg.go</code>).</p></li><li><p>a remote write entry&rsquo;s <code>azureAd</code> with no authentication method: none of
+<code>managedIdentity</code>, <code>oauth</code>, <code>sdk</code> and <code>workloadIdentity</code>. The operator refuses
+the object at reconcile without one, at every version, wherever it generates
+the configuration (<code>validateRemoteWriteSpec</code>, <code>pkg/prometheus/operator.go</code>):
+not with every monitor selector unset, unless it is run with unmanaged
+configuration disabled. The CRD states no rule for it. It is refused wherever
+the operator may reach the entries, the kind not seeing how the operator is
+run: at an unset <code>version</code> or a parseable one of major 2 or 3 (on another
+major the major is refused, and an unparsable one is left to the operator,
+which fails before it reads them), ahead of the version gates below, so the
+gate of <code>azureAd</code>, which says the operator drops it below 2.45.0, fires only
+on one with a method (<code>remoteWrite[0].azureAd: no authentication method: the Prometheus operator requires one of managedIdentity, oauth, sdk and workloadIdentity, and refuses the object at reconcile without one, at every version, wherever it generates the remote write configuration; set one, or leave azureAd unset</code>).</p></li><li><p>a field the operator reads only from some Prometheus version on, where
+<code>version</code> is below that version. An unset <code>version</code> is judged against the
+operator release launcher vendors (v0.95.1, default v3.14.0), at which no
+field below is refused; an unparsable one is left to the operator. Below its
+version the operator leaves the flag off the container, the setting out of the
+configuration or of the scrape configurations of the monitor objects, serves
+the web endpoints over plain HTTP (with <code>web.tlsConfig</code>, while the config
+reloader and the Thanos sidecar it configures speak HTTPS, so their requests
+fail, and without <code>listenLocal</code> so do the probes and the pods never become
+ready), refuses the object at reconcile, or, for an <code>authorization</code> other than
+an Alertmanager endpoint&rsquo;s, panics where it generates the configuration that
+reads it, and exits, to panic again on each restart, reconciling only between
+crashes (<code>retentionPercentage: read by the Prometheus operator only for Prometheus 3.11.0 and later; at version v3.10.0 it drops it from the configuration it generates, and Prometheus runs without it; raise version to 3.11.0 or later, or leave retentionPercentage unset</code>). Where a field holds
+several gates, the highest it misses is named. Where the spec authors several
+fields outside their versions, the three below read only under some version
+included, the operator may reach any one&rsquo;s consequence first (a refusal at
+reconcile, before the configuration a drop is from; a panic generating one
+part, before another), so none is claimed: the refusal names each field with
+the versions it is read at (<code>version: refused: fields outside their versions at version v2.50.0: remoteWrite[].messageVersion (read from Prometheus 2.54.0), remoteWrite[].azureAd.sdk (read from Prometheus 2.52.0); the Prometheus operator does not run the object as authored there; raise version to 2.54.0 or later, or leave those fields unset</code>). The version a refusal
 suggests, of one field or of several, is one at which every gated field
-authored is read, a minimum or a ceiling not missed at <code>version</code>
-included (<code>allowOverlappingBlocks</code> bounds it from 2.11.0 on and below
-2.39.0); where there is none, it suggests only leaving the fields refused
-unset (go-kure/launcher#1047). A field
-authored with the parent or the field it needs, both below their
-versions, is one of several. The gates under v2.45.0, the oldest
-Prometheus in the operator&rsquo;s compatibility matrix, are below the range
-the operator tests, and are kept.</p><ul><li><p>flags: <code>rules.alert.forOutageTolerance</code>, <code>forGracePeriod</code> and
-<code>resendDelay</code> (2.4.0), <code>query.maxSamples</code> (2.5.0), <code>web.pageTitle</code> and
-<code>logFormat</code> other than <code>logfmt</code> (2.6.0), <code>retentionSize</code> (2.7.0),
-<code>allowOverlappingBlocks</code> and <code>walCompression</code> (2.11.0),
-<code>web.tlsConfig</code> and <code>web.httpConfig</code> (2.24.0), <code>enableFeatures</code>
-(2.25.0), <code>extraScrapeMetrics: true</code> (2.32.0; the operator passes it
-as a feature flag up to 3.9 and writes it to the configuration from
-3.10.0), <code>enableRemoteWriteReceiver</code> (2.33.0), <code>enableOTLPReceiver</code>
-(2.47.0), <code>remoteWriteReceiverMessageVersions</code> (2.54.0).</p></li><li><p>the configuration: <code>queryLogFile</code> (2.16.0), <code>exemplars</code>
-(2.29.0), <code>tsdb.outOfOrderTimeWindow</code> (2.39.0), <code>bodySizeLimit</code>,
-<code>sampleLimit</code>, <code>targetLimit</code>, <code>labelLimit</code>, <code>labelNameLengthLimit</code> and
+authored is read, a minimum or a ceiling not missed at <code>version</code> included
+(<code>allowOverlappingBlocks</code> bounds it from 2.11.0 on and below 2.39.0); where
+there is none, it suggests only leaving the fields refused unset. A field
+authored with the parent or the field it needs, both below their versions, is
+one of several. The gates under v2.45.0, the oldest Prometheus in the
+operator&rsquo;s compatibility matrix, are below the range the operator tests, and
+are kept.</p><ul><li><p>flags: <code>rules.alert.forOutageTolerance</code>, <code>forGracePeriod</code> and <code>resendDelay</code>
+(2.4.0), <code>query.maxSamples</code> (2.5.0), <code>web.pageTitle</code> and <code>logFormat</code> other
+than <code>logfmt</code> (2.6.0), <code>retentionSize</code> (2.7.0), <code>allowOverlappingBlocks</code> and
+<code>walCompression</code> (2.11.0), <code>web.tlsConfig</code> and <code>web.httpConfig</code> (2.24.0),
+<code>enableFeatures</code> (2.25.0), <code>extraScrapeMetrics: true</code> (2.32.0; the operator
+passes it as a feature flag up to 3.9 and writes it to the configuration
+from 3.10.0), <code>enableRemoteWriteReceiver</code> (2.33.0), <code>enableOTLPReceiver</code>
+(2.47.0), <code>remoteWriteReceiverMessageVersions</code> (2.54.0).</p></li><li><p>the configuration: <code>queryLogFile</code> (2.16.0), <code>exemplars</code> (2.29.0),
+<code>tsdb.outOfOrderTimeWindow</code> (2.39.0), <code>bodySizeLimit</code>, <code>sampleLimit</code>,
+<code>targetLimit</code>, <code>labelLimit</code>, <code>labelNameLengthLimit</code> and
 <code>labelValueLengthLimit</code> (2.45.0), <code>keepDroppedTargets</code> (2.47.0),
 <code>scrapeProtocols</code> (2.49.0), <code>ruleQueryOffset</code> (2.53.0),
 <code>scrapeFailureLogFile</code> (2.55.0), <code>nameValidationScheme</code> (3.0.0),
@@ -1205,356 +1167,299 @@ as a feature flag up to 3.9 and writes it to the configuration from
 <code>scrapeClassicHistograms</code> (3.5.0), <code>scrapeNativeHistograms</code> (3.8.0),
 <code>tsdb.staleSeriesCompactionThreshold</code> (3.10.0), <code>retentionPercentage</code>
 (3.11.0), <code>tsdb.chunkEncoding</code> (3.13.0); <code>otlp</code> (2.55.0, refused at
-reconcile) with <code>promoteResourceAttributes</code> (2.55.0),
-<code>translationStrategy</code> (3.0.0; <code>NoTranslation</code> 3.4.0 and
-<code>UnderscoreEscapingWithoutSuffixes</code> 3.6.0, refused at reconcile),
-<code>keepIdentifyingResourceAttributes</code> (3.1.0), <code>convertHistogramsToNHCB</code>
-(3.4.0), <code>promoteAllResourceAttributes</code> and <code>ignoreResourceAttributes</code>
-(3.5.0), <code>promoteScopeMetadata</code> (3.6.0),
-<code>labelNameUnderscoreSanitization</code> and
-<code>labelNamePreserveMultipleUnderscores</code> (3.8.0).</p></li><li><p>the scrape configurations: <code>overrideHonorTimestamps</code> (2.9.0),
+reconcile) with <code>promoteResourceAttributes</code> (2.55.0), <code>translationStrategy</code>
+(3.0.0; <code>NoTranslation</code> 3.4.0 and <code>UnderscoreEscapingWithoutSuffixes</code> 3.6.0,
+refused at reconcile), <code>keepIdentifyingResourceAttributes</code> (3.1.0),
+<code>convertHistogramsToNHCB</code> (3.4.0), <code>promoteAllResourceAttributes</code> and
+<code>ignoreResourceAttributes</code> (3.5.0), <code>promoteScopeMetadata</code> (3.6.0),
+<code>labelNameUnderscoreSanitization</code> and <code>labelNamePreserveMultipleUnderscores</code>
+(3.8.0).</p></li><li><p>the scrape configurations: <code>overrideHonorTimestamps</code> (2.9.0),
 <code>serviceDiscoveryRole: EndpointSlice</code> (2.21.0), <code>enforcedTargetLimit</code>
 (2.21.0), <code>enforcedLabelLimit</code>, <code>enforcedLabelNameLengthLimit</code> and
-<code>enforcedLabelValueLengthLimit</code> (2.27.0), <code>enforcedBodySizeLimit</code>
-(2.28.0), <code>enforcedKeepDroppedTargets</code> (2.47.0); a scrape class&rsquo;s
-<code>authorization</code> (2.26.0), <code>attachMetadata</code> (2.35.0 for PodMonitors,
-2.37.0 for ServiceMonitors) and <code>fallbackScrapeProtocol</code> (3.0.0); and
-<code>scrapeProtocols: [PrometheusText1.0.0]</code> (3.0.0-rc.0).</p><p>A count or length limit, enforced or not, of 0 is written at no
-version, and is not refused at any; a body size limit is written
-whatever its value, <code>0</code> included.</p></li><li><p>an Alertmanager endpoint: <code>apiVersion</code> (2.11.0), <code>basicAuth</code> and
+<code>enforcedLabelValueLengthLimit</code> (2.27.0), <code>enforcedBodySizeLimit</code> (2.28.0),
+<code>enforcedKeepDroppedTargets</code> (2.47.0); a scrape class&rsquo;s <code>authorization</code>
+(2.26.0), <code>attachMetadata</code> (2.35.0 for PodMonitors, 2.37.0 for
+ServiceMonitors) and <code>fallbackScrapeProtocol</code> (3.0.0); and <code>scrapeProtocols: [PrometheusText1.0.0]</code> (3.0.0-rc.0).</p><p>A count or length limit, enforced or not, of 0 is written at no version, and
+is not refused at any; a body size limit is written whatever its value, <code>0</code>
+included.</p></li><li><p>an Alertmanager endpoint: <code>apiVersion</code> (2.11.0), <code>basicAuth</code> and
 <code>authorization</code> (2.26.0), <code>enableHttp2</code> (2.35.0), <code>sigv4</code> (2.48.0),
 <code>alertRelabelings</code> (2.51.0), <code>sigv4.useFIPSSTSEndpoint</code> (2.54.0),
 <code>sigv4.externalId</code> (3.11.0).</p></li><li><p>a remote read entry: <code>name</code> (2.15.0), <code>headers</code>, <code>authorization</code> and
 <code>followRedirects</code> (2.26.0), <code>oauth2</code> (2.27.0), <code>filterExternalLabels</code>
 (2.34.0).</p></li><li><p>a remote write entry: <code>headers</code> and <code>name</code> (2.15.0), <code>metadataConfig</code>
 (2.23.0), <code>queueConfig.minShards</code> (2.6.0), <code>authorization</code>, <code>sigv4</code>,
-<code>followRedirects</code> and <code>queueConfig.retryOnRateLimit</code> (2.26.0),
-<code>oauth2</code> and <code>sendExemplars</code> (2.27.0),
-<code>metadataConfig.maxSamplesPerSend</code> (2.29.0), <code>enableHTTP2</code> (2.35.0),
-<code>sendNativeHistograms</code> (2.40.0), <code>azureAd</code> (2.45.0),
+<code>followRedirects</code> and <code>queueConfig.retryOnRateLimit</code> (2.26.0), <code>oauth2</code> and
+<code>sendExemplars</code> (2.27.0), <code>metadataConfig.maxSamplesPerSend</code> (2.29.0),
+<code>enableHTTP2</code> (2.35.0), <code>sendNativeHistograms</code> (2.40.0), <code>azureAd</code> (2.45.0),
 <code>queueConfig.sampleAgeLimit</code> (2.50.0), <code>messageVersion</code> and
 <code>sigv4.useFIPSSTSEndpoint</code> (2.54.0), <code>roundRobinDNS</code> (3.1.0),
-<code>sigv4.externalId</code> (3.11.0); under <code>azureAd</code>, refused at reconcile:
-<code>oauth</code> (2.48.0), <code>sdk</code> (2.52.0), a <code>managedIdentity</code> without
-<code>clientId</code> (3.5.0), <code>workloadIdentity</code> (3.7.0); and <code>azureAd.scope</code>
-(3.9.0).</p></li><li><p><code>apiserverConfig.authorization</code> (2.26.0); the <code>minVersion</code> (2.35.0)
-and <code>maxVersion</code> (2.41.0) of a TLS configuration (under
-<code>apiserverConfig</code>, <code>tracingConfig</code>, a scrape class, an Alertmanager
-endpoint, a remote read or write entry and its <code>oauth2</code>); the proxy
-settings <code>noProxy</code>, <code>proxyFromEnvironment</code> and <code>proxyConnectHeader</code>
-(2.43.0, under <code>apiserverConfig</code>, an Alertmanager endpoint and a remote
-read or write entry), and an <code>oauth2</code>&rsquo;s <code>proxyUrl</code>, its proxy settings
-and its <code>tlsConfig</code> (2.43.0); a relabeling <code>action</code> of <code>lowercase</code> or
-<code>uppercase</code> (2.36.0) or of <code>keepequal</code> or <code>dropequal</code> (2.41.0), refused
-at reconcile, in a scrape class&rsquo;s <code>relabelings</code> and
-<code>metricRelabelings</code> and an Alertmanager endpoint&rsquo;s <code>relabelings</code> and
-<code>alertRelabelings</code>.</p></li></ul><p>The operator reads three fields only below some version, refused at it
-and above, and so with <code>version</code> unset: an Alertmanager endpoint&rsquo;s
-<code>apiVersion: v1</code> (Prometheus 2.x only; refused at every 3.x version, prereleases included),
+<code>sigv4.externalId</code> (3.11.0); under <code>azureAd</code>, refused at reconcile: <code>oauth</code>
+(2.48.0), <code>sdk</code> (2.52.0), a <code>managedIdentity</code> without <code>clientId</code> (3.5.0),
+<code>workloadIdentity</code> (3.7.0); and <code>azureAd.scope</code> (3.9.0).</p></li><li><p><code>apiserverConfig.authorization</code> (2.26.0); the <code>minVersion</code> (2.35.0) and
+<code>maxVersion</code> (2.41.0) of a TLS configuration (under <code>apiserverConfig</code>,
+<code>tracingConfig</code>, a scrape class, an Alertmanager endpoint, a remote read or
+write entry and its <code>oauth2</code>); the proxy settings <code>noProxy</code>,
+<code>proxyFromEnvironment</code> and <code>proxyConnectHeader</code> (2.43.0, under
+<code>apiserverConfig</code>, an Alertmanager endpoint and a remote read or write
+entry), and an <code>oauth2</code>&rsquo;s <code>proxyUrl</code>, its proxy settings and its <code>tlsConfig</code>
+(2.43.0); a relabeling <code>action</code> of <code>lowercase</code> or <code>uppercase</code> (2.36.0) or of
+<code>keepequal</code> or <code>dropequal</code> (2.41.0), refused at reconcile, in a scrape
+class&rsquo;s <code>relabelings</code> and <code>metricRelabelings</code> and an Alertmanager endpoint&rsquo;s
+<code>relabelings</code> and <code>alertRelabelings</code>.</p></li></ul><p>The operator reads three fields only below some version, refused at it and
+above, and so with <code>version</code> unset: an Alertmanager endpoint&rsquo;s <code>apiVersion: v1</code> (Prometheus 2.x only; refused at every 3.x version, prereleases included),
 a remote write entry&rsquo;s <code>queueConfig.maxRetries</code> (below 2.11.0), and
 <code>allowOverlappingBlocks</code> (from 2.11.0 and below 2.39.0).</p></li><li><p>a relabeling rule&rsquo;s <code>targetLabel</code> that is not a legacy label name
-(<code>[a-zA-Z_][a-zA-Z0-9_]*</code>), such as <code>service.name</code> or a <code>${1}</code>
-template, below Prometheus 3.0.0, from which the operator judges label
-names by the UTF-8 scheme instead (<code>ValidationSchemeForPrometheus</code>,
-<code>pkg/operator/validations.go</code>): it refuses the object at reconcile
-(go-kure/launcher#1018). The operator checks the <code>targetLabel</code> of the
-actions <code>replace</code> (an empty action included), <code>hashmod</code>, <code>lowercase</code>,
-<code>uppercase</code>, <code>keepequal</code> and <code>dropequal</code>, in the four lists whose
-actions are gated above. Unset, <code>version</code> is the operator&rsquo;s default
-v3.14.0, at which none is refused; an unparsable <code>version</code> is left to
-the operator, and an action refused below its version is refused first.
-<code>TestPrometheusRelabelTargetLabels_MatchVendoredSource</code> holds the
-threshold, the actions and the lists to the operator&rsquo;s source.</p></li><li><p>a <code>labelmap</code> rule&rsquo;s <code>replacement</code>, where set, that is not a legacy label
-name in which <code>$var</code> and <code>${var}</code> references may stand for any part
-(<code>relabelTargetLegacy</code>, <code>pkg/prometheus/validation/validator.go</code>), such
-as <code>service.$1</code>, below Prometheus 3.0.0, in the same four lists and on
-the same terms: the operator judges it by the UTF-8 scheme from 3.0.0,
-and refuses the object at reconcile below it (go-kure/launcher#1038).
-An empty <code>replacement</code> is left to the operator, which refuses it at every
-version. <code>TestPrometheusRelabelLabelmapReplacement_MatchVendoredSource</code>
-holds the pattern and the action to the operator&rsquo;s source. Like the
-refusals of fields above, a refusal of a <code>targetLabel</code> or a <code>replacement</code>
-suggests a version from 3.0.0 on only where every gated field authored is
-read there too: with <code>allowOverlappingBlocks</code> (below 2.39.0) or an
-Alertmanager endpoint&rsquo;s <code>apiVersion: v1</code> (Prometheus 2.x), it suggests
-only the name. The other way round, a refusal of a field above suggests no
-version below 3.0.0 where a label name outside the legacy scheme is
-authored: at <code>version: v3.0.0</code>, <code>allowOverlappingBlocks</code> beside a
-<code>replacement</code> of <code>service.$1</code> is only to be left unset.</p></li><li><p>a field of <code>thanos</code> the operator reads only from some Thanos version on,
-where <code>thanos.version</code> is below it; unset, the operator&rsquo;s default
-v0.42.5, at which none is refused (an empty <code>thanos.version</code> is not
-unset to the operator, which cannot parse it, and is left to it): <code>getConfigTimeout</code> and
+(<code>[a-zA-Z_][a-zA-Z0-9_]*</code>), such as <code>service.name</code> or a <code>${1}</code> template, below
+Prometheus 3.0.0, from which the operator judges label names by the UTF-8
+scheme instead (<code>ValidationSchemeForPrometheus</code>,
+<code>pkg/operator/validations.go</code>): it refuses the object at reconcile. The
+operator checks the <code>targetLabel</code> of the actions <code>replace</code> (an empty action
+included), <code>hashmod</code>, <code>lowercase</code>, <code>uppercase</code>, <code>keepequal</code> and <code>dropequal</code>,
+in the four lists whose actions are gated above. Unset, <code>version</code> is the
+operator&rsquo;s default v3.14.0, at which none is refused; an unparsable <code>version</code>
+is left to the operator, and an action refused below its version is refused
+first.</p></li><li><p>a <code>labelmap</code> rule&rsquo;s <code>replacement</code>, where set, that is not a legacy label name
+in which <code>$var</code> and <code>${var}</code> references may stand for any part
+(<code>relabelTargetLegacy</code>, <code>pkg/prometheus/validation/validator.go</code>), such as
+<code>service.$1</code>, below Prometheus 3.0.0, in the same four lists and on the same
+terms: the operator judges it by the UTF-8 scheme from 3.0.0, and refuses the
+object at reconcile below it. An empty <code>replacement</code> is left to the operator,
+which refuses it at every version. Like the refusals of fields above, a
+refusal of a <code>targetLabel</code> or a <code>replacement</code> suggests a version from 3.0.0 on
+only where every gated field authored is read there too: with
+<code>allowOverlappingBlocks</code> (below 2.39.0) or an Alertmanager endpoint&rsquo;s
+<code>apiVersion: v1</code> (Prometheus 2.x), it suggests only the name. The other way
+round, a refusal of a field above suggests no version below 3.0.0 where a
+label name outside the legacy scheme is authored: at <code>version: v3.0.0</code>,
+<code>allowOverlappingBlocks</code> beside a <code>replacement</code> of <code>service.$1</code> is only to be
+left unset.</p></li><li><p>a field of <code>thanos</code> the operator reads only from some Thanos version on, where
+<code>thanos.version</code> is below it; unset, the operator&rsquo;s default v0.42.5, at which
+none is refused (an empty <code>thanos.version</code> is not unset to the operator, which
+cannot parse it, and is left to it): <code>getConfigTimeout</code> and
 <code>getConfigInterval</code> (0.29.0), <code>grpcServerTlsConfig.minVersion</code> (0.37.0),
 <code>grpcServerTlsConfig.cipherSuites</code> and <code>curves</code> (0.42.0). Below it the
-operator leaves the flag off the sidecar.</p></li><li><p><code>thanos.blockSize</code>, other than the CRD&rsquo;s default <code>2h</code> that the API
-server writes where it is unset, where the operator reads it at neither
-version: with
-object storage configured and <code>disableCompaction</code> unset, from
-Prometheus 3.9.0 and Thanos 0.42.0 on it keeps local compaction on in
-step with the sidecar and passes no block duration
-(<code>compactionModeFor</code>), so it is refused there, with both versions unset
-too. Below either
-version, or with <code>disableCompaction</code>, it disables compaction and passes
-<code>blockSize</code> as the block duration. An unparsable <code>version</code> or
-<code>thanos.version</code> is left to the operator. Without object storage and
-without <code>disableCompaction</code> the operator reads <code>blockSize</code> at no
-version; that is not held here.</p><p><code>TestPrometheusVersionGates_MatchVendoredSource</code> parses every version
-comparison of the operator&rsquo;s packages <code>pkg/prometheus</code>,
-<code>pkg/prometheus/server</code> and <code>pkg/prometheus/validation</code> (every Go file,
-its tests aside) and holds each to these lists, or to the reason it
-gates no field of this kind (a field of a ServiceMonitor, PodMonitor,
-Probe or ScrapeConfig object, the configuration of a PrometheusAgent, a
-choice of how the operator spells a flag), and the two defaults to the
-operator&rsquo;s <code>pkg/operator/defaults.go</code>; the files are vendored as for
-<code>alertmanager</code>.</p></li><li><p>a name the operator&rsquo;s objects cannot be named after: the data volume
+operator leaves the flag off the sidecar.</p></li><li><p><code>thanos.blockSize</code>, other than the CRD&rsquo;s default <code>2h</code> that the API server
+writes where it is unset, where the operator reads it at neither version: with
+object storage configured and <code>disableCompaction</code> unset, from Prometheus 3.9.0
+and Thanos 0.42.0 on it keeps local compaction on in step with the sidecar and
+passes no block duration (<code>compactionModeFor</code>), so it is refused there, with
+both versions unset too. Below either version, or with <code>disableCompaction</code>, it
+disables compaction and passes <code>blockSize</code> as the block duration. An
+unparsable <code>version</code> or <code>thanos.version</code> is left to the operator. Without
+object storage and without <code>disableCompaction</code> the operator reads <code>blockSize</code>
+at no version; that is not held here.</p></li><li><p>a name the operator&rsquo;s objects cannot be named after: the data volume
 <code>prometheus-&lt;name>-db</code>, the volume of the third rule ConfigMap
-<code>prometheus-&lt;name>-rulefiles-2</code>, and the hostname of the last pod of the
-last shard, <code>prometheus-&lt;name>-&lt;replicas-1></code> or
-<code>prometheus-&lt;name>-shard-&lt;shards-1>-&lt;replicas-1></code>, must each be a
-DNS-1123 label; and the name of the last shard&rsquo;s StatefulSet,
-<code>prometheus-&lt;name></code> or <code>prometheus-&lt;name>-shard-&lt;shards-1></code>, must be at
-most 52 characters: the StatefulSet controller labels each of its pods
-<code>controller-revision-hash</code> with that name, a <code>-</code> and a hash of up to 10
-characters, a label value the API refuses beyond 63 characters. So a
-name has no dot and at most 40 characters, 33 with 2 to 10 shards, and
-fewer with more. Neither applies where <code>replicas</code> is 0, with no pod to
-name or label. The operator mounts three rule
-ConfigMaps whatever the rules (server/rules.go:119), and more only where
-the PrometheusRules it selects outgrow three of half a MiB each; the
-name of an eleventh, <code>rulefiles-10</code>, depends on the cluster&rsquo;s rules and
-is not checked. The refusal names the component, or <code>objectName</code> where
-that set the name.</p></li></ul><p><strong>The API&rsquo;s expression rules are not checked.</strong> Five are listed
-(<code>prometheusRulesLeft</code>) and left to the API server: with the sharding
-strategy mode <code>Topology</code>, <code>shards</code> must be at least the number of topology
-values, and <code>topology</code> needs that mode; an <code>updateStrategy</code> with a
-<code>rollingUpdate</code> must have the type <code>RollingUpdate</code>; and the <code>externalId</code>
-of a <code>sigv4</code>, a remote write entry&rsquo;s or an Alertmanager endpoint&rsquo;s, needs
-a <code>roleArn</code>.</p><p><strong>Topology sharding below the node metadata versions is not refused</strong>
-(go-kure/launcher#1019). With <code>shardingStrategy.mode: Topology</code>, the
-operator assigns each target to the shards of its zone: the zone of its
-EndpointSlice, else the pod&rsquo;s zone label where the cluster sets one
-(Kubernetes 1.35 and later, <code>PodTopologyLabelsAdmission</code>), else its
-node&rsquo;s zone label. For the node&rsquo;s, the operator writes
-<code>attach_metadata: {node: true}</code> into the service discovery of every
-PodMonitor from Prometheus 2.35.0 and every ServiceMonitor from 2.37.0,
+<code>prometheus-&lt;name>-rulefiles-2</code>, and the hostname of the last pod of the last
+shard, <code>prometheus-&lt;name>-&lt;replicas-1></code> or
+<code>prometheus-&lt;name>-shard-&lt;shards-1>-&lt;replicas-1></code>, must each be a DNS-1123
+label; and the name of the last shard&rsquo;s StatefulSet, <code>prometheus-&lt;name></code> or
+<code>prometheus-&lt;name>-shard-&lt;shards-1></code>, must be at most 52 characters: the
+StatefulSet controller labels each of its pods <code>controller-revision-hash</code> with
+that name, a <code>-</code> and a hash of up to 10 characters, a label value the API
+refuses beyond 63 characters. So a name has no dot and at most 40 characters,
+33 with 2 to 10 shards, and fewer with more. Neither applies where <code>replicas</code>
+is 0, with no pod to name or label. The operator mounts three rule ConfigMaps
+whatever the rules (server/rules.go:119), and more only where the
+PrometheusRules it selects outgrow three of half a MiB each; the name of an
+eleventh, <code>rulefiles-10</code>, depends on the cluster&rsquo;s rules and is not checked.
+The refusal names the component, or <code>objectName</code> where that set the name.</p></li></ul><p><strong>The API&rsquo;s expression rules are not checked.</strong> Five are listed
+(<code>prometheusRulesLeft</code>) and left to the API server: with the sharding strategy
+mode <code>Topology</code>, <code>shards</code> must be at least the number of topology values, and
+<code>topology</code> needs that mode; an <code>updateStrategy</code> with a <code>rollingUpdate</code> must have
+the type <code>RollingUpdate</code>; and the <code>externalId</code> of a <code>sigv4</code>, a remote write
+entry&rsquo;s or an Alertmanager endpoint&rsquo;s, needs a <code>roleArn</code>.</p><p><strong>Topology sharding below the node metadata versions is not refused</strong>. With
+<code>shardingStrategy.mode: Topology</code>, the operator assigns each target to the
+shards of its zone: the zone of its EndpointSlice, else the pod&rsquo;s zone label
+where the cluster sets one (Kubernetes 1.35 and later,
+<code>PodTopologyLabelsAdmission</code>), else its node&rsquo;s zone label. For the node&rsquo;s, the
+operator writes <code>attach_metadata: {node: true}</code> into the service discovery of
+every PodMonitor from Prometheus 2.35.0 and every ServiceMonitor from 2.37.0,
 and below them drops it (<code>mergeAttachMetadataForTopology</code>,
-<code>pkg/prometheus/promcfg.go</code>). There a target with no EndpointSlice zone,
-as every PodMonitor&rsquo;s, has no zone, and no shard scrapes it. Whether
-topology sharding is active at all depends on the operator&rsquo;s
-<code>PrometheusTopologySharding</code> feature gate, and the fallback on the
-cluster&rsquo;s pod labels; neither is visible at build, so the kind refuses
-nothing and documents the limit. A cluster without pod topology labels
-that shards by topology runs Prometheus 2.37.0 or later.
-<code>TestPrometheusTopologyNodeZone_MatchVendoredSource</code> holds both versions
-to the vendored <code>promcfg.go</code>.</p><p><strong>What the type writes unauthored:</strong> <code>arbitraryFSAccessThroughSMs: {}</code>,
-<code>resources: {}</code> and <code>rules: {alert: {}}</code>, on every Prometheus; on an
-authored <code>thanos</code>, its <code>resources: {}</code>; and, on an authored <code>storage</code>, a
-<code>volumeClaimTemplate</code> with <code>metadata: {}</code> and <code>status: {}</code>.</p><p><strong>Policy.</strong> Refused, with a workload kind&rsquo;s classes: <code>image</code>,
-<code>thanos.image</code>, the image of a listed container or init container (a patch
-included) and an image volume&rsquo;s reference outside the allowed registries;
-under a policy that lists allowed registries, an image the operator
-chooses (below); <code>replicas</code> times <code>shards</code> over the replica maximum, as the
-operator counts them (below; <code>replicas times shards 4 exceeds enforced maximum 3</code>); the cpu or memory of <code>resources</code>,
-of <code>thanos.resources</code> and of a listed container over the maxima; the
-storage a claim requests over the storage maximum; a hostPath volume;
-<code>hostNetwork</code> where the policy does not allow the host network; a
-privileged listed container, a pod-level
-<code>securityContext.windowsOptions.hostProcess</code> and a capability the policy
-does not allow. <code>TestMonitoringWorkloadKinds_PodFieldsHeldOrListed</code> holds
-every top-level field of the spec that shapes the pods to a refusal shown
-on a document or a stated reason; <code>shards</code> and the sidecar&rsquo;s fields are
-not top-level pod fields of the derivation, and <code>shards</code>, <code>thanos.image</code>
-and <code>thanos.resources</code> are held by <code>TestPrometheus_ReplicasTimesShards</code> and
-<code>TestPrometheus_PolicyRefusals</code> instead.</p><p><strong>An image the operator chooses is refused under a registry allowlist.</strong>
-Where the spec names no image for a container the operator generates, the
-operator chooses the one it runs, and no registry allowlist reaches that
-choice, so a policy with a non-empty <code>AllowedRegistries</code> refuses it
-(<code>image: unset, so the Prometheus operator chooses the image the pods run, …</code>; <code>thanos.image: unset, …</code>; <code>the image of the config-reloader container (containers): unset, …</code>) and the author names an image from one of the
-listed registries: <code>image</code> or a patch of <code>prometheus</code>; where <code>thanos</code> is
-set, <code>thanos.image</code> or a patch of <code>thanos-sidecar</code>; a patch of
-<code>config-reloader</code>; and a patch of <code>init-config-reloader</code> in
-<code>initContainers</code>. The operator generates the prometheus container, both
-reloaders and, where <code>thanos</code> is set, the sidecar (<code>makeStatefulSetSpec</code>,
-<code>createThanosContainer</code>, <code>BuildConfigReloader</code>). Without such a list, it
-builds.</p><p><strong>The operator&rsquo;s own counts are held, not written.</strong> The operator runs one
-StatefulSet a shard with the replica count each, and reads an unset or
-negative <code>replicas</code> as 1 and an unset <code>shards</code> as 1 (<code>ReplicasNumberPtr</code>,
-<code>shardsNumber</code>; a <code>shards</code> below 1 is refused). The replica maximum holds that
-product whether or not either is authored, and the emitted object still
-leaves both as authored.</p><p><strong>Credentials: three are held, the rest are stated.</strong> The deprecated
+<code>pkg/prometheus/promcfg.go</code>). There a target with no EndpointSlice zone, as
+every PodMonitor&rsquo;s, has no zone, and no shard scrapes it. Whether topology
+sharding is active at all depends on the operator&rsquo;s <code>PrometheusTopologySharding</code>
+feature gate, and the fallback on the cluster&rsquo;s pod labels; neither is visible
+at build, so the kind refuses nothing and documents the limit. A cluster without
+pod topology labels that shards by topology runs Prometheus 2.37.0 or later.</p><p><strong>Policy.</strong> Refused, with a workload kind&rsquo;s classes: <code>image</code>, <code>thanos.image</code>,
+the image of a listed container or init container (a patch included) and an
+image volume&rsquo;s reference outside the allowed registries; under a policy that
+lists allowed registries, an image the operator chooses (below); <code>replicas</code>
+times <code>shards</code> over the replica maximum, as the operator counts them (below;
+<code>replicas times shards 4 exceeds enforced maximum 3</code>); the cpu or memory of
+<code>resources</code>, of <code>thanos.resources</code> and of a listed container over the maxima;
+the storage a claim requests over the storage maximum; a hostPath volume;
+<code>hostNetwork</code> where the policy does not allow the host network; a privileged
+listed container, a pod-level <code>securityContext.windowsOptions.hostProcess</code> and a
+capability the policy does not allow.</p><p><strong>An image the operator chooses is refused under a registry allowlist.</strong> Where
+the spec names no image for a container the operator generates, the operator
+chooses the one it runs, and no registry allowlist reaches that choice, so a
+policy with a non-empty <code>AllowedRegistries</code> refuses it (<code>image: unset, so the Prometheus operator chooses the image the pods run, …</code>; <code>thanos.image: unset, …</code>; <code>the image of the config-reloader container (containers): unset, …</code>) and the
+author names an image from one of the listed registries: <code>image</code> or a patch of
+<code>prometheus</code>; where <code>thanos</code> is set, <code>thanos.image</code> or a patch of
+<code>thanos-sidecar</code>; a patch of <code>config-reloader</code>; and a patch of
+<code>init-config-reloader</code> in <code>initContainers</code>. The operator generates the
+prometheus container, both reloaders and, where <code>thanos</code> is set, the sidecar
+(<code>makeStatefulSetSpec</code>, <code>createThanosContainer</code>, <code>BuildConfigReloader</code>). Without
+such a list, it builds.</p><p><strong>The operator&rsquo;s own counts are held, not written.</strong> The operator runs one
+StatefulSet a shard with the replica count each, and reads an unset or negative
+<code>replicas</code> as 1 and an unset <code>shards</code> as 1 (<code>ReplicasNumberPtr</code>, <code>shardsNumber</code>;
+a <code>shards</code> below 1 is refused). The replica maximum holds that product whether
+or not either is authored, and the emitted object still leaves both as authored.</p><p><strong>Credentials: three are held, the rest are stated.</strong> The deprecated
 <code>bearerToken</code> of a <code>remoteWrite</code> entry, of a <code>remoteRead</code> entry and of
-<code>apiserverConfig</code> holds a credential in the object; under a policy that
-forbids explicit secrets each is refused (<code>oam.RefusalExplicitSecret</code>), and
-without one it is written as authored. Every other credential of the spec
-is the key of a Secret or the path of a file in the container.
-<strong>Not held:</strong> a value of a <code>headers</code> map (<code>remoteWrite</code>, <code>remoteRead</code>,
-<code>tracingConfig</code>), the userinfo of a URL, and free text (<code>additionalArgs</code>,
-the <code>env</code> of a listed container) are written as authored, under a policy
-that forbids explicit secrets too.
-<code>TestMonitoringWorkloadKinds_CredentialsHeldOrListed</code> derives the fields
-whose name suggests a credential and holds each to the policy or a stated
-reason.</p><p><strong><code>podMetadata</code>.</strong> As on <code>alertmanager</code>: the pods carry the component label
-only if the author writes the component&rsquo;s own value into
-<code>podMetadata.labels</code>. The operator reserves seven labels of its own on the
-pods (<code>prometheus</code>, <code>app.kubernetes.io/instance</code>,
-<code>app.kubernetes.io/managed-by</code>, <code>app.kubernetes.io/name</code>,
-<code>app.kubernetes.io/version</code>, <code>operator.prometheus.io/name</code>,
-<code>operator.prometheus.io/shard</code>) and the annotation
-<code>kubectl.kubernetes.io/default-container</code>. The operator copies the
+<code>apiserverConfig</code> holds a credential in the object; under a policy that forbids
+explicit secrets each is refused (<code>oam.RefusalExplicitSecret</code>), and without one
+it is written as authored. Every other credential of the spec is the key of a
+Secret or the path of a file in the container. <strong>Not held:</strong> a value of a
+<code>headers</code> map (<code>remoteWrite</code>, <code>remoteRead</code>, <code>tracingConfig</code>), the userinfo of a
+URL, and free text (<code>additionalArgs</code>, the <code>env</code> of a listed container) are
+written as authored, under a policy that forbids explicit secrets too.</p><p><strong><code>podMetadata</code>.</strong> As on <code>alertmanager</code>: the pods carry the component label only
+if the author writes the component&rsquo;s own value into <code>podMetadata.labels</code>. The
+operator reserves seven labels of its own on the pods (<code>prometheus</code>,
+<code>app.kubernetes.io/instance</code>, <code>app.kubernetes.io/managed-by</code>,
+<code>app.kubernetes.io/name</code>, <code>app.kubernetes.io/version</code>,
+<code>operator.prometheus.io/name</code>, <code>operator.prometheus.io/shard</code>) and the
+annotation <code>kubectl.kubernetes.io/default-container</code>. The operator copies the
 authored labels and annotations over <code>app.kubernetes.io/version</code> and the
-annotation, so an authored value replaces those two, and then sets the
-other six labels over the authored ones, so an authored value of those
-does not hold (<code>BuildPodMetadata</code>, promcfg.go:1367-1384;
-server/statefulset.go:219-230). Launcher does not refuse such a key.</p><p><strong>Not covered.</strong> Whether what the object refers to exists (a Secret key, a
-mounted Secret or ConfigMap, the ServiceAccount and the RBAC Kubernetes
-service discovery needs, a governing Service named by <code>serviceName</code>, the
-objects the selectors match, the Alertmanager endpoints). What the operator
-adds on its own beyond the containers above (the <code>prometheus-operated</code>
-Service, the configuration Secret) is not in the object; its code is not in
-the linked module, and was read at the version above for the containers,
-their images and the pod count only. The object&rsquo;s status is the operator&rsquo;s
-and is not written.</p></li><li><p><strong>servicemonitor</strong>, <strong>podmonitor</strong>, <strong>prometheus-probe</strong>, <strong>prometheusrule</strong>
-(go-kure/launcher#790) are the kind-named projections of four objects of the
-Prometheus operator&rsquo;s <code>monitoring.coreos.com/v1</code> API: a ServiceMonitor, a
-PodMonitor, a Probe and a PrometheusRule. Each is built on <code>policyFreeKind</code>
-and emits that one object in the build namespace, named after the component
-unless <code>objectName</code> names it; the handler adds no label, no annotation and no
-default of its own. Each declares its object as namespaced, so the object name is
-claimed in the object&rsquo;s namespace. The Probe&rsquo;s type name carries a prefix
-because a probe, in this package, is a container&rsquo;s.</p><p><strong>No capability is required, and none gates these kinds.</strong> Launcher does
-not ask whether the cluster serves <code>monitoring.coreos.com/v1</code>: where the
-operator&rsquo;s CRDs are not installed the component builds, and the object is
-refused at apply. Whoever may author a component may author these. A policy
-can keep the kinds out of a build through the object kind policy
-(<code>oam.ObjectKindPolicy</code>, go-kure/launcher#922).</p><p><strong>Authored.</strong> The properties are the top-level json fields of the spec type,
-decoded strictly at every depth: an unknown key is refused wherever it sits
-(an endpoint, a relabeling rule, a rule of a group).</p><ul><li><code>servicemonitor</code> (<code>ServiceMonitorSpec</code>): <code>endpoints</code>, <code>selector</code>,
+annotation, so an authored value replaces those two, and then sets the other six
+labels over the authored ones, so an authored value of those does not hold
+(<code>BuildPodMetadata</code>, promcfg.go:1367-1384; server/statefulset.go:219-230).
+Launcher does not refuse such a key.</p><p><strong>Not covered.</strong> Whether what the object refers to exists (a Secret key, a
+mounted Secret or ConfigMap, the ServiceAccount and the RBAC Kubernetes service
+discovery needs, a governing Service named by <code>serviceName</code>, the objects the
+selectors match, the Alertmanager endpoints). What the operator adds on its own
+beyond the containers above (the <code>prometheus-operated</code> Service, the
+configuration Secret) is not in the object; its code is not in the linked
+module, and was read at the version above for the containers, their images and
+the pod count only. The object&rsquo;s status is the operator&rsquo;s and is not written.</p><h3 id=example-2>Example<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>The component in <code>pkg/cmd/kurel/testdata/prometheus-component/app.yaml</code>, built
+against the <code>cluster.yaml</code> beside it, gives the <code>expected.yaml</code> beside it. The
+fixture test compares the two.</p><h2 id=servicemonitor-podmonitor-prometheus-probe-prometheusrule>servicemonitor, podmonitor, prometheus-probe, prometheusrule<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p><strong>servicemonitor</strong>, <strong>podmonitor</strong>, <strong>prometheus-probe</strong>, <strong>prometheusrule</strong> are
+the kind-named projections of four objects of the Prometheus operator&rsquo;s
+<code>monitoring.coreos.com/v1</code> API: a ServiceMonitor, a PodMonitor, a Probe and a
+PrometheusRule. Each is built on <code>policyFreeKind</code> and emits that one object in
+the build namespace, named after the component unless <code>objectName</code> names it; the
+handler adds no label, no annotation and no default of its own.</p><h3 id=properties-3>Properties<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><strong>Authored.</strong> The properties are the top-level json fields of the spec type,
+decoded strictly at every depth: an unknown key is refused wherever it sits (an
+endpoint, a relabeling rule, a rule of a group).</p><ul><li><code>servicemonitor</code> (<code>ServiceMonitorSpec</code>): <code>endpoints</code>, <code>selector</code>,
 <code>namespaceSelector</code>, <code>selectorMechanism</code>, <code>jobLabel</code>, <code>targetLabels</code>,
-<code>podTargetLabels</code>, <code>attachMetadata</code>, <code>bodySizeLimit</code>,
-<code>serviceDiscoveryRole</code>, and the scrape settings below.</li><li><code>podmonitor</code> (<code>PodMonitorSpec</code>): <code>podMetricsEndpoints</code>, <code>selector</code>,
+<code>podTargetLabels</code>, <code>attachMetadata</code>, <code>bodySizeLimit</code>, <code>serviceDiscoveryRole</code>,
+and the scrape settings below.</li><li><code>podmonitor</code> (<code>PodMonitorSpec</code>): <code>podMetricsEndpoints</code>, <code>selector</code>,
 <code>namespaceSelector</code>, <code>selectorMechanism</code>, <code>jobLabel</code>, <code>podTargetLabels</code>,
-<code>attachMetadata</code>, <code>bodySizeLimit</code>, and the scrape settings below.</li><li><code>prometheus-probe</code> (<code>ProbeSpec</code>): <code>prober</code>, <code>targets</code>, <code>module</code>,
-<code>jobName</code>, <code>interval</code>, <code>scrapeTimeout</code>, <code>metricRelabelings</code>, <code>params</code>,
-the HTTP client settings the type embeds (<code>authorization</code>, <code>basicAuth</code>,
-<code>oauth2</code>, <code>bearerTokenSecret</code>, <code>followRedirects</code>, <code>enableHttp2</code>,
-<code>tlsConfig</code>), and the scrape settings below.</li><li><code>prometheusrule</code> (<code>PrometheusRuleSpec</code>): <code>groups</code>, each with its <code>name</code>,
-<code>rules</code> and evaluation settings. A rule&rsquo;s <code>expr</code> is a string or a number
-and is emitted as the one authored.</li><li>The scrape settings the three scrape kinds share: <code>sampleLimit</code>,
-<code>targetLimit</code>, <code>labelLimit</code>, <code>labelNameLengthLimit</code>,
-<code>labelValueLengthLimit</code>, <code>keepDroppedTargets</code>, <code>scrapeProtocols</code>,
-<code>fallbackScrapeProtocol</code>, <code>scrapeClass</code>, <code>scrapeNativeHistograms</code>,
-<code>scrapeClassicHistograms</code>, <code>extraScrapeMetrics</code> (Prometheus v3.10.0 or
-later; the operator drops it from the configuration of an older one,
-which these kinds cannot see), <code>nativeHistogramBucketLimit</code>,
-<code>nativeHistogramMinBucketFactor</code> and <code>convertClassicHistogramsToNHCB</code>.</li><li>An authored <code>0</code> or <code>false</code> is kept where the API tells it from an unset
-field (<code>sampleLimit: 0</code>, <code>filterRunning: false</code>, a group&rsquo;s <code>limit: 0</code>), and
-left out where the type omits a zero that means the same
-(<code>honorLabels: false</code>). A quantity written as a number is emitted in its
-canonical string form (<code>nativeHistogramMinBucketFactor: 1.1</code> as <code>1100m</code>).
-The API&rsquo;s two defaults are strings (a prober&rsquo;s <code>path</code>, <code>/probe</code>, and a
-relabeling rule&rsquo;s <code>action</code>, <code>replace</code>): the type omits an empty string
-there, so an authored <code>""</code> would be defaulted, and it is refused
-(<code>prober.path: "" cannot be carried by the Prometheus operator API types (…)</code>). <code>TestMonitoringKinds_DefaultedZeros</code> holds each kind&rsquo;s list of
-such fields to the numbers, booleans and strings that are omitted when
-zero and defaulted to something else, from the default markers of the
-linked module&rsquo;s source.</li></ul><p><strong>Required</strong> is a field the API requires that the Go type writes whether or
-not it was authored, so that the object would not show the omission. It is
-the rule every kind follows, not a wider one: sent as it was authored, the
-document is one the API server refuses, and only the Go type&rsquo;s zero value
-hides that. Each must be authored (<code>selector: required (…)</code>,
-<code>endpoints[1].oauth2.tokenUrl: required (…)</code>):</p><ul><li>a <code>servicemonitor</code>&rsquo;s <code>endpoints</code> and <code>selector</code>, and a <code>podmonitor</code>&rsquo;s
-<code>selector</code>. No default selector is filled: unauthored, the type would
-write <code>selector: {}</code>, which selects every Service or pod of the selected
-namespaces. <code>selector: {}</code> and <code>endpoints: []</code> are authored values and
-build.</li><li>the <code>clientId</code>, <code>clientSecret</code> and <code>tokenUrl</code> of an <code>oauth2</code>, on an
-endpoint of either monitor and on a Probe;</li><li>a rule group&rsquo;s <code>name</code> and a rule&rsquo;s <code>expr</code> (unauthored, the type would
-write <code>expr: 0</code>);</li><li>the <code>key</code> and <code>operator</code> of a match expression, in a monitor&rsquo;s <code>selector</code>
-and in a Probe&rsquo;s <code>targets.ingress.selector</code>
-(<code>selector.matchExpressions[0].operator: required (…)</code>). The selector is
-a Kubernetes type, which carries no <code>+required</code> marker: the generator
-derives the two fields from that type&rsquo;s source by the schema generators'
-rule, that a field with no optional marker whose json tag keeps it when
-empty is required. Presence only: the operator&rsquo;s value and its <code>values</code>
-are left to the API server (see <a href=/launcher/dev/api-reference/oam-components/conventions/index.html#a-label-selectors-match-expressions>&ldquo;A label selector&rsquo;s match expressions&rdquo;</a>).</li><li>since go-kure/launcher#883 (<strong>breaking</strong> for a document that leaves one
-out under an authored parent): the <code>key</code> of a Secret or ConfigMap key
-reference (<code>endpoints[0].tlsConfig.ca.secret.key: required (…)</code>), the
-<code>key</code> of a proxy connect header&rsquo;s Secret key reference, and the
-<code>username</code> and the <code>password</code> of a <code>basicAuth</code>, on an endpoint of either
-monitor and on a Probe, which the API server accepts left out and the
-operator refuses.</li></ul><p><strong>A required field the type leaves out when it is empty is refused too:</strong>
-the <code>name</code> of a Probe parameter (<code>params[1].name: required (…)</code>), unauthored
-or empty. The object would show the omission and the API server refuse it.
-<code>TestKindComponents_OmittedRequiredAndWrittenDefaults</code> derives these fields
-for every kind in its table, from the CRD the linked module ships or, where
-it ships none, from the markers of its source. It holds each to a refusal,
-shown on a document, or to a stated reason. The same test derives the
-fields the API defaults and the type writes unauthored, where the default
-would never apply, and holds each to one of three answers: refused, filled
-by the kind with the API&rsquo;s default, or harmless with the reason.</p><p>The table holds the kind components that decode their properties into an
-upstream type, but for two groups. The <code>httproute</code> kind is not in it: the
-experimental-channel CRD requires the <code>protocol</code> of an <code>externalAuth</code>
-filter, of a rule and of a backend reference, the type leaves an empty one
-out, and the kind does not refuse it. The Flux kinds (<code>helmrelease</code>,
-<code>fluxcd-kustomization</code>, <code>helmrepository</code>, <code>ocirepository</code>, <code>gitrepository</code>,
-<code>bucket</code>, <code>helmchart</code>) are not in it either: no row is written for them.</p><p><strong>A Probe needs <code>prober.url</code> here, because the object always carries a
-prober.</strong> This is a limit of the Go type, not a rule of the API: the API
-does not require <code>prober</code>, but the type writes one whether or not it was
-authored, and the API server refuses a prober without a <code>url</code>. A Probe
-without a prober cannot be emitted. An empty <code>url</code> is refused as an
-unauthored one is.</p><p><strong>These lists are generated</strong> (go-kure/launcher#883; see <a href=/launcher/dev/api-reference/oam-components/conventions/index.html#required-fields-a-kind-writes-unauthored-and-does-not-refuse>&ldquo;Required fields
-a kind writes unauthored and does not refuse&rdquo;</a>) from the fields the source
-marks required and the type writes unauthored, the linked module&rsquo;s and
-those of the Kubernetes types the specs embed, so a dependency bump that
-adds, drops or moves one fails <code>TestKindComponents_RequiredIsGenerated</code>.
-<code>TestKindComponents_GeneratedRequiredBothWays</code> holds each field both ways
-on the kind, and runs a path of every type that holds one through the
-operator&rsquo;s CRD, vendored from its repository at the linked release (the
-module ships none). <strong>Not refused:</strong></p><ul><li>an authored empty string in a required field (a group&rsquo;s <code>name: ""</code>),
-<code>prober.url</code> and a parameter&rsquo;s <code>name</code> excepted. It is a value, and the
-API server&rsquo;s to refuse;</li><li>every other value rule of the API (formats, enumerations, lengths, that a
-rule is a recording or an alerting one), and the operator&rsquo;s own checks of
-an object the API server has admitted: that a Probe has targets, that a
-scrape timeout is no longer than its interval, that an endpoint or a
-Probe authenticates one way. Whether a rule&rsquo;s expression is valid PromQL
-is not checked either.</li></ul><p><strong>What the type writes unauthored.</strong> A <code>servicemonitor</code> or <code>podmonitor</code>
-carries <code>namespaceSelector: {}</code>, which selects the object&rsquo;s own namespace.
-A <code>podmonitor</code> without endpoints carries <code>podMetricsEndpoints: null</code>, which
-the API server drops as it drops every null of a field that is not
-nullable. A <code>prometheus-probe</code> carries <code>targets: {}</code>, and the operator
-rejects a Probe with no target. A <code>tlsConfig</code> carries <code>ca: {}</code> and
-<code>cert: {}</code> where they were not authored.</p><p><strong>The selector, the prober and the targets are the author&rsquo;s.</strong> Launcher
-points none at a component and looks for none in the document. To scrape a
-workload component&rsquo;s pods, select their <code>app</code> label
-(<code>matchLabels: {app: &lt;component>}</code>, valued as <a href=/launcher/dev/api-reference/oam-components/conventions/index.html#the-app-label>&ldquo;The <code>app</code> label&rdquo;</a>
-describes); to scrape a <code>service</code> component&rsquo;s
-Service, select a label its object carries (the component label, see
-&ldquo;Component label and ownership&rdquo; in the OAM model). A Secret or ConfigMap an
-object refers to is read by the operator in the object&rsquo;s namespace.</p><p><strong>Selected by a Prometheus through the object&rsquo;s labels.</strong> A Prometheus
-picks these objects up through its label selectors
-(<code>serviceMonitorSelector</code>, <code>podMonitorSelector</code>, <code>probeSelector</code>,
-<code>ruleSelector</code>). The handler writes no label, so the object carries the
-component label, whose value is the component&rsquo;s, and what <code>labels</code> authors:
-for a Prometheus that selects on a fixed label (<code>release: &lt;name></code>, say),
-write that label there.</p><p><strong>Policy.</strong> No field of these specs is one an <code>oam.Policy</code> method speaks to,
-so <code>ApplyPolicy</code> enforces nothing and fills nothing, and each builds the
-same under every policy and under none.</p><ul><li><strong>Hosts are not checked.</strong> A host these objects name is one Prometheus
+<code>attachMetadata</code>, <code>bodySizeLimit</code>, and the scrape settings below.</li><li><code>prometheus-probe</code> (<code>ProbeSpec</code>): <code>prober</code>, <code>targets</code>, <code>module</code>, <code>jobName</code>,
+<code>interval</code>, <code>scrapeTimeout</code>, <code>metricRelabelings</code>, <code>params</code>, the HTTP client
+settings the type embeds (<code>authorization</code>, <code>basicAuth</code>, <code>oauth2</code>,
+<code>bearerTokenSecret</code>, <code>followRedirects</code>, <code>enableHttp2</code>, <code>tlsConfig</code>), and the
+scrape settings below.</li><li><code>prometheusrule</code> (<code>PrometheusRuleSpec</code>): <code>groups</code>, each with its <code>name</code>,
+<code>rules</code> and evaluation settings. A rule&rsquo;s <code>expr</code> is a string or a number and
+is emitted as the one authored.</li><li>The scrape settings the three scrape kinds share: <code>sampleLimit</code>,
+<code>targetLimit</code>, <code>labelLimit</code>, <code>labelNameLengthLimit</code>, <code>labelValueLengthLimit</code>,
+<code>keepDroppedTargets</code>, <code>scrapeProtocols</code>, <code>fallbackScrapeProtocol</code>,
+<code>scrapeClass</code>, <code>scrapeNativeHistograms</code>, <code>scrapeClassicHistograms</code>,
+<code>extraScrapeMetrics</code> (Prometheus v3.10.0 or later; the operator drops it from
+the configuration of an older one, which these kinds cannot see),
+<code>nativeHistogramBucketLimit</code>, <code>nativeHistogramMinBucketFactor</code> and
+<code>convertClassicHistogramsToNHCB</code>.</li><li>An authored <code>0</code> or <code>false</code> is kept where the API tells it from an unset field
+(<code>sampleLimit: 0</code>, <code>filterRunning: false</code>, a group&rsquo;s <code>limit: 0</code>), and left out
+where the type omits a zero that means the same (<code>honorLabels: false</code>). A
+quantity written as a number is emitted in its canonical string form
+(<code>nativeHistogramMinBucketFactor: 1.1</code> as <code>1100m</code>). The API&rsquo;s two defaults are
+strings (a prober&rsquo;s <code>path</code>, <code>/probe</code>, and a relabeling rule&rsquo;s <code>action</code>,
+<code>replace</code>): the type omits an empty string there, so an authored <code>""</code> would be
+defaulted, and it is refused (<code>prober.path: "" cannot be carried by the Prometheus operator API types (…)</code>).</li></ul><p><strong>Required</strong> is a field the API requires that the Go type writes whether or not
+it was authored, so that the object would not show the omission. It is the rule
+every kind follows, not a wider one: sent as it was authored, the document is
+one the API server refuses, and only the Go type&rsquo;s zero value hides that. Each
+must be authored (<code>selector: required (…)</code>, <code>endpoints[1].oauth2.tokenUrl: required (…)</code>):</p><ul><li>a <code>servicemonitor</code>&rsquo;s <code>endpoints</code> and <code>selector</code>, and a <code>podmonitor</code>&rsquo;s
+<code>selector</code>. No default selector is filled: unauthored, the type would write
+<code>selector: {}</code>, which selects every Service or pod of the selected namespaces.
+<code>selector: {}</code> and <code>endpoints: []</code> are authored values and build.</li><li>the <code>clientId</code>, <code>clientSecret</code> and <code>tokenUrl</code> of an <code>oauth2</code>, on an endpoint
+of either monitor and on a Probe;</li><li>a rule group&rsquo;s <code>name</code> and a rule&rsquo;s <code>expr</code> (unauthored, the type would write
+<code>expr: 0</code>);</li><li>the <code>key</code> and <code>operator</code> of a match expression, in a monitor&rsquo;s <code>selector</code> and
+in a Probe&rsquo;s <code>targets.ingress.selector</code>
+(<code>selector.matchExpressions[0].operator: required (…)</code>). The selector is a
+Kubernetes type, which carries no <code>+required</code> marker: the generator derives
+the two fields from that type&rsquo;s source by the schema generators&rsquo; rule, that a
+field with no optional marker whose json tag keeps it when empty is required.
+Presence only: the operator&rsquo;s value and its <code>values</code> are left to the API
+server (see <a href=/launcher/dev/api-reference/oam-components/conventions/index.html#a-label-selectors-match-expressions>&ldquo;A label selector&rsquo;s match
+expressions&rdquo;</a>).</li><li>since go-kure/launcher#883 (<strong>breaking</strong> for a document that leaves one out
+under an authored parent): the <code>key</code> of a Secret or ConfigMap key reference
+(<code>endpoints[0].tlsConfig.ca.secret.key: required (…)</code>), the <code>key</code> of a proxy
+connect header&rsquo;s Secret key reference, and the <code>username</code> and the <code>password</code>
+of a <code>basicAuth</code>, on an endpoint of either monitor and on a Probe, which the
+API server accepts left out and the operator refuses.</li></ul><p><strong>A required field the type leaves out when it is empty is refused too:</strong> the
+<code>name</code> of a Probe parameter (<code>params[1].name: required (…)</code>), unauthored or
+empty. The object would show the omission and the API server refuse it.</p><p><strong>A Probe needs <code>prober.url</code> here, because the object always carries a prober.</strong>
+This is a limit of the Go type, not a rule of the API: the API does not require
+<code>prober</code>, but the type writes one whether or not it was authored, and the API
+server refuses a prober without a <code>url</code>. A Probe without a prober cannot be
+emitted. An empty <code>url</code> is refused as an unauthored one is.</p><p><strong>These lists are generated</strong> (see <a href=/launcher/dev/api-reference/oam-components/conventions/index.html#required-fields-a-kind-writes-unauthored-and-does-not-refuse>&ldquo;Required fields a kind writes unauthored
+and does not
+refuse&rdquo;</a>)
+from the fields the source marks required and the type writes unauthored, the
+linked module&rsquo;s and those of the Kubernetes types the specs embed, so a
+dependency bump that adds, drops or moves one fails
+<code>TestKindComponents_RequiredIsGenerated</code>. <strong>Not refused:</strong></p><ul><li>an authored empty string in a required field (a group&rsquo;s <code>name: ""</code>),
+<code>prober.url</code> and a parameter&rsquo;s <code>name</code> excepted. It is a value, and the API
+server&rsquo;s to refuse;</li><li>every other value rule of the API (formats, enumerations, lengths, that a rule
+is a recording or an alerting one), and the operator&rsquo;s own checks of an object
+the API server has admitted: that a Probe has targets, that a scrape timeout
+is no longer than its interval, that an endpoint or a Probe authenticates one
+way. Whether a rule&rsquo;s expression is valid PromQL is not checked either.</li></ul><p><strong>The selector, the prober and the targets are the author&rsquo;s.</strong> Launcher points
+none at a component and looks for none in the document. To scrape a workload
+component&rsquo;s pods, select their <code>app</code> label (<code>matchLabels: {app: &lt;component>}</code>,
+valued as <a href=/launcher/dev/api-reference/oam-components/conventions/index.html#the-app-label>&ldquo;The <code>app</code> label&rdquo;</a> describes); to
+scrape a <code>service</code> component&rsquo;s Service, select a label its object carries (the
+component label, see &ldquo;Component label and ownership&rdquo; in the OAM model). A Secret
+or ConfigMap an object refers to is read by the operator in the object&rsquo;s
+namespace.</p><h3 id=outputs-3>Outputs<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Each declares its object as namespaced, so the object name is claimed in the
+object&rsquo;s namespace. The Probe&rsquo;s type name carries a prefix because a probe, in
+this package, is a container&rsquo;s.</p><p><strong>What the type writes unauthored.</strong> A <code>servicemonitor</code> or <code>podmonitor</code> carries
+<code>namespaceSelector: {}</code>, which selects the object&rsquo;s own namespace. A
+<code>podmonitor</code> without endpoints carries <code>podMetricsEndpoints: null</code>, which the
+API server drops as it drops every null of a field that is not nullable. A
+<code>prometheus-probe</code> carries <code>targets: {}</code>, and the operator rejects a Probe with
+no target. A <code>tlsConfig</code> carries <code>ca: {}</code> and <code>cert: {}</code> where they were not
+authored.</p><p><strong>Selected by a Prometheus through the object&rsquo;s labels.</strong> A Prometheus picks
+these objects up through its label selectors (<code>serviceMonitorSelector</code>,
+<code>podMonitorSelector</code>, <code>probeSelector</code>, <code>ruleSelector</code>). The handler writes no
+label, so the object carries the component label, whose value is the
+component&rsquo;s, and what <code>labels</code> authors: for a Prometheus that selects on a fixed
+label (<code>release: &lt;name></code>, say), write that label there.</p><h3 id=validation-3>Validation<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><strong>No capability is required, and none gates these kinds.</strong> Launcher does not ask
+whether the cluster serves <code>monitoring.coreos.com/v1</code>: where the operator&rsquo;s CRDs
+are not installed the component builds, and the object is refused at apply.
+Whoever may author a component may author these. A policy can keep the kinds out
+of a build through the object kind policy (<code>oam.ObjectKindPolicy</code>).</p><p><strong>Policy.</strong> No field of these specs is one an <code>oam.Policy</code> method speaks to, so
+<code>ApplyPolicy</code> enforces nothing and fills nothing, and each builds the same under
+every policy and under none.</p><ul><li><strong>Hosts are not checked.</strong> A host these objects name is one Prometheus
 reaches, not an artifact source, and none is held to the policy&rsquo;s allowed
 registries: <code>prober.url</code>, a <code>proxyUrl</code> (of an endpoint, a prober or an
 <code>oauth2</code>), an <code>oauth2</code>&rsquo;s <code>tokenUrl</code>, and the static targets of a Probe.</li><li><strong>No field holds a literal secret by design, and none is checked.</strong> A
 credential is a reference to a key of a Secret: <code>authorization.credentials</code>,
 <code>basicAuth</code>, <code>bearerTokenSecret</code>, an <code>oauth2</code>&rsquo;s <code>clientSecret</code>, a
-<code>tlsConfig</code>&rsquo;s <code>keySecret</code>, the values of <code>proxyConnectHeader</code>. Free text
-that could hold one is written to the object as authored, under a policy
-that forbids explicit secrets too: <code>params</code>, an <code>oauth2</code>&rsquo;s
-<code>endpointParams</code>, and a <code>proxyUrl</code> with credentials in it.</li><li><strong>File paths are not checked.</strong> A <code>servicemonitor</code> endpoint may name a
-file in the Prometheus container (<code>bearerTokenFile</code>, and <code>caFile</code>,
-<code>certFile</code> and <code>keyFile</code> under <code>tlsConfig</code>).</li></ul><p><strong>Not covered.</strong> Whether what is selected or referred to exists (a
-Service, a pod, an Ingress, a named port, a Secret key), and whether a
-Prometheus of the cluster selects the object. The object&rsquo;s status is the
-operator&rsquo;s and is not written.</p></li></ul><footer class=footline></footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/launcher/dev/index.html><span class="logo-title default-animation">Go Kure — Launcher</span>
+<code>tlsConfig</code>&rsquo;s <code>keySecret</code>, the values of <code>proxyConnectHeader</code>. Free text that
+could hold one is written to the object as authored, under a policy that
+forbids explicit secrets too: <code>params</code>, an <code>oauth2</code>&rsquo;s <code>endpointParams</code>, and a
+<code>proxyUrl</code> with credentials in it.</li><li><strong>File paths are not checked.</strong> A <code>servicemonitor</code> endpoint may name a file in
+the Prometheus container (<code>bearerTokenFile</code>, and <code>caFile</code>, <code>certFile</code> and
+<code>keyFile</code> under <code>tlsConfig</code>).</li></ul><p><strong>Not covered.</strong> Whether what is selected or referred to exists (a Service, a
+pod, an Ingress, a named port, a Secret key), and whether a Prometheus of the
+cluster selects the object. The object&rsquo;s status is the operator&rsquo;s and is not
+written.</p><h3 id=example-3>Example<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><ul><li><code>servicemonitor</code>: The component in
+<code>pkg/cmd/kurel/testdata/servicemonitor-component/app.yaml</code>, built against the
+<code>cluster.yaml</code> beside it, gives the <code>expected.yaml</code> beside it. The fixture
+test compares the two.</li><li><code>podmonitor</code>: The component in
+<code>pkg/cmd/kurel/testdata/podmonitor-component/app.yaml</code>, built against the
+<code>cluster.yaml</code> beside it, gives the <code>expected.yaml</code> beside it. The fixture
+test compares the two.</li><li><code>prometheus-probe</code>: The component in
+<code>pkg/cmd/kurel/testdata/prometheus-probe-component/app.yaml</code>, built against
+the <code>cluster.yaml</code> beside it, gives the <code>expected.yaml</code> beside it. The fixture
+test compares the two.</li><li><code>prometheusrule</code>: The component in
+<code>pkg/cmd/kurel/testdata/prometheusrule-component/app.yaml</code>, built against the
+<code>cluster.yaml</code> beside it, gives the <code>expected.yaml</code> beside it. The fixture
+test compares the two.</li></ul><footer class=footline></footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/launcher/dev/index.html><span class="logo-title default-animation">Go Kure — Launcher</span>
 </a><search><form action=/launcher/dev/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
 <label class=a11y-only for=R-search-by>Search</label>
 <input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
 <button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/launcher/dev/index.html><a class=padding href=/launcher/dev/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul><li class=R-versionswitcher><div class="padding menu-control"><i class="fa-fw fas fa-code-branch"></i>
 <span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-version>Version</label>
-<select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/launcher/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main default-animation"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/launcher/dev/getting-started/index.html><a class="padding default-animation" href=/launcher/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/concepts/index.html><a class="padding default-animation" href=/launcher/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu></ul></li><li class=parent data-nav-id=/launcher/dev/api-reference/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/kurel-cli/index.html><a class=padding href=/launcher/dev/api-reference/kurel-cli/index.html>kurel CLI</a></li><li class=alwaysopen data-nav-id=/launcher/dev/api-reference/oam/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/oam/index.html>OAM Model</a><ul id=R-subsections-85257ea7983d512c6d1887735c85123a class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/api-reference/oam-models/index.html><a class=padding href=/launcher/dev/api-reference/oam-models/index.html>Component Models</a></li><li class="parent alwaysopen" data-nav-id=/launcher/dev/api-reference/oam-components/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/oam-components/index.html>Component Handlers</a><ul id=R-subsections-8500a965f661268b80bcfcc8403ee9e4 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/oam-components/common-config/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/common-config/index.html>Common config</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/policy-and-endpoints/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/policy-and-endpoints/index.html>Policy defaults, endpoints and outputs</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-core-workloads/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-core-workloads/index.html>Kinds: core workloads</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-networking/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-networking/index.html>Kinds: networking</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-access-and-admission/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-access-and-admission/index.html>Kinds: access and admission</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-flux/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-flux/index.html>Kinds: Flux</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-helm/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-helm/index.html>Kinds: Helm</a></li><li class=active data-nav-id=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html>Kinds: monitoring</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html>Kinds: MetalLB</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html>Kinds: PostgreSQL and CloudNativePG</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html>Kinds: secrets, certificates and backup</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/adding-a-kind/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/adding-a-kind/index.html>Adding a kind component: where its lines go</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/upstream-fields-not-read/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/upstream-fields-not-read/index.html>Upstream fields a hand-parsed kind does not read</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/extending/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/extending/index.html>Extending</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html>The null contract and two spellings of one field</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/conventions/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/conventions/index.html>Conventions</a></li></ul></li><li data-nav-id=/launcher/dev/api-reference/oam-traits/index.html><a class=padding href=/launcher/dev/api-reference/oam-traits/index.html>Trait Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-policies/index.html><a class=padding href=/launcher/dev/api-reference/oam-policies/index.html>Policy Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-registry/index.html><a class=padding href=/launcher/dev/api-reference/oam-registry/index.html>Built-in Registry</a></li><li data-nav-id=/launcher/dev/api-reference/errors/index.html><a class=padding href=/launcher/dev/api-reference/errors/index.html>Errors</a></li><li data-nav-id=/launcher/dev/api-reference/patch/index.html><a class=padding href=/launcher/dev/api-reference/patch/index.html>Patch Engine</a></li></ul></li><li data-nav-id=/launcher/dev/contributing/index.html><a class="padding default-animation" href=/launcher/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/changelog/index.html><a class="padding default-animation" href=/launcher/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul></ul></div><div id=R-footer class=default-animation><p id=R-revision>Version dev, built from commit <a href=https://github.com/go-kure/launcher/commit/6350e029>6350e029</a></p><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/launcher/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1794564627 defer></script><script src=/launcher/dev/js/theme.min.js?1794564627 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
+<select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/launcher/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main default-animation"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/launcher/dev/getting-started/index.html><a class="padding default-animation" href=/launcher/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/concepts/index.html><a class="padding default-animation" href=/launcher/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu></ul></li><li class=parent data-nav-id=/launcher/dev/api-reference/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/kurel-cli/index.html><a class=padding href=/launcher/dev/api-reference/kurel-cli/index.html>kurel CLI</a></li><li class=alwaysopen data-nav-id=/launcher/dev/api-reference/oam/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/oam/index.html>OAM Model</a><ul id=R-subsections-85257ea7983d512c6d1887735c85123a class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/api-reference/oam-models/index.html><a class=padding href=/launcher/dev/api-reference/oam-models/index.html>Component Models</a></li><li class="parent alwaysopen" data-nav-id=/launcher/dev/api-reference/oam-components/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/oam-components/index.html>Component Handlers</a><ul id=R-subsections-8500a965f661268b80bcfcc8403ee9e4 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/oam-components/common-config/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/common-config/index.html>Common config</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/policy-and-endpoints/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/policy-and-endpoints/index.html>Policy defaults, endpoints and outputs</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-core-workloads/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-core-workloads/index.html>Kinds: core workloads</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-networking/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-networking/index.html>Kinds: networking</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-access-and-admission/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-access-and-admission/index.html>Kinds: access and admission</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-flux/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-flux/index.html>Kinds: Flux</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-helm/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-helm/index.html>Kinds: Helm</a></li><li class=active data-nav-id=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html>Kinds: monitoring</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html>Kinds: MetalLB</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html>Kinds: PostgreSQL and CloudNativePG</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html>Kinds: secrets, certificates and backup</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/adding-a-kind/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/adding-a-kind/index.html>Adding a kind component: where its lines go</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/upstream-fields-not-read/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/upstream-fields-not-read/index.html>Upstream fields a hand-parsed kind does not read</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/extending/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/extending/index.html>Extending</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html>The null contract and two spellings of one field</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/conventions/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/conventions/index.html>Conventions</a></li></ul></li><li data-nav-id=/launcher/dev/api-reference/oam-traits/index.html><a class=padding href=/launcher/dev/api-reference/oam-traits/index.html>Trait Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-policies/index.html><a class=padding href=/launcher/dev/api-reference/oam-policies/index.html>Policy Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-registry/index.html><a class=padding href=/launcher/dev/api-reference/oam-registry/index.html>Built-in Registry</a></li><li data-nav-id=/launcher/dev/api-reference/errors/index.html><a class=padding href=/launcher/dev/api-reference/errors/index.html>Errors</a></li><li data-nav-id=/launcher/dev/api-reference/patch/index.html><a class=padding href=/launcher/dev/api-reference/patch/index.html>Patch Engine</a></li></ul></li><li data-nav-id=/launcher/dev/contributing/index.html><a class="padding default-animation" href=/launcher/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/changelog/index.html><a class="padding default-animation" href=/launcher/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul></ul></div><div id=R-footer class=default-animation><p id=R-revision>Version dev, built from commit <a href=https://github.com/go-kure/launcher/commit/da9db24e>da9db24e</a></p><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/launcher/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1794566328 defer></script><script src=/launcher/dev/js/theme.min.js?1794566328 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>

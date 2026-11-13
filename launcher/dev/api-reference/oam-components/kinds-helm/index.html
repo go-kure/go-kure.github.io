@@ -1,13 +1,13 @@
-<!doctype html><html id=R-html lang=en-us dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.169.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Each kind below with a heading has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
+<!doctype html><html id=R-html lang=en-us dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.169.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Each kind below has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
 helm helm is the role-named Helm component: a component-position lowering rule (HelmRule), not a handler, that lowers to the kind-named terminals.
-Properties Properties: chart, version, delivery (flux default | template), source (inline url with optional kind and, for a GitRepository, ref, for an OCI chart, digest; an inline Bucket’s kind, endpoint, bucketName, provider, region, prefix; beside any of these a name for the generated source; or a reference {name, kind, namespace} to an existing HelmRepository, GitRepository, Bucket, OCIRepository or HelmChart), values, valuesMode (inline | configMap), valuesConfigMapName, secretValues (the sensitive part of the values tree, see below), valuesSecretName, helmReleaseName (the name of the HelmRelease object, see below), scopeOverrides, hookGroupNamePrefix and layoutKustomizationName (each under delivery: template only, see below), and the HelmRelease keys interval, releaseName, targetNamespace, driftDetection, install, upgrade, valuesFrom."><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Kinds: Helm :: Go Kure — Launcher"><meta name=twitter:description content="Each kind below with a heading has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
+Properties Properties: chart, version, delivery (flux default | template), source (inline url with optional kind and, for a GitRepository, ref, for an OCI chart, digest; an inline Bucket’s kind, endpoint, bucketName, provider, region, prefix; beside any of these a name for the generated source; or a reference {name, kind, namespace} to an existing HelmRepository, GitRepository, Bucket, OCIRepository or HelmChart), values, valuesMode (inline | configMap), valuesConfigMapName, secretValues (the sensitive part of the values tree, see below), valuesSecretName, helmReleaseName (the name of the HelmRelease object, see below), scopeOverrides, hookGroupNamePrefix and layoutKustomizationName (each under delivery: template only, see below), and the HelmRelease keys interval, releaseName, targetNamespace, driftDetection, install, upgrade, valuesFrom."><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Kinds: Helm :: Go Kure — Launcher"><meta name=twitter:description content="Each kind below has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
 helm helm is the role-named Helm component: a component-position lowering rule (HelmRule), not a handler, that lowers to the kind-named terminals.
-Properties Properties: chart, version, delivery (flux default | template), source (inline url with optional kind and, for a GitRepository, ref, for an OCI chart, digest; an inline Bucket’s kind, endpoint, bucketName, provider, region, prefix; beside any of these a name for the generated source; or a reference {name, kind, namespace} to an existing HelmRepository, GitRepository, Bucket, OCIRepository or HelmChart), values, valuesMode (inline | configMap), valuesConfigMapName, secretValues (the sensitive part of the values tree, see below), valuesSecretName, helmReleaseName (the name of the HelmRelease object, see below), scopeOverrides, hookGroupNamePrefix and layoutKustomizationName (each under delivery: template only, see below), and the HelmRelease keys interval, releaseName, targetNamespace, driftDetection, install, upgrade, valuesFrom."><meta property="og:url" content="https://www.gokure.dev/launcher/dev/api-reference/oam-components/kinds-helm/index.html"><meta property="og:site_name" content="Go Kure — Launcher"><meta property="og:title" content="Kinds: Helm :: Go Kure — Launcher"><meta property="og:description" content="Each kind below with a heading has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
+Properties Properties: chart, version, delivery (flux default | template), source (inline url with optional kind and, for a GitRepository, ref, for an OCI chart, digest; an inline Bucket’s kind, endpoint, bucketName, provider, region, prefix; beside any of these a name for the generated source; or a reference {name, kind, namespace} to an existing HelmRepository, GitRepository, Bucket, OCIRepository or HelmChart), values, valuesMode (inline | configMap), valuesConfigMapName, secretValues (the sensitive part of the values tree, see below), valuesSecretName, helmReleaseName (the name of the HelmRelease object, see below), scopeOverrides, hookGroupNamePrefix and layoutKustomizationName (each under delivery: template only, see below), and the HelmRelease keys interval, releaseName, targetNamespace, driftDetection, install, upgrade, valuesFrom."><meta property="og:url" content="https://www.gokure.dev/launcher/dev/api-reference/oam-components/kinds-helm/index.html"><meta property="og:site_name" content="Go Kure — Launcher"><meta property="og:title" content="Kinds: Helm :: Go Kure — Launcher"><meta property="og:description" content="Each kind below has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
 helm helm is the role-named Helm component: a component-position lowering rule (HelmRule), not a handler, that lowers to the kind-named terminals.
-Properties Properties: chart, version, delivery (flux default | template), source (inline url with optional kind and, for a GitRepository, ref, for an OCI chart, digest; an inline Bucket’s kind, endpoint, bucketName, provider, region, prefix; beside any of these a name for the generated source; or a reference {name, kind, namespace} to an existing HelmRepository, GitRepository, Bucket, OCIRepository or HelmChart), values, valuesMode (inline | configMap), valuesConfigMapName, secretValues (the sensitive part of the values tree, see below), valuesSecretName, helmReleaseName (the name of the HelmRelease object, see below), scopeOverrides, hookGroupNamePrefix and layoutKustomizationName (each under delivery: template only, see below), and the HelmRelease keys interval, releaseName, targetNamespace, driftDetection, install, upgrade, valuesFrom."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="API Reference"><meta itemprop=name content="Kinds: Helm :: Go Kure — Launcher"><meta itemprop=description content="Each kind below with a heading has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
+Properties Properties: chart, version, delivery (flux default | template), source (inline url with optional kind and, for a GitRepository, ref, for an OCI chart, digest; an inline Bucket’s kind, endpoint, bucketName, provider, region, prefix; beside any of these a name for the generated source; or a reference {name, kind, namespace} to an existing HelmRepository, GitRepository, Bucket, OCIRepository or HelmChart), values, valuesMode (inline | configMap), valuesConfigMapName, secretValues (the sensitive part of the values tree, see below), valuesSecretName, helmReleaseName (the name of the HelmRelease object, see below), scopeOverrides, hookGroupNamePrefix and layoutKustomizationName (each under delivery: template only, see below), and the HelmRelease keys interval, releaseName, targetNamespace, driftDetection, install, upgrade, valuesFrom."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="API Reference"><meta itemprop=name content="Kinds: Helm :: Go Kure — Launcher"><meta itemprop=description content="Each kind below has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
 helm helm is the role-named Helm component: a component-position lowering rule (HelmRule), not a handler, that lowers to the kind-named terminals.
-Properties Properties: chart, version, delivery (flux default | template), source (inline url with optional kind and, for a GitRepository, ref, for an OCI chart, digest; an inline Bucket’s kind, endpoint, bucketName, provider, region, prefix; beside any of these a name for the generated source; or a reference {name, kind, namespace} to an existing HelmRepository, GitRepository, Bucket, OCIRepository or HelmChart), values, valuesMode (inline | configMap), valuesConfigMapName, secretValues (the sensitive part of the values tree, see below), valuesSecretName, helmReleaseName (the name of the HelmRelease object, see below), scopeOverrides, hookGroupNamePrefix and layoutKustomizationName (each under delivery: template only, see below), and the HelmRelease keys interval, releaseName, targetNamespace, driftDetection, install, upgrade, valuesFrom."><meta itemprop=wordCount content="16368"><title>Kinds: Helm :: Go Kure — Launcher</title><link href=/launcher/dev/css/auto-complete/auto-complete.min.css?1794564627 rel=stylesheet><script src=/launcher/dev/js/auto-complete/auto-complete.min.js?1794564627 defer></script><script src=/launcher/dev/js/search-lunr.min.js?1794564627 defer></script><script src=/launcher/dev/js/search.min.js?1794564627 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/launcher/dev/searchindex.en.js?1794564627"</script><script src=/launcher/dev/js/lunr/lunr.min.js?1794564627 defer></script><script src=/launcher/dev/js/lunr/lunr.stemmer.support.min.js?1794564627 defer></script><script src=/launcher/dev/js/lunr/lunr.multi.min.js?1794564627 defer></script><script src=/launcher/dev/js/lunr/lunr.en.min.js?1794564627 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794564627 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794564627 rel=stylesheet></noscript><link href=/launcher/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1794564627 rel=stylesheet><link href=/launcher/dev/css/theme.min.css?1794564627 rel=stylesheet><link href=/launcher/dev/css/format-html.min.css?1794564627 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/api-reference/oam-components/kinds-helm/index.html",window.relearn.relBasePath="../../..",window.relearn.relBaseUri="../../../../..",window.relearn.absBaseUri="https://www.gokure.dev/launcher/dev",window.relearn.version_js_url="/launcher/dev/versionindex.en.js?1794564627",window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-origin=/launcher/dev/api-reference/oam-components/kinds-helm/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#helm>helm</a><ul><li><a href=#properties>Properties</a></li><li><a href=#outputs>Outputs</a></li><li><a href=#validation>Validation</a></li><li><a href=#example>Example</a></li></ul></li><li><a href=#helmchart>helmchart</a><ul><li><a href=#properties-1>Properties</a></li><li><a href=#outputs-1>Outputs</a></li><li><a href=#validation-1>Validation</a></li><li><a href=#example-1>Example</a></li></ul></li><li><a href=#helmrelease>helmrelease</a><ul><li><a href=#properties-2>Properties</a></li><li><a href=#outputs-2>Outputs</a></li><li><a href=#validation-2>Validation</a></li><li><a href=#example-2>Example</a></li></ul></li><li><a href=#kinds-not-yet-in-sections>Kinds not yet in sections</a></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/index.html><span itemprop=name>launcher</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/index.html><span itemprop=name>API Reference</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/oam-components/index.html><span itemprop=name>Component Handlers</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Kinds: Helm</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-components/kinds-flux/index.html title="Kinds: Flux (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html title="Kinds: monitoring (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable api-reference" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><h1 id=kinds-helm>Kinds: Helm</h1><p>Each kind below with a heading has the same sections: Properties, Outputs,
-Validation and Example. Its implementation, history and tests are on the
+Properties Properties: chart, version, delivery (flux default | template), source (inline url with optional kind and, for a GitRepository, ref, for an OCI chart, digest; an inline Bucket’s kind, endpoint, bucketName, provider, region, prefix; beside any of these a name for the generated source; or a reference {name, kind, namespace} to an existing HelmRepository, GitRepository, Bucket, OCIRepository or HelmChart), values, valuesMode (inline | configMap), valuesConfigMapName, secretValues (the sensitive part of the values tree, see below), valuesSecretName, helmReleaseName (the name of the HelmRelease object, see below), scopeOverrides, hookGroupNamePrefix and layoutKustomizationName (each under delivery: template only, see below), and the HelmRelease keys interval, releaseName, targetNamespace, driftDetection, install, upgrade, valuesFrom."><meta itemprop=wordCount content="16294"><title>Kinds: Helm :: Go Kure — Launcher</title><link href=/launcher/dev/css/auto-complete/auto-complete.min.css?1794566328 rel=stylesheet><script src=/launcher/dev/js/auto-complete/auto-complete.min.js?1794566328 defer></script><script src=/launcher/dev/js/search-lunr.min.js?1794566328 defer></script><script src=/launcher/dev/js/search.min.js?1794566328 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/launcher/dev/searchindex.en.js?1794566328"</script><script src=/launcher/dev/js/lunr/lunr.min.js?1794566328 defer></script><script src=/launcher/dev/js/lunr/lunr.stemmer.support.min.js?1794566328 defer></script><script src=/launcher/dev/js/lunr/lunr.multi.min.js?1794566328 defer></script><script src=/launcher/dev/js/lunr/lunr.en.min.js?1794566328 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794566328 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794566328 rel=stylesheet></noscript><link href=/launcher/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1794566328 rel=stylesheet><link href=/launcher/dev/css/theme.min.css?1794566328 rel=stylesheet><link href=/launcher/dev/css/format-html.min.css?1794566328 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/api-reference/oam-components/kinds-helm/index.html",window.relearn.relBasePath="../../..",window.relearn.relBaseUri="../../../../..",window.relearn.absBaseUri="https://www.gokure.dev/launcher/dev",window.relearn.version_js_url="/launcher/dev/versionindex.en.js?1794566328",window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-origin=/launcher/dev/api-reference/oam-components/kinds-helm/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#helm>helm</a><ul><li><a href=#properties>Properties</a></li><li><a href=#outputs>Outputs</a></li><li><a href=#validation>Validation</a></li><li><a href=#example>Example</a></li></ul></li><li><a href=#helmchart>helmchart</a><ul><li><a href=#properties-1>Properties</a></li><li><a href=#outputs-1>Outputs</a></li><li><a href=#validation-1>Validation</a></li><li><a href=#example-1>Example</a></li></ul></li><li><a href=#helmrelease>helmrelease</a><ul><li><a href=#properties-2>Properties</a></li><li><a href=#outputs-2>Outputs</a></li><li><a href=#validation-2>Validation</a></li><li><a href=#example-2>Example</a></li></ul></li><li><a href=#helmtemplate>helmtemplate</a><ul><li><a href=#properties-3>Properties</a></li><li><a href=#outputs-3>Outputs</a></li><li><a href=#validation-3>Validation</a></li><li><a href=#example-3>Example</a></li></ul></li><li><a href=#oci>oci</a><ul><li><a href=#properties-4>Properties</a></li><li><a href=#outputs-4>Outputs</a></li><li><a href=#validation-4>Validation</a></li><li><a href=#example-4>Example</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/index.html><span itemprop=name>launcher</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/index.html><span itemprop=name>API Reference</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/oam-components/index.html><span itemprop=name>Component Handlers</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Kinds: Helm</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-components/kinds-flux/index.html title="Kinds: Flux (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html title="Kinds: monitoring (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable api-reference" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><h1 id=kinds-helm>Kinds: Helm</h1><p>Each kind below has the same sections: Properties, Outputs, Validation and
+Example. Its implementation, history and tests are on the
 <a href=/launcher/dev/contributing/oam-reference/kinds-helm/index.html>contributor page</a>.</p><h2 id=helm>helm<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p><code>helm</code> is the role-named Helm component: a component-position lowering rule
 (<code>HelmRule</code>), not a handler, that lowers to the kind-named terminals.</p><h3 id=properties>Properties<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Properties: <code>chart</code>, <code>version</code>, <code>delivery</code> (<code>flux</code> default | <code>template</code>),
 <code>source</code> (inline <code>url</code> with optional <code>kind</code> and, for a GitRepository, <code>ref</code>, for
@@ -530,617 +530,648 @@ and for a <code>helm</code> component with a HelmRepository, GitRepository or Bu
 whose HelmRelease name is: such a HelmRelease never reconciled.</p><h3 id=example-2>Example<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>The component in
 <code>pkg/cmd/kurel/testdata/helmrelease-oci-chart-component/app.yaml</code>, built against
 the <code>cluster.yaml</code> beside it, gives the <code>expected.yaml</code> beside it. The fixture
-test compares the two.</p><h2 id=kinds-not-yet-in-sections>Kinds not yet in sections<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>The kinds below are not yet in these sections.</p><ul><li><p><strong>helmtemplate</strong> — the kind-named terminal for a client-side Helm render
-(go-kure/launcher#348, part of the Helm-family redesign go-kure/launcher#336), and what the
-role-named <code>helm</code> rule lowers to under <code>delivery: template</code>.
-It fetches and renders the chart at build time and emits the rendered manifests, each checked
-against the environment policy (see <strong>Policy</strong> below). It creates no source CR and no
-<code>HelmRelease</code>.</p><p><strong>Properties.</strong> <code>source</code> is
-required: <code>url</code> (required) is an <code>http://</code> or <code>https://</code> Helm repository URL, or an <code>oci://</code>
-URL naming the chart; <code>kind</code> (optional, <code>HelmRepository</code> or <code>OCIRepository</code>) is inferred from
-the scheme when unset — <code>oci://</code> is <code>OCIRepository</code>, anything else <code>HelmRepository</code> — and
-must agree with it when set. A <code>url</code> carrying a user or password is refused, since the render
-takes no credentials, and the message never repeats it. <code>chart</code> is required for a
-<code>HelmRepository</code>; an <code>OCIRepository</code>&rsquo;s URL already names the chart, so there <code>chart</code> is not
-used. <code>version</code>
-is required for an <code>OCIRepository</code>. <code>values</code> is an open object, the Helm values tree, and must
-be representable as JSON: a non-finite number (<code>.nan</code>, <code>.inf</code>) is a build error. The source
-checks are shared with the <code>helm</code> rule&rsquo;s inline source rather than copied. <code>scopeOverrides</code>
-states the scope of a kind the chart renders (see <strong>Scope overrides</strong> below).
-<code>hookGroupNamePrefix</code> (go-kure/launcher#787) is the prefix of the names of the hook-group
-layouts, in place of <code>&lt;application>-&lt;component></code>, and so of their Flux Kustomizations under
-<code>FluxIntegratedPerLayout</code>; so does a prefix the <code>Naming</code> hook returns for the <code>hook-group</code>
-role. With neither, the default prefix names only the layouts: kure names each Kustomization
-<code>&lt;unit>-&lt;layout name></code> (go-kure/launcher#941). See the hook-group paragraph below.
-<code>layoutKustomizationName</code> (go-kure/launcher#787) is the name of the Flux Kustomization of
-the component&rsquo;s own layout, in place of <code>&lt;bundle>-&lt;component></code>; see the same paragraph.</p><p><code>secretValues</code> (go-kure/launcher#786) is a second open object, for the sensitive part of the
-values tree; it is what the <code>helm</code> rule forwards its own <code>secretValues</code> as. The chart is
-rendered with <code>secretValues</code> merged over <code>values</code>, object by object, with the authored value
-types. The terminal emits nothing for it, so a value is in the output only where the chart
-renders it: a chart that puts it in a Secret emits that Secret in clear form, and one that
-puts it in a ConfigMap or an environment variable emits it there. The output is as sensitive
-as the input; see the security note under <strong>helm</strong>. Further:</p><ul><li>a path set in both trees is refused, naming the path
-(<code>helmtemplate: auth.password is set in both values and secretValues; …</code>), by the rule the
-<code>helm</code> component states;</li><li>a key named <code>global</code> below the top level is refused, naming the path, before any fetch
-(<code>helmtemplate: secretValues: redis.global: a key named global is allowed only at the top level, …</code>), by the rule the <code>helm</code> component states and with its trade-off: such a key that
-is not a dependency&rsquo;s globals can be given through <code>values</code> only, and a sensitive global
-goes under the top-level <code>global</code>;</li><li>a policy that forbids explicit secrets (<code>oam.ExplicitSecretPolicy</code>) refuses the component
-in <code>ApplyPolicy</code>, before any fetch
-(<code>helmtemplate: secretValues is set and the environment policy forbids explicit secrets; …</code>).
-<strong>Not covered:</strong> a Secret the chart itself renders. It is emitted under such a policy, where
-the <code>passthrough</code> and <code>manifests</code> components refuse a Secret they carry: its content comes
-from the chart and its values, and most charts render one;</li><li>a render or decode failure is not reported as Helm reports it, since a template error can
-quote a value (<code>fail</code>, <code>required</code>, a YAML parse error showing the line). The chart is
-rendered a second time with <code>values</code> alone. If that fails too, its error is the one
-reported, after <code>rendering chart with secretValues failed; the cause is withheld because it can repeat a sensitive value. Without them it fails with: …</code>. If it succeeds, the message is
-only <code>rendering chart with secretValues failed, and without them it renders; the cause is withheld because it can repeat a sensitive value</code>. To debug such a chart, render it
-with placeholder values in <code>values</code>. The second render repeats the fetch;</li><li><em>not covered:</em> an error about a rendered object. No check that runs on what the chart
-rendered, once it has decoded, scrubs its error. It names the object it refuses by kind
-and name, and can quote any part of the object it refuses or locates the refusal by. The
-policy checks (see <strong>Policy</strong>) quote a container&rsquo;s or a volume&rsquo;s name, an image reference,
-a resource quantity, a capability; the transform&rsquo;s component label quotes the key of a
-label that is not a string. So any part of a rendered object can reach an error: a chart
-that builds one from a sensitive value has it quoted there. The refusal of a field the kind&rsquo;s type does not
-declare is not among them: it is a decode failure, withheld as above. The refusal of a
-<code>scopeOverrides</code> entry that contradicts a CustomResourceDefinition the chart renders (see
-<strong>Scope overrides</strong> below) is such an error and is not withheld: it names the kind, the
-object&rsquo;s name and the two scopes, never a value;</li><li>Helm&rsquo;s own warnings about a values conflict quote the value Helm drops. With the refusal
-above that is never a value of <code>secretValues</code>: for a top-level <code>global</code> it is the
-dependency&rsquo;s <code>global</code> entry from <code>values</code>, and for a dependency&rsquo;s ordinary key it is the
-dependency&rsquo;s default. A test pins both, each way round, on the process&rsquo;s standard log and
-its default <code>slog</code> logger.</li></ul><p><strong>Release name.</strong> <code>releaseName</code> is the render&rsquo;s <code>.Release.Name</code>. Unset, it is the default the
-<code>helmrelease</code> terminal writes to <code>spec.releaseName</code> (go-kure/launcher#785): the component
-name, and for a name over 53 characters, Flux helm-controller&rsquo;s shortened form of it — its
-first 40 characters, <code>-</code>, and the first 12 hex digits of the SHA-256 of the whole name. A
-<code>helm</code> component therefore renders under <code>delivery: template</code> with the same release name its
-HelmRelease is installed under with <code>delivery: flux</code>, whatever its target namespace. The chart
-and its source play no part. The name, authored or defaulted, must be a valid Helm release name
-by Helm&rsquo;s own rule — a DNS-1123 subdomain of at most 53 characters — since kure&rsquo;s render checks
-nothing. An authored name is never shortened: one over 53 characters is refused. A default that
-is not valid — the shortening can cut a dotted name just after a <code>.</code>, leaving a label that starts
-with <code>-</code> — is refused with the remedy to set <code>releaseName</code>, as Flux would fail to install it. A
-<code>HelmTemplateConfig</code> built directly defaults it from <code>Name</code> the same way, and is refused when
-both are empty. Since component names are unique in a document, two renders of one chart no
-longer share a release name by default. Two given the same <code>releaseName</code> in one namespace
-generate the same objects when the chart names its objects after the release, as most do, and
-<code>kurel build</code> refuses them as a generated-object collision rather than merging them. Before
-go-kure/launcher#776 every render used kure&rsquo;s default <code>release</code>; the project is pre-GA, so the
-changed object names of an existing template-rendered chart carry no compatibility shim.</p><p><strong>Decoding.</strong> <code>values</code>, <code>secretValues</code> and <code>scopeOverrides</code> are split off, and the rest of the property map is decoded with
-<code>builtin.DecodeStrictJSON</code> into a closed struct, so any other key, at any depth, is refused by
-name, as is a wrongly typed value. <code>values</code> itself reaches the render exactly as authored, with
-its YAML-decoded value types, rather than the strict decoder&rsquo;s <code>json.Number</code> re-reading, which
-a chart template comparing a value with a number would treat differently; <code>secretValues</code> likewise.
-A <code>secretValues</code> that is not an object is refused by its type, never by its content. The schema declares
-the same keys, with <code>source</code> closed to <code>url</code> and <code>kind</code>, and a test ties it to the struct. Keys
-match case-insensitively in the handler, as in <code>encoding/json</code>; schema validation, which a
-<code>kurel build</code> runs first, is exact.</p><p><strong>Refused outright.</strong> <code>targetNamespace</code>, every property only a Flux-reconciled release reads
-(<code>interval</code>, <code>driftDetection</code>, <code>install</code>, <code>upgrade</code>, <code>valuesFrom</code>, <code>valuesMode</code>), the <code>helm</code>
-rule&rsquo;s <code>delivery</code> switch, and a source reference (<code>source.name</code>, <code>source.namespace</code>) are
-undeclared keys: schema validation refuses each, and so does the strict decode. An
-<code>OCIRepository</code> source without <code>version</code> is refused by the handler. The key itself is what is
-refused, whatever it holds. The render&rsquo;s <code>.Release.Namespace</code> is the application namespace;
-the terminal declares no <code>targetNamespace</code>, so it cannot be set.</p><p><strong>Namespace.</strong> A namespaced rendered object that carries no <code>metadata.namespace</code> is given the
-application namespace, where a Helm install into that namespace would create it
-(go-kure/launcher#794, item 4). Each object&rsquo;s scope is resolved as the <code>manifests</code> component
-resolves it, by the one function both call (<code>resolveObjectScope</code>, <code>manifests.go</code>): a
-<code>scopeOverrides</code> entry for the object&rsquo;s kind, else kure&rsquo;s scope table (<code>manifest.Scope</code>) — the
-kinds kure registers, in any API version — plus the scope a <code>CustomResourceDefinition</code> among
-the emitted objects declares for the kind it defines. Unlike <code>manifests</code>, the render refuses
-nothing about what the chart wrote, since the application does not author a chart:</p><ul><li>a namespace the chart wrote is kept, on a cluster-scoped object too, as Helm keeps it;</li><li>a cluster-scoped object without one stays without;</li><li>an object of unknown scope without one is left as rendered, with no namespace and no error:
-a kind kure does not register — a custom resource, or a built-in of an API group kure&rsquo;s
-scheme does not hold — with no CRD for it among the emitted objects and no <code>scopeOverrides</code>
-entry. <code>Lease</code>, <code>EndpointSlice</code> and the image-reflector kinds (<code>ImageRepository</code>,
-<code>ImagePolicy</code>) are registered, so one without a namespace is given the application
-namespace. Whoever applies the output decides where it lands (Flux&rsquo;s <code>targetNamespace</code>, a
-client&rsquo;s default namespace). A chart&rsquo;s <code>crds/</code> directory is not rendered, and a CRD under a
-dropped hook is not emitted, so neither gives a kind a scope.</li></ul><p>The policy check runs on the stamped objects, so a violation names an object with the
-namespace it is emitted in. A <code>HelmTemplateConfig</code> built directly with an empty <code>Namespace</code>
-has none to give and stamps nothing.</p><p><strong>Scope overrides</strong> (go-kure/launcher#794, item 11). <code>scopeOverrides</code> states the scope of a
-kind the chart renders, for a kind of unknown scope above: a list of <code>{apiVersion, kind, scope}</code>, <code>scope</code> being <code>Cluster</code> or <code>Namespaced</code>, matched on the exact <code>apiVersion</code> and
-<code>kind</code>. It is the property <code>manifests</code> has, read by the same parser (<code>parseScopeOverrides</code>)
-and resolved by the same function, so an entry means the same on both: it outranks kure&rsquo;s
-own table, is ignored for a kind the Kubernetes API itself scopes, and must agree with a
-<code>CustomResourceDefinition</code> among the emitted objects (see <strong>crd / manifests</strong>). A test holds
-the two components to the same answer for the same objects and overrides.</p><ul><li><code>Namespaced</code>: an object of the kind without <code>metadata.namespace</code> is given the application
-namespace, as a kind kure knows to be namespaced is.</li><li><code>Cluster</code>: an object of the kind is left as rendered. That includes one the chart wrote a
-namespace on, which <code>manifests</code> refuses: template delivery refuses nothing about what a
-chart wrote.</li><li>An entry for a kind the chart does not render does nothing. <code>null</code> reads as omission.</li></ul><p><em>Refused</em>, two cases only. A malformed entry, at decode and before any render, with the
-<code>manifests</code> messages under this component&rsquo;s prefix (<code>helmtemplate: scopeOverrides[0]: scope "cluster" is invalid; must be "Cluster" or "Namespaced"</code>). And an entry that contradicts a
-<code>CustomResourceDefinition</code> the chart renders for the kind, when the chart is rendered
-(<code>helmtemplate "&lt;component>": object Widget "w": scopeOverrides says Cluster but the CustomResourceDefinition for Widget.fixtures.example.com the chart renders declares Namespaced; …</code>): that CRD defines the scope the cluster will serve, so no cluster can honour
-the entry. The message names the object&rsquo;s kind and name and the two scopes, nothing else of
-the object. A <code>HelmTemplateConfig</code> built directly holds the overrides in <code>ScopeOverrides</code>,
-where a value other than the two scopes is refused before the render.</p><p>The <code>helm</code> rule takes the same property under <code>delivery: template</code> and forwards it here as
-written, after refusing a malformed entry under its own prefix; under <code>delivery: flux</code> it
-refuses the property (see <strong>helm</strong>).</p><p><em>Not covered:</em> no policy or placement check on template output reads an object&rsquo;s scope, so
-the overrides change the namespace stamp and nothing else.
-Not breaking: a document that does not use the property renders as before.</p><p><strong>Breaking output change</strong> (go-kure/launcher#794): such objects gain <code>metadata.namespace</code> in
-the output. Before, a chart that left it unset rendered namespace-less objects, which landed
-wherever the applying client defaulted them.</p><p><strong>Breaking output change</strong> (go-kure/launcher#790, with the kure version that registers
-them): <code>Lease</code>, <code>EndpointSlice</code>, <code>PriorityClass</code>, <code>RuntimeClass</code>, <code>APIService</code>, the
-<code>admissionregistration.k8s.io/v1</code> kinds and the image-reflector kinds are read as their
-Go types, no longer as kinds the build does not know. One that sets only fields its type
-declares is emitted from that type; one that sets a field the type does not declare is
-emitted as rendered, the field kept (<em>Undeclared fields</em>, below); a field of the wrong type
-is now a build error. The namespaced ones (<code>Lease</code>, <code>EndpointSlice</code>, <code>ImageRepository</code>,
-<code>ImagePolicy</code>) gain <code>metadata.namespace</code> when the chart left it unset. A chart that renders
-a <code>v1</code> <code>List</code> or a typed list now builds, and each of its items is held to the policy and
-to <em>Undeclared fields</em> as a document of its own is. A list of a kind the scheme does not
-register no longer builds when a <code>helm.sh/hook</code> annotation is involved, on the list or on
-an item (see &ldquo;Rendered objects&rdquo;): it built before, with a wrong output, the list&rsquo;s hook
-lost and its items emitted as ordinary resources.</p><p><strong>Breaking</strong> (go-kure/launcher#790, with the kure version that reads a list in one place,
-go-kure/kure#1014), for template delivery, <code>manifests</code> and <code>crd</code> alike. Built before,
-refused now:</p><table><thead><tr><th>Document</th><th>Before</th><th>Now</th></tr></thead><tbody><tr><td>A list (a <code>v1</code> <code>List</code>, a typed list, a list of an unregistered kind) with a label or an annotation on its own metadata</td><td>Built: the items emitted, the list&rsquo;s metadata dropped. Template delivery refused only <code>helm.sh/hook</code> there, and still does, with its own text</td><td><code>List has metadata of its own that its items cannot keep: annotations …; labels …</code></td></tr><tr><td><code>Kind</code> or <code>apiversion</code> beside the exact key, on a document or on an item of a list</td><td>Built, with two exceptions: emitted as written, the extra key kept. A workload or a claim was refused already, by <em>Undeclared fields</em> (<code>undeclared field Kind</code>), and so was an item of a typed list whose <code>Kind</code> or <code>apiversion</code> states another value than the list holds, by the parser (<code>the item states …, the list holds …</code>). Both are refused now with the other text</td><td><code>the key "Kind" equals "kind" only after case folding; write it "kind" or remove it</code></td></tr><tr><td><code>Items</code> on a <code>v1</code> <code>List</code></td><td>Decoded, to no object at all: a chart or a source with other objects built. A <code>manifests</code> or <code>crd</code> source that held nothing else was refused already (<code>source resolved to no manifests</code>)</td><td>The same text, for <code>"Items"</code></td></tr><tr><td><code>Items</code> on a list of an unregistered kind</td><td>Built: the list emitted as one object</td><td>The same text</td></tr><tr><td>A <code>null</code> item in a list of an unregistered kind</td><td>Built: an otherwise empty object emitted, with the list&rsquo;s <code>apiVersion</code> and its kind without <code>List</code></td><td><code>item 0 of WidgetList: the item is null, not an object</code></td></tr><tr><td>An item of a registered kind, in a list of an unregistered kind, that does not decode as its type (<code>data: 1</code> on a ConfigMap)</td><td>Built: the item emitted as written. A workload, a claim or a PersistentVolume there did not build: the policy check refused it as unreadable, and it is refused now for the decode</td><td>The item&rsquo;s decode error, naming its position</td></tr><tr><td>In a JSON document, an item of a registered kind, in a list of an unregistered kind, that states <code>apiVersion</code> or <code>kind</code> and then <code>null</code> for it, where the stated value is not the one its list gives it</td><td>Built: the item emitted as written. A workload, a claim or a PersistentVolume there did not build: the policy check refused it as unreadable</td><td><code>item 0 of FooList: Deployment "web": the object was read as apps/v1 Deployment, and the decode that checks its fields reads the document as example.com/v1 Deployment, so its fields cannot be checked; …</code> (<em>Undeclared fields</em>, below)</td></tr><tr><td>An object of an unregistered kind that does not end in <code>List</code>, with a top-level <code>items</code> array</td><td>Built: the entries emitted in its place, each unstructured</td><td><code>… an </code>items<code> array on an object of a kind that is no list (example.com/v1 Widget) is read as a list by what applies the output …</code></td></tr></tbody></table><p>Not refusals, and a change of output all the same: an item of a registered kind in a list of
-an unregistered kind is read as its Go type, as in a <code>v1</code> <code>List</code>, where it was emitted as
-written. It is emitted from that type, <em>Undeclared fields</em> applies to it, and the policy
-check reads it: a workload, a claim or a PersistentVolume there was refused as unreadable
-and is now checked, and builds when the policy allows it. A list inside such a list was
-left whole, and refused by the policy check; it is opened in turn.</p><p>Texts that changed: a <code>null</code> item of a <code>v1</code> <code>List</code> was <code>nil runtime object provided</code> and is
-<code>the item is null, not an object</code>; <code>… is nested more than 8 lists deep</code> now holds for a
-list of an unregistered kind too; the policy check&rsquo;s refusal of an object with a top-level
-<code>items</code> array no longer says the object <code>sits inside a list of an unregistered kind</code>, and
-no decode returns such an object any more (<em>Limits</em>, below).</p><p><strong>Output order.</strong> Every rendered manifest carrying a <code>helm.sh/hook</code> annotation (or a standalone
-<code>helm.sh/hook-weight</code>) is grouped by <code>(phase, weight)</code> via kure&rsquo;s <code>helm.SplitByHookWeight</code>.
-<code>Generate</code> returns every rendered object flat, in hook-execution order —
-<code>pre-install, pre-upgrade, main, post-install, post-upgrade, &lt;unknown, alphabetical></code> — with a
-multi-event annotation such as <code>pre-install,pre-upgrade</code> placed by its earliest phase; a chart
-with no hook annotations at all yields one group, in chart-render order.
-<code>pre-delete</code>/<code>post-delete</code>/<code>pre-rollback</code>/<code>post-rollback</code>/<code>test</code> objects are dropped outright
-(kure does not surface them as static manifests) — mostly a bug fix, since a <code>test</code> Pod rendered
-as a static GitOps object would otherwise be reconciled on every apply, but it is silent data
-loss for a chart that relies on one of those hooks; <code>pkg/oam</code> has no logging channel to flag it.</p><p><strong>Rendered objects.</strong> The render is decoded with kure&rsquo;s manifest parser
-(<code>io.ParseYAMLWithOptions</code>, unstructured allowed), the decode the <code>manifests</code> component uses
-(go-kure/launcher#791). An object of a kind kure&rsquo;s scheme registers is emitted as its Go type —
-a Deployment as <code>*appsv1.Deployment</code>, a hook Job as <code>*batchv1.Job</code> — and any other as
-unstructured. What follows from reading a document as the API server does:</p><ul><li>a field the registered type does not declare is not dropped, as the parser alone would drop
-it: the object is refused or emitted as rendered (<em>Undeclared fields</em>, below). A value of
-the wrong type (an unquoted <code>true</code> as an annotation value) is a build error;</li><li>YAML is read as YAML 1.1, so an unquoted <code>yes</code> or <code>y</code> is a boolean; a mapping key that is not
-a string (<code>1:</code>) becomes its string form, and an unquoted timestamp stays the string the chart
-wrote; in an unstructured object an integer an int64 cannot hold becomes a float;</li><li>a large integer survives the write where the object holds it as an integer. Since
-go-kure/kure#1006 kure&rsquo;s manifest writer writes an integer field of a typed object, and an
-integer in an unstructured one, with its own digits: <code>9007199254740993</code> and
-<code>9223372036854775807</code> are written as rendered (they were written <code>9007199254740992</code> and
-<code>9223372036854776000</code>). That holds for every object launcher writes, whichever component
-emitted it. A number the object holds as a float is written as that float, with the
-shortest digits that read back as it, and an integer an int64 cannot hold is such a float
-in an unstructured object (the item above): <code>9223372036854775808</code> is written
-<code>9223372036854776000</code>, and <code>18446744073709551615</code> as <code>1.8446744073709552e+19</code>. A value
-that large has to be a string in a field that takes one;</li><li>an empty, null or comment-only document is skipped, while a scalar, a sequence, <code>{}</code> and a
-mapping without <code>apiVersion</code> and <code>kind</code> are build errors — in a document
-of a dropped hook as well, since the render is decoded before hooks are grouped;</li><li>a list document is replaced by its items, in the list&rsquo;s order. What a list is, is kure&rsquo;s
-parser&rsquo;s to say, in one place since go-kure/kure#1014: a list kind the scheme registers
-(a <code>v1</code> <code>List</code>, a typed list such as <code>DeploymentList</code>), and a kind the scheme does not
-register whose name ends in <code>List</code> and that states <code>items</code>. Each item of a typed list is
-decoded as the kind the list holds. Each item of a <code>v1</code> <code>List</code> and of a list of an
-unregistered kind is decoded as a document of its own: typed when its kind is registered,
-unstructured otherwise, and a list among them is replaced by its items in turn, to the
-eight levels the parser bounds. An item of a list of an unregistered kind that leaves
-<code>apiVersion</code> or <code>kind</code> out is read with the list&rsquo;s <code>apiVersion</code> and the list&rsquo;s kind
-without <code>List</code>. An item that does not decode, or is <code>null</code>, is a build error naming its
-position (<code>item 0 of WidgetList: the item is null, not an object</code>). A list is never
-emitted, so what it states on its own metadata would be lost: a label or an annotation
-there is the parser&rsquo;s error (<code>List has metadata of its own that its items cannot keep: annotations helm.sh/resource-policy</code>). A kind the scheme does not register that ends in
-<code>List</code> and states no <code>items</code> is one object; a registered list kind that states none is a
-list without items, and yields no object;</li><li><code>apiVersion</code>, <code>kind</code> and, on a list, <code>items</code> are read under those exact keys, and a key
-that equals one of them only after case folding (<code>Kind</code>, <code>apiversion</code>, <code>Items</code>) is the
-parser&rsquo;s error, on a document and on an item of a list (<code>the key "Kind" equals "kind" only after case folding; write it "kind" or remove it</code>): the readers of a document downstream
-do not agree on which of two such keys stands;</li><li>an object of a kind the scheme does not register and that does not end in <code>List</code>, with a
-top-level <code>items</code> array (<code>{kind: Widget, items: [...]}</code>), is a build error, with a policy
-or with none, at the top of the render and as an item of a list (<code>Widget "w": an </code>items<code> array on an object of a kind that is no list (example.com/v1 Widget) is read as a list by what applies the output, which would apply its entries in the object's place; write the entries as documents of their own, or give the object a kind ending in List</code>). The parser
-reads such a document as one object. What applies the output tells a list by that array
-and not by the kind, so the entries would reach the cluster without any check here having
-read them. It is the envelope <code>passthrough</code> refuses (<strong>Lists</strong>, under <code>passthrough</code>), and
-the one refused on a registered kind that declares no <code>items</code> (<em>Undeclared fields</em>,
-below). An <code>items</code> that is no array, or one below the top level, is the object&rsquo;s own
-content. The refusal is no refusal by the policy and carries no class. Under template
-delivery it is still the component&rsquo;s <code>oam.ViolationError</code>, as every render that does not
-decode is, since the chart is rendered at the transform&rsquo;s policy step; a <code>manifests</code>
-source reports it as its parse error, without one;</li><li>a document the decoder of its kind panics on is a build error, not a crash. The API type
-of a registered kind may decode itself and not handle what was written: Cilium&rsquo;s ICMP
-field dereferences the <code>type</code> an <code>icmps</code> field of a <code>CiliumNetworkPolicy</code> or a
-<code>CiliumClusterwideNetworkPolicy</code> left out. Since go-kure/kure#1009 kure&rsquo;s parser reports
-the panic itself, as that document&rsquo;s parse error. The error names the object by its kind
-and its name and holds the panic (<code>decoding rendered manifests: parse error in Kubernetes object: failed to decode object: the decoder panicked on CiliumNetworkPolicy "demo/p": runtime error: invalid memory address or nil pointer dereference</code>); it names neither the
-field nor the document&rsquo;s position, and an item of a list by its position in the list
-(<code>item 0 of List</code>). Such a document is one bad document among the others: the error holds
-every document&rsquo;s own, and the YAML error of input that stops being YAML further down.
-Before that change launcher caught the panic itself, named the document by its position
-(<code>document 2 (CiliumNetworkPolicy "demo/p")</code>) and reported that document alone;</li><li>malformed JSON the decoder cannot read past is a build error: <code>{]</code>, alone or after JSON
-documents. What follows it in the input is not read. Before go-kure/kure#1012 kure&rsquo;s
-parser did not return on such input, and neither did the build;</li><li>which kinds are registered is kure&rsquo;s to say. Since go-kure/kure#1007 a MetalLB <code>BGPPeer</code>
-at <code>metallb.io/v1beta2</code>, the version MetalLB stores, is one, beside <code>v1beta1</code>.
-<strong>Breaking</strong> for a chart or a manifest source that holds such a document, which was
-emitted as rendered: it is now emitted as its Go type, so <code>spec.passwordSecret: {}</code> is
-written where the document left the field out, and a field of the wrong type
-(<code>holdTime: [1]</code>) is a build error. One that sets an undeclared field is still emitted as
-rendered (<em>Undeclared fields</em>, below);</li><li>a list document where a <code>helm.sh/hook</code> annotation is involved is a build error naming the
-list: the annotation on the list&rsquo;s own metadata, or on one of its items (for a <code>v1</code> <code>List</code>
-and a list of an unregistered kind, whose items are documents of their own, at every
-depth the parser opens). Helm reads a hook on the rendered document&rsquo;s own
-metadata and nowhere else, and the parser reads only a list&rsquo;s items. So the items of a hook
-list would be emitted as ordinary resources, and an item&rsquo;s own annotation, which Helm does
-not read, would group it as a hook or drop it. The check reads a list as the parser does,
-with one addition: Helm reads <code>metadata</code> under any case of the key and the parser reads
-the exact key, so a hook on a list under <code>Metadata</code> is refused here. A list without the
-annotation, and without any other label or annotation of its own, builds; an object that
-is not a list keeps its hook.</li></ul><p>A decode failure is reported as <code>decoding rendered manifests: …</code>. <code>Generate</code> returns a fresh
-copy of the decoded objects on every call, as <code>manifests</code> does, so a trait that decorates a
-typed workload (<code>topology-spread</code>, <code>security-context</code>, a mounted <code>configmap</code>,
-<code>external-secret</code>) acts on a chart&rsquo;s Deployment as on an authored one, and generating the
-same result twice gives the same output.</p><p><strong>Policy.</strong> <code>ApplyPolicy</code> holds the chart to the environment policy in two steps
-(go-kure/launcher#791); the transform calls it with <code>NoopPolicy</code> when no policy is passed.</p><ul><li><em>The source, before any fetch.</em> The host of <code>source.url</code> must match an entry of the policy&rsquo;s
-allowed registries (<code>AllowedRegistries</code>) exactly, as for <code>oci</code>, <code>crd</code> and <code>manifests</code>; for an
-<code>oci://</code> URL that is its first segment, which is what the Helm registry client pulls from. A
-refused source fails before any request is made: only an allowed source is rendered. No
-allowlist, or an empty one, permits every host.</li><li><em>Every emitted workload.</em> The chart is then rendered — in the transform, so a fetch or render
-failure is reported there, as that component&rsquo;s policy error — and each Pod, PodTemplate,
-ReplicationController, Deployment, StatefulSet, DaemonSet, ReplicaSet, Job and CronJob in it,
-a kept hook&rsquo;s included, is checked as an authored workload is: host namespaces, hostPath
-volumes, the cpu/memory maxima, the storage maximum on a generic ephemeral volume&rsquo;s claim,
-the registry allowlist on an image volume&rsquo;s reference (<strong>breaking</strong>, go-kure/launcher#790:
-a chart that renders one from a registry outside the list built before; see <em>Image volumes</em>
-under <strong>pod</strong>),
-and for every init and regular container the registry allowlist, the privileged, HostProcess
-and capability gates, and <code>ValidateImageRef</code> (no untagged image, no <code>:latest</code>), which holds
-the reference of an image volume too (<strong>breaking</strong>, go-kure/launcher#790: a chart that
-renders an untagged or <code>:latest</code> one built before). Ephemeral
-containers are refused. The storage a PersistentVolumeClaim, or a StatefulSet&rsquo;s claim
-template, requests is held to the storage maximum (<code>MaxStorageSize</code>), as the
-<code>persistentvolumeclaim</code> and <code>statefulset</code> kinds hold theirs. The replica count of a
-Deployment, StatefulSet, ReplicaSet or ReplicationController (one when the chart sets none)
-and the <code>maxReplicas</code> of a HorizontalPodAutoscaler, in any API version, are held to the
-replica maximum (<code>MaxReplicas</code>), as the <code>deployment</code> and <code>statefulset</code> kinds and the
-<code>scaler</code> trait hold theirs. A PersistentVolume is held to what the <code>persistentvolume</code>
-kind holds its own to: a <code>hostPath</code> or <code>local</code> source needs <code>AllowHostPathVolumes()</code>,
-and <code>spec.capacity.storage</code> is held to the storage maximum (breaking for a chart that
-renders one; see <strong>persistentvolume</strong>). The error names the rendered
-object and the field (<code>helmtemplate: rendered Deployment "demo/web": spec.template.spec.containers[0] "app": …</code>).</li></ul><p><strong>Behaviour change:</strong> a chart that renders a privileged container, a host namespace or a
-hostPath volume no longer builds unless the policy allows it — and with no policy passed
-nothing allows it, since <code>NoopPolicy</code> denies all five. The policy accessors that allow such a
-chart are <code>AllowPrivileged()</code>, <code>AllowHostNetwork()</code>, <code>AllowHostPID()</code>, <code>AllowHostIPC()</code> and
-<code>AllowHostPathVolumes()</code>; there is no per-chart exemption. A chart image without a tag, or
-tagged <code>:latest</code>, has to be pinned through the chart&rsquo;s values.</p><p><strong>Undeclared fields</strong> (go-kure/launcher#794, item 7). Kure&rsquo;s parser decodes a registered kind
-leniently: a field the vendored API type does not declare — one a newer Kubernetes version
-added, say — is dropped, with no error. The policy check reads that type, so it would pass a
-workload whose undeclared pod spec field it never saw, and the object would be written
-without the field. Template delivery, <code>manifests</code>, <code>crd</code> and <code>passthrough</code> therefore decode
-each document of a registered kind once more, strictly, over the same scheme, and act on
-what that reports:</p><ul><li><em>A workload or a claim</em> — the kinds the policy check reads as Go types: Pod, PodTemplate,
-ReplicationController, Deployment, StatefulSet, DaemonSet, ReplicaSet, Job, CronJob,
-PersistentVolumeClaim and PersistentVolume, which &ldquo;a workload or a claim&rdquo; stands for
-wherever this rule is cited — that sets an undeclared field is refused, under any policy
-and with none. A kind the check comes to read as its Go type joins them. The error names the object and the path of every such field (<code>decoding rendered manifests: Deployment "demo/web": undeclared field spec.template.spec.fieldOfALaterVersion: the apps/v1 Deployment type this build reads the object with does not declare it, so the object cannot be checked against environment policy</code>).</li><li><em>Any other registered kind</em> is emitted as the document was rendered, unstructured, the
-field kept. A HorizontalPodAutoscaler is one of these: the check reads its <code>maxReplicas</code>
-from the unstructured object as it does from the Go type. One shape is refused: a
-top-level <code>items</code> array on a kind that declares none, since written out the object is a
-list to whatever applies it, and its items would be applied in its place.</li></ul><p>A list (a <code>v1</code> <code>List</code>, a typed list, a list of an unregistered kind) is replaced by its
-items, so the rule is each item&rsquo;s: an item is refused or kept as a document of its own is,
-the error naming its position (<code>decoding rendered manifests: item 1 of List: Deployment "demo/web": undeclared field …</code>; <code>item 0 of WidgetList: item 0 of List: …</code> for a list in a
-list). A kept item that left <code>apiVersion</code> and <code>kind</code> out is written with the ones its list
-gives it: the kind a typed list holds, and for a list of an unregistered kind the list&rsquo;s
-<code>apiVersion</code> and its kind without <code>List</code>. The list&rsquo;s other fields are not read: the list
-is never emitted. A document whose items cannot be matched to the objects the parser made
-of them is refused, not passed with an item unread.</p><p>A key written twice is not an undeclared field and is read as before (the last value
-stands). One case of it is refused, whatever the kind: a JSON document that writes so
-many keys twice that the strict decode&rsquo;s record of errors, which holds a hundred, is
-full without naming an undeclared field. Whether such a document also sets one cannot
-be told. (A document whose undeclared field is recorded before the record fills is
-treated as any other: refused as a workload or a claim, kept as another kind.)</p><p>Another is an item of a list of an unregistered kind, in a JSON document, that states
-<code>apiVersion</code> or <code>kind</code> and then <code>null</code> for it. The parser reads the last statement, takes
-the <code>null</code> for the key left out and gives the item its list&rsquo;s; the strict decode keeps the
-string the <code>null</code> follows. Where that string is what the list gives too, the two agree
-and nothing changes. Where it is not, the strict decode checks the fields of another kind
-than the one emitted, and an item the parser made a Go type of is refused, with or without
-an undeclared field
-(<code>item 0 of FooList: Deployment "web": the object was read as apps/v1 Deployment, and the decode that checks its fields reads the document as example.com/v1 Deployment, so its fields cannot be checked; a second apiVersion or kind that is null is the known cause, state each once</code>). The parser refuses the same in an item of a typed list itself. An item
-the parser leaves untyped, its kind not registered at the list&rsquo;s <code>apiVersion</code>, is emitted
-as the parser read it and is not checked as the kind the strict decode would read: nothing
-of an unstructured object is dropped.</p><p>Whether a cluster accepts a kept field its own version does not know is not verified
-here; the object reaches it as the chart wrote it.</p><p><strong>Breaking</strong>, in two ways. A chart that renders a workload or a claim with an undeclared
-field built before, the field dropped from the output, and no longer builds: the field has
-to go, or wait for a launcher whose pinned API types declare it. And the output of every
-other registered kind gains the fields the typed decode had dropped since
-go-kure/launcher#791; such an object is written from the document and not from its Go type,
-so the rest of it is as the chart wrote it too.</p><p>Known limit: a type that unmarshals itself decodes its own keys, so an undeclared key inside
-one is not reported and is still dropped. A CustomResourceDefinition&rsquo;s <code>items</code> schema is
-such a type: the same kind of type as a <code>CiliumNetworkPolicy</code>&rsquo;s endpoint selector, which
-the kind inventory records and an authored Cilium policy checks on its own. A key next to
-<code>properties</code> in the same schema is reported and kept. No type under a workload or a claim does this beyond scalar
-leaves (<code>Quantity</code>, <code>IntOrString</code>, <code>Time</code>) and the raw field set of <code>managedFields</code>; a test
-walks those types and fails when one starts to.</p><p>Limits. The items of a list, whatever its kind, are checked as documents of their own are,
-a list among them opened in turn.
-A workload, claim or PersistentVolume in an API version kure&rsquo;s scheme
-does not register
-(<code>batch/v1beta1</code>, <code>apps/v1beta2</code>) cannot be read and
-is refused rather than passed unchecked, inside a list as outside one. The decode returns no object with a
-top-level <code>items</code> array (<em>Rendered objects</em>, above), so the check meets none; one that reaches it
-another way is refused as unreadable. Not checked: an object of a dropped hook (never emitted); the pods a
-custom resource&rsquo;s controller creates, and the replica count a custom resource sets; the host of the chart archive a Helm repository&rsquo;s index
-points at, and any redirect, which kure&rsquo;s renderer follows. That one is a decided limit
-(go-kure/launcher#794, item 6): the allowlist is checked on the chart&rsquo;s source URL before
-anything is fetched, and holding every later request to it needs a hook in kure&rsquo;s chart
-renderer, which takes a release name and a namespace and nothing about its requests
-(<code>helm.RenderChart</code>). A nil policy (a direct
-<code>ApplyPolicy(nil)</code>, or <code>Generate</code> on a config no policy was applied to) checks nothing, and
-<code>ApplyPolicy(nil)</code> withdraws no policy applied before. A chart
-delivered as a Flux <code>HelmRelease</code> (<code>helmrelease</code>, <code>helm</code> under <code>delivery: flux</code>) is rendered
-on the cluster, so nothing it renders can be checked at build time; only the host of a source
-component in the document is.</p><p><strong>Hook-group layout.</strong> For a layout-walking consumer (the <code>layout.LayoutAugmenter</code> path), more
-than one hook group makes <code>AugmentLayout</code> clear the component&rsquo;s flat <code>Resources</code> and replace
-them with one child <code>ManifestLayout</code> per group, named
-<code>&lt;application>-&lt;component>-NN-&lt;phase-slug></code>, written to
-its own directory <code>&lt;component dir>/&lt;child></code> (its <code>Namespace</code> is the component layout&rsquo;s own path,
-which kure joins with the child&rsquo;s name, so a hook-group directory is never nested twice) and
-chained via <code>DependsOn</code>, listing each child&rsquo;s preceding sibling in the order kure&rsquo;s
-<code>helm.SplitByHookWeight</code> synthesizes from Helm&rsquo;s hook phases — a combined install/upgrade
-ordering for GitOps reconciliation, not Helm&rsquo;s own per-operation execution order (kure
-<code>pkg/stack/helm/hooks.go:28-36</code>). <code>DependsOn</code> is set on every child, and only kure&rsquo;s
-<code>FluxIntegratedPerLayout</code> placement carries it: there kure&rsquo;s layout integrator gives each child
-a Flux Kustomization CR of its own and writes each entry into its <code>spec.dependsOn</code> as the name
-of the Kustomization of the sibling the entry names (kure <code>pkg/stack/layout/manifest.go</code>&rsquo;s
-<code>DependsOn</code> field doc). Under <code>FluxSeparate</code> and <code>FluxIntegratedPerBundle</code> a child gets no
-Kustomization of its own, and kure&rsquo;s Flux integration refuses the child&rsquo;s <code>DependsOn</code> and
-<code>KustomizationName</code>, naming the child (go-kure/kure#1032); before, it dropped them without an
-error, and the order between hook groups was lost. A chart with more than one hook group
-therefore needs <code>FluxIntegratedPerLayout</code> under kure&rsquo;s Flux integration. When it
-partitions, <code>AugmentLayout</code> also sets the component layout&rsquo;s <code>ApplicationFileMode</code> to
-<code>AppFilePerResource</code> unless the caller already set one, so the component stays a directory
-whose <code>kustomization.yaml</code> lists the children. Without that, a writer-wide <code>AppFileSingle</code>
-default (kure <code>layout.Config.ApplicationFileMode</code>) would make kure&rsquo;s <code>WriteManifest</code> refuse the
-tree under any placement but <code>FluxIntegratedPerLayout</code>: an <code>AppFileSingle</code> layout writes no
-<code>kustomization.yaml</code>, so nothing would list its child layouts (<code>go-kure/launcher#563</code>). The
-children carry no mode of their own, so under such a default each hook group is written as one
-file, <code>&lt;component dir>/&lt;child>.yaml</code>, instead of a sub-directory, and the component&rsquo;s
-<code>kustomization.yaml</code> lists it; under <code>FluxIntegratedPerLayout</code> kure&rsquo;s layout integrator keeps
-every child a directory with its own Flux Kustomization, whatever the default. kure names
-that Kustomization <code>&lt;bundle's Kustomization>-&lt;child></code> and shortens it past 63 characters by
-its own rule (go-kure/kure#1030, go-kure/kure#1036), while the child&rsquo;s name, its directory,
-is held to 253 (<code>site/content/api-reference/oam/pipeline.md</code>, &ldquo;Pipeline&rdquo;). A single-group
-chart&rsquo;s <code>AugmentLayout</code> is a no-op. Every <code>helmtemplate</code> component is a <code>LayoutAugmenter</code>, a
-hook-free chart included, since the group count is known only after the render — so even a
-hook-free chart gets its own sub-layout directory under a layout-walking consumer, for no
-behavioural benefit. The child name begins with the application name
-(go-kure/launcher#792): component names are unique only within one Application, while the
-Kustomization CRs a consumer generates for the hook-group children of every application can
-share one namespace, so two differently named Applications that each have a component <code>db</code>
-get <code>&lt;application>-db-NN-&lt;phase-slug></code> children that differ. The transform hands the config its
-application (<code>oam.ApplicationNameSetter</code>, the <code>Application</code> field); a <code>HelmTemplateConfig</code>
-built directly, outside a transform, has none unless the caller sets the field, and its
-children are then named <code>&lt;layout name>-NN-&lt;phase-slug></code>. <strong>Breaking output change</strong>: every
-hook-group child name, and so its directory and the Flux Kustomization a consumer derives
-from it, gains the leading <code>&lt;application>-</code>. The Kustomization kure generates for the child
-under <code>FluxIntegratedPerLayout</code> is <code>&lt;bundle's Kustomization>-&lt;child></code>
-(<code>shop-shop-db-01-main</code>), and the next group&rsquo;s <code>spec.dependsOn</code> follows it. <strong>Breaking output
-change</strong> (go-kure/launcher#941): from go-kure/launcher#787 launcher named it by the child
-alone (<code>shop-db-01-main</code>) and shortened it to 63 characters itself; it now leaves the name to
-kure, whose <code>&lt;unit>-</code> keeps two applications of one name in different bundles apart, and
-which refuses the name under the coarser placements (go-kure/kure#1032). A layout name over
-253 characters is shortened by the one shortening rule (<code>oam.ShortenNameWithSuffix</code>, which
-<code>helm</code> uses for its values ConfigMap name): the <code>-NN-&lt;phase-slug></code> suffix is kept whole and <code>&lt;application>-&lt;component></code> becomes
-its own beginning plus 10 hex digits of its sha256 (8 before go-kure/launcher#793), so two
-long names that differ anywhere almost never shorten to the same one. Known limitation: the
-two names are joined by a plain <code>-</code>, which either may contain, so application <code>a-b</code> with
-component <code>c</code> and application <code>a</code> with component <code>b-c</code> still get the same child names. The
-default carries no namespace either: like the bundle name, a child name is built from the
-application&rsquo;s name alone, so two Applications with one name in different namespaces get the
-same child names. Keeping those apart is the author&rsquo;s or the consumer&rsquo;s: the
-<code>hookGroupNamePrefix</code> property, or the <code>Naming</code> hook&rsquo;s answer for the <code>hook-group</code> role
-(go-kure/launcher#787), replaces <code>&lt;application>-&lt;component></code> in the name of every child,
-directory and Kustomization alike. Such a prefix is a DNS-1123 subdomain and is never
-shortened: a child name over 63 characters built from it fails the transform, in an error
-with the component, the role and the full name (<code>*oam.HookGroupNameError</code>, which answers
-to <code>oam.ErrHookGroupNameTooLong</code>), and two components of one document that
-resolve to one prefix fail the transform. The transform has the chart rendered by its
+test compares the two.</p><h2 id=helmtemplate>helmtemplate<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p><code>helmtemplate</code> is the kind-named terminal for a client-side Helm render, and
+what the role-named <code>helm</code> rule lowers to under <code>delivery: template</code>. It fetches
+and renders the chart at build time and emits the rendered manifests, each
+checked against the environment policy (see <strong>Policy</strong> below). It creates no
+source CR and no <code>HelmRelease</code>.</p><h3 id=properties-3>Properties<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><strong>Properties.</strong> <code>source</code> is required: <code>url</code> (required) is an <code>http://</code> or
+<code>https://</code> Helm repository URL, or an <code>oci://</code> URL naming the chart; <code>kind</code>
+(optional, <code>HelmRepository</code> or <code>OCIRepository</code>) is inferred from the scheme when
+unset — <code>oci://</code> is <code>OCIRepository</code>, anything else <code>HelmRepository</code> — and must
+agree with it when set. A <code>url</code> carrying a user or password is refused, since
+the render takes no credentials, and the message never repeats it. <code>chart</code> is
+required for a <code>HelmRepository</code>; an <code>OCIRepository</code>&rsquo;s URL already names the
+chart, so there <code>chart</code> is not used. <code>version</code> is required for an
+<code>OCIRepository</code>. <code>values</code> is an open object, the Helm values tree, and must be
+representable as JSON: a non-finite number (<code>.nan</code>, <code>.inf</code>) is a build error.
+The source checks are shared with the <code>helm</code> rule&rsquo;s inline source rather than
+copied. <code>scopeOverrides</code> states the scope of a kind the chart renders (see
+<strong>Scope overrides</strong> below). <code>hookGroupNamePrefix</code> is the prefix of the names of
+the hook-group layouts, in place of <code>&lt;application>-&lt;component></code>, and so of their
+Flux Kustomizations under <code>FluxIntegratedPerLayout</code>; so does a prefix the
+<code>Naming</code> hook returns for the <code>hook-group</code> role. With neither, the default
+prefix names only the layouts: kure names each Kustomization <code>&lt;unit>-&lt;layout name></code>. See the hook-group paragraph below. <code>layoutKustomizationName</code> is the
+name of the Flux Kustomization of the component&rsquo;s own layout, in place of
+<code>&lt;bundle>-&lt;component></code>; see the same paragraph.</p><p><code>secretValues</code> is a second open object, for the sensitive part of the values
+tree; it is what the <code>helm</code> rule forwards its own <code>secretValues</code> as. The chart
+is rendered with <code>secretValues</code> merged over <code>values</code>, object by object, with the
+authored value types. The terminal emits nothing for it, so a value is in the
+output only where the chart renders it: a chart that puts it in a Secret emits
+that Secret in clear form, and one that puts it in a ConfigMap or an environment
+variable emits it there. The output is as sensitive as the input; see the
+security note under <strong>helm</strong>. Further:</p><ul><li>a path set in both trees is refused, naming the path (<code>helmtemplate: auth.password is set in both values and secretValues; …</code>), by the rule the
+<code>helm</code> component states;</li><li>a key named <code>global</code> below the top level is refused, naming the path, before
+any fetch (<code>helmtemplate: secretValues: redis.global: a key named global is allowed only at the top level, …</code>), by the rule the <code>helm</code> component states
+and with its trade-off: such a key that is not a dependency&rsquo;s globals can be
+given through <code>values</code> only, and a sensitive global goes under the top-level
+<code>global</code>;</li><li>a policy that forbids explicit secrets (<code>oam.ExplicitSecretPolicy</code>) refuses
+the component in <code>ApplyPolicy</code>, before any fetch (<code>helmtemplate: secretValues is set and the environment policy forbids explicit secrets; …</code>). <strong>Not
+covered:</strong> a Secret the chart itself renders. It is emitted under such a
+policy, where the <code>passthrough</code> and <code>manifests</code> components refuse a Secret
+they carry: its content comes from the chart and its values, and most charts
+render one;</li><li>a render or decode failure is not reported as Helm reports it, since a
+template error can quote a value (<code>fail</code>, <code>required</code>, a YAML parse error
+showing the line). The chart is rendered a second time with <code>values</code> alone. If
+that fails too, its error is the one reported, after <code>rendering chart with secretValues failed; the cause is withheld because it can repeat a sensitive value. Without them it fails with: …</code>. If it succeeds, the message is only
+<code>rendering chart with secretValues failed, and without them it renders; the cause is withheld because it can repeat a sensitive value</code>. To debug such a
+chart, render it with placeholder values in <code>values</code>. The second render
+repeats the fetch;</li><li><em>not covered:</em> an error about a rendered object. No check that runs on what
+the chart rendered, once it has decoded, scrubs its error. It names the object
+it refuses by kind and name, and can quote any part of the object it refuses
+or locates the refusal by. The policy checks (see <strong>Policy</strong>) quote a
+container&rsquo;s or a volume&rsquo;s name, an image reference, a resource quantity, a
+capability; the transform&rsquo;s component label quotes the key of a label that is
+not a string. So any part of a rendered object can reach an error: a chart
+that builds one from a sensitive value has it quoted there. The refusal of a
+field the kind&rsquo;s type does not declare is not among them: it is a decode
+failure, withheld as above. The refusal of a <code>scopeOverrides</code> entry that
+contradicts a CustomResourceDefinition the chart renders (see <strong>Scope
+overrides</strong> below) is such an error and is not withheld: it names the kind,
+the object&rsquo;s name and the two scopes, never a value;</li><li>Helm&rsquo;s own warnings about a values conflict quote the value Helm drops. With
+the refusal above that is never a value of <code>secretValues</code>: for a top-level
+<code>global</code> it is the dependency&rsquo;s <code>global</code> entry from <code>values</code>, and for a
+dependency&rsquo;s ordinary key it is the dependency&rsquo;s default.</li></ul><p><strong>Release name.</strong> <code>releaseName</code> is the render&rsquo;s <code>.Release.Name</code>. Unset, it is
+the default the <code>helmrelease</code> terminal writes to <code>spec.releaseName</code>: the
+component name, and for a name over 53 characters, Flux helm-controller&rsquo;s
+shortened form of it — its first 40 characters, <code>-</code>, and the first 12 hex digits
+of the SHA-256 of the whole name. A <code>helm</code> component therefore renders under
+<code>delivery: template</code> with the same release name its HelmRelease is installed
+under with <code>delivery: flux</code>, whatever its target namespace. The chart and its
+source play no part. The name, authored or defaulted, must be a valid Helm
+release name by Helm&rsquo;s own rule — a DNS-1123 subdomain of at most 53 characters
+— since kure&rsquo;s render checks nothing. An authored name is never shortened: one
+over 53 characters is refused. A default that is not valid — the shortening can
+cut a dotted name just after a <code>.</code>, leaving a label that starts with <code>-</code> — is
+refused with the remedy to set <code>releaseName</code>, as Flux would fail to install it.
+A <code>HelmTemplateConfig</code> built directly defaults it from <code>Name</code> the same way, and
+is refused when both are empty. Since component names are unique in a document,
+two renders of one chart no longer share a release name by default. Two given
+the same <code>releaseName</code> in one namespace generate the same objects when the chart
+names its objects after the release, as most do, and <code>kurel build</code> refuses them
+as a generated-object collision rather than merging them. Before
+go-kure/launcher#776 every render used kure&rsquo;s default <code>release</code>; the project is
+pre-GA, so the changed object names of an existing template-rendered chart carry
+no compatibility shim.</p><p><strong>Decoding.</strong> <code>values</code>, <code>secretValues</code> and <code>scopeOverrides</code> are split off, and
+the rest of the property map is decoded with <code>builtin.DecodeStrictJSON</code> into a
+closed struct, so any other key, at any depth, is refused by name, as is a
+wrongly typed value. <code>values</code> itself reaches the render exactly as authored,
+with its YAML-decoded value types, rather than the strict decoder&rsquo;s
+<code>json.Number</code> re-reading, which a chart template comparing a value with a number
+would treat differently; <code>secretValues</code> likewise. A <code>secretValues</code> that is not
+an object is refused by its type, never by its content. The schema declares the
+same keys, with <code>source</code> closed to <code>url</code> and <code>kind</code>, and a test ties it to the
+struct. Keys match case-insensitively in the handler, as in <code>encoding/json</code>;
+schema validation, which a <code>kurel build</code> runs first, is exact.</p><h3 id=outputs-3>Outputs<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><strong>Namespace.</strong> A namespaced rendered object that carries no <code>metadata.namespace</code>
+is given the application namespace, where a Helm install into that namespace
+would create it. Each object&rsquo;s scope is resolved as the <code>manifests</code> component
+resolves it, by the one function both call (<code>resolveObjectScope</code>,
+<code>manifests.go</code>): a <code>scopeOverrides</code> entry for the object&rsquo;s kind, else kure&rsquo;s
+scope table (<code>manifest.Scope</code>) — the kinds kure registers, in any API version —
+plus the scope a <code>CustomResourceDefinition</code> among the emitted objects declares
+for the kind it defines. Unlike <code>manifests</code>, the render refuses nothing about
+what the chart wrote, since the application does not author a chart:</p><ul><li>a namespace the chart wrote is kept, on a cluster-scoped object too, as Helm
+keeps it;</li><li>a cluster-scoped object without one stays without;</li><li>an object of unknown scope without one is left as rendered, with no namespace
+and no error: a kind kure does not register — a custom resource, or a built-in
+of an API group kure&rsquo;s scheme does not hold — with no CRD for it among the
+emitted objects and no <code>scopeOverrides</code> entry. <code>Lease</code>, <code>EndpointSlice</code> and
+the image-reflector kinds (<code>ImageRepository</code>, <code>ImagePolicy</code>) are registered,
+so one without a namespace is given the application namespace. Whoever applies
+the output decides where it lands (Flux&rsquo;s <code>targetNamespace</code>, a client&rsquo;s
+default namespace). A chart&rsquo;s <code>crds/</code> directory is not rendered, and a CRD
+under a dropped hook is not emitted, so neither gives a kind a scope.</li></ul><p>The policy check runs on the stamped objects, so a violation names an object
+with the namespace it is emitted in. A <code>HelmTemplateConfig</code> built directly with
+an empty <code>Namespace</code> has none to give and stamps nothing.</p><p><strong>Scope overrides</strong>. <code>scopeOverrides</code> states the scope of a kind the chart
+renders, for a kind of unknown scope above: a list of <code>{apiVersion, kind, scope}</code>, <code>scope</code> being <code>Cluster</code> or <code>Namespaced</code>, matched on the exact
+<code>apiVersion</code> and <code>kind</code>. It is the property <code>manifests</code> has, read by the same
+parser (<code>parseScopeOverrides</code>) and resolved by the same function, so an entry
+means the same on both: it outranks kure&rsquo;s own table, is ignored for a kind the
+Kubernetes API itself scopes, and must agree with a <code>CustomResourceDefinition</code>
+among the emitted objects (see <strong>crd / manifests</strong>).</p><ul><li><code>Namespaced</code>: an object of the kind without <code>metadata.namespace</code> is given the
+application namespace, as a kind kure knows to be namespaced is.</li><li><code>Cluster</code>: an object of the kind is left as rendered. That includes one the
+chart wrote a namespace on, which <code>manifests</code> refuses: template delivery
+refuses nothing about what a chart wrote.</li><li>An entry for a kind the chart does not render does nothing. <code>null</code> reads as
+omission.</li></ul><p><em>Refused</em>, two cases only. A malformed entry, at decode and before any render,
+with the <code>manifests</code> messages under this component&rsquo;s prefix (<code>helmtemplate: scopeOverrides[0]: scope "cluster" is invalid; must be "Cluster" or "Namespaced"</code>). And an entry that contradicts a <code>CustomResourceDefinition</code> the
+chart renders for the kind, when the chart is rendered (<code>helmtemplate "&lt;component>": object Widget "w": scopeOverrides says Cluster but the CustomResourceDefinition for Widget.fixtures.example.com the chart renders declares Namespaced; …</code>): that CRD defines the scope the cluster will serve, so
+no cluster can honour the entry. The message names the object&rsquo;s kind and name
+and the two scopes, nothing else of the object. A <code>HelmTemplateConfig</code> built
+directly holds the overrides in <code>ScopeOverrides</code>, where a value other than the
+two scopes is refused before the render.</p><p>The <code>helm</code> rule takes the same property under <code>delivery: template</code> and forwards
+it here as written, after refusing a malformed entry under its own prefix; under
+<code>delivery: flux</code> it refuses the property (see <strong>helm</strong>).</p><p><em>Not covered:</em> no policy or placement check on template output reads an object&rsquo;s
+scope, so the overrides change the namespace stamp and nothing else. Not
+breaking: a document that does not use the property renders as before.</p><p><strong>Breaking output change</strong>: such objects gain <code>metadata.namespace</code> in the
+output. Before, a chart that left it unset rendered namespace-less objects,
+which landed wherever the applying client defaulted them.</p><p><strong>Breaking output change</strong> (with the kure version that registers them): <code>Lease</code>,
+<code>EndpointSlice</code>, <code>PriorityClass</code>, <code>RuntimeClass</code>, <code>APIService</code>, the
+<code>admissionregistration.k8s.io/v1</code> kinds and the image-reflector kinds are read
+as their Go types, no longer as kinds the build does not know. One that sets
+only fields its type declares is emitted from that type; one that sets a field
+the type does not declare is emitted as rendered, the field kept (<em>Undeclared
+fields</em>, below); a field of the wrong type is now a build error. The namespaced
+ones (<code>Lease</code>, <code>EndpointSlice</code>, <code>ImageRepository</code>, <code>ImagePolicy</code>) gain
+<code>metadata.namespace</code> when the chart left it unset. A chart that renders a <code>v1</code>
+<code>List</code> or a typed list now builds, and each of its items is held to the policy
+and to <em>Undeclared fields</em> as a document of its own is. A list of a kind the
+scheme does not register no longer builds when a <code>helm.sh/hook</code> annotation is
+involved, on the list or on an item (see &ldquo;Rendered objects&rdquo;): it built before,
+with a wrong output, the list&rsquo;s hook lost and its items emitted as ordinary
+resources.</p><p><strong>Output order.</strong> Every rendered manifest carrying a <code>helm.sh/hook</code> annotation
+(or a standalone <code>helm.sh/hook-weight</code>) is grouped by <code>(phase, weight)</code> via
+kure&rsquo;s <code>helm.SplitByHookWeight</code>. <code>Generate</code> returns every rendered object flat,
+in hook-execution order — <code>pre-install, pre-upgrade, main, post-install, post-upgrade, &lt;unknown, alphabetical></code> — with a multi-event annotation such as
+<code>pre-install,pre-upgrade</code> placed by its earliest phase; a chart with no hook
+annotations at all yields one group, in chart-render order.
+<code>pre-delete</code>/<code>post-delete</code>/<code>pre-rollback</code>/<code>post-rollback</code>/<code>test</code> objects are
+dropped outright (kure does not surface them as static manifests) — mostly a bug
+fix, since a <code>test</code> Pod rendered as a static GitOps object would otherwise be
+reconciled on every apply, but it is silent data loss for a chart that relies on
+one of those hooks; <code>pkg/oam</code> has no logging channel to flag it.</p><p><strong>Rendered objects.</strong> The render is decoded with kure&rsquo;s manifest parser
+(<code>io.ParseYAMLWithOptions</code>, unstructured allowed), the decode the <code>manifests</code>
+component uses. An object of a kind kure&rsquo;s scheme registers is emitted as its Go
+type — a Deployment as <code>*appsv1.Deployment</code>, a hook Job as <code>*batchv1.Job</code> — and
+any other as unstructured. What follows from reading a document as the API
+server does:</p><ul><li>a field the registered type does not declare is not dropped, as the parser
+alone would drop it: the object is refused or emitted as rendered (<em>Undeclared
+fields</em>, below). A value of the wrong type (an unquoted <code>true</code> as an
+annotation value) is a build error;</li><li>YAML is read as YAML 1.1, so an unquoted <code>yes</code> or <code>y</code> is a boolean; a mapping
+key that is not a string (<code>1:</code>) becomes its string form, and an unquoted
+timestamp stays the string the chart wrote; in an unstructured object an
+integer an int64 cannot hold becomes a float;</li><li>a large integer survives the write where the object holds it as an integer.
+Since go-kure/kure#1006 kure&rsquo;s manifest writer writes an integer field of a
+typed object, and an integer in an unstructured one, with its own digits:
+<code>9007199254740993</code> and <code>9223372036854775807</code> are written as rendered (they
+were written <code>9007199254740992</code> and <code>9223372036854776000</code>). That holds for
+every object launcher writes, whichever component emitted it. A number the
+object holds as a float is written as that float, with the shortest digits
+that read back as it, and an integer an int64 cannot hold is such a float in
+an unstructured object (the item above): <code>9223372036854775808</code> is written
+<code>9223372036854776000</code>, and <code>18446744073709551615</code> as <code>1.8446744073709552e+19</code>.
+A value that large has to be a string in a field that takes one;</li><li>an empty, null or comment-only document is skipped, while a scalar, a
+sequence, <code>{}</code> and a mapping without <code>apiVersion</code> and <code>kind</code> are build errors
+— in a document of a dropped hook as well, since the render is decoded before
+hooks are grouped;</li><li>a list document is replaced by its items, in the list&rsquo;s order. What a list is,
+is kure&rsquo;s parser&rsquo;s to say, in one place since go-kure/kure#1014: a list kind
+the scheme registers (a <code>v1</code> <code>List</code>, a typed list such as <code>DeploymentList</code>),
+and a kind the scheme does not register whose name ends in <code>List</code> and that
+states <code>items</code>. Each item of a typed list is decoded as the kind the list
+holds. Each item of a <code>v1</code> <code>List</code> and of a list of an unregistered kind is
+decoded as a document of its own: typed when its kind is registered,
+unstructured otherwise, and a list among them is replaced by its items in
+turn, to the eight levels the parser bounds. An item of a list of an
+unregistered kind that leaves <code>apiVersion</code> or <code>kind</code> out is read with the
+list&rsquo;s <code>apiVersion</code> and the list&rsquo;s kind without <code>List</code>. An item that does not
+decode, or is <code>null</code>, is a build error naming its position (<code>item 0 of WidgetList: the item is null, not an object</code>). A list is never emitted, so
+what it states on its own metadata would be lost: a label or an annotation
+there is the parser&rsquo;s error (<code>List has metadata of its own that its items cannot keep: annotations helm.sh/resource-policy</code>). A kind the scheme does not
+register that ends in <code>List</code> and states no <code>items</code> is one object; a registered
+list kind that states none is a list without items, and yields no object;</li><li><code>apiVersion</code>, <code>kind</code> and, on a list, <code>items</code> are read under those exact keys,
+and a key that equals one of them only after case folding (<code>Kind</code>,
+<code>apiversion</code>, <code>Items</code>) is the parser&rsquo;s error, on a document and on an item of
+a list (<code>the key "Kind" equals "kind" only after case folding; write it "kind" or remove it</code>): the readers of a document downstream do not agree on which of
+two such keys stands;</li><li>an object of a kind the scheme does not register and that does not end in
+<code>List</code>, with a top-level <code>items</code> array (<code>{kind: Widget, items: [...]}</code>), is a
+build error, with a policy or with none, at the top of the render and as an
+item of a list (<code>Widget "w": an </code>items<code> array on an object of a kind that is no list (example.com/v1 Widget) is read as a list by what applies the output, which would apply its entries in the object's place; write the entries as documents of their own, or give the object a kind ending in List</code>). The parser
+reads such a document as one object. What applies the output tells a list by
+that array and not by the kind, so the entries would reach the cluster without
+any check here having read them. It is the envelope <code>passthrough</code> refuses
+(<strong>Lists</strong>, under <code>passthrough</code>), and the one refused on a registered kind
+that declares no <code>items</code> (<em>Undeclared fields</em>, below). An <code>items</code> that is no
+array, or one below the top level, is the object&rsquo;s own content. The refusal is
+no refusal by the policy and carries no class. Under template delivery it is
+still the component&rsquo;s <code>oam.ViolationError</code>, as every render that does not
+decode is, since the chart is rendered at the transform&rsquo;s policy step; a
+<code>manifests</code> source reports it as its parse error, without one;</li><li>a document the decoder of its kind panics on is a build error, not a crash.
+The API type of a registered kind may decode itself and not handle what was
+written: Cilium&rsquo;s ICMP field dereferences the <code>type</code> an <code>icmps</code> field of a
+<code>CiliumNetworkPolicy</code> or a <code>CiliumClusterwideNetworkPolicy</code> left out. Since
+go-kure/kure#1009 kure&rsquo;s parser reports the panic itself, as that document&rsquo;s
+parse error. The error names the object by its kind and its name and holds the
+panic (<code>decoding rendered manifests: parse error in Kubernetes object: failed to decode object: the decoder panicked on CiliumNetworkPolicy "demo/p": runtime error: invalid memory address or nil pointer dereference</code>); it names
+neither the field nor the document&rsquo;s position, and an item of a list by its
+position in the list (<code>item 0 of List</code>). Such a document is one bad document
+among the others: the error holds every document&rsquo;s own, and the YAML error of
+input that stops being YAML further down. Before that change launcher caught
+the panic itself, named the document by its position (<code>document 2 (CiliumNetworkPolicy "demo/p")</code>) and reported that document alone;</li><li>malformed JSON the decoder cannot read past is a build error: <code>{]</code>, alone or
+after JSON documents. What follows it in the input is not read. Before
+go-kure/kure#1012 kure&rsquo;s parser did not return on such input, and neither did
+the build;</li><li>which kinds are registered is kure&rsquo;s to say. Since go-kure/kure#1007 a MetalLB
+<code>BGPPeer</code> at <code>metallb.io/v1beta2</code>, the version MetalLB stores, is one, beside
+<code>v1beta1</code>. <strong>Breaking</strong> for a chart or a manifest source that holds such a
+document, which was emitted as rendered: it is now emitted as its Go type, so
+<code>spec.passwordSecret: {}</code> is written where the document left the field out,
+and a field of the wrong type (<code>holdTime: [1]</code>) is a build error. One that
+sets an undeclared field is still emitted as rendered (<em>Undeclared fields</em>,
+below);</li><li>a list document where a <code>helm.sh/hook</code> annotation is involved is a build error
+naming the list: the annotation on the list&rsquo;s own metadata, or on one of its
+items (for a <code>v1</code> <code>List</code> and a list of an unregistered kind, whose items are
+documents of their own, at every depth the parser opens). Helm reads a hook on
+the rendered document&rsquo;s own metadata and nowhere else, and the parser reads
+only a list&rsquo;s items. So the items of a hook list would be emitted as ordinary
+resources, and an item&rsquo;s own annotation, which Helm does not read, would group
+it as a hook or drop it. The check reads a list as the parser does, with one
+addition: Helm reads <code>metadata</code> under any case of the key and the parser reads
+the exact key, so a hook on a list under <code>Metadata</code> is refused here. A list
+without the annotation, and without any other label or annotation of its own,
+builds; an object that is not a list keeps its hook.</li></ul><p>A decode failure is reported as <code>decoding rendered manifests: …</code>. <code>Generate</code>
+returns a fresh copy of the decoded objects on every call, as <code>manifests</code> does,
+so a trait that decorates a typed workload (<code>topology-spread</code>,
+<code>security-context</code>, a mounted <code>configmap</code>, <code>external-secret</code>) acts on a chart&rsquo;s
+Deployment as on an authored one, and generating the same result twice gives the
+same output.</p><p><strong>Hook-group layout.</strong> For a layout-walking consumer (the
+<code>layout.LayoutAugmenter</code> path), more than one hook group makes <code>AugmentLayout</code>
+clear the component&rsquo;s flat <code>Resources</code> and replace them with one child
+<code>ManifestLayout</code> per group, named <code>&lt;application>-&lt;component>-NN-&lt;phase-slug></code>,
+written to its own directory <code>&lt;component dir>/&lt;child></code> (its <code>Namespace</code> is the
+component layout&rsquo;s own path, which kure joins with the child&rsquo;s name, so a
+hook-group directory is never nested twice) and chained via <code>DependsOn</code>, listing
+each child&rsquo;s preceding sibling in the order kure&rsquo;s <code>helm.SplitByHookWeight</code>
+synthesizes from Helm&rsquo;s hook phases — a combined install/upgrade ordering for
+GitOps reconciliation, not Helm&rsquo;s own per-operation execution order (kure
+<code>pkg/stack/helm/hooks.go:28-36</code>). <code>DependsOn</code> is set on every child, and only
+kure&rsquo;s <code>FluxIntegratedPerLayout</code> placement carries it: there kure&rsquo;s layout
+integrator gives each child a Flux Kustomization CR of its own and writes each
+entry into its <code>spec.dependsOn</code> as the name of the Kustomization of the sibling
+the entry names (kure <code>pkg/stack/layout/manifest.go</code>&rsquo;s <code>DependsOn</code> field doc).
+Under <code>FluxSeparate</code> and <code>FluxIntegratedPerBundle</code> a child gets no Kustomization
+of its own, and kure&rsquo;s Flux integration refuses the child&rsquo;s <code>DependsOn</code> and
+<code>KustomizationName</code>, naming the child; before, it dropped them without an error,
+and the order between hook groups was lost. A chart with more than one hook
+group therefore needs <code>FluxIntegratedPerLayout</code> under kure&rsquo;s Flux integration.
+When it partitions, <code>AugmentLayout</code> also sets the component layout&rsquo;s
+<code>ApplicationFileMode</code> to <code>AppFilePerResource</code> unless the caller already set one,
+so the component stays a directory whose <code>kustomization.yaml</code> lists the
+children. Without that, a writer-wide <code>AppFileSingle</code> default (kure
+<code>layout.Config.ApplicationFileMode</code>) would make kure&rsquo;s <code>WriteManifest</code> refuse
+the tree under any placement but <code>FluxIntegratedPerLayout</code>: an <code>AppFileSingle</code>
+layout writes no <code>kustomization.yaml</code>, so nothing would list its child layouts.
+The children carry no mode of their own, so under such a default each hook group
+is written as one file, <code>&lt;component dir>/&lt;child>.yaml</code>, instead of a
+sub-directory, and the component&rsquo;s <code>kustomization.yaml</code> lists it; under
+<code>FluxIntegratedPerLayout</code> kure&rsquo;s layout integrator keeps every child a directory
+with its own Flux Kustomization, whatever the default. kure names that
+Kustomization <code>&lt;bundle's Kustomization>-&lt;child></code> and shortens it past 63
+characters by its own rule, while the child&rsquo;s name, its directory, is held to
+253 (<code>site/content/api-reference/oam/pipeline.md</code>, &ldquo;Pipeline&rdquo;). A single-group
+chart&rsquo;s <code>AugmentLayout</code> is a no-op. Every <code>helmtemplate</code> component is a
+<code>LayoutAugmenter</code>, a hook-free chart included, since the group count is known
+only after the render — so even a hook-free chart gets its own sub-layout
+directory under a layout-walking consumer, for no behavioural benefit. The child
+name begins with the application name: component names are unique only within
+one Application, while the Kustomization CRs a consumer generates for the
+hook-group children of every application can share one namespace, so two
+differently named Applications that each have a component <code>db</code> get
+<code>&lt;application>-db-NN-&lt;phase-slug></code> children that differ. The transform hands the
+config its application (<code>oam.ApplicationNameSetter</code>, the <code>Application</code> field); a
+<code>HelmTemplateConfig</code> built directly, outside a transform, has none unless the
+caller sets the field, and its children are then named <code>&lt;layout name>-NN-&lt;phase-slug></code>. <strong>Breaking output change</strong>: every hook-group child name,
+and so its directory and the Flux Kustomization a consumer derives from it,
+gains the leading <code>&lt;application>-</code>. The Kustomization kure generates for the
+child under <code>FluxIntegratedPerLayout</code> is <code>&lt;bundle's Kustomization>-&lt;child></code>
+(<code>shop-shop-db-01-main</code>), and the next group&rsquo;s <code>spec.dependsOn</code> follows it.
+<strong>Breaking output change</strong>: from go-kure/launcher#787 launcher named it by the
+child alone (<code>shop-db-01-main</code>) and shortened it to 63 characters itself; it now
+leaves the name to kure, whose <code>&lt;unit>-</code> keeps two applications of one name in
+different bundles apart, and which refuses the name under the coarser
+placements. A layout name over 253 characters is shortened by the one shortening
+rule (<code>oam.ShortenNameWithSuffix</code>, which <code>helm</code> uses for its values ConfigMap
+name): the <code>-NN-&lt;phase-slug></code> suffix is kept whole and
+<code>&lt;application>-&lt;component></code> becomes its own beginning plus 10 hex digits of its
+sha256 (8 before go-kure/launcher#793), so two long names that differ anywhere
+almost never shorten to the same one. Known limitation: the two names are joined
+by a plain <code>-</code>, which either may contain, so application <code>a-b</code> with component
+<code>c</code> and application <code>a</code> with component <code>b-c</code> still get the same child names. The
+default carries no namespace either: like the bundle name, a child name is built
+from the application&rsquo;s name alone, so two Applications with one name in
+different namespaces get the same child names. Keeping those apart is the
+author&rsquo;s or the consumer&rsquo;s: the <code>hookGroupNamePrefix</code> property, or the <code>Naming</code>
+hook&rsquo;s answer for the <code>hook-group</code> role, replaces <code>&lt;application>-&lt;component></code> in
+the name of every child, directory and Kustomization alike. Such a prefix is a
+DNS-1123 subdomain and is never shortened: a child name over 63 characters built
+from it fails the transform, in an error with the component, the role and the
+full name (<code>*oam.HookGroupNameError</code>, which answers to
+<code>oam.ErrHookGroupNameTooLong</code>), and two components of one document that resolve
+to one prefix fail the transform. The transform has the chart rendered by its
 policy step, with or without a policy of the caller&rsquo;s, and asks the config then
-(<code>CheckHookGroupNames</code>); <code>AugmentLayout</code> returns the same error for a config built
-directly or a prefix set after the transform. Known limit: the transform holds the prefixes
-apart, not the names built from them after the render, so two different prefixes can still
-give one Kustomization name (a written prefix that equals kure&rsquo;s name for another
-component&rsquo;s default child, less its suffix; a prefix that ends as another chart&rsquo;s phase
-begins). kure refuses that name, used twice, when the
-walked tree is integrated; another <code>hookGroupNamePrefix</code> on one of the components is the
-way out (<code>site/content/api-reference/oam/names-and-overrides.md</code>, &ldquo;Name roles and the <code>Naming</code> hook&rdquo;). A <code>HelmTemplateConfig</code> built directly sets <code>HookGroupNamePrefix</code>.
-The component&rsquo;s own layout, the parent of the hook-group children, also gets a Flux
-Kustomization under <code>FluxIntegratedPerLayout</code>, which kure names <code>&lt;bundle>-&lt;component></code> and
-shortens past 63 characters by its own rule; launcher leaves that default to kure.
-<strong>Breaking output change</strong> (go-kure/launcher#941): before, the transform shortened a default
-over 63 characters by launcher&rsquo;s rule and <code>AugmentLayout</code> set it on the layout, so such a
-layout&rsquo;s Kustomization name changes. The <code>layoutKustomizationName</code> property, or the
-<code>Naming</code> hook&rsquo;s answer for the <code>layout</code> role, sets another name, a DNS-1123 subdomain of at
-most 63 characters used as written and never shortened; any other fails the transform,
-naming the component and the role. A name set on the layout needs per-layout placement:
-under any other the layout gets no Kustomization of its own, and kure&rsquo;s Flux integration
-refuses the name, naming the layout (go-kure/kure#1032). A
-<code>HelmTemplateConfig</code> built directly sets <code>LayoutKustomizationName</code>; <code>AugmentLayout</code> never
-overwrites a <code>KustomizationName</code> the layout already carries. <code>GenerateCoversAugmentLayout</code> is always true —
-<code>Generate</code>&rsquo;s output is already the flat union <code>AugmentLayout</code> repartitions — so <code>kurel build</code>,
-which never walks a layout, accepts the component and emits <code>Generate</code>&rsquo;s flat output.</p></li><li><p><strong>oci</strong> — <code>source.url</code> (<code>oci://…</code>), <code>source.name</code> (a name for the generated
-OCIRepository, see below), <code>source.objectName</code> (a name for the OCIRepository
-the component keeps to itself, see below), <code>kustomizationName</code> (a name for
-the Kustomization, see below), the source&rsquo;s registry access
-<code>source.secretRef</code>, <code>source.provider</code>, <code>source.insecure</code>,
-<code>source.certSecretRef</code>, <code>source.proxySecretRef</code> (go-kure/launcher#999) and
-<code>source.serviceAccountName</code> (go-kure/launcher#1009),
-<code>version</code> (tag or <code>sha256:…</code>), <code>path</code>, <code>prune</code>, <code>interval</code>,
-<code>targetNamespace</code>, <code>wait</code>, <code>healthChecks</code>.</p><p><strong>Lowering (go-kure/launcher#784).</strong> <code>oci</code> is a role-named component: <code>OCIRule</code>
-lowers it to the two kind-named terminals it stands for, an <code>ocirepository</code>
-(<code>url</code>, <code>ref.tag</code> from <code>version</code>, or <code>ref.digest</code> for a <code>sha256:</code> value, the
-authored <code>interval</code>, and each registry access key that is set, as written)
-and a <code>fluxcd-kustomization</code> (<code>path</code>, <code>prune</code>,
-<code>sourceRef</code>, and <code>interval</code>, <code>targetNamespace</code>, <code>wait</code> and <code>healthChecks</code>
-when set). No handler is registered for <code>oci</code>. The rule runs the checks
-below first, with their <code>oci:</code> messages; everything past them is the
-terminals&rsquo; own.
-Each Secret reference of the registry access names a Secret in the
-namespace the OCIRepository lands in, the Flux namespace when one is set,
-as on <code>ocirepository</code>; <code>source.serviceAccountName</code> names a ServiceAccount
-in that namespace. A Secret-making trait (<code>secret</code>,
-<code>external-secret</code>, <code>certificate</code>) goes to the Kustomization, not the source.
-The Secret it makes moves to the Flux namespace when the source reads it,
-whichever form the source takes: the source the component keeps to itself,
-as the two land there together (go-kure/launcher#1012), or one generated on
-its own, which several components share or <code>source.name</code> names, and which
-every consumer is ordered after (go-kure/launcher#1016). A workload that
-needs the Secret in the application namespace gets a second Secret of its
-own; or provide the Secret in the Flux namespace. One consumer making it is
-enough; two consumers making the same Secret collide. A consumer that
-makes it in a later group than another consumer of the same source (a
-<code>dependency</code> policy orders it after that one) is admitted under the
-default delivery, which converges. Under
-<code>TransformContext.GroupsWaitForFluxObjects</code>, a delivery that makes a group
-Ready only once its Flux objects are, it never would: the earlier
-consumer waits for the source, the source for the Secret, and the
-Secret&rsquo;s group for the earlier one. The transform then refuses it
-(go-kure/launcher#1039): put the trait on a consumer in the earliest
-group, or provide the Secret apart from the document. The same holds for
-any Flux object that requires a ConfigMap or Secret a trait makes in a
-later group, whichever component carries the trait (go-kure/launcher#1079;
-see each kind&rsquo;s <em>Required reads</em>), and for one a component of a later
-group makes: a <code>secret</code> or <code>configmap</code> component, a <code>certificate</code>&rsquo;s
-<code>secretName</code>, an <code>externalsecret</code>&rsquo;s target, where it lands with the
-source (go-kure/launcher#1086): place the component in the group of the
-earliest consumer or an earlier one. An
-<code>external-secret</code> under <code>target.creationPolicy: Merge</code> or <code>None</code> makes no
-Secret and is admitted; so is a <code>verify.trustedRootSecretRef</code> under a
-provider other than <code>cosign</code>, which source-controller does not read.</p><ul><li><p><em>A component alone on its artifact</em> lowers to a same-name group: both
-objects are named after the component (unless <code>kustomizationName</code> or
+(<code>CheckHookGroupNames</code>); <code>AugmentLayout</code> returns the same error for a config
+built directly or a prefix set after the transform. Known limit: the transform
+holds the prefixes apart, not the names built from them after the render, so two
+different prefixes can still give one Kustomization name (a written prefix that
+equals kure&rsquo;s name for another component&rsquo;s default child, less its suffix; a
+prefix that ends as another chart&rsquo;s phase begins). kure refuses that name, used
+twice, when the walked tree is integrated; another <code>hookGroupNamePrefix</code> on one
+of the components is the way out
+(<code>site/content/api-reference/oam/names-and-overrides.md</code>, &ldquo;Name roles and the
+<code>Naming</code> hook&rdquo;). A <code>HelmTemplateConfig</code> built directly sets
+<code>HookGroupNamePrefix</code>. The component&rsquo;s own layout, the parent of the hook-group
+children, also gets a Flux Kustomization under <code>FluxIntegratedPerLayout</code>, which
+kure names <code>&lt;bundle>-&lt;component></code> and shortens past 63 characters by its own
+rule; launcher leaves that default to kure. <strong>Breaking output change</strong>: before,
+the transform shortened a default over 63 characters by launcher&rsquo;s rule and
+<code>AugmentLayout</code> set it on the layout, so such a layout&rsquo;s Kustomization name
+changes. The <code>layoutKustomizationName</code> property, or the <code>Naming</code> hook&rsquo;s answer
+for the <code>layout</code> role, sets another name, a DNS-1123 subdomain of at most 63
+characters used as written and never shortened; any other fails the transform,
+naming the component and the role. A name set on the layout needs per-layout
+placement: under any other the layout gets no Kustomization of its own, and
+kure&rsquo;s Flux integration refuses the name, naming the layout. A
+<code>HelmTemplateConfig</code> built directly sets <code>LayoutKustomizationName</code>;
+<code>AugmentLayout</code> never overwrites a <code>KustomizationName</code> the layout already
+carries. <code>GenerateCoversAugmentLayout</code> is always true — <code>Generate</code>&rsquo;s output is
+already the flat union <code>AugmentLayout</code> repartitions — so <code>kurel build</code>, which
+never walks a layout, accepts the component and emits <code>Generate</code>&rsquo;s flat output.</p><h3 id=validation-3>Validation<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><strong>Refused outright.</strong> <code>targetNamespace</code>, every property only a Flux-reconciled
+release reads (<code>interval</code>, <code>driftDetection</code>, <code>install</code>, <code>upgrade</code>, <code>valuesFrom</code>,
+<code>valuesMode</code>), the <code>helm</code> rule&rsquo;s <code>delivery</code> switch, and a source reference
+(<code>source.name</code>, <code>source.namespace</code>) are undeclared keys: schema validation
+refuses each, and so does the strict decode. An <code>OCIRepository</code> source without
+<code>version</code> is refused by the handler. The key itself is what is refused, whatever
+it holds. The render&rsquo;s <code>.Release.Namespace</code> is the application namespace; the
+terminal declares no <code>targetNamespace</code>, so it cannot be set.</p><p><strong>Breaking</strong> (with the kure version that reads a list in one place), for
+template delivery, <code>manifests</code> and <code>crd</code> alike. Built before, refused now:</p><table><thead><tr><th>Document</th><th>Before</th><th>Now</th></tr></thead><tbody><tr><td>A list (a <code>v1</code> <code>List</code>, a typed list, a list of an unregistered kind) with a label or an annotation on its own metadata</td><td>Built: the items emitted, the list&rsquo;s metadata dropped. Template delivery refused only <code>helm.sh/hook</code> there, and still does, with its own text</td><td><code>List has metadata of its own that its items cannot keep: annotations …; labels …</code></td></tr><tr><td><code>Kind</code> or <code>apiversion</code> beside the exact key, on a document or on an item of a list</td><td>Built, with two exceptions: emitted as written, the extra key kept. A workload or a claim was refused already, by <em>Undeclared fields</em> (<code>undeclared field Kind</code>), and so was an item of a typed list whose <code>Kind</code> or <code>apiversion</code> states another value than the list holds, by the parser (<code>the item states …, the list holds …</code>). Both are refused now with the other text</td><td><code>the key "Kind" equals "kind" only after case folding; write it "kind" or remove it</code></td></tr><tr><td><code>Items</code> on a <code>v1</code> <code>List</code></td><td>Decoded, to no object at all: a chart or a source with other objects built. A <code>manifests</code> or <code>crd</code> source that held nothing else was refused already (<code>source resolved to no manifests</code>)</td><td>The same text, for <code>"Items"</code></td></tr><tr><td><code>Items</code> on a list of an unregistered kind</td><td>Built: the list emitted as one object</td><td>The same text</td></tr><tr><td>A <code>null</code> item in a list of an unregistered kind</td><td>Built: an otherwise empty object emitted, with the list&rsquo;s <code>apiVersion</code> and its kind without <code>List</code></td><td><code>item 0 of WidgetList: the item is null, not an object</code></td></tr><tr><td>An item of a registered kind, in a list of an unregistered kind, that does not decode as its type (<code>data: 1</code> on a ConfigMap)</td><td>Built: the item emitted as written. A workload, a claim or a PersistentVolume there did not build: the policy check refused it as unreadable, and it is refused now for the decode</td><td>The item&rsquo;s decode error, naming its position</td></tr><tr><td>In a JSON document, an item of a registered kind, in a list of an unregistered kind, that states <code>apiVersion</code> or <code>kind</code> and then <code>null</code> for it, where the stated value is not the one its list gives it</td><td>Built: the item emitted as written. A workload, a claim or a PersistentVolume there did not build: the policy check refused it as unreadable</td><td><code>item 0 of FooList: Deployment "web": the object was read as apps/v1 Deployment, and the decode that checks its fields reads the document as example.com/v1 Deployment, so its fields cannot be checked; …</code> (<em>Undeclared fields</em>, below)</td></tr><tr><td>An object of an unregistered kind that does not end in <code>List</code>, with a top-level <code>items</code> array</td><td>Built: the entries emitted in its place, each unstructured</td><td><code>… an </code>items<code> array on an object of a kind that is no list (example.com/v1 Widget) is read as a list by what applies the output …</code></td></tr></tbody></table><p>Not refusals, and a change of output all the same: an item of a registered kind
+in a list of an unregistered kind is read as its Go type, as in a <code>v1</code> <code>List</code>,
+where it was emitted as written. It is emitted from that type, <em>Undeclared
+fields</em> applies to it, and the policy check reads it: a workload, a claim or a
+PersistentVolume there was refused as unreadable and is now checked, and builds
+when the policy allows it. A list inside such a list was left whole, and refused
+by the policy check; it is opened in turn.</p><p>Texts that changed: a <code>null</code> item of a <code>v1</code> <code>List</code> was <code>nil runtime object provided</code> and is <code>the item is null, not an object</code>; <code>… is nested more than 8 lists deep</code> now holds for a list of an unregistered kind too; the policy check&rsquo;s
+refusal of an object with a top-level <code>items</code> array no longer says the object
+<code>sits inside a list of an unregistered kind</code>, and no decode returns such an
+object any more (<em>Limits</em>, below).</p><p><strong>Policy.</strong> <code>ApplyPolicy</code> holds the chart to the environment policy in two
+steps; the transform calls it with <code>NoopPolicy</code> when no policy is passed.</p><ul><li><em>The source, before any fetch.</em> The host of <code>source.url</code> must match an entry
+of the policy&rsquo;s allowed registries (<code>AllowedRegistries</code>) exactly, as for
+<code>oci</code>, <code>crd</code> and <code>manifests</code>; for an <code>oci://</code> URL that is its first segment,
+which is what the Helm registry client pulls from. A refused source fails
+before any request is made: only an allowed source is rendered. No allowlist,
+or an empty one, permits every host.</li><li><em>Every emitted workload.</em> The chart is then rendered — in the transform, so a
+fetch or render failure is reported there, as that component&rsquo;s policy error —
+and each Pod, PodTemplate, ReplicationController, Deployment, StatefulSet,
+DaemonSet, ReplicaSet, Job and CronJob in it, a kept hook&rsquo;s included, is
+checked as an authored workload is: host namespaces, hostPath volumes, the
+cpu/memory maxima, the storage maximum on a generic ephemeral volume&rsquo;s claim,
+the registry allowlist on an image volume&rsquo;s reference (<strong>breaking</strong>,
+go-kure/launcher#790: a chart that renders one from a registry outside the
+list built before; see <em>Image volumes</em> under <strong>pod</strong>), and for every init and
+regular container the registry allowlist, the privileged, HostProcess and
+capability gates, and <code>ValidateImageRef</code> (no untagged image, no <code>:latest</code>),
+which holds the reference of an image volume too (<strong>breaking</strong>,
+go-kure/launcher#790: a chart that renders an untagged or <code>:latest</code> one built
+before). Ephemeral containers are refused. The storage a
+PersistentVolumeClaim, or a StatefulSet&rsquo;s claim template, requests is held to
+the storage maximum (<code>MaxStorageSize</code>), as the <code>persistentvolumeclaim</code> and
+<code>statefulset</code> kinds hold theirs. The replica count of a Deployment,
+StatefulSet, ReplicaSet or ReplicationController (one when the chart sets
+none) and the <code>maxReplicas</code> of a HorizontalPodAutoscaler, in any API version,
+are held to the replica maximum (<code>MaxReplicas</code>), as the <code>deployment</code> and
+<code>statefulset</code> kinds and the <code>scaler</code> trait hold theirs. A PersistentVolume is
+held to what the <code>persistentvolume</code> kind holds its own to: a <code>hostPath</code> or
+<code>local</code> source needs <code>AllowHostPathVolumes()</code>, and <code>spec.capacity.storage</code> is
+held to the storage maximum (breaking for a chart that renders one; see
+<strong>persistentvolume</strong>). The error names the rendered object and the field
+(<code>helmtemplate: rendered Deployment "demo/web": spec.template.spec.containers[0] "app": …</code>).</li></ul><p><strong>Behaviour change:</strong> a chart that renders a privileged container, a host
+namespace or a hostPath volume no longer builds unless the policy allows it —
+and with no policy passed nothing allows it, since <code>NoopPolicy</code> denies all five.
+The policy accessors that allow such a chart are <code>AllowPrivileged()</code>,
+<code>AllowHostNetwork()</code>, <code>AllowHostPID()</code>, <code>AllowHostIPC()</code> and
+<code>AllowHostPathVolumes()</code>; there is no per-chart exemption. A chart image without
+a tag, or tagged <code>:latest</code>, has to be pinned through the chart&rsquo;s values.</p><p><strong>Undeclared fields</strong>. Kure&rsquo;s parser decodes a registered kind leniently: a
+field the vendored API type does not declare — one a newer Kubernetes version
+added, say — is dropped, with no error. The policy check reads that type, so it
+would pass a workload whose undeclared pod spec field it never saw, and the
+object would be written without the field. Template delivery, <code>manifests</code>, <code>crd</code>
+and <code>passthrough</code> therefore decode each document of a registered kind once more,
+strictly, over the same scheme, and act on what that reports:</p><ul><li><em>A workload or a claim</em> — the kinds the policy check reads as Go types: Pod,
+PodTemplate, ReplicationController, Deployment, StatefulSet, DaemonSet,
+ReplicaSet, Job, CronJob, PersistentVolumeClaim and PersistentVolume, which &ldquo;a
+workload or a claim&rdquo; stands for wherever this rule is cited — that sets an
+undeclared field is refused, under any policy and with none. A kind the check
+comes to read as its Go type joins them. The error names the object and the
+path of every such field (<code>decoding rendered manifests: Deployment "demo/web": undeclared field spec.template.spec.fieldOfALaterVersion: the apps/v1 Deployment type this build reads the object with does not declare it, so the object cannot be checked against environment policy</code>).</li><li><em>Any other registered kind</em> is emitted as the document was rendered,
+unstructured, the field kept. A HorizontalPodAutoscaler is one of these: the
+check reads its <code>maxReplicas</code> from the unstructured object as it does from the
+Go type. One shape is refused: a top-level <code>items</code> array on a kind that
+declares none, since written out the object is a list to whatever applies it,
+and its items would be applied in its place.</li></ul><p>A list (a <code>v1</code> <code>List</code>, a typed list, a list of an unregistered kind) is replaced
+by its items, so the rule is each item&rsquo;s: an item is refused or kept as a
+document of its own is, the error naming its position (<code>decoding rendered manifests: item 1 of List: Deployment "demo/web": undeclared field …</code>; <code>item 0 of WidgetList: item 0 of List: …</code> for a list in a list). A kept item that left
+<code>apiVersion</code> and <code>kind</code> out is written with the ones its list gives it: the kind
+a typed list holds, and for a list of an unregistered kind the list&rsquo;s
+<code>apiVersion</code> and its kind without <code>List</code>. The list&rsquo;s other fields are not read:
+the list is never emitted. A document whose items cannot be matched to the
+objects the parser made of them is refused, not passed with an item unread.</p><p>A key written twice is not an undeclared field and is read as before (the last
+value stands). One case of it is refused, whatever the kind: a JSON document
+that writes so many keys twice that the strict decode&rsquo;s record of errors, which
+holds a hundred, is full without naming an undeclared field. Whether such a
+document also sets one cannot be told. (A document whose undeclared field is
+recorded before the record fills is treated as any other: refused as a workload
+or a claim, kept as another kind.)</p><p>Another is an item of a list of an unregistered kind, in a JSON document, that
+states <code>apiVersion</code> or <code>kind</code> and then <code>null</code> for it. The parser reads the last
+statement, takes the <code>null</code> for the key left out and gives the item its list&rsquo;s;
+the strict decode keeps the string the <code>null</code> follows. Where that string is what
+the list gives too, the two agree and nothing changes. Where it is not, the
+strict decode checks the fields of another kind than the one emitted, and an
+item the parser made a Go type of is refused, with or without an undeclared
+field (<code>item 0 of FooList: Deployment "web": the object was read as apps/v1 Deployment, and the decode that checks its fields reads the document as example.com/v1 Deployment, so its fields cannot be checked; a second apiVersion or kind that is null is the known cause, state each once</code>). The parser refuses
+the same in an item of a typed list itself. An item the parser leaves untyped,
+its kind not registered at the list&rsquo;s <code>apiVersion</code>, is emitted as the parser
+read it and is not checked as the kind the strict decode would read: nothing of
+an unstructured object is dropped.</p><p>Whether a cluster accepts a kept field its own version does not know is not
+verified here; the object reaches it as the chart wrote it.</p><p><strong>Breaking</strong>, in two ways. A chart that renders a workload or a claim with an
+undeclared field built before, the field dropped from the output, and no longer
+builds: the field has to go, or wait for a launcher whose pinned API types
+declare it. And the output of every other registered kind gains the fields the
+typed decode had dropped since go-kure/launcher#791; such an object is written
+from the document and not from its Go type, so the rest of it is as the chart
+wrote it too.</p><p>Known limit: a type that unmarshals itself decodes its own keys, so an
+undeclared key inside one is not reported and is still dropped. A
+CustomResourceDefinition&rsquo;s <code>items</code> schema is such a type: the same kind of type
+as a <code>CiliumNetworkPolicy</code>&rsquo;s endpoint selector, which the kind inventory records
+and an authored Cilium policy checks on its own. A key next to <code>properties</code> in
+the same schema is reported and kept. No type under a workload or a claim does
+this beyond scalar leaves (<code>Quantity</code>, <code>IntOrString</code>, <code>Time</code>) and the raw field
+set of <code>managedFields</code>; a test walks those types and fails when one starts to.</p><p>Limits. The items of a list, whatever its kind, are checked as documents of
+their own are, a list among them opened in turn. A workload, claim or
+PersistentVolume in an API version kure&rsquo;s scheme does not register
+(<code>batch/v1beta1</code>, <code>apps/v1beta2</code>) cannot be read and is refused rather than
+passed unchecked, inside a list as outside one. The decode returns no object
+with a top-level <code>items</code> array (<em>Rendered objects</em>, above), so the check meets
+none; one that reaches it another way is refused as unreadable. Not checked: an
+object of a dropped hook (never emitted); the pods a custom resource&rsquo;s
+controller creates, and the replica count a custom resource sets; the host of
+the chart archive a Helm repository&rsquo;s index points at, and any redirect, which
+kure&rsquo;s renderer follows. That one is a decided limit: the allowlist is checked
+on the chart&rsquo;s source URL before anything is fetched, and holding every later
+request to it needs a hook in kure&rsquo;s chart renderer, which takes a release name
+and a namespace and nothing about its requests (<code>helm.RenderChart</code>). A nil
+policy (a direct <code>ApplyPolicy(nil)</code>, or <code>Generate</code> on a config no policy was
+applied to) checks nothing, and <code>ApplyPolicy(nil)</code> withdraws no policy applied
+before. A chart delivered as a Flux <code>HelmRelease</code> (<code>helmrelease</code>, <code>helm</code> under
+<code>delivery: flux</code>) is rendered on the cluster, so nothing it renders can be
+checked at build time; only the host of a source component in the document is.</p><h3 id=example-3>Example<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>No example yet.</p><h2 id=oci>oci<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p><code>oci</code> is a role-named component: <code>OCIRule</code> lowers it to the two kind-named
+terminals it stands for, an <code>ocirepository</code> (<code>url</code>, <code>ref.tag</code> from <code>version</code>, or
+<code>ref.digest</code> for a <code>sha256:</code> value, the authored <code>interval</code>, and each registry
+access key that is set, as written) and a <code>fluxcd-kustomization</code> (<code>path</code>,
+<code>prune</code>, <code>sourceRef</code>, and <code>interval</code>, <code>targetNamespace</code>, <code>wait</code> and
+<code>healthChecks</code> when set). No handler is registered for <code>oci</code>. The rule runs the
+checks below first, with their <code>oci:</code> messages; everything past them is the
+terminals&rsquo; own.</p><h3 id=properties-4>Properties<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><code>source.url</code> (<code>oci://…</code>), <code>source.name</code> (a name for the generated OCIRepository,
+see below), <code>source.objectName</code> (a name for the OCIRepository the component
+keeps to itself, see below), <code>kustomizationName</code> (a name for the Kustomization,
+see below), the source&rsquo;s registry access <code>source.secretRef</code>, <code>source.provider</code>,
+<code>source.insecure</code>, <code>source.certSecretRef</code>, <code>source.proxySecretRef</code> and
+<code>source.serviceAccountName</code>, <code>version</code> (tag or <code>sha256:…</code>), <code>path</code>, <code>prune</code>,
+<code>interval</code>, <code>targetNamespace</code>, <code>wait</code>, <code>healthChecks</code>.</p><p><code>wait</code> and <code>healthChecks</code> are opt-in readiness settings for the delivery
+Kustomization. A document in which neither requests anything — <code>wait</code> absent or
+<code>false</code>, and <code>healthChecks</code> absent, null or empty — builds the same
+Kustomization byte for byte, and the default stays unset. <code>wait: true</code> sets
+<code>spec.wait</code>, so Flux reports the Kustomization ready only once everything it
+applied is ready; <code>false</code>, like an omitted key, emits nothing. <code>healthChecks</code> is
+a list of <code>{apiVersion, kind, name, namespace}</code> entries copied, in authored
+order, into <code>spec.healthChecks</code>. The component delivers an opaque artifact, so
+the list is authored, never derived. <code>apiVersion</code> (<code>apps/v1</code>, or <code>v1</code> for a core
+kind), <code>kind</code> and <code>name</code> are required non-empty strings, and <code>namespace</code> is
+optional, left out for a cluster-scoped kind. Any other key in an entry is
+refused by name, a wrongly typed field is a type error (<code>healthChecks[0].name: must be a string, got int</code>), and an empty or null list emits nothing. <code>wait: true</code> together with a non-empty <code>healthChecks</code> is refused: kustomize-controller
+ignores <code>healthChecks</code> when <code>wait</code> is true, so the list would never be checked.
+There is no <code>timeout</code> property; Flux&rsquo;s own default applies.</p><h3 id=outputs-4>Outputs<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Each Secret reference of the registry access names a Secret in the namespace the
+OCIRepository lands in, the Flux namespace when one is set, as on
+<code>ocirepository</code>; <code>source.serviceAccountName</code> names a ServiceAccount in that
+namespace. A Secret-making trait (<code>secret</code>, <code>external-secret</code>, <code>certificate</code>)
+goes to the Kustomization, not the source. The Secret it makes moves to the Flux
+namespace when the source reads it, whichever form the source takes: the source
+the component keeps to itself, as the two land there together, or one generated
+on its own, which several components share or <code>source.name</code> names, and which
+every consumer is ordered after. A workload that needs the Secret in the
+application namespace gets a second Secret of its own; or provide the Secret in
+the Flux namespace. One consumer making it is enough; two consumers making the
+same Secret collide. A consumer that makes it in a later group than another
+consumer of the same source (a <code>dependency</code> policy orders it after that one) is
+admitted under the default delivery, which converges. Under
+<code>TransformContext.GroupsWaitForFluxObjects</code>, a delivery that makes a group Ready
+only once its Flux objects are, it never would: the earlier consumer waits for
+the source, the source for the Secret, and the Secret&rsquo;s group for the earlier
+one. The transform then refuses it: put the trait on a consumer in the earliest
+group, or provide the Secret apart from the document. The same holds for any
+Flux object that requires a ConfigMap or Secret a trait makes in a later group,
+whichever component carries the trait (see each kind&rsquo;s <em>Required reads</em>), and
+for one a component of a later group makes: a <code>secret</code> or <code>configmap</code> component,
+a <code>certificate</code>&rsquo;s <code>secretName</code>, an <code>externalsecret</code>&rsquo;s target, where it lands
+with the source: place the component in the group of the earliest consumer or an
+earlier one. An <code>external-secret</code> under <code>target.creationPolicy: Merge</code> or <code>None</code>
+makes no Secret and is admitted; so is a <code>verify.trustedRootSecretRef</code> under a
+provider other than <code>cosign</code>, which source-controller does not read.</p><ul><li><em>A component alone on its artifact</em> lowers to a same-name group: both objects
+are named after the component (unless <code>kustomizationName</code> or
 <code>source.objectName</code> names them, below) and deploy as one unit, the
 OCIRepository first. This is the pair of objects <code>oci</code> has always emitted,
 byte for byte. Annotations go to both members, so a tier annotation, a
 <code>placement</code> policy or a <code>dependency</code> rule naming the component acts on the
-pair. <code>prune-protection</code> and <code>force-replace</code> cover both objects (the
-pair&rsquo;s application takes the delivery intent); every other trait goes to
-the Kustomization.</p></li><li><p><em>Two or more <code>oci</code> components of one document on the same source</em> share
-it. The source then belongs to the document, not to the component that
-comes first: it is emitted once, named <code>&lt;document>-source-&lt;digest></code> (the
-10-hex digest of the source identity, through
-<code>LoweringContext.ResolveSharedName</code>, which shortens a default over 253
-characters by the one rule), and each component lowers to its Kustomization alone,
-referencing it and ordered after it (<code>Component.OrderAfter</code>). Like a
-source <code>helm</code> generates, it is then a generated source: <code>pkg/oam</code> applies
-it with the application bundle, ahead of every group, wherever its
-consumers are placed. It carries no trait and no annotation of any
-consumer, and may not be placed in a tier or made to wait on a component.
-The consumer&rsquo;s <code>Naming</code> hook may rename it: it is asked under role
-<code>helm-source</code>, once for each source identity of a document, with that
-default and no component (go-kure/launcher#787).</p></li><li><p><em><code>source.name</code> names the source</em> (go-kure/launcher#787), and makes it the
-shared form whatever the number of consumers: the OCIRepository is emitted
-once under that name, applied with the application bundle ahead of every
-group, and the component lowers to its Kustomization alone. <strong>A source
-named this way carries no annotations and no traits of the component</strong>, not
-even for a component alone on its artifact: <code>prune-protection</code> and
-<code>force-replace</code> then cover the Kustomization only, and a tier annotation
-places only the Kustomization. The name is the component&rsquo;s own choice.
-Components that write the same name for the same identity share the source;
-a component that writes none does not share it and is not counted among
-its consumers, so it keeps its own source, or shares the document&rsquo;s with
-the other components that name none. A name equal to that shared source&rsquo;s
-own names that source: one name for one identity is one source. The name
-is used as written: it must
-be a DNS-1123 subdomain of at most 253 characters, and cannot be the
-component&rsquo;s own name or that of another component of the document (<code>oci: source.name "base" is the component's own name; the generated source is a component of the document too, so give it another name</code>). One name for two
-identities is refused as a collision. <code>source.name: ""</code> reads as absent.</p></li><li><p><em><code>kustomizationName</code> and <code>source.objectName</code> name the two objects that
-carry the component&rsquo;s name</em> (go-kure/launcher#787): the Kustomization, in
-both forms, and the source a component keeps to itself. Each is the
-author&rsquo;s property, else the consumer&rsquo;s <code>Naming</code> hook&rsquo;s answer (roles
-<code>oci-kustomization</code> and <code>oci-source</code>, asked with the component), else the
-component name, so a document that sets neither and a hook that declines
-give the same output as before. A name that is not the default is used as
-written: a DNS-1123 subdomain of at most 253 characters, refused otherwise
-and never shortened. It names the object alone. Both members keep the
-component&rsquo;s name, so the pair stays one unit: a tier annotation, a
-<code>placement</code> policy or a <code>dependency</code> rule naming the component still acts
-on both, and the traits go where they went. The Kustomization&rsquo;s <code>sourceRef</code>
-names the kept source by the name that object takes. Every one of these
-names is claimed, the default included, so an authored <code>ocirepository</code> or
+pair. <code>prune-protection</code> and <code>force-replace</code> cover both objects (the pair&rsquo;s
+application takes the delivery intent); every other trait goes to the
+Kustomization.</li><li><em>Two or more <code>oci</code> components of one document on the same source</em> share it.
+The source then belongs to the document, not to the component that comes
+first: it is emitted once, named <code>&lt;document>-source-&lt;digest></code> (the 10-hex
+digest of the source identity, through <code>LoweringContext.ResolveSharedName</code>,
+which shortens a default over 253 characters by the one rule), and each
+component lowers to its Kustomization alone, referencing it and ordered after
+it (<code>Component.OrderAfter</code>). Like a source <code>helm</code> generates, it is then a
+generated source: <code>pkg/oam</code> applies it with the application bundle, ahead of
+every group, wherever its consumers are placed. It carries no trait and no
+annotation of any consumer, and may not be placed in a tier or made to wait on
+a component. The consumer&rsquo;s <code>Naming</code> hook may rename it: it is asked under
+role <code>helm-source</code>, once for each source identity of a document, with that
+default and no component.</li><li><em><code>source.name</code> names the source</em>, and makes it the shared form whatever the
+number of consumers: the OCIRepository is emitted once under that name,
+applied with the application bundle ahead of every group, and the component
+lowers to its Kustomization alone. <strong>A source named this way carries no
+annotations and no traits of the component</strong>, not even for a component alone
+on its artifact: <code>prune-protection</code> and <code>force-replace</code> then cover the
+Kustomization only, and a tier annotation places only the Kustomization. The
+name is the component&rsquo;s own choice. Components that write the same name for
+the same identity share the source; a component that writes none does not
+share it and is not counted among its consumers, so it keeps its own source,
+or shares the document&rsquo;s with the other components that name none. A name
+equal to that shared source&rsquo;s own names that source: one name for one identity
+is one source. The name is used as written: it must be a DNS-1123 subdomain of
+at most 253 characters, and cannot be the component&rsquo;s own name or that of
+another component of the document (<code>oci: source.name "base" is the component's own name; the generated source is a component of the document too, so give it another name</code>). One name for two identities is refused as a collision.
+<code>source.name: ""</code> reads as absent.</li><li><em><code>kustomizationName</code> and <code>source.objectName</code> name the two objects that carry
+the component&rsquo;s name</em>: the Kustomization, in both forms, and the source a
+component keeps to itself. Each is the author&rsquo;s property, else the consumer&rsquo;s
+<code>Naming</code> hook&rsquo;s answer (roles <code>oci-kustomization</code> and <code>oci-source</code>, asked with
+the component), else the component name, so a document that sets neither and a
+hook that declines give the same output as before. A name that is not the
+default is used as written: a DNS-1123 subdomain of at most 253 characters,
+refused otherwise and never shortened. It names the object alone. Both members
+keep the component&rsquo;s name, so the pair stays one unit: a tier annotation, a
+<code>placement</code> policy or a <code>dependency</code> rule naming the component still acts on
+both, and the traits go where they went. The Kustomization&rsquo;s <code>sourceRef</code> names
+the kept source by the name that object takes. Every one of these names is
+claimed, the default included, so an authored <code>ocirepository</code> or
 <code>fluxcd-kustomization</code> component whose <code>objectName</code> is the same name is
-refused in the transform with both named:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><pre tabindex=0><code>name collision: OCIRepository.source.toolkit.fluxcd.io &#34;default/manifests&#34; is named by component &#34;manifests&#34; (role &#34;oci-source&#34;, its default) and by component &#34;repo&#34; (role &#34;object&#34;, set by properties.objectName); give one of them another name</code></pre></div><p><code>source.objectName</code> and <code>source.name</code> both name the OCIRepository, in two
-ways, and are refused together. Write <code>source.objectName</code> to rename the
-source the component keeps to itself: it stays with the Kustomization and
-carries the component&rsquo;s annotations and its <code>prune-protection</code> and
-<code>force-replace</code> traits. Write <code>source.name</code> for a source generated on its
-own, which components that write the same name share. A component that
-writes <code>source.objectName</code> keeps its own source whatever other component
-has the same identity, and is not counted among the consumers of a shared
-one.</p></li><li><p><em>The source identity</em> is the <code>url</code>, the <code>version</code>, the effective
-<code>interval</code> and the registry access. Unset, <code>0s</code>, <code>60m</code> and <code>1h</code> are one
-interval. Components whose intervals differ do not share: each keeps a
-source of its own, polling at its own interval, as a component alone on
-its artifact does. Nor do components whose access differs in any key, so
-no component pulls with another&rsquo;s credentials, provider, ServiceAccount
-or TLS settings; one <code>source.name</code> written with two accesses is refused
-as one name for two identities. An unset key (a <code>null</code> reference, an
-empty <code>provider</code> or <code>serviceAccountName</code>, <code>insecure: false</code>) is no access and leaves the identity, and a shared
-source&rsquo;s name, as they were before these keys; an authored <code>{}</code>
+refused in the transform with both named:</li></ul><div class="highlight actionbar-wrapper wrap-code" dir=auto><pre tabindex=0><code>name collision: OCIRepository.source.toolkit.fluxcd.io &#34;default/manifests&#34; is named by component &#34;manifests&#34; (role &#34;oci-source&#34;, its default) and by component &#34;repo&#34; (role &#34;object&#34;, set by properties.objectName); give one of them another name</code></pre></div><p><code>source.objectName</code> and <code>source.name</code> both name the OCIRepository, in two ways,
+and are refused together. Write <code>source.objectName</code> to rename the source the
+component keeps to itself: it stays with the Kustomization and carries the
+component&rsquo;s annotations and its <code>prune-protection</code> and <code>force-replace</code> traits.
+Write <code>source.name</code> for a source generated on its own, which components that
+write the same name share. A component that writes <code>source.objectName</code> keeps its
+own source whatever other component has the same identity, and is not counted
+among the consumers of a shared one.</p><ul><li><em>The source identity</em> is the <code>url</code>, the <code>version</code>, the effective <code>interval</code>
+and the registry access. Unset, <code>0s</code>, <code>60m</code> and <code>1h</code> are one interval.
+Components whose intervals differ do not share: each keeps a source of its
+own, polling at its own interval, as a component alone on its artifact does.
+Nor do components whose access differs in any key, so no component pulls with
+another&rsquo;s credentials, provider, ServiceAccount or TLS settings; one
+<code>source.name</code> written with two accesses is refused as one name for two
+identities. An unset key (a <code>null</code> reference, an empty <code>provider</code> or
+<code>serviceAccountName</code>, <code>insecure: false</code>) is no access and leaves the identity,
+and a shared source&rsquo;s name, as they were before these keys; an authored <code>{}</code>
 reference is access of its own, and <code>provider: generic</code> differs from no
-provider.
-An <code>oci</code> and a <code>helm</code> component on one artifact never share either: the
-identities differ, and a Helm source copies the chart layer instead of
-extracting it.</p></li></ul><p><strong>Output changes.</strong> For a document in which several <code>oci</code> components
-reconcile one artifact, the OCIRepository is renamed from the name of the
-component deployed first to <code>&lt;document>-source-&lt;digest></code>. It is applied
-with the application bundle, ahead of every group, instead of with that
-component, so the application has an ordered group even when the document
-declares no order. That component&rsquo;s <code>prune-protection</code> or <code>force-replace</code>
-no longer covers it. The rename also happens when a second consumer
-is added to a document that had one, and is undone when it is removed.
-Components that shared one source while their intervals differed now emit
-one source each. <code>interval: 0s</code> now emits the 60m default on both objects,
-since both terminals read a zero interval as unset; it used to be emitted
-as <code>0s</code>. Nothing else changes.</p><p>Sharing is decided among the <code>oci</code> components the document holds when the
-rule runs: an <code>oci</code> component a third-party rule emits in a later lowering
-round is not counted as a consumer of a source lowered before it.</p><p><strong>Messages.</strong> The checks the rule runs keep their <code>oci:</code> text. A lowering
-refusal is reported with the component and its document
-(<code>component "x" (type "oci") in document …: oci: version is required …</code>).
-The registry allowlist is the <code>ocirepository</code> terminal&rsquo;s check, so its
-refusals name that kind and its field (<code>ocirepository: url: …</code>) rather
-than <code>oci: source.url</code>.</p><p><code>targetNamespace</code> has no default (go-kure/launcher#622). Unset, the
-Kustomization emits no <code>spec.targetNamespace</code> and each object keeps the
-namespace the artifact&rsquo;s own kustomize build gives it: the one it carries,
-or a <code>namespace</code> set in the artifact&rsquo;s <code>kustomization.yaml</code>.
-kustomize-controller does not fill in its own namespace for an object that
-still has none. Author <code>targetNamespace</code> when namespaced objects are left
-without a namespace after that build: they otherwise fail at apply with
-<code>namespace not specified</code>, with or without a Flux namespace. This deliberately differs from <code>helmrelease</code>, which under a Flux namespace defaults
-<code>targetNamespace</code> to the application namespace. A Kustomization&rsquo;s
-<code>targetNamespace</code> sets or overrides the namespace of every namespaced object
-it applies, Flux custom resources included, so a default would move the
-objects of a deliberately multi-namespace artifact.
-<code>wait</code> and <code>healthChecks</code> are opt-in readiness settings for the delivery
-Kustomization (go-kure/launcher#432). A document in which neither requests
-anything — <code>wait</code> absent or <code>false</code>, and <code>healthChecks</code> absent, null or
-empty — builds the same Kustomization byte for byte, and the default stays
-unset.
-<code>wait: true</code> sets <code>spec.wait</code>, so Flux reports the Kustomization ready only
-once everything it applied is ready; <code>false</code>, like an omitted key, emits
-nothing. <code>healthChecks</code> is a list of <code>{apiVersion, kind, name, namespace}</code>
-entries copied, in authored order, into <code>spec.healthChecks</code>. The component
-delivers an opaque artifact, so the list is authored, never derived.
-<code>apiVersion</code> (<code>apps/v1</code>, or <code>v1</code> for a core kind), <code>kind</code> and <code>name</code> are
-required non-empty strings, and <code>namespace</code> is optional, left out for a
-cluster-scoped kind. Any other key in an entry is refused by name, a
-wrongly typed field is a type error (<code>healthChecks[0].name: must be a string, got int</code>), and an empty or null list emits nothing. <code>wait: true</code>
-together with a non-empty <code>healthChecks</code> is refused: kustomize-controller
-ignores <code>healthChecks</code> when <code>wait</code> is true, so the list would never be
-checked. There is no <code>timeout</code> property; Flux&rsquo;s own default applies.
-Under a policy with a non-empty registry allowlist (<code>AllowedRegistries</code>),
+provider. An <code>oci</code> and a <code>helm</code> component on one artifact never share either:
+the identities differ, and a Helm source copies the chart layer instead of
+extracting it.</li></ul><p><strong>Output changes.</strong> For a document in which several <code>oci</code> components reconcile
+one artifact, the OCIRepository is renamed from the name of the component
+deployed first to <code>&lt;document>-source-&lt;digest></code>. It is applied with the
+application bundle, ahead of every group, instead of with that component, so the
+application has an ordered group even when the document declares no order. That
+component&rsquo;s <code>prune-protection</code> or <code>force-replace</code> no longer covers it. The
+rename also happens when a second consumer is added to a document that had one,
+and is undone when it is removed. Components that shared one source while their
+intervals differed now emit one source each. <code>interval: 0s</code> now emits the 60m
+default on both objects, since both terminals read a zero interval as unset; it
+used to be emitted as <code>0s</code>. Nothing else changes.</p><p>Sharing is decided among the <code>oci</code> components the document holds when the rule
+runs: an <code>oci</code> component a third-party rule emits in a later lowering round is
+not counted as a consumer of a source lowered before it.</p><p><code>targetNamespace</code> has no default. Unset, the Kustomization emits no
+<code>spec.targetNamespace</code> and each object keeps the namespace the artifact&rsquo;s own
+kustomize build gives it: the one it carries, or a <code>namespace</code> set in the
+artifact&rsquo;s <code>kustomization.yaml</code>. kustomize-controller does not fill in its own
+namespace for an object that still has none. Author <code>targetNamespace</code> when
+namespaced objects are left without a namespace after that build: they otherwise
+fail at apply with <code>namespace not specified</code>, with or without a Flux namespace.
+This deliberately differs from <code>helmrelease</code>, which under a Flux namespace
+defaults <code>targetNamespace</code> to the application namespace. A Kustomization&rsquo;s
+<code>targetNamespace</code> sets or overrides the namespace of every namespaced object it
+applies, Flux custom resources included, so a default would move the objects of
+a deliberately multi-namespace artifact.</p><h3 id=validation-4>Validation<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><strong>Messages.</strong> The checks the rule runs keep their <code>oci:</code> text. A lowering
+refusal is reported with the component and its document (<code>component "x" (type "oci") in document …: oci: version is required …</code>). The registry allowlist is
+the <code>ocirepository</code> terminal&rsquo;s check, so its refusals name that kind and its
+field (<code>ocirepository: url: …</code>) rather than <code>oci: source.url</code>.</p><p>Under a policy with a non-empty registry allowlist (<code>AllowedRegistries</code>),
 <code>source.url</code> must name its registry explicitly — <code>oci://&lt;registry>/&lt;repository></code>
-with a non-empty repository and a registry that is <code>localhost</code> or contains
-<code>.</code> or <code>:</code> — and that registry must match an allowlist entry exactly
-(go-kure/launcher#580). Flux&rsquo;s source-controller parses the url with
-go-containerregistry&rsquo;s <code>name.NewRepository</code>, which reads any other first
-segment as part of a Docker Hub repository: <code>oci://ghcr.io</code> and
-<code>oci://registry/my-artifact</code> are pulled from Docker Hub, so they are refused
-even when <code>ghcr.io</code> or <code>registry</code> is listed. No policy, or an empty
-allowlist, accepts every <code>oci://</code> url this rule would refuse; a user or
-password in <code>source.url</code> is refused whatever the policy, by its
-<code>ocirepository</code> terminal (see <strong>helmrepository / ocirepository /
-gitrepository / bucket / helmchart</strong>).
-<code>interval</code> (default <code>60m</code>) must be a duration Flux accepts, checked exactly as
-for <code>helmrelease</code> (go-kure/launcher#590): see its Defaults paragraph.</p></li></ul><footer class=footline></footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/launcher/dev/index.html><span class="logo-title default-animation">Go Kure — Launcher</span>
+with a non-empty repository and a registry that is <code>localhost</code> or contains <code>.</code>
+or <code>:</code> — and that registry must match an allowlist entry exactly. Flux&rsquo;s
+source-controller parses the url with go-containerregistry&rsquo;s
+<code>name.NewRepository</code>, which reads any other first segment as part of a Docker
+Hub repository: <code>oci://ghcr.io</code> and <code>oci://registry/my-artifact</code> are pulled from
+Docker Hub, so they are refused even when <code>ghcr.io</code> or <code>registry</code> is listed. No
+policy, or an empty allowlist, accepts every <code>oci://</code> url this rule would
+refuse; a user or password in <code>source.url</code> is refused whatever the policy, by
+its <code>ocirepository</code> terminal (see <strong>helmrepository / ocirepository /
+gitrepository / bucket / helmchart</strong>).</p><p><code>interval</code> (default <code>60m</code>) must be a duration Flux accepts, checked exactly as
+for <code>helmrelease</code>: see its Defaults paragraph.</p><h3 id=example-4>Example<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>The component in <code>pkg/cmd/kurel/testdata/oci/app.yaml</code>, built against the
+<code>cluster.yaml</code> beside it, gives the <code>expected.yaml</code> beside it. The fixture test
+compares the two.</p><footer class=footline></footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/launcher/dev/index.html><span class="logo-title default-animation">Go Kure — Launcher</span>
 </a><search><form action=/launcher/dev/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
 <label class=a11y-only for=R-search-by>Search</label>
 <input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
 <button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/launcher/dev/index.html><a class=padding href=/launcher/dev/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul><li class=R-versionswitcher><div class="padding menu-control"><i class="fa-fw fas fa-code-branch"></i>
 <span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-version>Version</label>
-<select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/launcher/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main default-animation"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/launcher/dev/getting-started/index.html><a class="padding default-animation" href=/launcher/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/concepts/index.html><a class="padding default-animation" href=/launcher/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu></ul></li><li class=parent data-nav-id=/launcher/dev/api-reference/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/kurel-cli/index.html><a class=padding href=/launcher/dev/api-reference/kurel-cli/index.html>kurel CLI</a></li><li class=alwaysopen data-nav-id=/launcher/dev/api-reference/oam/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/oam/index.html>OAM Model</a><ul id=R-subsections-85257ea7983d512c6d1887735c85123a class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/api-reference/oam-models/index.html><a class=padding href=/launcher/dev/api-reference/oam-models/index.html>Component Models</a></li><li class="parent alwaysopen" data-nav-id=/launcher/dev/api-reference/oam-components/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/oam-components/index.html>Component Handlers</a><ul id=R-subsections-8500a965f661268b80bcfcc8403ee9e4 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/oam-components/common-config/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/common-config/index.html>Common config</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/policy-and-endpoints/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/policy-and-endpoints/index.html>Policy defaults, endpoints and outputs</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-core-workloads/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-core-workloads/index.html>Kinds: core workloads</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-networking/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-networking/index.html>Kinds: networking</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-access-and-admission/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-access-and-admission/index.html>Kinds: access and admission</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-flux/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-flux/index.html>Kinds: Flux</a></li><li class=active data-nav-id=/launcher/dev/api-reference/oam-components/kinds-helm/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-helm/index.html>Kinds: Helm</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html>Kinds: monitoring</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html>Kinds: MetalLB</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html>Kinds: PostgreSQL and CloudNativePG</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html>Kinds: secrets, certificates and backup</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/adding-a-kind/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/adding-a-kind/index.html>Adding a kind component: where its lines go</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/upstream-fields-not-read/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/upstream-fields-not-read/index.html>Upstream fields a hand-parsed kind does not read</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/extending/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/extending/index.html>Extending</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html>The null contract and two spellings of one field</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/conventions/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/conventions/index.html>Conventions</a></li></ul></li><li data-nav-id=/launcher/dev/api-reference/oam-traits/index.html><a class=padding href=/launcher/dev/api-reference/oam-traits/index.html>Trait Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-policies/index.html><a class=padding href=/launcher/dev/api-reference/oam-policies/index.html>Policy Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-registry/index.html><a class=padding href=/launcher/dev/api-reference/oam-registry/index.html>Built-in Registry</a></li><li data-nav-id=/launcher/dev/api-reference/errors/index.html><a class=padding href=/launcher/dev/api-reference/errors/index.html>Errors</a></li><li data-nav-id=/launcher/dev/api-reference/patch/index.html><a class=padding href=/launcher/dev/api-reference/patch/index.html>Patch Engine</a></li></ul></li><li data-nav-id=/launcher/dev/contributing/index.html><a class="padding default-animation" href=/launcher/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/changelog/index.html><a class="padding default-animation" href=/launcher/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul></ul></div><div id=R-footer class=default-animation><p id=R-revision>Version dev, built from commit <a href=https://github.com/go-kure/launcher/commit/6350e029>6350e029</a></p><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/launcher/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1794564627 defer></script><script src=/launcher/dev/js/theme.min.js?1794564627 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
+<select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/launcher/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main default-animation"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/launcher/dev/getting-started/index.html><a class="padding default-animation" href=/launcher/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/concepts/index.html><a class="padding default-animation" href=/launcher/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu></ul></li><li class=parent data-nav-id=/launcher/dev/api-reference/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/kurel-cli/index.html><a class=padding href=/launcher/dev/api-reference/kurel-cli/index.html>kurel CLI</a></li><li class=alwaysopen data-nav-id=/launcher/dev/api-reference/oam/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/oam/index.html>OAM Model</a><ul id=R-subsections-85257ea7983d512c6d1887735c85123a class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/api-reference/oam-models/index.html><a class=padding href=/launcher/dev/api-reference/oam-models/index.html>Component Models</a></li><li class="parent alwaysopen" data-nav-id=/launcher/dev/api-reference/oam-components/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/oam-components/index.html>Component Handlers</a><ul id=R-subsections-8500a965f661268b80bcfcc8403ee9e4 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/oam-components/common-config/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/common-config/index.html>Common config</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/policy-and-endpoints/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/policy-and-endpoints/index.html>Policy defaults, endpoints and outputs</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-core-workloads/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-core-workloads/index.html>Kinds: core workloads</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-networking/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-networking/index.html>Kinds: networking</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-access-and-admission/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-access-and-admission/index.html>Kinds: access and admission</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-flux/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-flux/index.html>Kinds: Flux</a></li><li class=active data-nav-id=/launcher/dev/api-reference/oam-components/kinds-helm/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-helm/index.html>Kinds: Helm</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html>Kinds: monitoring</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html>Kinds: MetalLB</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html>Kinds: PostgreSQL and CloudNativePG</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html>Kinds: secrets, certificates and backup</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/adding-a-kind/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/adding-a-kind/index.html>Adding a kind component: where its lines go</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/upstream-fields-not-read/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/upstream-fields-not-read/index.html>Upstream fields a hand-parsed kind does not read</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/extending/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/extending/index.html>Extending</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html>The null contract and two spellings of one field</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/conventions/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/conventions/index.html>Conventions</a></li></ul></li><li data-nav-id=/launcher/dev/api-reference/oam-traits/index.html><a class=padding href=/launcher/dev/api-reference/oam-traits/index.html>Trait Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-policies/index.html><a class=padding href=/launcher/dev/api-reference/oam-policies/index.html>Policy Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-registry/index.html><a class=padding href=/launcher/dev/api-reference/oam-registry/index.html>Built-in Registry</a></li><li data-nav-id=/launcher/dev/api-reference/errors/index.html><a class=padding href=/launcher/dev/api-reference/errors/index.html>Errors</a></li><li data-nav-id=/launcher/dev/api-reference/patch/index.html><a class=padding href=/launcher/dev/api-reference/patch/index.html>Patch Engine</a></li></ul></li><li data-nav-id=/launcher/dev/contributing/index.html><a class="padding default-animation" href=/launcher/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/changelog/index.html><a class="padding default-animation" href=/launcher/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul></ul></div><div id=R-footer class=default-animation><p id=R-revision>Version dev, built from commit <a href=https://github.com/go-kure/launcher/commit/da9db24e>da9db24e</a></p><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/launcher/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1794566328 defer></script><script src=/launcher/dev/js/theme.min.js?1794566328 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
