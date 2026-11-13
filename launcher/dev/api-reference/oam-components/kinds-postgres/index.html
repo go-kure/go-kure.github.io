@@ -1,10 +1,10 @@
-<!doctype html><html id=R-html lang=en-us dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.169.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Each kind below with a heading has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
-cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription are the kind-named projections of seven objects of the CloudNativePG API, postgresql.cnpg.io/v1, beyond those of cnpg-cluster and cnpg-pooler, below: an ImageCatalog, a ClusterImageCatalog, a Backup, a ScheduledBackup, a DatabaseRole, a Publication and a Subscription. Each emits that one object, named after the component unless objectName names it; the handler adds no label, no annotation and no default of its own."><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Kinds: PostgreSQL and CloudNativePG :: Go Kure — Launcher"><meta name=twitter:description content="Each kind below with a heading has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
-cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription are the kind-named projections of seven objects of the CloudNativePG API, postgresql.cnpg.io/v1, beyond those of cnpg-cluster and cnpg-pooler, below: an ImageCatalog, a ClusterImageCatalog, a Backup, a ScheduledBackup, a DatabaseRole, a Publication and a Subscription. Each emits that one object, named after the component unless objectName names it; the handler adds no label, no annotation and no default of its own."><meta property="og:url" content="https://www.gokure.dev/launcher/dev/api-reference/oam-components/kinds-postgres/index.html"><meta property="og:site_name" content="Go Kure — Launcher"><meta property="og:title" content="Kinds: PostgreSQL and CloudNativePG :: Go Kure — Launcher"><meta property="og:description" content="Each kind below with a heading has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
-cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription are the kind-named projections of seven objects of the CloudNativePG API, postgresql.cnpg.io/v1, beyond those of cnpg-cluster and cnpg-pooler, below: an ImageCatalog, a ClusterImageCatalog, a Backup, a ScheduledBackup, a DatabaseRole, a Publication and a Subscription. Each emits that one object, named after the component unless objectName names it; the handler adds no label, no annotation and no default of its own."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="API Reference"><meta itemprop=name content="Kinds: PostgreSQL and CloudNativePG :: Go Kure — Launcher"><meta itemprop=description content="Each kind below with a heading has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
-cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription are the kind-named projections of seven objects of the CloudNativePG API, postgresql.cnpg.io/v1, beyond those of cnpg-cluster and cnpg-pooler, below: an ImageCatalog, a ClusterImageCatalog, a Backup, a ScheduledBackup, a DatabaseRole, a Publication and a Subscription. Each emits that one object, named after the component unless objectName names it; the handler adds no label, no annotation and no default of its own."><meta itemprop=wordCount content="13506"><title>Kinds: PostgreSQL and CloudNativePG :: Go Kure — Launcher</title><link href=/launcher/dev/css/auto-complete/auto-complete.min.css?1794566328 rel=stylesheet><script src=/launcher/dev/js/auto-complete/auto-complete.min.js?1794566328 defer></script><script src=/launcher/dev/js/search-lunr.min.js?1794566328 defer></script><script src=/launcher/dev/js/search.min.js?1794566328 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/launcher/dev/searchindex.en.js?1794566328"</script><script src=/launcher/dev/js/lunr/lunr.min.js?1794566328 defer></script><script src=/launcher/dev/js/lunr/lunr.stemmer.support.min.js?1794566328 defer></script><script src=/launcher/dev/js/lunr/lunr.multi.min.js?1794566328 defer></script><script src=/launcher/dev/js/lunr/lunr.en.min.js?1794566328 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794566328 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794566328 rel=stylesheet></noscript><link href=/launcher/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1794566328 rel=stylesheet><link href=/launcher/dev/css/theme.min.css?1794566328 rel=stylesheet><link href=/launcher/dev/css/format-html.min.css?1794566328 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/api-reference/oam-components/kinds-postgres/index.html",window.relearn.relBasePath="../../..",window.relearn.relBaseUri="../../../../..",window.relearn.absBaseUri="https://www.gokure.dev/launcher/dev",window.relearn.version_js_url="/launcher/dev/versionindex.en.js?1794566328",window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-origin=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#cnpg-imagecatalog-cnpg-clusterimagecatalog-cnpg-backup-cnpg-scheduledbackup-cnpg-databaserole-cnpg-publication-cnpg-subscription>cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription</a><ul><li><a href=#properties>Properties</a></li><li><a href=#outputs>Outputs</a></li><li><a href=#validation>Validation</a></li><li><a href=#example>Example</a></li></ul></li><li><a href=#postgresql>postgresql</a><ul><li><a href=#properties-1>Properties</a></li><li><a href=#outputs-1>Outputs</a></li><li><a href=#validation-1>Validation</a></li><li><a href=#example-1>Example</a></li></ul></li><li><a href=#kinds-not-yet-in-sections>Kinds not yet in sections</a></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/index.html><span itemprop=name>launcher</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/index.html><span itemprop=name>API Reference</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/oam-components/index.html><span itemprop=name>Component Handlers</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Kinds: PostgreSQL and CloudNativePG</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html title="Kinds: MetalLB (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html title="Kinds: secrets, certificates and backup (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable api-reference" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><h1 id=kinds-postgresql-and-cloudnativepg>Kinds: PostgreSQL and CloudNativePG</h1><p>Each kind below with a heading has the same sections: Properties, Outputs,
-Validation and Example. Its implementation, history and tests are on the
-<a href=/launcher/dev/contributing/oam-reference/kinds-postgres/index.html>contributor page</a>.</p><h2 id=cnpg-imagecatalog-cnpg-clusterimagecatalog-cnpg-backup-cnpg-scheduledbackup-cnpg-databaserole-cnpg-publication-cnpg-subscription>cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p><strong>cnpg-imagecatalog</strong>, <strong>cnpg-clusterimagecatalog</strong>, <strong>cnpg-backup</strong>,
+<!doctype html><html id=R-html lang=en-us dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.169.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Each kind below has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
+cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription are the kind-named projections of seven objects of the CloudNativePG API, postgresql.cnpg.io/v1, beyond those of cnpg-cluster and cnpg-pooler, below: an ImageCatalog, a ClusterImageCatalog, a Backup, a ScheduledBackup, a DatabaseRole, a Publication and a Subscription. Each emits that one object, named after the component unless objectName names it; the handler adds no label, no annotation and no default of its own."><meta name=author content><meta name=twitter:card content="summary"><meta name=twitter:title content="Kinds: PostgreSQL and CloudNativePG :: Go Kure — Launcher"><meta name=twitter:description content="Each kind below has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
+cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription are the kind-named projections of seven objects of the CloudNativePG API, postgresql.cnpg.io/v1, beyond those of cnpg-cluster and cnpg-pooler, below: an ImageCatalog, a ClusterImageCatalog, a Backup, a ScheduledBackup, a DatabaseRole, a Publication and a Subscription. Each emits that one object, named after the component unless objectName names it; the handler adds no label, no annotation and no default of its own."><meta property="og:url" content="https://www.gokure.dev/launcher/dev/api-reference/oam-components/kinds-postgres/index.html"><meta property="og:site_name" content="Go Kure — Launcher"><meta property="og:title" content="Kinds: PostgreSQL and CloudNativePG :: Go Kure — Launcher"><meta property="og:description" content="Each kind below has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
+cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription are the kind-named projections of seven objects of the CloudNativePG API, postgresql.cnpg.io/v1, beyond those of cnpg-cluster and cnpg-pooler, below: an ImageCatalog, a ClusterImageCatalog, a Backup, a ScheduledBackup, a DatabaseRole, a Publication and a Subscription. Each emits that one object, named after the component unless objectName names it; the handler adds no label, no annotation and no default of its own."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="API Reference"><meta itemprop=name content="Kinds: PostgreSQL and CloudNativePG :: Go Kure — Launcher"><meta itemprop=description content="Each kind below has the same sections: Properties, Outputs, Validation and Example. Its implementation, history and tests are on the contributor page.
+cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription are the kind-named projections of seven objects of the CloudNativePG API, postgresql.cnpg.io/v1, beyond those of cnpg-cluster and cnpg-pooler, below: an ImageCatalog, a ClusterImageCatalog, a Backup, a ScheduledBackup, a DatabaseRole, a Publication and a Subscription. Each emits that one object, named after the component unless objectName names it; the handler adds no label, no annotation and no default of its own."><meta itemprop=wordCount content="13470"><title>Kinds: PostgreSQL and CloudNativePG :: Go Kure — Launcher</title><link href=/launcher/dev/css/auto-complete/auto-complete.min.css?1794567373 rel=stylesheet><script src=/launcher/dev/js/auto-complete/auto-complete.min.js?1794567373 defer></script><script src=/launcher/dev/js/search-lunr.min.js?1794567373 defer></script><script src=/launcher/dev/js/search.min.js?1794567373 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/launcher/dev/searchindex.en.js?1794567373"</script><script src=/launcher/dev/js/lunr/lunr.min.js?1794567373 defer></script><script src=/launcher/dev/js/lunr/lunr.stemmer.support.min.js?1794567373 defer></script><script src=/launcher/dev/js/lunr/lunr.multi.min.js?1794567373 defer></script><script src=/launcher/dev/js/lunr/lunr.en.min.js?1794567373 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794567373 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/launcher/dev/fonts/fontawesome/css/all.min.css?1794567373 rel=stylesheet></noscript><link href=/launcher/dev/css/perfect-scrollbar/perfect-scrollbar.min.css?1794567373 rel=stylesheet><link href=/launcher/dev/css/theme.min.css?1794567373 rel=stylesheet><link href=/launcher/dev/css/format-html.min.css?1794567373 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/api-reference/oam-components/kinds-postgres/index.html",window.relearn.relBasePath="../../..",window.relearn.relBaseUri="../../../../..",window.relearn.absBaseUri="https://www.gokure.dev/launcher/dev",window.relearn.version_js_url="/launcher/dev/versionindex.en.js?1794567373",window.relearn.disableInlineCopyToClipboard=!0,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["relearn-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script></head><body class="mobile-support html" data-origin=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#cnpg-imagecatalog-cnpg-clusterimagecatalog-cnpg-backup-cnpg-scheduledbackup-cnpg-databaserole-cnpg-publication-cnpg-subscription>cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription</a><ul><li><a href=#properties>Properties</a></li><li><a href=#outputs>Outputs</a></li><li><a href=#validation>Validation</a></li><li><a href=#example>Example</a></li></ul></li><li><a href=#postgresql>postgresql</a><ul><li><a href=#properties-1>Properties</a></li><li><a href=#outputs-1>Outputs</a></li><li><a href=#validation-1>Validation</a></li><li><a href=#example-1>Example</a></li></ul></li><li><a href=#cnpg-cluster>cnpg-cluster</a><ul><li><a href=#properties-2>Properties</a></li><li><a href=#outputs-2>Outputs</a></li><li><a href=#validation-2>Validation</a></li><li><a href=#example-2>Example</a></li></ul></li><li><a href=#cnpg-pooler-cnpg-database-cnpg-objectstore>cnpg-pooler, cnpg-database, cnpg-objectstore</a><ul><li><a href=#properties-3>Properties</a></li><li><a href=#outputs-3>Outputs</a></li><li><a href=#validation-3>Validation</a></li><li><a href=#example-3>Example</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/index.html><span itemprop=name>launcher</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/index.html><span itemprop=name>API Reference</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/launcher/dev/api-reference/oam-components/index.html><span itemprop=name>Component Handlers</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Kinds: PostgreSQL and CloudNativePG</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html title="Kinds: MetalLB (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html title="Kinds: secrets, certificates and backup (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable api-reference" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline></header><h1 id=kinds-postgresql-and-cloudnativepg>Kinds: PostgreSQL and CloudNativePG</h1><p>Each kind below has the same sections: Properties, Outputs, Validation and
+Example. Its implementation, history and tests are on the <a href=/launcher/dev/contributing/oam-reference/kinds-postgres/index.html>contributor
+page</a>.</p><h2 id=cnpg-imagecatalog-cnpg-clusterimagecatalog-cnpg-backup-cnpg-scheduledbackup-cnpg-databaserole-cnpg-publication-cnpg-subscription>cnpg-imagecatalog, cnpg-clusterimagecatalog, cnpg-backup, cnpg-scheduledbackup, cnpg-databaserole, cnpg-publication, cnpg-subscription<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p><strong>cnpg-imagecatalog</strong>, <strong>cnpg-clusterimagecatalog</strong>, <strong>cnpg-backup</strong>,
 <strong>cnpg-scheduledbackup</strong>, <strong>cnpg-databaserole</strong>, <strong>cnpg-publication</strong>,
 <strong>cnpg-subscription</strong> are the kind-named projections of seven objects of the
 CloudNativePG API, <code>postgresql.cnpg.io/v1</code>, beyond those of <strong>cnpg-cluster</strong> and
@@ -707,426 +707,388 @@ writes these keys into it (cloudnative-pg v1.30.1, <code>pkg/specs/secrets.go</c
 <code>jdbc-uri</code>, <code>fqdn-uri</code> and <code>fqdn-jdbc-uri</code>. A consumer reads one of these as the
 <code>key</code> of a <code>secretKeyRef</code>. Only a part later in the document reads the output.</p><h3 id=example-1>Example<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>The component in <code>pkg/cmd/kurel/testdata/postgresql-full/app.yaml</code>, built
 against the <code>cluster.yaml</code> beside it, gives the <code>expected.yaml</code> beside it. The
-fixture test compares the two.</p><h2 id=kinds-not-yet-in-sections>Kinds not yet in sections<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>The kinds below are not yet in these sections.</p><ul><li><p><strong>cnpg-cluster</strong> — the operator-CR kind component for a CloudNativePG
-<code>Cluster</code> (design: <code>docs/oam/design-operator-cr-components.md</code>). The
-component name becomes the Cluster&rsquo;s name and its <code>cnpg.io/cluster</code>
-endpoint selector, so it must be what CloudNativePG&rsquo;s admission webhook
-admits: a DNS-1035 label (no leading digit, no dot) of at most 50
-characters. Any other name is refused at parse time, when endpoints are
-collected and by <code>Generate</code> (<code>cnpg-cluster name "db.main": must be a DNS-1035 label of at most 50 characters …</code>), although other kinds accept
-DNS-1123 subdomains of up to 253. Its
-properties are the <code>spec</code> of a <code>postgresql.cnpg.io/v1</code> <code>Cluster</code>, one schema
-key per <code>ClusterSpec</code> json field: scalars are typed, and every structured
-field is an open <code>object</code> or an <code>array</code> of open objects whose description
-points at the upstream type. <code>ToApplicationConfig</code> decodes the whole property
-map into <code>cnpgv1.ClusterSpec</code> with <code>builtin.DecodeStrictJSON</code>, so a key the
-linked CNPG version does not declare, at any depth (<code>storage.sise</code>,
-<code>bootstrap.initdb.databse</code>), and a value of the wrong type
-(<code>storage.size: 5</code>) are refused rather than dropped. Two limits come from
-<code>encoding/json</code> itself: the unknown-field error names the key but not its
-path, and a key differing from a declared one only in letter case is
-accepted as that field (two spellings of one field in the same object are
-refused, since the decoder would keep only one: <code>storage.size: sets the same field as storage.Size …</code>). The policy defaults below read what was authored
-from the decoded spec as well as from the property map, where every
-spelling the decoder accepts is consulted, so such a key still counts as
-authored and is not overwritten by a default — including an empty
-<code>storage.size</code>, which the decoded spec cannot tell from absence.
-It carries <strong>no launcher opinions</strong>: <code>Generate</code> emits the Cluster named after
+fixture test compares the two.</p><h2 id=cnpg-cluster>cnpg-cluster<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p><strong>cnpg-cluster</strong> — the operator-CR kind component for a CloudNativePG <code>Cluster</code>
+(design: <code>docs/oam/design-operator-cr-components.md</code>).</p><h3 id=properties-2>Properties<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>The component name becomes the Cluster&rsquo;s name and its <code>cnpg.io/cluster</code> endpoint
+selector, so it must be what CloudNativePG&rsquo;s admission webhook admits: a
+DNS-1035 label (no leading digit, no dot) of at most 50 characters. Any other
+name is refused at parse time, when endpoints are collected and by <code>Generate</code>
+(<code>cnpg-cluster name "db.main": must be a DNS-1035 label of at most 50 characters …</code>), although other kinds accept DNS-1123 subdomains of up to 253. Its
+properties are the <code>spec</code> of a <code>postgresql.cnpg.io/v1</code> <code>Cluster</code>, one schema key
+per <code>ClusterSpec</code> json field: scalars are typed, and every structured field is
+an open <code>object</code> or an <code>array</code> of open objects whose description points at the
+upstream type. <code>ToApplicationConfig</code> decodes the whole property map into
+<code>cnpgv1.ClusterSpec</code> with <code>builtin.DecodeStrictJSON</code>, so a key the linked CNPG
+version does not declare, at any depth (<code>storage.sise</code>,
+<code>bootstrap.initdb.databse</code>), and a value of the wrong type (<code>storage.size: 5</code>)
+are refused rather than dropped. Two limits come from <code>encoding/json</code> itself:
+the unknown-field error names the key but not its path, and a key differing from
+a declared one only in letter case is accepted as that field (two spellings of
+one field in the same object are refused, since the decoder would keep only one:
+<code>storage.size: sets the same field as storage.Size …</code>). The policy defaults
+below read what was authored from the decoded spec as well as from the property
+map, where every spelling the decoder accepts is consulted, so such a key still
+counts as authored and is not overwritten by a default — including an empty
+<code>storage.size</code>, which the decoded spec cannot tell from absence.</p><h3 id=outputs-2>Outputs<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>It carries <strong>no launcher opinions</strong>: <code>Generate</code> emits the Cluster named after
 the component in the build namespace with exactly the authored spec, so an
-unauthored field is left for the operator&rsquo;s own default. <code>postgresql</code>&rsquo;s
-choices — an image from <code>version</code>, <code>primaryUpdateStrategy: unsupervised</code>,
-<code>enablePDB</code> from the replica count, a <code>1Gi</code> storage fallback, pod
-anti-affinity — are not made here: its lowering rule writes them as this
-kind&rsquo;s properties, and the trait it attaches sets the two that depend on
-the policy (see <code>postgresql</code>). The one value it writes unasked is
-<code>instances: 1</code>, the CRD default, because <code>ClusterSpec.Instances</code> has no
-<code>omitempty</code> and would otherwise serialize as <code>0</code>. The non-pointer blocks
-appear even when unauthored, as they do for <code>postgresql</code>: <code>affinity</code> and
-<code>resources</code> as empty objects, and <code>postgresql</code> as
-<code>syncReplicaElectionConstraint: {enabled: false}</code>, because that nested
-field&rsquo;s <code>enabled</code> has no <code>omitempty</code>.
-Nulls follow <a href=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html#the-null-contract>&ldquo;The null contract&rdquo;</a>, and a null is whatever serializes
-to JSON null: the properties are marshalled with <code>encoding/json</code> and read
-back before anything else looks at them, so a null map value is left out
-rather than decoded to an empty string, and a null array element is
-refused by path (<code>env[0]: null is not a valid array element</code>). The
-contract covers declared keys only: a key the CNPG type does not declare
-is refused as an unknown field even when its value is null
-(<code>storage: {sise: null}</code>), not dropped with the null. A lowering
-rule emits JSON-shaped values (string-keyed maps, slices, scalars) as for
-every component; that is the supported contract, and the engine&rsquo;s schema
-check refuses a typed API struct where it checks an object or array item
-(for example an <code>env</code> entry), though not inside an open object&rsquo;s
-undeclared keys. Because the reading is the serialization itself, a
-direct caller of the handler additionally has a value built in Go read
-exactly as <code>encoding/json</code> writes it — a concrete collection type, a nil
-behind a pointer, a <code>json.RawMessage</code> and a custom encoder included. A
-value that does not serialize is refused. An <code>instances</code> below 1, in
-any spelling, is refused before policy runs (<code>instances: must be >= 1, got 0</code>): the CRD&rsquo;s minimum is 1, so the API server would refuse the
-Cluster. A policy instance-count default below 1 is refused the same way.
-<code>Generate</code> repeats the name and instance-count refusals on what it emits,
-the count&rsquo;s upper bound (<code>instances: must be &lt;= 2147483647, got …</code>)
-included, so a <code>CnpgClusterConfig</code> built in Go without
-<code>ToApplicationConfig</code> cannot produce a Cluster the operator or the API
-server rejects for either. It also refuses any storage request the
-Cluster carries that does not parse or is not positive, authored or from
-a policy default, on every claim the storage maximum below covers
-(<code>storage.size: quantity must be positive, got "0"</code>;
-<code>walStorage.pvcTemplate.resources.requests.storage: …</code>): CloudNativePG&rsquo;s
-webhook parses only <code>storage.size</code>, so such a Cluster was admitted and its
-claims then failed the API server&rsquo;s positive storage-request check
-(go-kure/launcher#623). An unset size is still left to the operator.
-An authored <code>0</code> or <code>false</code> that the typed spec cannot carry, on a field
-whose CRD default is not zero, is refused by path
-(<code>managed.roles[0].connectionLimit: 0 cannot be carried by the CloudNativePG API types (the field is omitted when zero, so the operator would apply its default -1)</code>). These fields are non-pointer and
-<code>omitempty</code>, so the value is omitted when the Cluster is encoded and the
-operator applies its CRD default instead. For the linked CNPG version they
-are <code>managed.roles[].connectionLimit</code> (default <code>-1</code>, unlimited),
-<code>postgresUID</code> and <code>postgresGID</code> (<code>26</code>), <code>startDelay</code> (<code>3600</code>),
+unauthored field is left for the operator&rsquo;s own default. <code>postgresql</code>&rsquo;s choices
+— an image from <code>version</code>, <code>primaryUpdateStrategy: unsupervised</code>, <code>enablePDB</code>
+from the replica count, a <code>1Gi</code> storage fallback, pod anti-affinity — are not
+made here: its lowering rule writes them as this kind&rsquo;s properties, and the
+trait it attaches sets the two that depend on the policy (see <code>postgresql</code>). The
+one value it writes unasked is <code>instances: 1</code>, the CRD default, because
+<code>ClusterSpec.Instances</code> has no <code>omitempty</code> and would otherwise serialize as <code>0</code>.
+The non-pointer blocks appear even when unauthored, as they do for <code>postgresql</code>:
+<code>affinity</code> and <code>resources</code> as empty objects, and <code>postgresql</code> as
+<code>syncReplicaElectionConstraint: {enabled: false}</code>, because that nested field&rsquo;s
+<code>enabled</code> has no <code>omitempty</code>.</p><h3 id=validation-2>Validation<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Nulls follow <a href=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html#the-null-contract>&ldquo;The null contract&rdquo;</a>, and
+a null is whatever serializes to JSON null: the properties are marshalled with
+<code>encoding/json</code> and read back before anything else looks at them, so a null map
+value is left out rather than decoded to an empty string, and a null array
+element is refused by path (<code>env[0]: null is not a valid array element</code>). The
+contract covers declared keys only: a key the CNPG type does not declare is
+refused as an unknown field even when its value is null (<code>storage: {sise: null}</code>), not dropped with the null. A lowering rule emits JSON-shaped values
+(string-keyed maps, slices, scalars) as for every component; that is the
+supported contract, and the engine&rsquo;s schema check refuses a typed API struct
+where it checks an object or array item (for example an <code>env</code> entry), though not
+inside an open object&rsquo;s undeclared keys. Because the reading is the
+serialization itself, a direct caller of the handler additionally has a value
+built in Go read exactly as <code>encoding/json</code> writes it — a concrete collection
+type, a nil behind a pointer, a <code>json.RawMessage</code> and a custom encoder included.
+A value that does not serialize is refused. An <code>instances</code> below 1, in any
+spelling, is refused before policy runs (<code>instances: must be >= 1, got 0</code>): the
+CRD&rsquo;s minimum is 1, so the API server would refuse the Cluster. A policy
+instance-count default below 1 is refused the same way. <code>Generate</code> repeats the
+name and instance-count refusals on what it emits, the count&rsquo;s upper bound
+(<code>instances: must be &lt;= 2147483647, got …</code>) included, so a <code>CnpgClusterConfig</code>
+built in Go without <code>ToApplicationConfig</code> cannot produce a Cluster the operator
+or the API server rejects for either. It also refuses any storage request the
+Cluster carries that does not parse or is not positive, authored or from a
+policy default, on every claim the storage maximum below covers (<code>storage.size: quantity must be positive, got "0"</code>;
+<code>walStorage.pvcTemplate.resources.requests.storage: …</code>): CloudNativePG&rsquo;s webhook
+parses only <code>storage.size</code>, so such a Cluster was admitted and its claims then
+failed the API server&rsquo;s positive storage-request check. An unset size is still
+left to the operator. An authored <code>0</code> or <code>false</code> that the typed spec cannot
+carry, on a field whose CRD default is not zero, is refused by path
+(<code>managed.roles[0].connectionLimit: 0 cannot be carried by the CloudNativePG API types (the field is omitted when zero, so the operator would apply its default -1)</code>). These fields are non-pointer and <code>omitempty</code>, so the value is omitted
+when the Cluster is encoded and the operator applies its CRD default instead.
+For the linked CNPG version they are <code>managed.roles[].connectionLimit</code> (default
+<code>-1</code>, unlimited), <code>postgresUID</code> and <code>postgresGID</code> (<code>26</code>), <code>startDelay</code> (<code>3600</code>),
 <code>stopDelay</code> (<code>1800</code>), <code>switchoverDelay</code> (<code>3600</code>),
 <code>probes.liveness.isolationCheck.requestTimeout</code> and <code>.connectionTimeout</code>
-(<code>1000</code>) and <code>replicationSlots.updateInterval</code> (<code>30</code>); a test derives the
-set from the CNPG module&rsquo;s CRD and Go types, so a CNPG bump that changes it
-fails CI. An explicit zero default on any other such field, such as
-<code>managed.roles[].login: false</code>, <code>superuser: false</code>, <code>minSyncReplicas: 0</code>
-or <code>monitoring.enablePodMonitor: false</code>, is accepted: it is omitted too,
-and the field&rsquo;s absence means the same value.
-Two fields the Cluster CRD requires, which the Go type leaves out when they
-are empty, are refused when unauthored or empty: the <code>signerName</code> and the
-<code>keyType</code> of a pod certificate source of the projected volume template
-(<code>projectedVolumeTemplate.sources[0].podCertificate.signerName: required (…)</code>). The object would show the omission and the API server refuse it.
-Two more that the CRD requires, which the Go type writes as <code>null</code> when
-they are unauthored, are refused when unauthored: the <code>nodeSelectorTerms</code>
-of a required node affinity
+(<code>1000</code>) and <code>replicationSlots.updateInterval</code> (<code>30</code>); a test derives the set
+from the CNPG module&rsquo;s CRD and Go types, so a CNPG bump that changes it fails
+CI. An explicit zero default on any other such field, such as
+<code>managed.roles[].login: false</code>, <code>superuser: false</code>, <code>minSyncReplicas: 0</code> or
+<code>monitoring.enablePodMonitor: false</code>, is accepted: it is omitted too, and the
+field&rsquo;s absence means the same value. Two fields the Cluster CRD requires, which
+the Go type leaves out when they are empty, are refused when unauthored or
+empty: the <code>signerName</code> and the <code>keyType</code> of a pod certificate source of the
+projected volume template
+(<code>projectedVolumeTemplate.sources[0].podCertificate.signerName: required (…)</code>).
+The object would show the omission and the API server refuse it. Two more that
+the CRD requires, which the Go type writes as <code>null</code> when they are unauthored,
+are refused when unauthored: the <code>nodeSelectorTerms</code> of a required node affinity
 (<code>affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms: required (…)</code>) and the <code>databases</code> of an import
-(<code>bootstrap.initdb.import.databases: required (…)</code>). The API server drops a
-null of a field that is not nullable before it validates, so the required
-field is then missing. An authored empty list is written as one and is not
-refused here. A third such field is not refused:
-<code>replicationSlots.synchronizeReplicas.enabled</code>, which the CRD defaults, so
-the API server puts the default (<code>true</code>) in the place of the null.
-<code>TestKindComponents_NullRequired</code> derives the three from the CRD and shows
-each answer by running the CRD&rsquo;s schema validator on the object.
-<strong>Four fields the linked Go type holds and the Cluster CRD does not are
-refused when authored</strong>, under <code>backup.barmanObjectStore</code> and under each
-<code>externalClusters[].barmanObjectStore</code>: <code>s3Credentials.sseCustomerKey</code>
-(with its <code>name</code> and <code>key</code>) and <code>s3AddressingStyle</code> (for example
+(<code>bootstrap.initdb.import.databases: required (…)</code>). The API server drops a null
+of a field that is not nullable before it validates, so the required field is
+then missing. An authored empty list is written as one and is not refused here.
+A third such field is not refused:
+<code>replicationSlots.synchronizeReplicas.enabled</code>, which the CRD defaults, so the
+API server puts the default (<code>true</code>) in the place of the null.
+<code>TestKindComponents_NullRequired</code> derives the three from the CRD and shows each
+answer by running the CRD&rsquo;s schema validator on the object. <strong>Four fields the
+linked Go type holds and the Cluster CRD does not are refused when authored</strong>,
+under <code>backup.barmanObjectStore</code> and under each
+<code>externalClusters[].barmanObjectStore</code>: <code>s3Credentials.sseCustomerKey</code> (with its
+<code>name</code> and <code>key</code>) and <code>s3AddressingStyle</code> (for example
 <code>backup.barmanObjectStore.s3AddressingStyle: no field of the postgresql.cnpg.io/v1 Cluster API: its CRD has no such property</code>). The
 barman-cloud type the strict decode reads is newer than the Cluster CRD of
-cloudnative-pg v1.30.1 (its <code>clusters.yaml</code>), which has no property for
-either, so the API server would name each as unknown and prune it. A <code>null</code>
-or an empty <code>s3AddressingStyle</code> is not authored and builds. The kind&rsquo;s row
-in <code>TestKindComponents_OmittedRequiredAndWrittenDefaults</code> derives the eight
-paths from the CRD in both directions, and
-<code>TestCnpgClusterHandler_AbsentFromCRD</code> shows each refusal. Remove the
-refusals when cloudnative-pg ships a CRD that carries the fields.
-<strong>The kind&rsquo;s required list is generated</strong> (go-kure/launcher#883; see
-<a href=/launcher/dev/api-reference/oam-components/conventions/index.html#required-fields-a-kind-writes-unauthored-and-does-not-refuse>&ldquo;Required fields a kind writes unauthored and does not refuse&rdquo;</a>): every
-field the Cluster CRD requires that the Go type writes whether or not it
-was authored (<code>""</code>, <code>0</code>, <code>{}</code> or <code>null</code>) is refused when unauthored, each
-where its parent is authored (<code>replica.source: required (…)</code>), the fields
-of the Kubernetes types the spec embeds included. Among them are the eleven
-strings the kind refused by hand before, which the CRD bounds with a
-minimum length or an enumeration:
-<code>backup.barmanObjectStore.destinationPath</code>,
+cloudnative-pg v1.30.1 (its <code>clusters.yaml</code>), which has no property for either,
+so the API server would name each as unknown and prune it. A <code>null</code> or an empty
+<code>s3AddressingStyle</code> is not authored and builds. The kind&rsquo;s row in
+<code>TestKindComponents_OmittedRequiredAndWrittenDefaults</code> derives the eight paths
+from the CRD in both directions, and <code>TestCnpgClusterHandler_AbsentFromCRD</code>
+shows each refusal. Remove the refusals when cloudnative-pg ships a CRD that
+carries the fields. <strong>The kind&rsquo;s required list is generated</strong> (see <a href=/launcher/dev/api-reference/oam-components/conventions/index.html#required-fields-a-kind-writes-unauthored-and-does-not-refuse>&ldquo;Required
+fields a kind writes unauthored and does not
+refuse&rdquo;</a>):
+every field the Cluster CRD requires that the Go type writes whether or not it
+was authored (<code>""</code>, <code>0</code>, <code>{}</code> or <code>null</code>) is refused when unauthored, each where
+its parent is authored (<code>replica.source: required (…)</code>), the fields of the
+Kubernetes types the spec embeds included. Among them are the eleven strings the
+kind refused by hand before, which the CRD bounds with a minimum length or an
+enumeration: <code>backup.barmanObjectStore.destinationPath</code>,
 <code>bootstrap.initdb.import.type</code> (<code>microservice</code> or <code>monolith</code>),
 <code>bootstrap.pg_basebackup.source</code>,
 <code>externalClusters[].barmanObjectStore.destinationPath</code>,
 <code>managed.services.additional[].selectorType</code> (<code>rw</code>, <code>r</code> or <code>ro</code>),
-<code>podSelectorRefs[].name</code>, the <code>name</code> of a <code>postgresql.extensions[]</code> entry
-and the <code>name</code> and the <code>value</code> of its <code>env[]</code> entries,
-<code>postgresql.synchronous.method</code> (<code>any</code> or <code>first</code>) and <code>replica.source</code>;
-and, refused since go-kure/launcher#883 (<strong>breaking</strong> for a document that
-leaves one out under an authored parent), the <code>name</code> and <code>key</code> of a Secret
-or ConfigMap reference, an <code>imageCatalogRef</code>&rsquo;s <code>kind</code>, <code>name</code> and <code>major</code>,
+<code>podSelectorRefs[].name</code>, the <code>name</code> of a <code>postgresql.extensions[]</code> entry and
+the <code>name</code> and the <code>value</code> of its <code>env[]</code> entries,
+<code>postgresql.synchronous.method</code> (<code>any</code> or <code>first</code>) and <code>replica.source</code>; and,
+refused since go-kure/launcher#883 (<strong>breaking</strong> for a document that leaves one
+out under an authored parent), the <code>name</code> and <code>key</code> of a Secret or ConfigMap
+reference, an <code>imageCatalogRef</code>&rsquo;s <code>kind</code>, <code>name</code> and <code>major</code>,
 <code>postgresql.synchronous.number</code>, an external cluster&rsquo;s <code>name</code>, a plugin&rsquo;s
 <code>name</code>, a tablespace&rsquo;s <code>name</code> and <code>storage</code>, a <code>podSelectorRefs</code> entry&rsquo;s
 <code>selector</code>, the <code>topologyKey</code> of a pod affinity term and the <code>weight</code> of a
-weighted one, the
-<code>maxSkew</code>, <code>topologyKey</code> and <code>whenUnsatisfiable</code> of a topology spread
-constraint and the <code>type</code> of a seccomp or AppArmor profile. A field the
-kind refused by hand keeps its text byte for byte; any other reads <code>the CloudNativePG API requires this field</code> (or <code>requires the name of what this refers to</code>, for a reference&rsquo;s <code>name</code>). Most such objects the API server
-refused; an <code>imageCatalogRef</code> written with <code>name: ""</code> or <code>major: 0</code> it
-accepted, and it reached the operator. An authored empty one is a value: it is
-written, and refusing it is left to the API server. The refusal reads the authored
-properties, so <code>Generate</code> does not repeat it: a <code>CnpgClusterConfig</code> built
-in Go is not held to it. Nor is the component a <code>postgresql</code> component is
-lowered to, whose properties are written from a typed spec, so that a
-string left out there reaches the kind as an authored <code>""</code>: <code>postgresql</code>
-refuses the two it could leave out itself, under the property its author
-wrote (above). The same test
-derives every field
-the type writes unauthored as a zero value the CRD&rsquo;s own rule refuses, and
-shows each answer with the validator; the twelfth of a Cluster is
-<code>instances</code>, which is not refused (below).
-<code>TestKindComponents_OmittedRequiredAndWrittenDefaults</code> derives the two from
-the CRD and shows the refusals. It also holds the two fields the CRD
-defaults and the type writes unauthored to a reason they are harmless:
-<code>instances</code>, of which the kind always writes a count (the authored one, the
-policy&rsquo;s default, or the CRD&rsquo;s own <code>1</code>), and
-<code>backup.volumeSnapshot.onlineConfiguration</code>, written <code>{}</code> under an authored
-<code>volumeSnapshot</code>. The CRD&rsquo;s default for the object is <code>waitForArchive: true</code>
-and <code>immediateCheckpoint: false</code>; in a <code>{}</code> it fills <code>waitForArchive</code> with
-the field&rsquo;s own default <code>true</code>, and an absent <code>immediateCheckpoint</code> is
-<code>false</code>.
-A <code>false</code> or <code>0</code> the type keeps (a pointer such as <code>enablePDB: false</code>,
-a quantity <code>cpu: 0</code>) is emitted as authored. An authored
-empty string the type omits on a field the CRD defaults (<code>primaryUpdateStrategy: ""</code>, <code>logLevel: ""</code>) is refused as a defaulted <code>0</code> is
-(<code>cnpgClusterDefaultedZeroFields</code>); elsewhere it is not refused —
-<code>storage.size: ""</code>, which the CRD does not default, keeps its meaning
-above. The two pod-certificate fields above are refused too: an empty
-<code>signerName</code> or <code>keyType</code> is refused as an unauthored one is.
-A match expression authored in one of the spec&rsquo;s label selectors without
-its <code>key</code> or its <code>operator</code> is refused by path
-(<code>podSelectorRefs[0].selector.matchExpressions[0].operator: required (…)</code>):
-the CRD requires both, and the type would write them empty; the generated
-list holds them with the sentences of every kind&rsquo;s selectors. Presence only;
-<a href=/launcher/dev/api-reference/oam-components/conventions/index.html#a-label-selectors-match-expressions>&ldquo;A label selector&rsquo;s match expressions&rdquo;</a> lists the selectors and says what is
-left to the API server and to the operator&rsquo;s webhook.
-<code>ApplyPolicy</code> enforces the policy <code>postgresql</code> enforces (postgresql lowers
-onto this kind, so it is the same code), in this order:
-the instance-count default when <code>instances</code> is not authored (an authored
-value wins even when it equals the fallback) and its maximum; the cpu and
-memory request and limit defaults on <code>resources</code>, filling only unset
-entries, and their maxima; and the storage-size default on <code>storage.size</code>
-when neither <code>storage.size</code> nor <code>storage.pvcTemplate</code>&rsquo;s storage request is
-authored. With no policy default the size is left to the operator; the
-<code>1Gi</code> fallback is postgresql&rsquo;s, applied after the policy by the post-policy
-step its rule attaches
-(<code>ApplyPostgresqlDefaults</code>: the fallback is held to the policy maximum, and
-<code>enablePDB</code> is set from the instance count; a fallback over the maximum is the
-component&rsquo;s <code>oam.ViolationError</code> of class <code>oam.RefusalStorageMaximum</code>, as a
-refusal of <code>ApplyPolicy</code> is). That method is for that step,
-not an authoring surface. A storage-size default that is
-not a quantity is refused (<code>policy default for storage.size: invalid quantity "lots"</code>), as an invalid cpu or memory default is, since with no
-maximum set nothing else would parse it. So is a zero or negative one
-(<code>quantity must be positive, got "0"</code>): CloudNativePG&rsquo;s webhook only
-parses the size, and the claims it creates would then fail the API
-server&rsquo;s positive storage-request check. The storage maximum applies to
-every claim the Cluster creates — <code>storage</code>, <code>walStorage</code>, each
-<code>tablespaces[i].storage</code> (either <code>size</code> or the <code>pvcTemplate</code> request) and
-<code>ephemeralVolumeSource.volumeClaimTemplate</code> — and the error names the one
-that exceeds it. Because this kind exposes the two security contexts, it
-also refuses <code>securityContext.privileged</code> and a <code>securityContext</code> or
-<code>podSecurityContext</code> <code>windowsOptions.hostProcess</code> unless the policy allows
-privileged workloads, and an added capability the policy forbids or leaves
-off a non-empty allowlist. The registry allowlist the workload kinds apply
-to their image applies to an authored <code>imageName</code>
-(<code>imageName: image "…" is not from an allowed registry [...]</code>). When
-<code>imageName</code> is unset, the operator takes the image from the catalog
-<code>imageCatalogRef</code> names, which this kind does not check, or, without one,
-chooses an image of its own, which no allowlist can hold: under a non-empty
-allowlist a Cluster with neither <code>imageName</code> nor <code>imageCatalogRef</code> is
-refused, with the registry class (<strong>breaking</strong>, go-kure/launcher#790: it
-built before): <code>imageName: unset, so the CloudNativePG operator chooses the image the pods run, which the allowed registries [...] cannot hold; name an image from one of them</code>. Set <code>imageName</code>, or <code>imageCatalogRef</code> to take the
-image from a catalog. With no allowlist nothing changes. The operator&rsquo;s own
-image, which it runs in the instance pods&rsquo; bootstrap init container, is not
-covered: no field of the Cluster names it. A <code>postgresql</code> component always
-writes <code>imageName</code> (its derived <code>ghcr.io/cloudnative-pg/postgresql:&lt;version></code> or the authored one),
-so the allowlist applies to its image too. The allowlist applies as well to
-the image of each <code>postgresql.extensions[]</code> entry, which the operator mounts
-into the instance pods as an image volume (<strong>breaking</strong>,
-go-kure/launcher#790: an extension image from a registry outside the list
-built before): <code>postgresql.extensions[0].image.reference: image "…" is not from an allowed registry [...]</code>, with the registry class, the reference read
-as <code>imageName</code> is (see <em>Image volumes</em> under <strong>pod</strong>). An entry
-without a reference is not checked: the operator takes that image from the
-catalog <code>imageCatalogRef</code> names (and refuses the Cluster without one), and
-a catalog&rsquo;s images are not checked by this kind, as for an unset
-<code>imageName</code>. A build reads the objects a document brings, not an object a
-reference points at: a catalog&rsquo;s images are held where the catalog is
-authored, by the kind that builds it. <code>cnpg-imagecatalog</code> and
-<code>cnpg-clusterimagecatalog</code> hold every image of a catalog they build to the
-same list (see their entry above). Nothing in this library holds the images
-of any other catalog: not of a raw catalog on <code>manifests</code>, <code>passthrough</code> or
-a chart, and not of one that already exists in the cluster. A <code>postgresql</code>
-component writes no extension entry. <code>imageName</code> and the extension images are every image a
-Cluster names today; the test that walks the pod spec for image fields
-walks the Cluster and the Pooler spec the same way.
-Both are also held to the tag rule (<code>ValidateImageRef</code>) when the component
-is read and again at generation, with or without a policy (<strong>breaking</strong>,
-go-kure/launcher#790: an untagged or <code>:latest</code> <code>imageName</code> or extension
-reference built before): <code>imageName: image "…" rejected: no tag or digest specified; use an explicit version tag or digest</code>,
+weighted one, the <code>maxSkew</code>, <code>topologyKey</code> and <code>whenUnsatisfiable</code> of a topology
+spread constraint and the <code>type</code> of a seccomp or AppArmor profile. A field the
+kind refused by hand keeps its text byte for byte; any other reads <code>the CloudNativePG API requires this field</code> (or <code>requires the name of what this refers to</code>, for a reference&rsquo;s <code>name</code>). Most such objects the API server refused;
+an <code>imageCatalogRef</code> written with <code>name: ""</code> or <code>major: 0</code> it accepted, and it
+reached the operator. An authored empty one is a value: it is written, and
+refusing it is left to the API server. The refusal reads the authored
+properties, so <code>Generate</code> does not repeat it: a <code>CnpgClusterConfig</code> built in Go
+is not held to it. Nor is the component a <code>postgresql</code> component is lowered to,
+whose properties are written from a typed spec, so that a string left out there
+reaches the kind as an authored <code>""</code>: <code>postgresql</code> refuses the two it could
+leave out itself, under the property its author wrote (above). The same test
+derives every field the type writes unauthored as a zero value the CRD&rsquo;s own
+rule refuses, and shows each answer with the validator; the twelfth of a Cluster
+is <code>instances</code>, which is not refused (below).
+<code>TestKindComponents_OmittedRequiredAndWrittenDefaults</code> derives the two from the
+CRD and shows the refusals. It also holds the two fields the CRD defaults and
+the type writes unauthored to a reason they are harmless: <code>instances</code>, of which
+the kind always writes a count (the authored one, the policy&rsquo;s default, or the
+CRD&rsquo;s own <code>1</code>), and <code>backup.volumeSnapshot.onlineConfiguration</code>, written <code>{}</code>
+under an authored <code>volumeSnapshot</code>. The CRD&rsquo;s default for the object is
+<code>waitForArchive: true</code> and <code>immediateCheckpoint: false</code>; in a <code>{}</code> it fills
+<code>waitForArchive</code> with the field&rsquo;s own default <code>true</code>, and an absent
+<code>immediateCheckpoint</code> is <code>false</code>. A <code>false</code> or <code>0</code> the type keeps (a pointer
+such as <code>enablePDB: false</code>, a quantity <code>cpu: 0</code>) is emitted as authored. An
+authored empty string the type omits on a field the CRD defaults
+(<code>primaryUpdateStrategy: ""</code>, <code>logLevel: ""</code>) is refused as a defaulted <code>0</code> is
+(<code>cnpgClusterDefaultedZeroFields</code>); elsewhere it is not refused — <code>storage.size: ""</code>, which the CRD does not default, keeps its meaning above. The two
+pod-certificate fields above are refused too: an empty <code>signerName</code> or <code>keyType</code>
+is refused as an unauthored one is. A match expression authored in one of the
+spec&rsquo;s label selectors without its <code>key</code> or its <code>operator</code> is refused by path
+(<code>podSelectorRefs[0].selector.matchExpressions[0].operator: required (…)</code>): the
+CRD requires both, and the type would write them empty; the generated list holds
+them with the sentences of every kind&rsquo;s selectors. Presence only; <a href=/launcher/dev/api-reference/oam-components/conventions/index.html#a-label-selectors-match-expressions>&ldquo;A label
+selector&rsquo;s match
+expressions&rdquo;</a> lists the
+selectors and says what is left to the API server and to the operator&rsquo;s webhook.
+<code>ApplyPolicy</code> enforces the policy <code>postgresql</code> enforces (postgresql lowers onto
+this kind, so it is the same code), in this order: the instance-count default
+when <code>instances</code> is not authored (an authored value wins even when it equals the
+fallback) and its maximum; the cpu and memory request and limit defaults on
+<code>resources</code>, filling only unset entries, and their maxima; and the storage-size
+default on <code>storage.size</code> when neither <code>storage.size</code> nor
+<code>storage.pvcTemplate</code>&rsquo;s storage request is authored. With no policy default the
+size is left to the operator; the <code>1Gi</code> fallback is postgresql&rsquo;s, applied after
+the policy by the post-policy step its rule attaches (<code>ApplyPostgresqlDefaults</code>:
+the fallback is held to the policy maximum, and <code>enablePDB</code> is set from the
+instance count; a fallback over the maximum is the component&rsquo;s
+<code>oam.ViolationError</code> of class <code>oam.RefusalStorageMaximum</code>, as a refusal of
+<code>ApplyPolicy</code> is). That method is for that step, not an authoring surface. A
+storage-size default that is not a quantity is refused (<code>policy default for storage.size: invalid quantity "lots"</code>), as an invalid cpu or memory default is,
+since with no maximum set nothing else would parse it. So is a zero or negative
+one (<code>quantity must be positive, got "0"</code>): CloudNativePG&rsquo;s webhook only parses
+the size, and the claims it creates would then fail the API server&rsquo;s positive
+storage-request check. The storage maximum applies to every claim the Cluster
+creates — <code>storage</code>, <code>walStorage</code>, each <code>tablespaces[i].storage</code> (either <code>size</code>
+or the <code>pvcTemplate</code> request) and <code>ephemeralVolumeSource.volumeClaimTemplate</code> —
+and the error names the one that exceeds it. Because this kind exposes the two
+security contexts, it also refuses <code>securityContext.privileged</code> and a
+<code>securityContext</code> or <code>podSecurityContext</code> <code>windowsOptions.hostProcess</code> unless
+the policy allows privileged workloads, and an added capability the policy
+forbids or leaves off a non-empty allowlist. The registry allowlist the workload
+kinds apply to their image applies to an authored <code>imageName</code> (<code>imageName: image "…" is not from an allowed registry [...]</code>). When <code>imageName</code> is unset, the
+operator takes the image from the catalog <code>imageCatalogRef</code> names, which this
+kind does not check, or, without one, chooses an image of its own, which no
+allowlist can hold: under a non-empty allowlist a Cluster with neither
+<code>imageName</code> nor <code>imageCatalogRef</code> is refused, with the registry class
+(<strong>breaking</strong>: it built before): <code>imageName: unset, so the CloudNativePG operator chooses the image the pods run, which the allowed registries [...] cannot hold; name an image from one of them</code>. Set <code>imageName</code>, or
+<code>imageCatalogRef</code> to take the image from a catalog. With no allowlist nothing
+changes. The operator&rsquo;s own image, which it runs in the instance pods&rsquo; bootstrap
+init container, is not covered: no field of the Cluster names it. A <code>postgresql</code>
+component always writes <code>imageName</code> (its derived
+<code>ghcr.io/cloudnative-pg/postgresql:&lt;version></code> or the authored one), so the
+allowlist applies to its image too. The allowlist applies as well to the image
+of each <code>postgresql.extensions[]</code> entry, which the operator mounts into the
+instance pods as an image volume (<strong>breaking</strong>: an extension image from a
+registry outside the list built before):
+<code>postgresql.extensions[0].image.reference: image "…" is not from an allowed registry [...]</code>, with the registry class, the reference read as <code>imageName</code> is
+(see <em>Image volumes</em> under <strong>pod</strong>). An entry without a reference is not
+checked: the operator takes that image from the catalog <code>imageCatalogRef</code> names
+(and refuses the Cluster without one), and a catalog&rsquo;s images are not checked by
+this kind, as for an unset <code>imageName</code>. A build reads the objects a document
+brings, not an object a reference points at: a catalog&rsquo;s images are held where
+the catalog is authored, by the kind that builds it. <code>cnpg-imagecatalog</code> and
+<code>cnpg-clusterimagecatalog</code> hold every image of a catalog they build to the same
+list (see their entry above). Nothing in this library holds the images of any
+other catalog: not of a raw catalog on <code>manifests</code>, <code>passthrough</code> or a chart,
+and not of one that already exists in the cluster. A <code>postgresql</code> component
+writes no extension entry. <code>imageName</code> and the extension images are every image
+a Cluster names today; the test that walks the pod spec for image fields walks
+the Cluster and the Pooler spec the same way. Both are also held to the tag rule
+(<code>ValidateImageRef</code>) when the component is read and again at generation, with or
+without a policy (<strong>breaking</strong>: an untagged or <code>:latest</code> <code>imageName</code> or
+extension reference built before): <code>imageName: image "…" rejected: no tag or digest specified; use an explicit version tag or digest</code>,
 <code>postgresql.extensions[0].image.reference: image "…" rejected: …</code>. An unset
-<code>imageName</code> and an entry without a reference name no image and are not
-checked, as for the allowlist. A digest without a tag passes, here as
-everywhere the rule runs; on <code>imageName</code> CloudNativePG&rsquo;s webhook refuses
-one, and a tag that is no PostgreSQL version, and those are the operator&rsquo;s
-value rules, left to the operator.
-Generation refuses <code>hugepages-&lt;size></code>
-in <code>resources</code> without <code>cpu</code> or <code>memory</code> after policy defaults. It also
-applies the shared parser&rsquo;s request/limit cross-check there
-(<code>resources: cpu: request 2 must not exceed limit 1</code>; hugepages and
-extended resources need a limit equal to the request), so a policy default
-limit below an authored request is refused as well. The other
-resource-name rules of the shared parser are left to the API server.
+<code>imageName</code> and an entry without a reference name no image and are not checked,
+as for the allowlist. A digest without a tag passes, here as everywhere the rule
+runs; on <code>imageName</code> CloudNativePG&rsquo;s webhook refuses one, and a tag that is no
+PostgreSQL version, and those are the operator&rsquo;s value rules, left to the
+operator. Generation refuses <code>hugepages-&lt;size></code> in <code>resources</code> without <code>cpu</code> or
+<code>memory</code> after policy defaults. It also applies the shared parser&rsquo;s
+request/limit cross-check there (<code>resources: cpu: request 2 must not exceed limit 1</code>; hugepages and extended resources need a limit equal to the request),
+so a policy default limit below an authored request is refused as well. The
+other resource-name rules of the shared parser are left to the API server.
 <code>Endpoints</code> declares the same primary endpoint as <code>postgresql</code>
-(<code>cnpg.io/cluster: &lt;Cluster name></code> on port <code>5432</code>), and only for a
-component the parse accepts: what <code>ToApplicationConfig</code> refuses of the
-name or of the properties is refused where endpoints are collected, in the
-same words (<code>instances: must be >= 1, got 0</code>). What <code>Generate</code> refuses
-once the policy is applied is not repeated there.
-<code>TestCnpgClusterSchema_CoversClusterSpec</code> pins the schema to
-<code>ClusterSpec</code> by reflection: each json field is published with its type or
-listed with a reason in <code>cnpgClusterExcludedFields</code> (empty today), and a
-schema key with no field or a stale exclusion also fails, so a CNPG bump
-that adds, removes or retypes a field names it.</p></li><li><p><strong>cnpg-pooler</strong>, <strong>cnpg-database</strong>, <strong>cnpg-objectstore</strong> — the operator-CR
-kind components for a CloudNativePG <code>Pooler</code> and <code>Database</code> and a Barman
-Cloud plugin <code>ObjectStore</code> (<code>barmancloud.cnpg.io/v1</code>), built on the
-<code>cnpg-cluster</code> recipe: one schema key per json field of <code>PoolerSpec</code>,
-<code>DatabaseSpec</code> or <code>ObjectStoreSpec</code>, the whole property map decoded strictly
-into that type under the same null contract, the same refusal of an
-authored <code>0</code> or <code>false</code> the type cannot carry (for the linked versions only
-<code>instanceSidecarConfiguration.retentionPolicyIntervalSeconds</code>, default
-<code>1800</code>, on the ObjectStore) and of two spellings of one field, and the same
-reflection tests pinning the schema and both derived lists to the linked
-modules. <code>Generate</code> emits one object named after the component in the build
-namespace with the authored spec, and repeats the parse-time refusals made
-on the decoded spec. The
-fields each CRD requires are refused when
-unauthored or empty, by path: <code>cluster.name</code> and <code>pgbouncer</code> on the Pooler
-(<code>pgbouncer: {}</code> selects PgBouncer&rsquo;s defaults); <code>cluster.name</code>, <code>name</code> and
-<code>owner</code> on the Database; <code>configuration.destinationPath</code> on the ObjectStore.
-The published schema marks the top-level property of each as required
-(go-kure/launcher#790): <code>cluster</code> and <code>pgbouncer</code> of a <code>cnpg-pooler</code>;
-<code>cluster</code>, <code>name</code> and <code>owner</code> of a <code>cnpg-database</code>; <code>configuration</code> of a
-<code>cnpg-objectstore</code>. That refuses no component that built before, since the
-kind refused each without it already. The <code>template</code> of a <code>cnpg-pooler</code> is an
-open object, so its schema names the gated pod fields in <code>gatedPaths</code>, as the
-pod template kinds do: a gated field under <code>template.spec</code> is refused when the
-ClusterProfile&rsquo;s <code>kubernetesVersion</code> is below the release where its feature
-gate is on by default, unless the profile&rsquo;s <code>spec.featureGates</code> sets that gate
-on, and refused at any version when it sets the gate off (go-kure/launcher#1321).
-A document with no <code>kubernetesVersion</code> is unchanged.
-<strong>The required lists of the three kinds are generated</strong>
-(go-kure/launcher#883), as <code>cnpg-cluster</code>&rsquo;s is: every field each CRD
-requires that the Go type writes whether or not it was authored is refused
-when unauthored under an authored parent, with the text the kind gave it by
-hand where it had one. <strong>Breaking</strong> for a document that leaves one out
+(<code>cnpg.io/cluster: &lt;Cluster name></code> on port <code>5432</code>), and only for a component the
+parse accepts: what <code>ToApplicationConfig</code> refuses of the name or of the
+properties is refused where endpoints are collected, in the same words
+(<code>instances: must be >= 1, got 0</code>). What <code>Generate</code> refuses once the policy is
+applied is not repeated there.</p><h3 id=example-2>Example<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>The component in <code>pkg/cmd/kurel/testdata/cnpg-cluster-full/app.yaml</code>, built
+against the <code>cluster.yaml</code> beside it, gives the <code>expected.yaml</code> beside it. The
+fixture test compares the two.</p><h2 id=cnpg-pooler-cnpg-database-cnpg-objectstore>cnpg-pooler, cnpg-database, cnpg-objectstore<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=properties-3>Properties<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><strong>cnpg-pooler</strong>, <strong>cnpg-database</strong>, <strong>cnpg-objectstore</strong> — the operator-CR kind
+components for a CloudNativePG <code>Pooler</code> and <code>Database</code> and a Barman Cloud plugin
+<code>ObjectStore</code> (<code>barmancloud.cnpg.io/v1</code>), built on the <code>cnpg-cluster</code> recipe:
+one schema key per json field of <code>PoolerSpec</code>, <code>DatabaseSpec</code> or
+<code>ObjectStoreSpec</code>, the whole property map decoded strictly into that type under
+the same null contract, the same refusal of an authored <code>0</code> or <code>false</code> the type
+cannot carry (for the linked versions only
+<code>instanceSidecarConfiguration.retentionPolicyIntervalSeconds</code>, default <code>1800</code>,
+on the ObjectStore) and of two spellings of one field, and the same reflection
+tests pinning the schema and both derived lists to the linked modules.</p><h3 id=outputs-3>Outputs<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><code>Generate</code> emits one object named after the component in the build namespace
+with the authored spec, and repeats the parse-time refusals made on the decoded
+spec.</p><h3 id=validation-3>Validation<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>The fields each CRD requires are refused when unauthored or empty, by path:
+<code>cluster.name</code> and <code>pgbouncer</code> on the Pooler (<code>pgbouncer: {}</code> selects
+PgBouncer&rsquo;s defaults); <code>cluster.name</code>, <code>name</code> and <code>owner</code> on the Database;
+<code>configuration.destinationPath</code> on the ObjectStore. The published schema marks
+the top-level property of each as required: <code>cluster</code> and <code>pgbouncer</code> of a
+<code>cnpg-pooler</code>; <code>cluster</code>, <code>name</code> and <code>owner</code> of a <code>cnpg-database</code>;
+<code>configuration</code> of a <code>cnpg-objectstore</code>. That refuses no component that built
+before, since the kind refused each without it already. The <code>template</code> of a
+<code>cnpg-pooler</code> is an open object, so its schema names the gated pod fields in
+<code>gatedPaths</code>, as the pod template kinds do: a gated field under <code>template.spec</code>
+is refused when the ClusterProfile&rsquo;s <code>kubernetesVersion</code> is below the release
+where its feature gate is on by default, unless the profile&rsquo;s
+<code>spec.featureGates</code> sets that gate on, and refused at any version when it sets
+the gate off. A document with no <code>kubernetesVersion</code> is unchanged. <strong>The
+required lists of the three kinds are generated</strong>, as <code>cnpg-cluster</code>&rsquo;s is: every
+field each CRD requires that the Go type writes whether or not it was authored
+is refused when unauthored under an authored parent, with the text the kind gave
+it by hand where it had one. <strong>Breaking</strong> for a document that leaves one out
 under an authored parent: on the Pooler, among others, the <code>name</code> of a
-<code>pgbouncer</code> Secret reference, <code>pgbouncer.imageCatalogRef</code>&rsquo;s <code>kind</code> and
-<code>name</code>, a service port&rsquo;s <code>port</code>, and under <code>template.spec</code> a container&rsquo;s
-<code>name</code>, the <code>topologyKey</code> of a pod affinity term, a topology spread
-constraint&rsquo;s <code>maxSkew</code>, <code>topologyKey</code> and <code>whenUnsatisfiable</code> and a seccomp
-profile&rsquo;s <code>type</code>; on the Database, the <code>name</code> of a <code>schemas</code>, <code>extensions</code>,
-<code>fdws</code> or <code>servers</code> entry, the <code>name</code> and <code>value</code> of an option, the <code>name</code>
-of a usage and a server&rsquo;s <code>fdw</code>; on the ObjectStore, the <code>name</code> and <code>key</code>
-of a credential&rsquo;s or <code>endpointCA</code>&rsquo;s Secret reference and the fields of the
-sidecar&rsquo;s <code>env</code> the pod kinds require. The texts the kinds refused with
-before (<code>cluster.name: required (…)</code>, <code>pgbouncer: required (…)</code>) are kept
-byte for byte. <code>template.spec.containers</code> is not refused: the kind writes
-<code>containers: []</code> itself, which the CRD accepts (below).
-A <code>cluster.name</code> must be a name CloudNativePG admits for a Cluster (a DNS-1035
-label of at most 50 characters).
-On the Pooler, a match expression authored in a label selector of
-<code>template.spec</code> without its <code>key</code> or its <code>operator</code> is refused too, by
-path, by the generated list; an authored empty one is not (presence only;
-see <a href=/launcher/dev/api-reference/oam-components/conventions/index.html#a-label-selectors-match-expressions>&ldquo;A label selector&rsquo;s match expressions&rdquo;</a>).
+<code>pgbouncer</code> Secret reference, <code>pgbouncer.imageCatalogRef</code>&rsquo;s <code>kind</code> and <code>name</code>, a
+service port&rsquo;s <code>port</code>, and under <code>template.spec</code> a container&rsquo;s <code>name</code>, the
+<code>topologyKey</code> of a pod affinity term, a topology spread constraint&rsquo;s <code>maxSkew</code>,
+<code>topologyKey</code> and <code>whenUnsatisfiable</code> and a seccomp profile&rsquo;s <code>type</code>; on the
+Database, the <code>name</code> of a <code>schemas</code>, <code>extensions</code>, <code>fdws</code> or <code>servers</code> entry,
+the <code>name</code> and <code>value</code> of an option, the <code>name</code> of a usage and a server&rsquo;s <code>fdw</code>;
+on the ObjectStore, the <code>name</code> and <code>key</code> of a credential&rsquo;s or <code>endpointCA</code>&rsquo;s
+Secret reference and the fields of the sidecar&rsquo;s <code>env</code> the pod kinds require.
+The texts the kinds refused with before (<code>cluster.name: required (…)</code>,
+<code>pgbouncer: required (…)</code>) are kept byte for byte. <code>template.spec.containers</code> is
+not refused: the kind writes <code>containers: []</code> itself, which the CRD accepts
+(below). A <code>cluster.name</code> must be a name CloudNativePG admits for a Cluster (a
+DNS-1035 label of at most 50 characters). On the Pooler, a match expression
+authored in a label selector of <code>template.spec</code> without its <code>key</code> or its
+<code>operator</code> is refused too, by path, by the generated list; an authored empty one
+is not (presence only; see <a href=/launcher/dev/api-reference/oam-components/conventions/index.html#a-label-selectors-match-expressions>&ldquo;A label selector&rsquo;s match
+expressions&rdquo;</a>).
 <code>cnpg-pooler</code> writes no type or instance count of its own, so the operator&rsquo;s
 defaults (<code>rw</code>, <code>1</code>) apply. Its component name is the Pooler&rsquo;s name and its
-Service&rsquo;s, so it must be a DNS-1123 label of at most 63 characters (a
-leading digit is refused when <code>spec.kubernetesVersion</code> is below 1.36, RelaxedServiceNameValidation, unless <code>spec.featureGates</code> sets that gate on; CloudNativePG&rsquo;s Pooler
-webhook checks no name syntax, go-kure/launcher#959,
-<code>docs/delivery-scope.md</code> §3.5), and a pooler named like its cluster is refused, as CloudNativePG&rsquo;s webhook does:
-by the build, and where its endpoint is collected in the same words
-(<code>cluster.name "main": a pooler cannot have the same name as its cluster</code>).
-<code>ApplyPolicy</code> applies the workload kinds&rsquo; pod gates to <code>template.spec</code> (host
-namespaces, hostPath volumes, privilege, host-process, capabilities, the
-registry allowlist on each authored container image, cpu and memory maxima;
-errors name the container, as in <code>template.spec.containers[0] "pgbouncer": cpu limit "2" exceeds enforced maximum "1"</code>), caps a generic ephemeral volume&rsquo;s
-claim at the policy storage maximum, holds an image volume&rsquo;s reference to the
-registry allowlist (<code>template.spec: volume "ext" image.reference: image "…" is not from an allowed registry [...]</code>; <strong>breaking</strong>, go-kure/launcher#790, see
-<em>Image volumes</em> under <strong>pod</strong>), and applies the registry allowlist to an
-authored <code>pgbouncer.image</code>. With or without a policy, when the component is
-read and again at generation, an authored <code>pgbouncer.image</code>, the image of
-each init and regular container of the template and the reference of each
-of its image volumes are held to the tag rule (<code>ValidateImageRef</code>;
-<strong>breaking</strong>, go-kure/launcher#790: an untagged or <code>:latest</code> one built
-before): <code>pgbouncer.image: image "…" rejected: …</code>,
+Service&rsquo;s, so it must be a DNS-1123 label of at most 63 characters (a leading
+digit is refused when <code>spec.kubernetesVersion</code> is below 1.36,
+RelaxedServiceNameValidation, unless <code>spec.featureGates</code> sets that gate on;
+CloudNativePG&rsquo;s Pooler webhook checks no name syntax, go-kure/launcher#959,
+<code>docs/delivery-scope.md</code> §3.5), and a pooler named like its cluster is refused,
+as CloudNativePG&rsquo;s webhook does: by the build, and where its endpoint is
+collected in the same words (<code>cluster.name "main": a pooler cannot have the same name as its cluster</code>). <code>ApplyPolicy</code> applies the workload kinds&rsquo; pod gates to
+<code>template.spec</code> (host namespaces, hostPath volumes, privilege, host-process,
+capabilities, the registry allowlist on each authored container image, cpu and
+memory maxima; errors name the container, as in <code>template.spec.containers[0] "pgbouncer": cpu limit "2" exceeds enforced maximum "1"</code>), caps a generic
+ephemeral volume&rsquo;s claim at the policy storage maximum, holds an image volume&rsquo;s
+reference to the registry allowlist (<code>template.spec: volume "ext" image.reference: image "…" is not from an allowed registry [...]</code>; <strong>breaking</strong>,
+go-kure/launcher#790, see <em>Image volumes</em> under <strong>pod</strong>), and applies the
+registry allowlist to an authored <code>pgbouncer.image</code>. With or without a policy,
+when the component is read and again at generation, an authored
+<code>pgbouncer.image</code>, the image of each init and regular container of the template
+and the reference of each of its image volumes are held to the tag rule
+(<code>ValidateImageRef</code>; <strong>breaking</strong>, go-kure/launcher#790: an untagged or
+<code>:latest</code> one built before): <code>pgbouncer.image: image "…" rejected: …</code>,
 <code>template.spec.containers[0] "pgbouncer": image "…" rejected: …</code>. A template
 container that names no image is not checked: the operator supplies the
-PgBouncer image, so that is the ordinary form here, where the pod kinds
-refuse it. The operator takes the PgBouncer image, in order, from the
-template&rsquo;s regular container named <code>pgbouncer</code>, from <code>pgbouncer.image</code>, from
-the catalog <code>pgbouncer.imageCatalogRef</code> names (not checked by this kind, as
-for <code>cnpg-cluster</code>), and otherwise chooses one of its own, which no allowlist
-can hold. Under a non-empty allowlist a Pooler that names its image none of
-these three ways is refused, with the registry class (<strong>breaking</strong>,
-go-kure/launcher#790: it built before): <code>pgbouncer.image (pooler.image on a postgresql component): unset, so the CloudNativePG operator chooses the image the pods run, which the allowed registries [...] cannot hold; name an image from one of them</code>. An image on an init container or on a container of
-another name does not count. With no allowlist nothing changes. The
-operator&rsquo;s own image, which it runs in the pod&rsquo;s bootstrap init container,
-is not covered: no field of the Pooler names it. Generation runs the shared
-parser&rsquo;s request/limit and hugepages checks on the template&rsquo;s pod and container
-resources (<code>template.spec.containers[0] "pgbouncer": resources: cpu: request 2 must not exceed limit 1</code>), as <code>cnpg-cluster</code> does on its <code>resources</code>; the
-other resource-name rules of the shared parser are left to the API server. A
-template declaring <code>ephemeralContainers</code>, <code>activeDeadlineSeconds</code>, <code>priority</code>
-or <code>overhead</code> is refused, as the workload kinds refuse them: the operator
-copies the template into a Deployment, whose pod template cannot carry the
-first two and whose pods get the last two from the default Priority and
-RuntimeClass admission controllers, which refuse an authored value that
-differs from theirs. Four fields the Pooler CRD requires under
-<code>template.spec</code>, which the pod spec&rsquo;s type leaves out when they are empty,
-are refused when unauthored or empty: the <code>action</code> of a restart rule of a
-container or an init container and the <code>operator</code> of its exit codes
-(<code>template.spec.containers[0].restartPolicyRules[0].action: required (…)</code>),
-and the <code>signerName</code> and <code>keyType</code> of a pod certificate source of a
-projected volume
-(<code>template.spec.volumes[0].projected.sources[0].podCertificate.signerName: required (…)</code>). The object would show the omission and the API server
-refuse it; the CRD of the linked module settles that, which is what the
-built-in pod kinds lack.
-<code>TestKindComponents_OmittedRequiredAndWrittenDefaults</code> derives the fields
-from the CRD and shows the refusals. Five more that the CRD requires under
-<code>template.spec</code>, which the pod spec&rsquo;s type writes as <code>null</code> when they are
-unauthored, are refused when unauthored: the <code>nodeSelectorTerms</code> of a
-required node affinity, the <code>priority</code> of an eviction responder, the
-<code>monitors</code> of a <code>cephfs</code> or an <code>rbd</code> volume, and the <code>secretRef</code> of a
-<code>scaleIO</code> volume (<code>template.spec.volumes[0].cephfs.monitors: required (…)</code>).
-The API server drops a null of a field that is not nullable before it
+PgBouncer image, so that is the ordinary form here, where the pod kinds refuse
+it. The operator takes the PgBouncer image, in order, from the template&rsquo;s
+regular container named <code>pgbouncer</code>, from <code>pgbouncer.image</code>, from the catalog
+<code>pgbouncer.imageCatalogRef</code> names (not checked by this kind, as for
+<code>cnpg-cluster</code>), and otherwise chooses one of its own, which no allowlist can
+hold. Under a non-empty allowlist a Pooler that names its image none of these
+three ways is refused, with the registry class (<strong>breaking</strong>: it built before):
+<code>pgbouncer.image (pooler.image on a postgresql component): unset, so the CloudNativePG operator chooses the image the pods run, which the allowed registries [...] cannot hold; name an image from one of them</code>. An image on an
+init container or on a container of another name does not count. With no
+allowlist nothing changes. The operator&rsquo;s own image, which it runs in the pod&rsquo;s
+bootstrap init container, is not covered: no field of the Pooler names it.
+Generation runs the shared parser&rsquo;s request/limit and hugepages checks on the
+template&rsquo;s pod and container resources (<code>template.spec.containers[0] "pgbouncer": resources: cpu: request 2 must not exceed limit 1</code>), as
+<code>cnpg-cluster</code> does on its <code>resources</code>; the other resource-name rules of the
+shared parser are left to the API server. A template declaring
+<code>ephemeralContainers</code>, <code>activeDeadlineSeconds</code>, <code>priority</code> or <code>overhead</code> is
+refused, as the workload kinds refuse them: the operator copies the template
+into a Deployment, whose pod template cannot carry the first two and whose pods
+get the last two from the default Priority and RuntimeClass admission
+controllers, which refuse an authored value that differs from theirs. Four
+fields the Pooler CRD requires under <code>template.spec</code>, which the pod spec&rsquo;s type
+leaves out when they are empty, are refused when unauthored or empty: the
+<code>action</code> of a restart rule of a container or an init container and the
+<code>operator</code> of its exit codes
+(<code>template.spec.containers[0].restartPolicyRules[0].action: required (…)</code>), and
+the <code>signerName</code> and <code>keyType</code> of a pod certificate source of a projected volume
+(<code>template.spec.volumes[0].projected.sources[0].podCertificate.signerName: required (…)</code>). The object would show the omission and the API server refuse it;
+the CRD of the linked module settles that, which is what the built-in pod kinds
+lack.</p><p>Five more that the CRD requires under <code>template.spec</code>, which the pod spec&rsquo;s type
+writes as <code>null</code> when they are unauthored, are refused when unauthored: the
+<code>nodeSelectorTerms</code> of a required node affinity, the <code>priority</code> of an eviction
+responder, the <code>monitors</code> of a <code>cephfs</code> or an <code>rbd</code> volume, and the <code>secretRef</code>
+of a <code>scaleIO</code> volume (<code>template.spec.volumes[0].cephfs.monitors: required (…)</code>). The API server drops a null of a field that is not nullable before it
 validates, so the required field is then missing. An authored empty list is
-written as one and is not refused here. <code>template.spec.containers</code> is such
-a field too and is not refused: the kind writes <code>containers: []</code> itself
-(below). <code>TestKindComponents_NullRequired</code> derives these fields and
-<code>pgbouncer</code> from the CRD and shows each answer by running the CRD&rsquo;s schema
-validator on the object. One string the CRD requires and bounds with a
-pattern, which the type writes as <code>""</code> when it is unauthored, is refused
-when unauthored under an authored <code>pgbouncer.imageCatalogRef</code>: its <code>key</code>
-(<code>pgbouncer.imageCatalogRef.key: required (…)</code>). An authored empty one is
-written, and refusing it is left to the API server. The refusal reads the
-authored properties, so <code>Generate</code> does not repeat it: a <code>CnpgPoolerConfig</code>
-built in Go is not held to it. The same test derives
-it, as the one field of a Pooler the type writes unauthored as a zero value
-the CRD&rsquo;s own rule refuses. The instance count is deliberately not policed:
-<code>postgresql</code>, which lowers its pooler onto this kind, never applied a
-policy to the pooler&rsquo;s count, so a maximum here would refuse a document
-that built before.
-Pod-level errors name the template&rsquo;s own fields, as in <code>template.spec: resources cpu limit "2" exceeds enforced maximum "1"</code>. A <code>template</code> that lists
-no containers (labels only, say) is written with <code>containers: []</code>: the Go type
-cannot omit the template&rsquo;s <code>spec</code>, the CRD requires <code>containers</code> once it is
-present, and the operator adds its <code>pgbouncer</code> container either way.
-<code>Endpoints</code> declares the PgBouncer pods (<code>cnpg.io/poolerName: &lt;Pooler object name></code> on port <code>5432</code>: the component name unless
-<code>objectName</code> or the naming hook names the Pooler), byte-identical to <code>postgresql</code>&rsquo;s pooler
-endpoint for a pooler of that name (<code>&lt;component-name>-pooler</code> by default,
-of the <code>postgresql</code> component), and
-only for a component the parse accepts: what <code>ToApplicationConfig</code> refuses
-is refused where endpoints are collected, in the same words (<code>pgbouncer: required (an empty object selects PgBouncer's defaults)</code>).
-<code>cnpg-database</code> also refuses the names the CRD reserves (<code>postgres</code>,
-<code>template0</code>, <code>template1</code>). The <code>ensure</code> of each schema, extension, fdw and
-server has no <code>omitempty</code> but a CRD default of <code>present</code>, so <code>Generate</code> writes
-<code>present</code> where it is unauthored, as the API server would have; a
-test derives that list from the CRD too. An authored <code>ensure: ""</code> there is
-refused by its path (<code>schemas[0].ensure: "" is refused by the Database CRD, …</code>) rather than written as <code>present</code>, since the CRD&rsquo;s enum refuses it as
-written; an explicit null is absence and takes the default. A Database runs nothing, so it has
-no policy and no endpoint.
-<code>cnpg-objectstore</code> caps the cpu and memory requests and limits of the plugin
-sidecar it adds to every instance pod (<code>instanceSidecarConfiguration.resources</code>)
-at the policy maxima, filling no default, and declares no endpoint;
-generation runs the same request/limit and hugepages checks on them, leaving
-the other resource-name rules to the API server. It refuses
-<code>configuration.serverName</code>, which the shared Barman type carries but the
-plugin&rsquo;s CRD forbids on an ObjectStore: the server name is a plugin parameter
-of the Cluster that uses the store.</p></li></ul><footer class=footline></footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/launcher/dev/index.html><span class="logo-title default-animation">Go Kure — Launcher</span>
+written as one and is not refused here. <code>template.spec.containers</code> is such a
+field too and is not refused: the kind writes <code>containers: []</code> itself (below).</p><p>One string the CRD requires and bounds with a pattern, which the type writes as
+<code>""</code> when it is unauthored, is refused when unauthored under an authored
+<code>pgbouncer.imageCatalogRef</code>: its <code>key</code> (<code>pgbouncer.imageCatalogRef.key: required (…)</code>). An authored empty one is written, and refusing it is left to the API
+server. The refusal reads the authored properties, so <code>Generate</code> does not repeat
+it: a <code>CnpgPoolerConfig</code> built in Go is not held to it.</p><p>The instance count is deliberately not policed: <code>postgresql</code>, which lowers its
+pooler onto this kind, never applied a policy to the pooler&rsquo;s count, so a
+maximum here would refuse a document that built before. Pod-level errors name
+the template&rsquo;s own fields, as in <code>template.spec: resources cpu limit "2" exceeds enforced maximum "1"</code>. A <code>template</code> that lists no containers (labels only, say)
+is written with <code>containers: []</code>: the Go type cannot omit the template&rsquo;s <code>spec</code>,
+the CRD requires <code>containers</code> once it is present, and the operator adds its
+<code>pgbouncer</code> container either way. <code>Endpoints</code> declares the PgBouncer pods
+(<code>cnpg.io/poolerName: &lt;Pooler object name></code> on port <code>5432</code>: the component name
+unless <code>objectName</code> or the naming hook names the Pooler), byte-identical to
+<code>postgresql</code>&rsquo;s pooler endpoint for a pooler of that name
+(<code>&lt;component-name>-pooler</code> by default, of the <code>postgresql</code> component), and only
+for a component the parse accepts: what <code>ToApplicationConfig</code> refuses is refused
+where endpoints are collected, in the same words (<code>pgbouncer: required (an empty object selects PgBouncer's defaults)</code>). <code>cnpg-database</code> also refuses the names
+the CRD reserves (<code>postgres</code>, <code>template0</code>, <code>template1</code>). The <code>ensure</code> of each
+schema, extension, fdw and server has no <code>omitempty</code> but a CRD default of
+<code>present</code>, so <code>Generate</code> writes <code>present</code> where it is unauthored, as the API
+server would have; a test derives that list from the CRD too. An authored
+<code>ensure: ""</code> there is refused by its path (<code>schemas[0].ensure: "" is refused by the Database CRD, …</code>) rather than written as <code>present</code>, since the CRD&rsquo;s enum
+refuses it as written; an explicit null is absence and takes the default. A
+Database runs nothing, so it has no policy and no endpoint. <code>cnpg-objectstore</code>
+caps the cpu and memory requests and limits of the plugin sidecar it adds to
+every instance pod (<code>instanceSidecarConfiguration.resources</code>) at the policy
+maxima, filling no default, and declares no endpoint; generation runs the same
+request/limit and hugepages checks on them, leaving the other resource-name
+rules to the API server. It refuses <code>configuration.serverName</code>, which the shared
+Barman type carries but the plugin&rsquo;s CRD forbids on an ObjectStore: the server
+name is a plugin parameter of the Cluster that uses the store.</p><h3 id=example-3>Example<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><ul><li><code>cnpg-pooler</code>: The component in
+<code>pkg/cmd/kurel/testdata/cnpg-pooler-full/app.yaml</code>, built against the
+<code>cluster.yaml</code> beside it, gives the <code>expected.yaml</code> beside it. The fixture
+test compares the two.</li><li><code>cnpg-database</code>: The component in
+<code>pkg/cmd/kurel/testdata/cnpg-database-full/app.yaml</code>, built against the
+<code>cluster.yaml</code> beside it, gives the <code>expected.yaml</code> beside it. The fixture
+test compares the two.</li><li><code>cnpg-objectstore</code>: The component in
+<code>pkg/cmd/kurel/testdata/cnpg-objectstore-full/app.yaml</code>, built against the
+<code>cluster.yaml</code> beside it, gives the <code>expected.yaml</code> beside it. The fixture
+test compares the two.</li></ul><footer class=footline></footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/launcher/dev/index.html><span class="logo-title default-animation">Go Kure — Launcher</span>
 </a><search><form action=/launcher/dev/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
 <label class=a11y-only for=R-search-by>Search</label>
 <input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
 <button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/launcher/dev/index.html><a class=padding href=/launcher/dev/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul><li class=R-versionswitcher><div class="padding menu-control"><i class="fa-fw fas fa-code-branch"></i>
 <span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-version>Version</label>
-<select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/launcher/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main default-animation"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/launcher/dev/getting-started/index.html><a class="padding default-animation" href=/launcher/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/concepts/index.html><a class="padding default-animation" href=/launcher/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu></ul></li><li class=parent data-nav-id=/launcher/dev/api-reference/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/kurel-cli/index.html><a class=padding href=/launcher/dev/api-reference/kurel-cli/index.html>kurel CLI</a></li><li class=alwaysopen data-nav-id=/launcher/dev/api-reference/oam/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/oam/index.html>OAM Model</a><ul id=R-subsections-85257ea7983d512c6d1887735c85123a class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/api-reference/oam-models/index.html><a class=padding href=/launcher/dev/api-reference/oam-models/index.html>Component Models</a></li><li class="parent alwaysopen" data-nav-id=/launcher/dev/api-reference/oam-components/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/oam-components/index.html>Component Handlers</a><ul id=R-subsections-8500a965f661268b80bcfcc8403ee9e4 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/oam-components/common-config/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/common-config/index.html>Common config</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/policy-and-endpoints/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/policy-and-endpoints/index.html>Policy defaults, endpoints and outputs</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-core-workloads/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-core-workloads/index.html>Kinds: core workloads</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-networking/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-networking/index.html>Kinds: networking</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-access-and-admission/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-access-and-admission/index.html>Kinds: access and admission</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-flux/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-flux/index.html>Kinds: Flux</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-helm/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-helm/index.html>Kinds: Helm</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html>Kinds: monitoring</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html>Kinds: MetalLB</a></li><li class=active data-nav-id=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html>Kinds: PostgreSQL and CloudNativePG</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html>Kinds: secrets, certificates and backup</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/adding-a-kind/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/adding-a-kind/index.html>Adding a kind component: where its lines go</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/upstream-fields-not-read/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/upstream-fields-not-read/index.html>Upstream fields a hand-parsed kind does not read</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/extending/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/extending/index.html>Extending</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html>The null contract and two spellings of one field</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/conventions/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/conventions/index.html>Conventions</a></li></ul></li><li data-nav-id=/launcher/dev/api-reference/oam-traits/index.html><a class=padding href=/launcher/dev/api-reference/oam-traits/index.html>Trait Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-policies/index.html><a class=padding href=/launcher/dev/api-reference/oam-policies/index.html>Policy Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-registry/index.html><a class=padding href=/launcher/dev/api-reference/oam-registry/index.html>Built-in Registry</a></li><li data-nav-id=/launcher/dev/api-reference/errors/index.html><a class=padding href=/launcher/dev/api-reference/errors/index.html>Errors</a></li><li data-nav-id=/launcher/dev/api-reference/patch/index.html><a class=padding href=/launcher/dev/api-reference/patch/index.html>Patch Engine</a></li></ul></li><li data-nav-id=/launcher/dev/contributing/index.html><a class="padding default-animation" href=/launcher/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/changelog/index.html><a class="padding default-animation" href=/launcher/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul></ul></div><div id=R-footer class=default-animation><p id=R-revision>Version dev, built from commit <a href=https://github.com/go-kure/launcher/commit/da9db24e>da9db24e</a></p><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/launcher/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1794566328 defer></script><script src=/launcher/dev/js/theme.min.js?1794566328 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
+<select id=R-select-version><option id=R-select-version-dev value=dev data-identifier=dev data-abs=true data-uri=https://www.gokure.dev/launcher/dev selected data-selected>Development</option></select></div><div class=clear></div></div></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-main default-animation"><ul class="enlarge morespace collapsible-menu"><li data-nav-id=/launcher/dev/getting-started/index.html><a class="padding default-animation" href=/launcher/dev/getting-started/index.html>Getting Started</a><ul id=R-subsections-87c0363912f379e0725cbe1d504c985c class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/concepts/index.html><a class="padding default-animation" href=/launcher/dev/concepts/index.html>Concepts</a><ul id=R-subsections-90941c33b457a4d12ffdbc0aa62a266d class=collapsible-menu></ul></li><li class=parent data-nav-id=/launcher/dev/api-reference/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/index.html>API Reference</a><ul id=R-subsections-dd202aa4390a9811c67d06158c5ff213 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/kurel-cli/index.html><a class=padding href=/launcher/dev/api-reference/kurel-cli/index.html>kurel CLI</a></li><li class=alwaysopen data-nav-id=/launcher/dev/api-reference/oam/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/oam/index.html>OAM Model</a><ul id=R-subsections-85257ea7983d512c6d1887735c85123a class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/api-reference/oam-models/index.html><a class=padding href=/launcher/dev/api-reference/oam-models/index.html>Component Models</a></li><li class="parent alwaysopen" data-nav-id=/launcher/dev/api-reference/oam-components/index.html><a class="padding default-animation" href=/launcher/dev/api-reference/oam-components/index.html>Component Handlers</a><ul id=R-subsections-8500a965f661268b80bcfcc8403ee9e4 class=collapsible-menu><li data-nav-id=/launcher/dev/api-reference/oam-components/common-config/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/common-config/index.html>Common config</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/policy-and-endpoints/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/policy-and-endpoints/index.html>Policy defaults, endpoints and outputs</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-core-workloads/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-core-workloads/index.html>Kinds: core workloads</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-networking/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-networking/index.html>Kinds: networking</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-access-and-admission/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-access-and-admission/index.html>Kinds: access and admission</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-flux/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-flux/index.html>Kinds: Flux</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-helm/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-helm/index.html>Kinds: Helm</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-monitoring/index.html>Kinds: monitoring</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-metallb/index.html>Kinds: MetalLB</a></li><li class=active data-nav-id=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-postgres/index.html>Kinds: PostgreSQL and CloudNativePG</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/kinds-secrets-certs-backup/index.html>Kinds: secrets, certificates and backup</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/adding-a-kind/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/adding-a-kind/index.html>Adding a kind component: where its lines go</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/upstream-fields-not-read/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/upstream-fields-not-read/index.html>Upstream fields a hand-parsed kind does not read</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/extending/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/extending/index.html>Extending</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/null-and-spellings/index.html>The null contract and two spellings of one field</a></li><li data-nav-id=/launcher/dev/api-reference/oam-components/conventions/index.html><a class=padding href=/launcher/dev/api-reference/oam-components/conventions/index.html>Conventions</a></li></ul></li><li data-nav-id=/launcher/dev/api-reference/oam-traits/index.html><a class=padding href=/launcher/dev/api-reference/oam-traits/index.html>Trait Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-policies/index.html><a class=padding href=/launcher/dev/api-reference/oam-policies/index.html>Policy Handlers</a></li><li data-nav-id=/launcher/dev/api-reference/oam-registry/index.html><a class=padding href=/launcher/dev/api-reference/oam-registry/index.html>Built-in Registry</a></li><li data-nav-id=/launcher/dev/api-reference/errors/index.html><a class=padding href=/launcher/dev/api-reference/errors/index.html>Errors</a></li><li data-nav-id=/launcher/dev/api-reference/patch/index.html><a class=padding href=/launcher/dev/api-reference/patch/index.html>Patch Engine</a></li></ul></li><li data-nav-id=/launcher/dev/contributing/index.html><a class="padding default-animation" href=/launcher/dev/contributing/index.html>Contributing</a><ul id=R-subsections-0d02badb7422c7536b9ac4528048a4b1 class=collapsible-menu></ul></li><li data-nav-id=/launcher/dev/changelog/index.html><a class="padding default-animation" href=/launcher/dev/changelog/index.html>Changelog</a><ul id=R-subsections-d1977150cf385e06b32490e43a8e612b class=collapsible-menu></ul></li></ul></div><div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation"><ul class="space collapsible-menu"></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul></ul></div><div id=R-footer class=default-animation><p id=R-revision>Version dev, built from commit <a href=https://github.com/go-kure/launcher/commit/64fa22c8>64fa22c8</a></p><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/launcher/dev/js/perfect-scrollbar/perfect-scrollbar.min.js?1794567373 defer></script><script src=/launcher/dev/js/theme.min.js?1794567373 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
